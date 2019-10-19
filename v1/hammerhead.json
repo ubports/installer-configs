@@ -103,6 +103,12 @@
           "group": "firmware"
         },
         {
+          "type": "adb:reboot",
+          "condition": {"var": "bootstrap", "value": false},
+          "to_state": "recovery",
+          "fallback_user_action": "recovery"
+        },
+        {
           "type": "systemimage"
         },
         {
