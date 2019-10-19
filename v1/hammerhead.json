@@ -1,0 +1,187 @@
+{
+  "name": "Nexus 5",
+  "codename": "hammerhead",
+  "unlock": [],
+  "user_actions": {
+    "recovery": {
+      "title": "Reboot to Recovery",
+      "description": "Press and hold the volume down and power buttons until the phone reboots. Use the volume keys to select recovery mode and confirm with the power button.",
+      "image": "phone_power_down",
+      "button": true
+    },
+    "bootloader": {
+      "title": "Reboot to Bootloader",
+      "description": "Press and hold the volume down and power buttons until the phone reboots.",
+      "image": "phone_power_down",
+      "button": true
+    }
+  },
+  "operating_systems": [
+    {
+      "name": "Ubuntu Touch",
+      "sanity_check": "Are you sure?",
+      "options": [
+        {
+          "var": "channel",
+          "name": "Channel",
+          "tooltip": "The release channel",
+          "type": "select",
+          "remote_values": {
+            "type": "systemimagechannels",
+            "url": "https://system-image.ubports.com"
+          },
+          "values": [
+            {"label": "stable", "value": "ubports-touch/16.04/stable"},
+            {"label": "rc", "value": "ubports-touch/16.04/rc"},
+            {"label": "devel", "value": "ubports-touch/16.04/devel"},
+            {"label": "edge", "value": "ubports-touch/16.04/edge"}
+          ]
+        },
+        {
+          "var": "wipe",
+          "name": "Wipe Userdata",
+          "tooltip": "Wipe personal data",
+          "type": "checkbox"
+        },
+        {
+          "var": "bootstrap",
+          "name": "Bootstrap",
+          "tooltip": "Flash system partitions using fastboot",
+          "type": "checkbox",
+          "value": true
+        }
+      ],
+      "prerequisites": [],
+      "steps": [
+        {
+          "type": "download",
+          "condition": {"var": "bootstrap", "value": true},
+          "group": "firmware",
+          "files": [
+            {
+              "url": "http://cdimage.ubports.com/devices/recovery-hammerhead.img",
+              "checksum": "91b681a3287808a79e21c2ac17f85537c6c9b23fb009b5e491c2ccf28986856c"
+            },
+            {
+              "url": "http://cdimage.ubports.com/devices/boot-hammerhead.img",
+              "checksum": "3f39372bdac0a6a8bd6507683a87da16e74346152525e12d6ea46418a88c62c3"
+            }
+          ]
+        },
+        {
+          "type": "adb:reboot",
+          "condition": {"var": "bootstrap", "value": true},
+          "to_state": "bootloader",
+          "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:flash",
+          "condition": {"var": "bootstrap", "value": true},
+          "flash": [
+            {
+              "partition": "boot",
+              "file": "boot-hammerhead.img",
+              "group": "firmware"
+            },
+            {
+              "partition": "recovery",
+              "file": "recovery-hammerhead.img",
+              "group": "firmware"
+            }
+          ]
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "bootstrap", "value": true},
+          "partition": "cache"
+        },
+        {
+          "type": "fastboot:boot",
+          "condition": {"var": "bootstrap", "value": true},
+          "file": "recovery-hammerhead.img",
+          "fallback_user_action": "recovery",
+          "group": "firmware"
+        },
+        {
+          "type": "systemimage"
+        },
+        {
+          "type": "adb:reboot",
+          "to_state": "recovery",
+          "fallback_user_action": "recovery"
+        }
+      ],
+      "slideshow": []
+    },
+    {
+      "name": "Android",
+      "options": [
+        {
+          "var": "wipe",
+          "name": "Wipe Userdata",
+          "tooltip": "Wipe personal data",
+          "type": "checkbox",
+          "value": true
+        }
+      ],
+      "prerequisites": [],
+      "steps": [
+        {
+          "type": "download",
+          "group": "firmware",
+          "files": [
+            {
+              "url": "https://github.com/fun-files/files/raw/master/hammerhead/bootloader-hammerhead.img",
+              "checksum": "32142b3e3da82c772ca8e297dbfb1b0f2e7ee7e1eaaf75a0359199c523fdf437"
+            },
+            {
+              "url": "https://github.com/fun-files/files/raw/master/hammerhead/radio-hammerhead.img",
+              "checksum": "fc331251b190b4b1e29bd678cab7950091bf0575c245e306d57802bf6db2910b"
+            }
+          ]
+        },
+        {
+          "type": "download",
+          "group": "android",
+          "files": [
+            {
+              "url": "https://github.com/fun-files/files/raw/master/hammerhead/stock-image-hammerhead.zip",
+              "checksum": "0f6e76e5321aa150ddaf8c6a865a6e5bf7cff3f0527811ad49b7ccc94cdfbb3a"
+            }
+          ]
+        },
+        {
+          "type": "adb:reboot",
+          "to_state": "bootloader",
+          "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:flash",
+          "flash": [
+            {
+              "partition": "bootloader",
+              "file": "bootloader-hammerhead.img",
+              "group": "firmware"
+            },
+            {
+              "partition": "radio",
+              "file": "radio-hammerhead.img",
+              "group": "firmware"
+            }
+          ]
+        },
+        {
+          "type": "fastboot:reboot_bootloader",
+          "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:update",
+          "file": "stock-image-hammerhead.zip",
+          "group": "android"
+        }
+      ],
+      "success_message": "It can take up to 10 minutes for the device to reboot.",
+      "slideshow": []
+    }
+  ]
+}
