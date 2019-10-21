@@ -1,0 +1,100 @@
+{
+  "name": "Meizu MX4",
+  "codename": "arale",
+  "unlock": [],
+  "user_actions": {
+    "recovery": {
+      "title": "Reboot to Recovery",
+      "description": "Press and hold the volume up and power buttons until the phone reboots.",
+      "image": "phone_power_up",
+      "button": true
+    },
+    "bootloader": {
+      "title": "Reboot to Bootloader",
+      "description": "Press and hold the volume down and power buttons until the phone reboots.",
+      "image": "phone_power_down",
+      "button": true
+    }
+  },
+  "operating_systems": [
+    {
+      "name": "Ubuntu Touch",
+      "sanity_check": "Are you sure?",
+      "options": [
+        {
+          "var": "channel",
+          "name": "Channel",
+          "tooltip": "The release channel",
+          "type": "select",
+          "remote_values": { "type": "systemimagechannels" }
+        },
+        {
+          "var": "wipe",
+          "name": "Wipe Userdata",
+          "tooltip": "Wipe personal data",
+          "type": "checkbox"
+        },
+        {
+          "var": "bootstrap",
+          "name": "Bootstrap",
+          "tooltip": "Flash system partitions using fastboot",
+          "type": "checkbox",
+          "value": true
+        }
+      ],
+      "prerequisites": [],
+      "steps": [
+        {
+          "type": "download",
+          "condition": {"var": "bootstrap", "value": true},
+          "group": "recovery",
+          "files": [
+            {
+              "url": "http://cdimage.ubports.com/devices/recovery-arale.img",
+              "checksum": "27160d1ce2d55bd940b38ebf643018b33e0516795dff179942129943fabdc3d8"
+            }
+          ]
+        },
+        {
+          "type": "adb:reboot",
+          "condition": {"var": "bootstrap", "value": true},
+          "to_state": "bootloader",
+          "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:flash",
+          "condition": {"var": "bootstrap", "value": true},
+          "flash": [
+            {
+              "partition": "recovery",
+              "file": "recovery-arale.img",
+              "group": "recovery"
+            }
+          ]
+        },
+        {
+          "type": "fastboot:boot",
+          "condition": {"var": "bootstrap", "value": true},
+          "file": "recovery-arale.img",
+          "fallback_user_action": "recovery",
+          "group": "recovery"
+        },
+        {
+          "type": "adb:reboot",
+          "condition": {"var": "bootstrap", "value": false},
+          "to_state": "recovery",
+          "fallback_user_action": "recovery"
+        },
+        {
+          "type": "systemimage"
+        },
+        {
+          "type": "adb:reboot",
+          "to_state": "recovery",
+          "fallback_user_action": "recovery"
+        }
+      ],
+      "slideshow": []
+    }
+  ]
+}
