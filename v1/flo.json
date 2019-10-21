@@ -1,17 +1,17 @@
 {
-  "name": "Fairphone 2",
-  "codename": "FP2",
+  "name": "Nexus 7 2013 WiFi",
+  "codename": "flo",
   "unlock": [],
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
-      "description": "With the device powered off, press and hold the volume up and power buttons until the screen turns on.",
-      "image": "phone_power_up",
+      "description": "With the device powered off, hold Volume Down + Power until the bootloader appears, then release the buttons. Use the volume buttons to scroll to “RECOVERY” and press Power to select.",
+      "image": "phone_power_down",
       "button": true
     },
     "bootloader": {
       "title": "Reboot to Bootloader",
-      "description": "With the device powered off, press and hold the volume down and power buttons until the screen turns on.",
+      "description": "With the device powered off, hold Volume Down + Power until the bootloader appears.",
       "image": "phone_power_down",
       "button": true
     }
@@ -50,12 +50,12 @@
           "group": "firmware",
           "files": [
             {
-              "url": "http://cdimage.ubports.com/devices/recovery-FP2.img",
-              "checksum": "534cc2da2add4a2bd8136b01069ed7dbe432076659fd4780910b6910b916f77b"
+              "url": "https://gitlab.com/ubports/community-ports/flo/raw/76f6151b1291fe1cf8739d2b080c83543a62a051/partitions/recovery.img",
+              "checksum": "cdbf7a58ff49a55a977b43a933625f6b8845687259d6b96bc5047f197bde49e6"
             },
             {
-              "url": "http://cdimage.ubports.com/devices/splash-FP2.img",
-              "checksum": "2bf76ec909af34d9896a954cd6c4ed5ad114d6053e59b7a856325b4fcfca43cd"
+              "url": "https://gitlab.com/ubports/community-ports/flo/raw/76f6151b1291fe1cf8739d2b080c83543a62a051/partitions/boot.img",
+              "checksum": "c288f81ae5e71b8be91c446932ff734dcd251c035bd368804a04f6b5fa21dcb6"
             }
           ]
         },
@@ -70,13 +70,13 @@
           "condition": {"var": "bootstrap", "value": true},
           "flash": [
             {
-              "partition": "recovery",
-              "file": "recovery-FP2.img",
+              "partition": "boot",
+              "file": "boot.img",
               "group": "firmware"
             },
             {
-              "partition": "splash",
-              "file": "splash-FP2.img",
+              "partition": "recovery",
+              "file": "recovery.img",
               "group": "firmware"
             }
           ]
@@ -87,9 +87,11 @@
           "partition": "cache"
         },
         {
-          "type": "user_action",
+          "type": "fastboot:boot",
           "condition": {"var": "bootstrap", "value": true},
-          "action": "recovery"
+          "file": "recovery.img",
+          "fallback_user_action": "recovery",
+          "group": "firmware"
         },
         {
           "type": "adb:reboot",

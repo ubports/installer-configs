@@ -1,18 +1,18 @@
 {
-  "name": "Fairphone 2",
-  "codename": "FP2",
+  "name": "Bq Aquaris M10 FHD",
+  "codename": "frieza",
   "unlock": [],
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
-      "description": "With the device powered off, press and hold the volume up and power buttons until the screen turns on.",
+      "description": "Press and hold the volume up and power buttons until the phone reboots. Use the volume keys to select recovery mode and confirm with the power button.",
       "image": "phone_power_up",
       "button": true
     },
     "bootloader": {
       "title": "Reboot to Bootloader",
-      "description": "With the device powered off, press and hold the volume down and power buttons until the screen turns on.",
-      "image": "phone_power_down",
+      "description": "Press and hold the volume up and power buttons until the phone reboots. Use the volume keys to select bootloader mode and confirm with the power button.",
+      "image": "phone_power_up",
       "button": true
     }
   },
@@ -47,15 +47,11 @@
         {
           "type": "download",
           "condition": {"var": "bootstrap", "value": true},
-          "group": "firmware",
+          "group": "recovery",
           "files": [
             {
-              "url": "http://cdimage.ubports.com/devices/recovery-FP2.img",
-              "checksum": "534cc2da2add4a2bd8136b01069ed7dbe432076659fd4780910b6910b916f77b"
-            },
-            {
-              "url": "http://cdimage.ubports.com/devices/splash-FP2.img",
-              "checksum": "2bf76ec909af34d9896a954cd6c4ed5ad114d6053e59b7a856325b4fcfca43cd"
+              "url": "http://cdimage.ubports.com/devices/recovery-frieza.img",
+              "checksum": "374f184e2675f53651cf4790ee685ee363f59f2be98ea99a6d9d948bbc168c8b"
             }
           ]
         },
@@ -71,25 +67,17 @@
           "flash": [
             {
               "partition": "recovery",
-              "file": "recovery-FP2.img",
-              "group": "firmware"
-            },
-            {
-              "partition": "splash",
-              "file": "splash-FP2.img",
-              "group": "firmware"
+              "file": "recovery-frieza.img",
+              "group": "recovery"
             }
           ]
         },
         {
-          "type": "fastboot:erase",
+          "type": "fastboot:boot",
           "condition": {"var": "bootstrap", "value": true},
-          "partition": "cache"
-        },
-        {
-          "type": "user_action",
-          "condition": {"var": "bootstrap", "value": true},
-          "action": "recovery"
+          "file": "recovery-frieza.img",
+          "fallback_user_action": "recovery",
+          "group": "recovery"
         },
         {
           "type": "adb:reboot",

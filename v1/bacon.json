@@ -1,18 +1,18 @@
 {
-  "name": "Fairphone 2",
-  "codename": "FP2",
+  "name": "Oneplus One",
+  "codename": "bacon",
   "unlock": [],
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
-      "description": "With the device powered off, press and hold the volume up and power buttons until the screen turns on.",
-      "image": "phone_power_up",
+      "description": "With the device powered off, hold Volume Down + Power.",
+      "image": "phone_power_down",
       "button": true
     },
     "bootloader": {
       "title": "Reboot to Bootloader",
-      "description": "With the device powered off, press and hold the volume down and power buttons until the screen turns on.",
-      "image": "phone_power_down",
+      "description": "With the device powered off, hold Volume Up + Power.",
+      "image": "phone_power_up",
       "button": true
     }
   },
@@ -50,12 +50,16 @@
           "group": "firmware",
           "files": [
             {
-              "url": "http://cdimage.ubports.com/devices/recovery-FP2.img",
-              "checksum": "534cc2da2add4a2bd8136b01069ed7dbe432076659fd4780910b6910b916f77b"
+              "url": "http://cdimage.ubports.com/devices/recovery-bacon.img",
+              "checksum": "9b5bf80d1cfc6b21b87d8b29d9a4a02cc9745dd541e3e75180de40be4e92a780"
             },
             {
-              "url": "http://cdimage.ubports.com/devices/splash-FP2.img",
-              "checksum": "2bf76ec909af34d9896a954cd6c4ed5ad114d6053e59b7a856325b4fcfca43cd"
+              "url": "http://cdimage.ubports.com/devices/boot-bacon.img",
+              "checksum": "44c6a5c81a979cd28be3b8e44e78929dbca3c0293a2330c56ee599a69b1c9656"
+            },
+            {
+              "url": "https://github.com/ubports/android_device_oneplus_bacon-1/raw/ubp-5.1/ubuntu_overlay/partitions/LOGO.img",
+              "checksum": "57c7e5d940d65452f59a2485ab9182e67d66f6bd6e5bafc0b5f40850eddb1980"
             }
           ]
         },
@@ -70,13 +74,18 @@
           "condition": {"var": "bootstrap", "value": true},
           "flash": [
             {
-              "partition": "recovery",
-              "file": "recovery-FP2.img",
+              "partition": "boot",
+              "file": "boot-bacon.img",
               "group": "firmware"
             },
             {
-              "partition": "splash",
-              "file": "splash-FP2.img",
+              "partition": "recovery",
+              "file": "recovery-bacon.img",
+              "group": "firmware"
+            },
+            {
+              "partition": "LOGO",
+              "file": "LOGO.img",
               "group": "firmware"
             }
           ]
@@ -87,13 +96,7 @@
           "partition": "cache"
         },
         {
-          "type": "user_action",
-          "condition": {"var": "bootstrap", "value": true},
-          "action": "recovery"
-        },
-        {
           "type": "adb:reboot",
-          "condition": {"var": "bootstrap", "value": false},
           "to_state": "recovery",
           "fallback_user_action": "recovery"
         },
