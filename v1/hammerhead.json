@@ -26,16 +26,7 @@
           "name": "Channel",
           "tooltip": "The release channel",
           "type": "select",
-          "remote_values": {
-            "type": "systemimagechannels",
-            "url": "https://system-image.ubports.com"
-          },
-          "values": [
-            {"label": "stable", "value": "ubports-touch/16.04/stable"},
-            {"label": "rc", "value": "ubports-touch/16.04/rc"},
-            {"label": "devel", "value": "ubports-touch/16.04/devel"},
-            {"label": "edge", "value": "ubports-touch/16.04/edge"}
-          ]
+          "remote_values": { "type": "systemimagechannels" }
         },
         {
           "var": "wipe",
