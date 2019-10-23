@@ -41,6 +41,13 @@
           "tooltip": "Flash system partitions using fastboot",
           "type": "checkbox",
           "value": true
+        },
+        {
+          "var": "format",
+          "name": "Format system partitions",
+          "tooltip": "Needed if the device is coming from android. This will lead to data-loss.",
+          "type": "checkbox",
+          "value": false
         }
       ],
       "prerequisites": [],
@@ -99,6 +106,21 @@
           "condition": {"var": "bootstrap", "value": false},
           "to_state": "recovery",
           "fallback_user_action": "recovery"
+        },
+        {
+          "type": "adb:format",
+          "condition": {"var": "format", "value": true},
+          "partition": "system"
+        },
+        {
+          "type": "adb:format",
+          "condition": {"var": "format", "value": true},
+          "partition": "data"
+        },
+        {
+          "type": "adb:format",
+          "condition": {"var": "format", "value": true},
+          "partition": "cache"
         },
         {
           "type": "systemimage"
