@@ -25,6 +25,7 @@
           "var": "channel",
           "name": "Channel",
           "tooltip": "The release channel",
+          "link": "https://docs.ubports.com/en/latest/about/process/release-schedule.html",
           "type": "select",
           "remote_values": { "type": "systemimagechannels" }
         },
