@@ -110,7 +110,6 @@
         },
         {
           "type": "adb:format",
-          "condition": {"var": "format", "value": true},
           "partition": "cache"
         },
         {

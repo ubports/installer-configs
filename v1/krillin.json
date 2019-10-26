@@ -87,6 +87,10 @@
           "fallback_user_action": "recovery"
         },
         {
+          "type": "adb:format",
+          "partition": "cache"
+        },
+        {
           "type": "systemimage"
         },
         {
