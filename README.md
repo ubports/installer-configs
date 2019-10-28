@@ -1,4 +1,4 @@
-# UBports Installer configs
+# UBports Installer configs [![Build Status](https://travis-ci.org/ubports/installer-configs.svg?branch=master)](https://travis-ci.org/ubports/installer-configs)
 
 This repository contanins the config files for the [UBports Installer](https://github.com/ubports/ubports-installer).
 
