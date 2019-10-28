@@ -1,0 +1,13 @@
+language: node_js
+cache:
+  directories:
+  - node_modules
+matrix:
+  include:
+  - os: osx
+  - os: linux
+node_js:
+  - "8"
+  - "10"
+  - "12"
+script: "npm run-script validate"
