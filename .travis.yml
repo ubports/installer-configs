@@ -10,4 +10,4 @@ node_js:
   - "8"
   - "10"
   - "12"
-script: "npm run-script validate"
+script: "npm run-script validate:index && npm run-script validate:aliases && npm run-script validate:devices"
