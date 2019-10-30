@@ -1,0 +1,62 @@
+{
+  "name": "LG G Watch R",
+  "codename": "lenok",
+  "unlock": [],
+  "user_actions": {
+    "bootloader": {
+      "title": "Is the device in Bootloader mode?",
+      "description": "You should be seeing the 'FASTBOOT MENU' on the device now.",
+      "button": true
+    }
+   },
+  "operating_systems": [
+    {
+      "name": "Asteroid OS",
+      "sanity_check": "Are you sure?",
+      "options": [],
+      "prerequisites": [],
+      "steps": [
+        {
+          "type": "download",
+          "group": "asteroidos",
+          "files": [
+            {
+              "url": "https://release.asteroidos.org/nightlies/lenok/asteroid-image-lenok.ext4",
+              "checksum": "c501409f1a479e27823a6f49b7859c5a1c3f348d83f7b88913368762a2806ae8"
+            },
+            {
+              "url": "https://release.asteroidos.org/nightlies/lenok/zImage-dtb-lenok.fastboot",
+              "checksum": "d290df211779f663cb862855373f725e729fcfd8d3fbdc0e1ce20737edc7d085"
+            }
+          ]
+        },
+        {
+          "type": "adb:reboot",
+          "to_state": "bootloader",
+          "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:flash",
+          "flash": [
+            {
+              "partition": "userdata",
+              "file": "asteroid-image-lenok.ext4",
+              "group": "asteroidos"
+            },
+            {
+              "partition": "boot",
+              "file": "zImage-dtb-lenok.fastboot",
+              "group": "asteroidos"
+            }
+          ]
+        },
+        {
+          "type": "fastboot:boot",
+          "file": "zImage-dtb-lenok.fastboot",
+          "group": "asteroidos"
+        }
+      ],
+      "slideshow": []
+    }
+  ]
+}
