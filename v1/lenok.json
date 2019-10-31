@@ -5,7 +5,7 @@
   "user_actions": {
     "bootloader": {
       "title": "Is the device in Bootloader mode?",
-      "description": "You should be seeing the 'FASTBOOT MENU' on the device now.",
+      "description": "You should be seeing the 'FASTBOOT MENU' on the device now. If not, reboot the device and swipe from the top left to the bottom right edge of the screen while booting.",
       "button": true
     }
    },
@@ -21,12 +21,12 @@
           "group": "asteroidos",
           "files": [
             {
-              "url": "https://release.asteroidos.org/nightlies/lenok/asteroid-image-lenok.ext4",
-              "checksum": "c501409f1a479e27823a6f49b7859c5a1c3f348d83f7b88913368762a2806ae8"
+              "url": "https://release.asteroidos.org/1.0/lenok/asteroid-image-lenok.ext4",
+              "checksum": "4df70ce3870aaf93c7f086369e83d9090e1c502d685ec4627e4bf3881979e2bc"
             },
             {
-              "url": "https://release.asteroidos.org/nightlies/lenok/zImage-dtb-lenok.fastboot",
-              "checksum": "d290df211779f663cb862855373f725e729fcfd8d3fbdc0e1ce20737edc7d085"
+              "url": "https://release.asteroidos.org/1.0/lenok/zImage-dtb-lenok.fastboot",
+              "checksum": "f6b553d7ceface126133393bb5b79ea9a2efb1b85e8ff8fe22794fe94fba4bcc"
             }
           ]
         },
