@@ -1,0 +1,108 @@
+{
+  "name": "Oneplus 3",
+  "codename": "oneplus3",
+  "unlock": [],
+  "user_actions": {
+    "recovery": {
+      "title": "Reboot to Recovery",
+      "description": "With the device powered off, hold Volume Down + Power.",
+      "image": "phone_power_down",
+      "button": true
+    },
+    "bootloader": {
+      "title": "Reboot to Bootloader",
+      "description": "With the device powered off, hold Volume Up + Power.",
+      "image": "phone_power_up",
+      "button": true
+    }
+  },
+  "operating_systems": [
+    {
+      "name": "Ubuntu Touch",
+      "sanity_check": "Are you sure?",
+      "options": [
+        {
+          "var": "channel",
+          "name": "Channel",
+          "tooltip": "The release channel",
+          "link": "https://docs.ubports.com/en/latest/about/process/release-schedule.html",
+          "type": "select",
+          "remote_values": { "type": "systemimagechannels" }
+        },
+        {
+          "var": "wipe",
+          "name": "Wipe Userdata",
+          "tooltip": "Wipe personal data",
+          "type": "checkbox"
+        },
+        {
+          "var": "bootstrap",
+          "name": "Bootstrap",
+          "tooltip": "Flash system partitions using fastboot",
+          "type": "checkbox",
+          "value": true
+        }
+      ],
+      "prerequisites": [],
+      "steps": [
+        {
+          "type": "download",
+          "condition": {"var": "bootstrap", "value": true},
+          "group": "firmware",
+          "files": [
+            {
+              "url": "https://ci.ubports.com/view/Device%20Builds/job/halium-oneplus3/lastSuccessfulBuild/artifact/halium-boot_oneplus3.img"
+            },
+            {
+              "url": "https://ci.ubports.com/view/Device%20Builds/job/halium-oneplus3/lastSuccessfulBuild/artifact/halium-unlocked-recovery_oneplus3.img"
+            }
+          ]
+        },
+        {
+          "type": "adb:reboot",
+          "condition": {"var": "bootstrap", "value": true},
+          "to_state": "bootloader",
+          "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:flash",
+          "condition": {"var": "bootstrap", "value": true},
+          "flash": [
+            {
+              "partition": "boot",
+              "file": "halium-boot_oneplus3.img",
+              "group": "firmware"
+            },
+            {
+              "partition": "recovery",
+              "file": "halium-unlocked-recovery_oneplus3.img",
+              "group": "firmware"
+            }
+          ]
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "bootstrap", "value": true},
+          "partition": "cache"
+        },
+        {
+          "type": "fastboot:boot",
+          "condition": {"var": "bootstrap", "value": true},
+          "file": "halium-unlocked-recovery_oneplus3.img",
+          "fallback_user_action": "recovery",
+          "group": "firmware"
+        },
+        {
+          "type": "systemimage"
+        },
+        {
+          "type": "adb:reboot",
+          "to_state": "recovery",
+          "fallback_user_action": "recovery"
+        }
+      ],
+      "slideshow": []
+    }
+  ]
+}
+
