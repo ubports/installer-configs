@@ -57,10 +57,8 @@
           "group": "firmware",
           "files": [
             {
-              "url": "https://ci.ubports.com/view/Device%20Builds/job/halium-suzu/lastSuccessfulBuild/artifact/halium-boot_suzu.img"
-            },
-            {
-              "url": "https://ci.ubports.com/view/Device%20Builds/job/halium-suzu/lastSuccessfulBuild/artifact/halium-unlocked-recovery_suzu.img"
+              "url": "http://cdimage.ubports.com/devices/halium-unlocked-recovery_suzu.img",
+              "checksum": "1fd576f4685164971bf24f194d2a684fa7081616778fef7c882ed7345a1b8949"
             }
           ]
         },
@@ -76,7 +74,7 @@
           "flash": [
             {
               "partition": "boot",
-              "file": "halium-boot_suzu.img",
+              "file": "halium-unlocked-recovery_suzu.img",
               "group": "firmware"
             },
             {
@@ -90,23 +88,6 @@
           "type": "fastboot:erase",
           "condition": {"var": "bootstrap", "value": true},
           "partition": "cache"
-        },
-        {
-          "type": "fastboot:flash",
-          "condition": {"var": "bootstrap", "value": true},
-          "flash": [
-            {
-              "partition": "boot",
-              "file": "halium-unlocked-recovery_suzu.img",
-              "group": "firmware"
-            },
-            {
-              "partition": "recovery",
-              "file": "halium-unlocked-recovery_suzu.img",
-              "group": "firmware"
-            }
-          ],
-          "group": "firmware"
         },
         {
           "type": "fastboot:reboot",
