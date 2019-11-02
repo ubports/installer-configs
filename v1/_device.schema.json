@@ -154,6 +154,8 @@
                     "fastboot:update",
                     "systemimage",
                     "fastboot:boot",
+                    "fastboot:reboot",
+                    "fastboot:continue",
                     "fastboot:erase",
                     "fastboot:flash",
                     "adb:reboot",
