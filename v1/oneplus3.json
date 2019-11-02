@@ -51,10 +51,8 @@
           "group": "firmware",
           "files": [
             {
-              "url": "https://ci.ubports.com/view/Device%20Builds/job/halium-oneplus3/lastSuccessfulBuild/artifact/halium-boot_oneplus3.img"
-            },
-            {
-              "url": "https://ci.ubports.com/view/Device%20Builds/job/halium-oneplus3/lastSuccessfulBuild/artifact/halium-unlocked-recovery_oneplus3.img"
+              "url": "http://cdimage.ubports.com/devices/halium-unlocked-recovery_oneplus3.img",
+              "checksum": "ca6359915a692523d7d12f6f0ca85e81d89328e7ad5bd46779e0af5c4b8c850b"
             }
           ]
         },
@@ -68,11 +66,6 @@
           "type": "fastboot:flash",
           "condition": {"var": "bootstrap", "value": true},
           "flash": [
-            {
-              "partition": "boot",
-              "file": "halium-boot_oneplus3.img",
-              "group": "firmware"
-            },
             {
               "partition": "recovery",
               "file": "halium-unlocked-recovery_oneplus3.img",
