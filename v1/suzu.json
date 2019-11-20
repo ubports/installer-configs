@@ -1,5 +1,5 @@
 {
-  "name": "Sony Xperia X",
+  "name": "Sony Xperia X (F5121)",
   "codename": "suzu",
   "unlock": [],
   "user_actions": {
@@ -11,7 +11,7 @@
     },
     "bootloader": {
       "title": "Reboot to Bootloader",
-      "description": "With the device powered off, hold Volume Up + Power. The LED indicator has to light up blue.",
+      "description": "With the device powered off, hold Volume Up and insert a USB cable. The LED indicator has to light up blue.",
       "image": "phone_power_up",
       "button": true
     },
@@ -88,6 +88,11 @@
           "type": "fastboot:erase",
           "condition": {"var": "bootstrap", "value": true},
           "partition": "cache"
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "wipe", "value": true},
+          "partition": "userdata"
         },
         {
           "type": "fastboot:reboot",
