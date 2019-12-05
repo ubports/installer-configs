@@ -1,7 +1,7 @@
 {
   "name": "Bq Aquaris M10 HD",
   "codename": "cooler",
-  "unlock": ["unlock"],
+  "unlock": ["unlock", "confirm_model"],
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
@@ -19,6 +19,10 @@
       "title": "Unlock",
       "description": "If the device is running Android, it needs to be manually unlocked for the Installer to work. This is achieved by first installing a very old version of Canonical's Ubuntu Touch using an OEM tool, which is a manual process. Click the link below to find out more. If the device is already running Ubuntu Touch, you can simply ignore this message.",
       "link": "https://docs.ubports.com/en/latest/userguide/install.html#install-on-legacy-android-devices"
+    },
+    "confirm_model": {
+      "title": "Confirm your model",
+      "description": "Please double-check that your device is a Bq M10 HD (cooler). If you have the FHD version (frieza), you have to select that instead."
     }
   },
   "operating_systems": [

@@ -1,7 +1,7 @@
 {
   "name": "Nexus 5",
   "codename": "hammerhead",
-  "unlock": [],
+  "unlock": ["confirm_model"],
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
@@ -14,6 +14,10 @@
       "description": "Press and hold the volume down and power buttons until the phone reboots.",
       "image": "phone_power_down",
       "button": true
+    },
+    "confirm_model": {
+      "title": "Confirm your model",
+      "description": "Please double-check that your device is an LG Nexus 5 (hammerhead). The LG Nexus 5x (bullhead) is not compatible."
     }
   },
   "operating_systems": [
