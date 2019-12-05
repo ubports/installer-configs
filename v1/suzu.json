@@ -1,7 +1,7 @@
 {
   "name": "Sony Xperia X (F5121)",
   "codename": "suzu",
-  "unlock": [],
+  "unlock": ["confirm_model"],
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
@@ -20,6 +20,10 @@
       "description": "Power on the device.",
       "image": "phone_power_up",
       "button": true
+    },
+    "confirm_model": {
+      "title": "Confirm your model",
+      "description": "Please double-check that your device is a Sony Xperia X (F5121), the 32 GB version. The F5121 (64 GB) version is not compatible."
     }
   },
   "operating_systems": [
