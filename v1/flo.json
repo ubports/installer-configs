@@ -1,7 +1,7 @@
 {
   "name": "Nexus 7 2013 WiFi",
   "codename": "flo",
-  "unlock": [],
+  "unlock": ["confirm_model"],
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
