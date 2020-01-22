@@ -5,14 +5,12 @@
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
-      "description": "Press and hold the volume down and power buttons until the phone reboots. Use the volume keys to select recovery mode and confirm with the power button.",
-      "image": "phone_power_down",
+      "description": "Press and hold the volume buttons and the power button until the phone reboots. Use the volume keys to select recovery mode and confirm with the power button.",
       "button": true
     },
     "bootloader": {
       "title": "Reboot to Bootloader",
-      "description": "Press and hold the volume down and power buttons until the phone reboots.",
-      "image": "phone_power_down",
+      "description": "Press and hold the volume buttons and the power button until the phone reboots.",
       "button": true
     }
   },
