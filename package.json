@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Configuration files for the UBports Installer.",
   "scripts": {
+    "validate": "npm run validate:index && npm run validate:aliases && npm run validate:devices",
     "validate:index": "./node_modules/ajv-cli/index.js validate -s _index.schema.json -d index.json",
     "validate:aliases": "./node_modules/ajv-cli/index.js validate -s _aliases.schema.json -d aliases.json",
     "validate:devices": "ls v1/*.json | grep -v schema | while read device; do ./node_modules/ajv-cli/index.js validate -s v1/_device.schema.json -d $device; done"
@@ -18,6 +19,6 @@
   "homepage": "https://github.com/ubports/installer-configs#readme",
   "dependencies": {},
   "devDependencies": {
-    "ajv-cli": "^3.0.0"
+    "ajv-cli": "^3.1.0"
   }
 }
