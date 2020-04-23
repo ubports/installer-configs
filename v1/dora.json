@@ -1,0 +1,124 @@
+{
+  "name": "Sony Xperia X Performance (F8131 & F8132)",
+  "codename": "dora",
+  "unlock": ["confirm_model", "upgrade_android"],
+  "user_actions": {
+    "recovery": {
+      "title": "Reboot to Recovery",
+      "description": "With the device powered off, hold Volume Down + Power.",
+      "image": "phone_power_down",
+      "button": true
+    },
+    "bootloader": {
+      "title": "Reboot to Bootloader",
+      "description": "With the device powered off, hold Volume Up and insert a USB cable. The LED indicator has to light up blue.",
+      "image": "phone_power_up",
+      "button": true
+    },
+    "boot": {
+      "title": "Boot the device",
+      "description": "Power on the device.",
+      "image": "phone_power_up",
+      "button": true
+    },
+    "confirm_model": {
+      "title": "Confirm your model",
+      "description": "Please double-check that your device is a Sony Xperia X Performance (F8131 or F8132)."
+    },
+    "upgrade_android": {
+      "title": "Upgrade Android",
+      "description": "If the device is running Android, you might have to upgrade to Android 8.0.",
+      "link": "https://forums.ubports.com/topic/4147/sony-xperia-x-performance-dora-f8131-f8132"
+    }
+  },
+  "operating_systems": [
+    {
+      "name": "Ubuntu Touch",
+      "sanity_check": "Are you sure?",
+      "options": [
+        {
+          "var": "channel",
+          "name": "Channel",
+          "tooltip": "The release channel",
+          "link": "https://docs.ubports.com/en/latest/about/process/release-schedule.html",
+          "type": "select",
+          "remote_values": { "type": "systemimagechannels" }
+        },
+        {
+          "var": "wipe",
+          "name": "Wipe Userdata",
+          "tooltip": "Wipe personal data",
+          "type": "checkbox"
+        },
+        {
+          "var": "bootstrap",
+          "name": "Bootstrap",
+          "tooltip": "Flash system partitions using fastboot",
+          "type": "checkbox",
+          "value": true
+        }
+      ],
+      "prerequisites": [],
+      "steps": [
+        {
+          "type": "download",
+          "condition": {"var": "bootstrap", "value": true},
+          "group": "firmware",
+          "files": [
+            {
+              "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-dora/9/artifact/halium-unlocked-recovery_dora.img",
+              "checksum": "069cf56a6b3251d31e253bf308a76f456400c21abfbc7e1850475fbed1f810cb"
+            }
+          ]
+        },
+        {
+          "type": "adb:reboot",
+          "condition": {"var": "bootstrap", "value": true},
+          "to_state": "bootloader",
+          "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:flash",
+          "condition": {"var": "bootstrap", "value": true},
+          "flash": [
+            {
+              "partition": "boot",
+              "file": "halium-unlocked-recovery_dora.img",
+              "group": "firmware"
+            },
+            {
+              "partition": "recovery",
+              "file": "halium-unlocked-recovery_dora.img",
+              "group": "firmware"
+            }
+          ]
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "bootstrap", "value": true},
+          "partition": "cache"
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "wipe", "value": true},
+          "partition": "userdata"
+        },
+        {
+          "type": "fastboot:reboot",
+          "fallback_user_action": "boot",
+          "group": "firmware"
+        },
+        {
+          "type": "systemimage"
+        },
+        {
+          "type": "adb:reboot",
+          "to_state": "recovery",
+          "fallback_user_action": "recovery"
+        }
+      ],
+      "slideshow": []
+    }
+  ]
+}
+
