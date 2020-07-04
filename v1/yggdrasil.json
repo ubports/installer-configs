@@ -5,7 +5,7 @@
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
-      "description": "With the device powered off, hold Volume Down + Power.",
+      "description": "With the device powered off, hold Volume Down + Power. You might be prompted to select a mode to boot into. If that happens, follow the on-screen instructions and select \"Recovery\" mode.",
       "image": "phone_power_down",
       "button": true
     },
@@ -113,4 +113,3 @@
     }
   ]
 }
-
