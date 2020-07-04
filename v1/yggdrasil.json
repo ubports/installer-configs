@@ -11,7 +11,7 @@
     },
     "bootloader": {
       "title": "Reboot to Bootloader",
-      "description": "With the device powered off, hold Volume Up + Power.",
+      "description": "With the device powered off, hold Volume Up + Power. You might be prompted to select a mode to boot into. If that happens, follow the on-screen instructions and select \"Fastboot\" mode.",
       "image": "phone_power_up",
       "button": true
     }
