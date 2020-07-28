@@ -1,0 +1,102 @@
+{
+  "name": "Nexus 6P",
+  "codename": "angler",
+  "unlock": ["confirm_model"],
+  "user_actions": {
+    "recovery": {
+      "title": "Reboot to Recovery",
+      "description": "Press and hold the volume up and power buttons until the phone reboots.",
+      "image": "phone_power_down",
+      "button": true
+    },
+    "bootloader": {
+      "title": "Reboot to Bootloader",
+      "description": "Press and hold the volume down and power buttons until the phone reboots.",
+      "image": "phone_power_down",
+      "button": true
+    },
+    "confirm_model": {
+      "title": "Confirm your model",
+      "description": "Please double-check that your device is a Huawei Nexus 6P (angler). The LG Nexus 6 (shamu) is not compatible."
+    }
+  },
+  "operating_systems": [
+    {
+      "name": "Ubuntu Touch",
+      "sanity_check": "Are you sure?",
+      "options": [
+        {
+          "var": "channel",
+          "name": "Channel",
+          "tooltip": "The release channel",
+          "link": "https://docs.ubports.com/en/latest/about/process/release-schedule.html",
+          "type": "select",
+          "remote_values": { "type": "systemimagechannels" }
+        },
+        {
+          "var": "wipe",
+          "name": "Wipe Userdata",
+          "tooltip": "Wipe personal data",
+          "type": "checkbox"
+        },
+        {
+          "var": "bootstrap",
+          "name": "Bootstrap",
+          "tooltip": "Flash system partitions using fastboot",
+          "type": "checkbox",
+          "value": true
+        }
+      ],
+      "prerequisites": [],
+      "steps": [
+        {
+          "type": "download",
+          "condition": {"var": "bootstrap", "value": true},
+          "group": "firmware",
+          "files": [
+            {
+              "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-angler/9/artifact/halium-unlocked-recovery_angler.img",
+              "checksum": "fad5ec36532a262957f7efa9fcc835373ca208cf4217b06feefcb5d0fd588661"
+            }
+          ]
+        },
+        {
+          "type": "adb:reboot",
+          "condition": {"var": "bootstrap", "value": true},
+          "to_state": "bootloader",
+          "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:flash",
+          "condition": {"var": "bootstrap", "value": true},
+          "flash": [
+            {
+              "partition": "recovery",
+              "file": "halium-unlocked-recovery_angler.img",
+              "group": "firmware"
+            },
+            {
+              "partition": "boot",
+              "file": "halium-unlocked-recovery_angler.img",
+              "group": "firmware"
+            }
+          ]
+        },
+        {
+          "type": "fastboot:reboot",
+          "fallback_user_action": "boot",
+          "group": "firmware"
+        },
+        {
+          "type": "systemimage"
+        },
+        {
+          "type": "adb:reboot",
+          "to_state": "recovery",
+          "fallback_user_action": "recovery"
+        }
+      ],
+      "slideshow": []
+    }
+  ]
+}
