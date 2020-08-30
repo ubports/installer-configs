@@ -17,7 +17,7 @@
     },
     "confirm_model": {
       "title": "Confirm your model",
-      "description": "Please double-check that your device is an LG Nexus 5 (hammerhead). The LG Nexus 5x (bullhead) is not compatible."
+      "description": "Please double-check that your device is an LG Nexus 5 (hammerhead). The LG Nexus 5x (bullhead) is not compatible. Also note, that multiple users encountered issues while flashing Nexus 5 (hammerhead) due to altered partition layouts. If you've previously had a recent version of LineageOS installed (>16.0, July 2019 or later) the partition layout has probably been altered. See https://github.com/ubports/ubports-installer/issues/1107 for instructions on how to revert to the original partition layout. If you're unsure whether this is the case you may go ahead now and revisit the instructions linked above if you encounter \"Error: systemimage: Push failed: Failed push: Failed to push file 0: Push failed: out of space\" while flashing the device."
     }
   },
   "operating_systems": [
