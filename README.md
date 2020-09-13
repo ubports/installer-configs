@@ -2,7 +2,7 @@
 
 This repository contanins the config files for the [UBports Installer](https://github.com/ubports/ubports-installer).
 
-To add a new device, add a codename-name mapping to [index.js](./index.js), add overrides for all alternative codenames to [aliases.json](./aliases.json) and commit a config file that follows the [schema](./v1/_device.schema.json) to the [v1](./v1) folder. You must always test configs before committing, only working configs will be accepted.  
+To add a new device, add a codename-name mapping to [index.json](./index.json), add overrides for all alternative codenames to [aliases.json](./aliases.json) and commit a config file that follows the [schema](./v1/_device.schema.json) to the [v1](./v1) folder. You must always test configs before committing, only working configs will be accepted.  
 
 Run `npm run validate:index && npm run validate:aliases && npm run validate:devices` to make sure you followed the schema correctly.
 
