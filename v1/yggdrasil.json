@@ -1,0 +1,115 @@
+{
+  "name": "VollaPhone",
+  "codename": "yggdrasil",
+  "unlock": [],
+  "user_actions": {
+    "recovery": {
+      "title": "Reboot to Recovery",
+      "description": "With the device powered off, hold Volume Down + Power. You might be prompted to select a mode to boot into. If that happens, follow the on-screen instructions and select \"Recovery\" mode.",
+      "image": "phone_power_down",
+      "button": true
+    },
+    "bootloader": {
+      "title": "Reboot to Bootloader",
+      "description": "With the device powered off, hold Volume Up + Power. You might be prompted to select a mode to boot into. If that happens, follow the on-screen instructions and select \"Fastboot\" mode.",
+      "image": "phone_power_up",
+      "button": true
+    }
+  },
+  "operating_systems": [
+    {
+      "name": "Ubuntu Touch",
+      "sanity_check": "Are you sure?",
+      "options": [
+        {
+          "var": "channel",
+          "name": "Channel",
+          "tooltip": "The release channel",
+          "link": "https://docs.ubports.com/en/latest/about/process/release-schedule.html",
+          "type": "select",
+          "remote_values": { "type": "systemimagechannels" }
+        },
+        {
+          "var": "wipe",
+          "name": "Wipe Userdata",
+          "tooltip": "Wipe personal data",
+          "type": "checkbox"
+        },
+        {
+          "var": "bootstrap",
+          "name": "Bootstrap",
+          "tooltip": "Flash system partitions using fastboot",
+          "type": "checkbox",
+          "value": true
+        }
+      ],
+      "prerequisites": [],
+      "steps": [
+        {
+          "type": "download",
+          "condition": {"var": "bootstrap", "value": true},
+          "group": "firmware",
+          "files": [
+            {
+              "url": "https://cdimage.ubports.com/devices/halium-unlocked-recovery_yggdrasil.img",
+              "checksum": "bf32cb85ba58d1f0791b37a91e44697c647440fd365a9f28ab77d9616fd36b2c"
+            }
+          ]
+        },
+        {
+          "type": "adb:reboot",
+          "condition": {"var": "bootstrap", "value": true},
+          "to_state": "bootloader",
+          "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:flash",
+          "condition": {"var": "bootstrap", "value": true},
+          "flash": [
+            {
+              "partition": "boot",
+              "file": "halium-unlocked-recovery_yggdrasil.img",
+              "group": "firmware"
+            },
+            {
+              "partition": "recovery",
+              "file": "halium-unlocked-recovery_yggdrasil.img",
+              "group": "firmware"
+            }
+          ]
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "bootstrap", "value": true},
+          "partition": "cache"
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "wipe", "value": true},
+          "partition": "userdata"
+        },
+        {
+          "type": "fastboot:reboot",
+          "fallback_user_action": "boot",
+          "condition": {"var": "bootstrap", "value": true},
+          "group": "firmware"
+        },
+        {
+          "type": "adb:reboot",
+          "to_state": "recovery",
+          "fallback_user_action": "recovery",
+          "condition": {"var": "bootstrap", "value": false}
+        },
+        {
+          "type": "systemimage"
+        },
+        {
+          "type": "adb:reboot",
+          "to_state": "recovery",
+          "fallback_user_action": "recovery"
+        }
+      ],
+      "slideshow": []
+    }
+  ]
+}
