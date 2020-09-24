@@ -157,6 +157,7 @@
                     "fastboot:reboot",
                     "fastboot:continue",
                     "fastboot:erase",
+                    "fastboot:format",
                     "fastboot:flash",
                     "adb:reboot",
                     "adb:format",
