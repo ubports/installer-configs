@@ -94,7 +94,7 @@
           ]
         },
         {
-          "type": "fastboot:erase",
+          "type": "fastboot:format",
           "condition": {"var": "bootstrap", "value": true},
           "partition": "cache"
         },
@@ -120,10 +120,6 @@
           "type": "adb:format",
           "condition": {"var": "format", "value": true},
           "partition": "data"
-        },
-        {
-          "type": "adb:format",
-          "partition": "cache"
         },
         {
           "type": "systemimage"
