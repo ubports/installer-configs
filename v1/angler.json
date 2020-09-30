@@ -1,7 +1,7 @@
 {
   "name": "Nexus 6P",
   "codename": "angler",
-  "unlock": ["confirm_model"],
+  "unlock": ["confirm_model", "confirm_vendorimage"],
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
@@ -17,7 +17,11 @@
     },
     "confirm_model": {
       "title": "Confirm your model",
-      "description": "Please double-check that your device is a Huawei Nexus 6P (angler). The LG Nexus 6 (shamu) is not compatible."
+      "description": "Please confirm that your device is a Huawei Nexus 6P (angler). The LG Nexus 6 (shamu) is not compatible!"
+    },
+    "confirm_vendorimage": {
+      "title": "Confirm Android version",
+      "description": "Please confirm that your device has been reset to stock Android 7.1.2 - Critical vendor files are otherwise missing!"
     }
   },
   "operating_systems": [
@@ -50,21 +54,27 @@
       "prerequisites": [],
       "steps": [
         {
+          "type": "adb:reboot",
+          "condition": {"var": "bootstrap", "value": true},
+          "to_state": "bootloader",
+          "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "adb:reboot",
+          "condition": {"var": "bootstrap", "value": false},
+          "to_state": "recovery",
+          "fallback_user_action": "recovery"
+        },
+        {
           "type": "download",
           "condition": {"var": "bootstrap", "value": true},
           "group": "firmware",
           "files": [
             {
-              "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-angler/9/artifact/halium-unlocked-recovery_angler.img",
-              "checksum": "fad5ec36532a262957f7efa9fcc835373ca208cf4217b06feefcb5d0fd588661"
+              "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-angler/14/artifact/halium-unlocked-recovery_angler.img",
+              "checksum": "32d73944c4d5d2f6fb6f7f06b0a3bec1e9509fbe2c6e5965453c1982facde38d"
             }
           ]
-        },
-        {
-          "type": "adb:reboot",
-          "condition": {"var": "bootstrap", "value": true},
-          "to_state": "bootloader",
-          "fallback_user_action": "bootloader"
         },
         {
           "type": "fastboot:flash",
@@ -84,6 +94,7 @@
         },
         {
           "type": "fastboot:reboot",
+          "condition": {"var": "bootstrap", "value": true},
           "fallback_user_action": "boot",
           "group": "firmware"
         },
