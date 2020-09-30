@@ -219,6 +219,74 @@
         }
       ],
       "slideshow": []
+    },
+    {
+      "name": "SailfishOS",
+      "sanity_check": "Are you sure?",
+      "options": [],
+      "prerequisites": [],
+      "steps": [
+        {
+          "type": "download",
+          "group": "SailfishOS",
+          "files": [
+            {
+              "url": "https://gitlab.com/sailfishos-porters-ci/yggdrasil-ci/-/jobs/765598172/artifacts/download",
+              "checksum": {
+                "sum": "66e64358084a6f0cb9c326bdf6b6eb70",
+                "algorithm": "md5"
+              }
+            }
+          ]
+        },
+        {
+          "type": "unpack",
+          "group": "SailfishOS",
+          "files": [
+            {
+              "archive": "download",
+              "dir": "unpacked"
+            }
+          ]
+        },
+        {
+          "type": "unpack",
+          "group": "SailfishOS",
+          "files": [
+            {
+              "archive": "unpacked/sfe-yggdrasil-3.3.0.16-devel-20200930/Sailfish_OS--devel-20200930-3.3.0.16-yggdrasil-0.0.1+master.20200412232514.072539f.15.zip",
+              "dir": "unpacked"
+            }
+          ]
+        },
+        {
+          "type": "adb:reboot",
+          "to_state": "bootloader",
+          "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:flash",
+          "flash": [
+            {
+              "partition": "boot",
+              "file": "unpacked/Sailfish_OS--devel-20200930-3.3.0.16-yggdrasil-0.0.1+master.20200412232514.072539f.15/hybris-boot.img",
+              "group": "SailfishOS"
+            },
+            {
+              "partition": "userdata",
+              "file": "unpacked/Sailfish_OS--devel-20200930-3.3.0.16-yggdrasil-0.0.1+master.20200412232514.072539f.15/sailfish.img001",
+              "group": "SailfishOS"
+            }
+          ]
+        },
+        {
+          "type": "fastboot:reboot",
+          "fallback_user_action": "boot",
+          "condition": {"var": "bootstrap", "value": true},
+          "group": "firmware"
+        }
+      ],
+      "slideshow": []
     }
   ]
 }
