@@ -100,7 +100,6 @@
           "type": "fastboot:reboot",
           "condition": {"var": "bootstrap", "value": true},
           "fallback_user_action": "boot",
-          "group": "firmware"
         },
         {
           "type": "systemimage"
