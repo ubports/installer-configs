@@ -1,0 +1,123 @@
+{
+  "name": "Sony Xperia XZ (F8331 & F8332)",
+  "codename": "kagura",
+  "unlock": ["confirm_model", "upgrade_android"],
+  "user_actions": {
+    "recovery": {
+      "title": "Reboot to Recovery",
+      "description": "With the device powered off, hold Volume Down + Power.",
+      "image": "phone_power_down",
+      "button": true
+    },
+    "bootloader": {
+      "title": "Reboot to Bootloader",
+      "description": "With the device powered off, hold Volume Up and insert a USB cable. The LED indicator has to light up blue.",
+      "image": "phone_power_up",
+      "button": true
+    },
+    "boot": {
+      "title": "Boot the device",
+      "description": "Power on the device.",
+      "image": "phone_power_up",
+      "button": true
+    },
+    "confirm_model": {
+      "title": "Confirm your model",
+      "description": "Please double-check that your device is a Sony Xperia XZ (F8331 or F8332)."
+    },
+    "upgrade_android": {
+      "title": "Upgrade Android",
+      "description": "If the device is running Android, should upgrade to Android 8.0 first."
+    }
+  },
+  "operating_systems": [
+    {
+      "name": "Ubuntu Touch",
+      "sanity_check": "Are you sure?",
+      "options": [
+        {
+          "var": "channel",
+          "name": "Channel",
+          "tooltip": "The release channel",
+          "link": "https://docs.ubports.com/en/latest/about/process/release-schedule.html",
+          "type": "select",
+          "remote_values": { "type": "systemimagechannels" }
+        },
+        {
+          "var": "wipe",
+          "name": "Wipe Userdata",
+          "tooltip": "Wipe personal data",
+          "type": "checkbox"
+        },
+        {
+          "var": "bootstrap",
+          "name": "Bootstrap",
+          "tooltip": "Flash system partitions using fastboot",
+          "type": "checkbox",
+          "value": true
+        }
+      ],
+      "prerequisites": [],
+      "steps": [
+        {
+          "type": "download",
+          "condition": {"var": "bootstrap", "value": true},
+          "group": "firmware",
+          "files": [
+            {
+              "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-kagura/6/artifact/halium-unlocked-recovery_kagura.img",
+              "checksum": "c51f82c893d053965663140f9f8ccb15e0c80a01ac3a1a76e81ac49105ee978e"
+            }
+          ]
+        },
+        {
+          "type": "adb:reboot",
+          "condition": {"var": "bootstrap", "value": true},
+          "to_state": "bootloader",
+          "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:flash",
+          "condition": {"var": "bootstrap", "value": true},
+          "flash": [
+            {
+              "partition": "boot",
+              "file": "halium-unlocked-recovery_kagura.img",
+              "group": "firmware"
+            },
+            {
+              "partition": "recovery",
+              "file": "halium-unlocked-recovery_kagura.img",
+              "group": "firmware"
+            }
+          ]
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "bootstrap", "value": true},
+          "partition": "cache"
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "wipe", "value": true},
+          "partition": "userdata"
+        },
+        {
+          "type": "fastboot:reboot",
+          "fallback_user_action": "boot",
+          "group": "firmware"
+        },
+        {
+          "type": "systemimage"
+        },
+        {
+          "type": "adb:reboot",
+          "to_state": "recovery",
+          "fallback_user_action": "recovery"
+        }
+      ],
+      "slideshow": []
+    }
+  ]
+}
+
