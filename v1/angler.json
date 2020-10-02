@@ -99,7 +99,7 @@
         {
           "type": "fastboot:reboot",
           "condition": {"var": "bootstrap", "value": true},
-          "fallback_user_action": "boot",
+          "fallback_user_action": "boot"
         },
         {
           "type": "systemimage"
