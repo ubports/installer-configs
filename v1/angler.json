@@ -30,6 +30,10 @@
     "confirm_formatting": {
       "title": "Reformat all partitions with TWRP",
       "description": "Please install TWRP recovery and format all partitions due to the encryption applied by the stock ROM!"
+    },
+    "boot": {
+      "title": "Reboot the device",
+      "description": "Hold the power button to turn your device completely off, release it for a few seconds, then hold it down again until the device boots."
     }
   },
   "operating_systems": [
@@ -105,8 +109,7 @@
         {
           "type": "fastboot:reboot",
           "condition": {"var": "bootstrap", "value": true},
-          "fallback_user_action": "boot",
-          "group": "firmware"
+          "fallback_user_action": "boot"
         },
         {
           "type": "systemimage"
