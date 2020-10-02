@@ -1,7 +1,7 @@
 {
   "name": "Nexus 6P",
   "codename": "angler",
-  "unlock": ["confirm_model", "confirm_vendorimage"],
+  "unlock": ["confirm_model", "confirm_vendorimage", "confirm_oemunlock", "confirm_formatting"],
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
@@ -21,7 +21,15 @@
     },
     "confirm_vendorimage": {
       "title": "Confirm Android version",
-      "description": "Please confirm that your device has been reset to stock Android 7.1.2 - Critical vendor files are otherwise missing!"
+      "description": "Please reset your device to stock Android 7.1.2 - Critical vendor files are otherwise missing!"
+    },
+    "confirm_oemunlock": {
+      "title": "Unlock your bootloader",
+      "description": "Please unlock the bootloader with the command fastboot flashing unlock!"
+    },
+    "confirm_formatting": {
+      "title": "Reformat all partitions with TWRP",
+      "description": "Please install TWRP recovery and format all partitions due to the encryption applied by the stock ROM!"
     }
   },
   "operating_systems": [
@@ -83,12 +91,14 @@
             {
               "partition": "recovery",
               "file": "halium-unlocked-recovery_angler.img",
-              "group": "firmware"
+              "group": "firmware",
+              "raw": "true"
             },
             {
               "partition": "boot",
               "file": "halium-unlocked-recovery_angler.img",
-              "group": "firmware"
+              "group": "firmware",
+              "raw": "true"
             }
           ]
         },
