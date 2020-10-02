@@ -22,6 +22,10 @@
     "confirm_vendorimage": {
       "title": "Confirm Android version",
       "description": "Please confirm that your device has been reset to stock Android 7.1.2 - Critical vendor files are otherwise missing!"
+    },
+    "boot": {
+      "title": "Reboot the device",
+      "description": "Hold the power button to turn your device completely off, release it for a few seconds, then hold it down again until the device boots."
     }
   },
   "operating_systems": [
