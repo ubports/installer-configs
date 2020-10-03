@@ -84,7 +84,8 @@
             {
               "partition": "boot",
               "file": "halium-unlocked-recovery_suzu.img",
-              "group": "firmware"
+              "group": "firmware",
+              "raw": true
             },
             {
               "partition": "recovery",
