@@ -34,6 +34,11 @@
       "title": "Sideload complete!",
       "description": "Follow the on-screen instructions to complete the sideload. Your device will reboot to the new OS next.",
       "button": true
+    },
+    "install_android": {
+      "title": "Install Android",
+      "description": "Unfortunately, SailfishOS can only be successfully installed if the device is running some version of Android; be it VollaOS or the stock AOSP.",
+      "button": true
     }
   },
   "operating_systems": [
@@ -224,18 +229,14 @@
       "name": "SailfishOS",
       "sanity_check": "Are you sure?",
       "options": [],
-      "prerequisites": [],
+      "prerequisites": ["install_android"],
       "steps": [
         {
           "type": "download",
           "group": "SailfishOS",
           "files": [
             {
-              "url": "https://gitlab.com/sailfishos-porters-ci/yggdrasil-ci/-/jobs/765598172/artifacts/download",
-              "checksum": {
-                "sum": "66e64358084a6f0cb9c326bdf6b6eb70",
-                "algorithm": "md5"
-              }
+              "url": "https://gitlab.com/sailfishos-porters-ci/yggdrasil-ci/-/jobs/artifacts/master/download?job=run-build-lvm"
             }
           ]
         },
@@ -244,17 +245,7 @@
           "group": "SailfishOS",
           "files": [
             {
-              "archive": "download",
-              "dir": "unpacked"
-            }
-          ]
-        },
-        {
-          "type": "unpack",
-          "group": "SailfishOS",
-          "files": [
-            {
-              "archive": "unpacked/sfe-yggdrasil-3.3.0.16-devel-20200930/Sailfish_OS--devel-20200930-3.3.0.16-yggdrasil-0.0.1+master.20200412232514.072539f.15.zip",
+              "archive": "download?job=run-build-lvm",
               "dir": "unpacked"
             }
           ]
@@ -269,12 +260,12 @@
           "flash": [
             {
               "partition": "boot",
-              "file": "unpacked/Sailfish_OS--devel-20200930-3.3.0.16-yggdrasil-0.0.1+master.20200412232514.072539f.15/hybris-boot.img",
+              "file": "unpacked/sfe-yggdrasil/Sailfish_OS/hybris-boot.img",
               "group": "SailfishOS"
             },
             {
               "partition": "userdata",
-              "file": "unpacked/Sailfish_OS--devel-20200930-3.3.0.16-yggdrasil-0.0.1+master.20200412232514.072539f.15/sailfish.img001",
+              "file": "unpacked/sfe-yggdrasil/Sailfish_OS/sailfish.img001",
               "group": "SailfishOS"
             }
           ]
