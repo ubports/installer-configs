@@ -77,7 +77,8 @@
             {
               "partition": "boot",
               "file": "boot-bacon.img",
-              "group": "firmware"
+              "group": "firmware",
+              "raw": true
             },
             {
               "partition": "recovery",
