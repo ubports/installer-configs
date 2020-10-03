@@ -83,7 +83,8 @@
             {
               "partition": "boot",
               "file": "halium-unlocked-recovery_kagura.img",
-              "group": "firmware"
+              "group": "firmware",
+              "raw": true
             },
             {
               "partition": "recovery",
