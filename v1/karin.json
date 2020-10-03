@@ -27,7 +27,7 @@
     },
     "upgrade_android": {
       "title": "Upgrade Android",
-      "description": "If the device is running Android, you might have to upgrade to Android 8.0.",
+      "description": "If the device is running Android, you might have to upgrade to Android 8.0."
     }
   },
   "operating_systems": [
