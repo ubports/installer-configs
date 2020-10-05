@@ -84,7 +84,8 @@
             {
               "partition": "boot",
               "file": "halium-unlocked-recovery_kugo.img",
-              "group": "firmware"
+              "group": "firmware",
+              "raw": true
             },
             {
               "partition": "recovery",
