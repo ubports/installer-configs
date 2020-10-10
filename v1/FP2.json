@@ -5,13 +5,13 @@
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
-      "description": "With the device powered off, press and hold the volume up and power buttons until the screen turns on.",
+      "description": "With the device powered off, press and hold the volume up and power buttons until the screen turns on. You might have to unplug your device. Plug it back in as soon as it is in recovery mode and click the button below to continue.",
       "image": "phone_power_up",
       "button": true
     },
     "bootloader": {
       "title": "Reboot to Bootloader",
-      "description": "With the device powered off, press and hold the volume down and power buttons until the screen turns on.",
+      "description": "With the device powered off, press and hold the volume down and power buttons until the screen turns on. You might have to unplug your device. Plug it back in as soon as it is in bootloader mode and click the button below to continue.",
       "image": "phone_power_down",
       "button": true
     }
