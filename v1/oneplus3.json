@@ -5,13 +5,13 @@
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
-      "description": "With the device powered off, hold Volume Down + Power.",
+      "description": "With the device powered off, hold Volume Down + Power. You might have to unplug your device. Plug it back in as soon as it is in recovery mode and click the button below to continue.",
       "image": "phone_power_down",
       "button": true
     },
     "bootloader": {
       "title": "Reboot to Bootloader",
-      "description": "With the device powered off, hold Volume Up + Power.",
+      "description": "With the device powered off, hold Volume Up + Power. You might have to unplug your device. Plug it back in as soon as it is in bootloader/fastboot mode and click the button below to continue.",
       "image": "phone_power_up",
       "button": true
     },
