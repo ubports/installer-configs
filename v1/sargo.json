@@ -93,6 +93,16 @@
               "partition": "boot",
               "file": "boot-sargo.img",
               "group": "firmware"
+            },
+            {
+              "partition": "dtbo",
+              "file": "dtbo-sargo.img",
+              "group": "firmware"
+            },
+            {
+              "partition": "vbmeta",
+              "file": "vbmeta-sargo.img",
+              "group": "firmware"
             }
           ]
         },
