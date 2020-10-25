@@ -8,21 +8,20 @@
       "description": "If you haven't done so already, make sure to OEM unlock your device first.",
       "link": "https://source.android.com/devices/bootloader/locking_unlocking#unlocking-bootloader"
     },
-    "recovery": {
-      "title": "Reboot to Recovery",
-      "description": "With the device powered off, press and hold the volume up and power buttons until the screen turns on. You might have to unplug your device. Plug it back in as soon as it is in recovery mode and click the button below to continue.",
-      "image": "phone_power_up",
-      "button": true
-    },
     "bootloader": {
       "title": "Reboot to Bootloader",
-      "description": "With the device powered off, press and hold the volume down and power buttons until the screen turns on. You might have to unplug your device. Plug it back in as soon as it is in bootloader mode and click the button below to continue.",
+      "description": "With the device powered off, press and hold the volume down and power buttons until the screen turns on. It should say 'Fastboot Mode' underneath the warning sign.",
+      "button": true
+    },
+    "recovery": {
+      "title": "Reboot to Recovery",
+      "description": "With the device still at the 'Fastboot Mode' screen, select the 'Recovery Mode' option by using the volume buttons and press the power button to enter.",
       "image": "phone_power_down",
       "button": true
     },
     "downgrade_android": {
       "title": "Downgrade Android",
-      "description": "If the device is running an Android version above 9.0, you might have to downgrade. Please make sure to flash version pq3b.190801.002 of the factory image before proceeding.",
+      "description": "If the device is running an Android version above 9.0, you have to downgrade to the last 9.0 release. Please make sure to flash version PQ3B.190801.002 of the factory image before proceeding.",
       "link": "https://developers.google.com/android/images#sargo"
     },
     "support": {
@@ -66,16 +65,16 @@
           "group": "firmware",
           "files": [
             {
-              "url": "http://cdimage.ubports.com/devices/sargo/boot-sargo.img",
-              "checksum": "534cc2da2add4a2bd8136b01069ed7dbe432076659fd4780910b6910b916f77b"
+              "url": "https://cdimage.ubports.com/devices/sargo/boot.img",
+              "checksum": "ee0db28b3749aae06e978217f99da7977eb47ca17bbaed66e0a1320ef2f6d1b4"
             },
             {
-              "url": "http://cdimage.ubports.com/devices/sargo/vbmeta-sargo.img",
-              "checksum": "534cc2da2add4a2bd8136b01069ed7dbe432076659fd4780910b6910b916f77b"
+              "url": "https://cdimage.ubports.com/devices/sargo/dtbo.img",
+              "checksum": "51e63686ee4bb15e1ddc296f8809996d645d114347daebacc561cf02d2bfce2d"
             },
             {
-              "url": "http://cdimage.ubports.com/devices/sargo/dtbo-sargo.img",
-              "checksum": "534cc2da2add4a2bd8136b01069ed7dbe432076659fd4780910b6910b916f77b"
+              "url": "https://cdimage.ubports.com/devices/sargo/vbmeta.img",
+              "checksum": "854a2c2a5e82c2c49a5d9d62c70334002c7dcd9203f904952ff5fc43b2eac420"
             }
           ]
         },
@@ -91,18 +90,19 @@
           "flash": [
             {
               "partition": "boot",
-              "file": "boot-sargo.img",
+              "file": "boot.img",
               "group": "firmware"
             },
             {
               "partition": "dtbo",
-              "file": "dtbo-sargo.img",
+              "file": "dtbo.img",
               "group": "firmware"
             },
             {
               "partition": "vbmeta",
-              "file": "vbmeta-sargo.img",
-              "group": "firmware"
+              "file": "vbmeta.img",
+              "group": "firmware",
+              "flags": ["--disable-verity", "--disable-verification"]
             }
           ]
         },
