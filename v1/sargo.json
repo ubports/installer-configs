@@ -11,6 +11,7 @@
     "bootloader": {
       "title": "Reboot to Bootloader",
       "description": "With the device powered off, press and hold the volume down and power buttons until the screen turns on. It should say 'Fastboot Mode' underneath the warning sign.",
+      "image": "phone_power_down",
       "button": true
     },
     "recovery": {
