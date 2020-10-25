@@ -15,7 +15,7 @@
     },
     "recovery": {
       "title": "Reboot to Recovery",
-      "description": "With the device still at the 'Fastboot Mode' screen, select the 'Recovery Mode' option by using the volume buttons and press the power button to enter.",
+      "description": "With the device still at the 'Fastboot Mode' screen (if not, power off the device and press and hold volume down and power buttons until the screen turns on), select the 'Recovery Mode' option by using the volume buttons and press the power button to enter.",
       "image": "phone_power_down",
       "button": true
     },
