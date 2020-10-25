@@ -3,6 +3,7 @@
   "codename": "suzu",
   "unlock": ["confirm_model", "upgrade_android"],
   "user_actions": {
+    
     "recovery": {
       "title": "Reboot to Recovery",
       "description": "With the device powered off, hold Volume Down + Power.",
@@ -61,6 +62,19 @@
       "prerequisites": [],
       "steps": [
         {
+          "type": "manual_download",
+          "condition": {"var": "bootstrap", "value": true},
+          "group": "firmware",
+          "file": {
+            "name": "SW_binaries_for_Xperia_AOSP_N_MR1_5.7_r1_v08_loire.img",
+            "url": "https://developer.sony.com/file/download/software-binaries-for-aosp-nougat-android-7-1-kernel-4-4-loire/",
+            "checksum": {
+              "sum": "38fe0b6a72f4f2373529f29b12cba010a987cb3fa9417aebd7e3279eeea0798e",
+              "algorithm": "sha256"
+            }
+          }
+        },
+        {
           "type": "download",
           "condition": {"var": "bootstrap", "value": true},
           "group": "firmware",
@@ -76,6 +90,23 @@
           "condition": {"var": "bootstrap", "value": true},
           "to_state": "bootloader",
           "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:flash",
+          "condition": {"var": "bootstrap", "value": true},
+          "flash": [
+            {
+              "partition": "oem",
+              "file": "SW_binaries_for_Xperia_AOSP_N_MR1_5.7_r1_v08_loire.img",
+              "group": "firmware",
+              "raw": true
+            }
+          ]
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "bootstrap", "value": true},
+          "partition": "system"
         },
         {
           "type": "fastboot:flash",
