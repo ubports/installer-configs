@@ -3,7 +3,6 @@
   "codename": "suzu",
   "unlock": ["confirm_model", "upgrade_android"],
   "user_actions": {
-    
     "recovery": {
       "title": "Reboot to Recovery",
       "description": "With the device powered off, hold Volume Down + Power.",
