@@ -92,21 +92,19 @@
           "fallback_user_action": "bootloader"
         },
         {
-          "type": "fastboot:flash",
+          "type": "fastboot:erase",
           "condition": {"var": "bootstrap", "value": true},
-          "flash": [
-            {
-              "partition": "oem",
-              "file": "SW_binaries_for_Xperia_AOSP_N_MR1_5.7_r1_v08_loire.img",
-              "group": "firmware",
-              "raw": true
-            }
-          ]
+          "partition": "system"
         },
         {
           "type": "fastboot:erase",
           "condition": {"var": "bootstrap", "value": true},
-          "partition": "system"
+          "partition": "cache"
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "wipe", "value": true},
+          "partition": "userdata"
         },
         {
           "type": "fastboot:flash",
@@ -122,18 +120,13 @@
               "partition": "recovery",
               "file": "halium-unlocked-recovery_suzu.img",
               "group": "firmware"
+            },
+            {
+              "partition": "oem",
+              "file": "SW_binaries_for_Xperia_AOSP_N_MR1_5.7_r1_v08_loire.img",
+              "group": "firmware"
             }
           ]
-        },
-        {
-          "type": "fastboot:erase",
-          "condition": {"var": "bootstrap", "value": true},
-          "partition": "cache"
-        },
-        {
-          "type": "fastboot:erase",
-          "condition": {"var": "wipe", "value": true},
-          "partition": "userdata"
         },
         {
           "type": "fastboot:reboot",
