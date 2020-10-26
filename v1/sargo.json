@@ -67,7 +67,7 @@
           "files": [
             {
               "url": "https://cdimage.ubports.com/devices/sargo/boot.img",
-              "checksum": "ee0db28b3749aae06e978217f99da7977eb47ca17bbaed66e0a1320ef2f6d1b4"
+              "checksum": "3125fa5cdd097cd69b8005af13e4c6a4a4cc61b83c6b13b219799def51fff2fa"
             },
             {
               "url": "https://cdimage.ubports.com/devices/sargo/dtbo.img",
@@ -84,6 +84,10 @@
           "condition": {"var": "bootstrap", "value": true},
           "to_state": "bootloader",
           "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:set_active",
+          "slot": "a"
         },
         {
           "type": "fastboot:flash",
