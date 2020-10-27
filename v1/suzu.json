@@ -61,6 +61,19 @@
       "prerequisites": [],
       "steps": [
         {
+          "type": "manual_download",
+          "condition": {"var": "bootstrap", "value": true},
+          "group": "firmware",
+          "file": {
+            "name": "SW_binaries_for_Xperia_AOSP_N_MR1_5.7_r1_v08_loire.img",
+            "url": "https://developer.sony.com/file/download/software-binaries-for-aosp-nougat-android-7-1-kernel-4-4-loire/",
+            "checksum": {
+              "sum": "38fe0b6a72f4f2373529f29b12cba010a987cb3fa9417aebd7e3279eeea0798e",
+              "algorithm": "sha256"
+            }
+          }
+        },
+        {
           "type": "download",
           "condition": {"var": "bootstrap", "value": true},
           "group": "firmware",
@@ -78,6 +91,21 @@
           "fallback_user_action": "bootloader"
         },
         {
+          "type": "fastboot:erase",
+          "condition": {"var": "bootstrap", "value": true},
+          "partition": "system"
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "bootstrap", "value": true},
+          "partition": "cache"
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "wipe", "value": true},
+          "partition": "userdata"
+        },
+        {
           "type": "fastboot:flash",
           "condition": {"var": "bootstrap", "value": true},
           "flash": [
@@ -91,18 +119,13 @@
               "partition": "recovery",
               "file": "halium-unlocked-recovery_suzu.img",
               "group": "firmware"
+            },
+            {
+              "partition": "oem",
+              "file": "SW_binaries_for_Xperia_AOSP_N_MR1_5.7_r1_v08_loire.img",
+              "group": "firmware"
             }
           ]
-        },
-        {
-          "type": "fastboot:erase",
-          "condition": {"var": "bootstrap", "value": true},
-          "partition": "cache"
-        },
-        {
-          "type": "fastboot:erase",
-          "condition": {"var": "wipe", "value": true},
-          "partition": "userdata"
         },
         {
           "type": "fastboot:reboot",
