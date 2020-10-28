@@ -38,7 +38,7 @@
     "upgrade_android": {
       "title": "Upgrade Android",
       "description": "If the device is running Android, you might have to upgrade to Android 8.0.",
-      "link": "https://clickitornot.com/android-8-0-oreo-on-sony-xperia-x/"
+      "link": "https://forums.ubports.com/topic/3229/sony-xperia-x-suzu-f5121"
     }
   },
   "operating_systems": [
@@ -155,4 +155,3 @@
     }
   ]
 }
-
