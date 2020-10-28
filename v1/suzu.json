@@ -1,7 +1,7 @@
 {
   "name": "Sony Xperia X (F5121 & F5122)",
   "codename": "suzu",
-  "unlock": ["confirm_model", "upgrade_android"],
+  "unlock": ["confirm_model", "ta_backup", "unlock"],
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
@@ -24,6 +24,16 @@
     "confirm_model": {
       "title": "Confirm your model",
       "description": "Please double-check that your device is a Sony Xperia X (F5121 or F5122)."
+    },
+    "ta_backup": {
+      "title": "Backup the TA partition",
+      "description": "In case you later wish to return to factory state, you will have to back up your TA partition before unlocking the bootloader. You can't do this step at a later stage!",
+      "link": "https://together.jolla.com/question/168711/xperia-x-backup-ta-partition-before-unlocking-bootloader/"
+    },
+    "unlock": {
+      "title": "Unlock the bootloader",
+      "description": "You have to unlock the bootloader to install third-party operating systems on your device.",
+      "link": "https://developer.sony.com/develop/open-devices/get-started/unlock-bootloader/"
     },
     "upgrade_android": {
       "title": "Upgrade Android",
@@ -58,7 +68,7 @@
           "value": true
         }
       ],
-      "prerequisites": [],
+      "prerequisites": ["upgrade_android"],
       "steps": [
         {
           "type": "manual_download",
@@ -145,4 +155,3 @@
     }
   ]
 }
-
