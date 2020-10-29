@@ -35,9 +35,10 @@
       "description": "Follow the on-screen instructions to complete the sideload. Your device will reboot to the new OS next.",
       "button": true
     },
-    "install_android": {
-      "title": "Install Android",
-      "description": "Unfortunately, SailfishOS can only be successfully installed if the device is running some version of Android; be it VollaOS or the stock AOSP.",
+    "untested": {
+      "title": "Untested",
+      "description": "Sorry, this configuration has not yet been fully tested. You might run into issues. If you want to help us improve, click the link below to see the config file.",
+      "link": "https://github.com/ubports/installer-configs/blob/master/v1/yggdrasil.json",
       "button": true
     }
   },
@@ -140,15 +141,18 @@
       "name": "VollaOS",
       "sanity_check": "Are you sure?",
       "options": [],
-      "prerequisites": [],
+      "prerequisites": ["untested"],
       "steps": [
         {
           "type": "download",
           "group": "VollaOS",
           "files": [
             {
-              "url": "https://ota.volla.tech/builds/volla-9.0-20200702-nightly-k63v2_64_bsp-signed.zip",
-              "checksum": "6011b8472e7f2fc3ba20bd0f79f790db2140d992b20e29f2f3f8a61a2030b1c9"
+              "url": "https://ota.volla.tech/builds/volla-9.0-20201019-nightly-k63v2_64_bsp-signed.zip",
+              "checksum": {
+                "sum": "0837f19481c9962e9ff3f1249b809942e2563e478f8735236436bd719b49fd5c",
+                "algorithm": "sha256"
+              }
             }
           ]
         },
@@ -157,7 +161,7 @@
           "group": "VollaOS",
           "files": [
             {
-              "archive": "volla-9.0-20200702-nightly-k63v2_64_bsp-signed.zip",
+              "archive": "volla-9.0-20201019-nightly-k63v2_64_bsp-signed.zip",
               "dir": "unpacked"
             }
           ]
@@ -193,11 +197,6 @@
               "partition": "boot",
               "file": "unpacked/boot.img",
               "group": "VollaOS"
-            },
-            {
-              "partition": "vendor",
-              "file": "vendor.img",
-              "group": "firmware"
             }
           ]
         },
@@ -215,12 +214,17 @@
         },
         {
           "type": "adb:sideload",
-          "file": "volla-9.0-20200702-nightly-k63v2_64_bsp-signed.zip",
+          "file": "volla-9.0-20201019-nightly-k63v2_64_bsp-signed.zip",
           "group": "VollaOS"
         },
         {
           "type": "user_action",
           "action": "twrp_sideload_reboot"
+        },
+        {
+          "type": "adb:reboot",
+          "to_state": "system",
+          "fallback_user_action": "boot"
         }
       ],
       "slideshow": []
@@ -229,7 +233,7 @@
       "name": "SailfishOS",
       "sanity_check": "Are you sure?",
       "options": [],
-      "prerequisites": ["install_android"],
+      "prerequisites": ["untested"],
       "steps": [
         {
           "type": "download",
@@ -267,13 +271,22 @@
               "partition": "userdata",
               "file": "unpacked/sfe-yggdrasil/Sailfish_OS/sailfish.img001",
               "group": "SailfishOS"
+            },
+            {
+              "partition": "logo",
+              "file": "unpacked/sfe-yggdrasil/Sailfish_OS/logo.bin",
+              "group": "SailfishOS"
+            },
+            {
+              "partition": "lk",
+              "file": "unpacked/sfe-yggdrasil/Sailfish_OS/lk-yggdrasil.img",
+              "group": "SailfishOS"
             }
           ]
         },
         {
-          "type": "fastboot:reboot",
+          "type": "fastboot:continue",
           "fallback_user_action": "boot",
-          "condition": {"var": "bootstrap", "value": true},
           "group": "firmware"
         }
       ],
