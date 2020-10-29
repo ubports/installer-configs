@@ -161,7 +161,8 @@
                     "fastboot:flash",
                     "adb:reboot",
                     "adb:format",
-                    "download"
+                    "download",
+                    "unpack"
                   ]
                 },
                 "optional": {
