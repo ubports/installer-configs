@@ -87,7 +87,7 @@
         },
         {
           "type": "fastboot:set_active",
-          "slot": "a"
+          "slot": "b"
         },
         {
           "type": "fastboot:flash",
