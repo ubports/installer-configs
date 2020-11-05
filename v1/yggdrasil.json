@@ -140,7 +140,15 @@
     {
       "name": "VollaOS",
       "sanity_check": "Are you sure?",
-      "options": [],
+      "options": [
+        {
+          "var": "install_twrp",
+          "name": "TWRP",
+          "tooltip": "Install Team Win Recovery Project (TWRP) recovery",
+          "type": "checkbox",
+          "value": true
+        }
+      ],
       "prerequisites": ["untested"],
       "steps": [
         {
@@ -157,36 +165,25 @@
           ]
         },
         {
-          "type": "unpack",
-          "group": "VollaOS",
-          "files": [
-            {
-              "archive": "volla-9.0-20201019-nightly-k63v2_64_bsp-signed.zip",
-              "dir": "unpacked"
-            }
-          ]
-        },
-        {
           "type": "download",
           "group": "firmware",
+          "condition": {"var": "install_twrp", "value": true},
           "files": [
             {
               "url": "http://volla.tech/filedump/twrp.img",
               "checksum": "c40c3c91c4d4de7651d2cc99b1265dd521f4a8175a260d0a55f62b9d8a8a3f69"
-            },
-            {
-              "url": "https://volla.tech/filedump/vendor.img",
-              "checksum": "73e1376ddffe6a24c25666b7f9ada1a9346e38baa98276504e4734da9cd4eb8b"
             }
           ]
         },
         {
           "type": "adb:reboot",
+          "condition": {"var": "install_twrp", "value": true},
           "to_state": "bootloader",
           "fallback_user_action": "bootloader"
         },
         {
           "type": "fastboot:flash",
+          "condition": {"var": "install_twrp", "value": true},
           "flash": [
             {
               "partition": "recovery",
@@ -202,6 +199,7 @@
         },
         {
           "type": "user_action",
+          "condition": {"var": "install_twrp", "value": true},
           "action": "recovery"
         },
         {
@@ -218,13 +216,9 @@
           "group": "VollaOS"
         },
         {
-          "type": "user_action",
-          "action": "twrp_sideload_reboot"
-        },
-        {
           "type": "adb:reboot",
           "to_state": "system",
-          "fallback_user_action": "boot"
+          "fallback_user_action": "twrp_sideload_reboot"
         }
       ],
       "slideshow": []
