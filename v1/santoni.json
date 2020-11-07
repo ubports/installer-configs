@@ -71,12 +71,12 @@
           "group": "firmware",
           "files": [
             {
-              "url": "https://ci.ubports.com/view/Device%20Compatibility%20Images/job/Device%20Compatibility%20Images/job/halium-santoni/184/artifact/halium-unlocked-recovery_santoni.img",
-              "checksum": "8235406a210804e65b591b4f00728b574396c67f78f90134916debf3b681039f"
+              "url": "https://ci.ubports.com/view/Device%20Compatibility%20Images/job/Device%20Compatibility%20Images/job/halium-santoni/196/artifact/halium-unlocked-recovery_santoni.img",
+              "checksum": "25798584952f29273d3ec2ebf63e7551db26f48e447493461627172330d616a5"
             },
             {
-              "url": "https://ci.ubports.com/view/Device%20Compatibility%20Images/job/Device%20Compatibility%20Images/job/halium-santoni/184/artifact/halium-boot_santoni.img",
-              "checksum": "0845be37fff8d3c376f3c9d6e4f54632c66921571b129194150b94689beb5b54"
+              "url": "https://ci.ubports.com/view/Device%20Compatibility%20Images/job/Device%20Compatibility%20Images/job/halium-santoni/196/artifact/halium-boot_santoni.img",
+              "checksum": "bb8f5aa0d3f6f9e406cda3549764441379d9f54ff770b44218e5f59c65700884"
             },
             {
               "url": "https://github.com/ubports-santoni/android_device_xiaomi_santoni/raw/e7f3940a66166c756041cbf8fc55f88ab5f37821/ut-miscs/splash.img",
