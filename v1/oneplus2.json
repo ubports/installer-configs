@@ -1,0 +1,106 @@
+{
+  "name": "Oneplus 2",
+  "codename": "oneplus2",
+  "unlock": ["twrp"],
+  "user_actions": {
+    "recovery": {
+      "title": "Reboot to Recovery",
+      "description": "With the device powered off, hold Volume Down + Power.",
+      "image": "phone_power_down",
+      "button": true
+    },
+    "bootloader": {
+      "title": "Reboot to Bootloader",
+      "description": "With the device powered off, hold Volume Up + Power.",
+      "image": "phone_power_up",
+      "button": true
+    },
+    "twrp": {
+      "title": "TWRP",
+      "description": "The installation instructions for this device are not fully tested yet. If you come from Android, you will have to install TWRP and format to ext4 /data and /system from inside TWRP before you can install Ubuntu Touch.",
+      "link": "https://twrp.me/oneplus/oneplustwo.html"
+    }
+  },
+  "operating_systems": [
+    {
+      "name": "Ubuntu Touch",
+      "sanity_check": "Are you sure?",
+      "options": [
+        {
+          "var": "channel",
+          "name": "Channel",
+          "tooltip": "The release channel",
+          "link": "https://docs.ubports.com/en/latest/about/process/release-schedule.html",
+          "type": "select",
+          "remote_values": { "type": "systemimagechannels" }
+        },
+        {
+          "var": "wipe",
+          "name": "Wipe Userdata",
+          "tooltip": "Wipe personal data",
+          "type": "checkbox"
+        },
+        {
+          "var": "bootstrap",
+          "name": "Bootstrap",
+          "tooltip": "Flash system partitions using fastboot",
+          "type": "checkbox",
+          "value": true
+        }
+      ],
+      "prerequisites": [],
+      "steps": [
+        {
+          "type": "download",
+          "condition": {"var": "bootstrap", "value": true},
+          "group": "firmware",
+          "files": [
+            {
+              "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-oneplus2/2/artifact/halium-unlocked-recovery_oneplus2.img",
+              "checksum": "528ec709b0735a699484d0c748350a6c260ab8b8ae587395fe4a9dc16818c3be"
+            }
+          ]
+        },
+        {
+          "type": "adb:reboot",
+          "condition": {"var": "bootstrap", "value": true},
+          "to_state": "bootloader",
+          "fallback_user_action": "bootloader"
+        },
+        {
+          "type": "fastboot:flash",
+          "condition": {"var": "bootstrap", "value": true},
+          "flash": [
+            {
+              "partition": "recovery",
+              "file": "halium-unlocked-recovery_oneplus2.img",
+              "group": "firmware"
+            }
+          ]
+        },
+        {
+          "type": "fastboot:erase",
+          "condition": {"var": "bootstrap", "value": true},
+          "partition": "cache"
+        },
+        {
+          "type": "fastboot:boot",
+          "condition": {"var": "bootstrap", "value": true},
+          "file": "halium-unlocked-recovery_oneplus2.img",
+          "fallback_user_action": "recovery",
+          "group": "firmware"
+        },
+        {
+          "type": "systemimage"
+        },
+        {
+          "type": "adb:reboot",
+          "to_state": "recovery",
+          "fallback_user_action": "recovery"
+        }
+      ],
+      "slideshow": []
+    }
+  ]
+}
+
