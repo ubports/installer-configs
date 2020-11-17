@@ -1,13 +1,8 @@
 {
   "name": "Oneplus 2",
   "codename": "oneplus2",
-  "unlock": ["confirm_oemunlock", "update", "twrp"],
+  "unlock": ["update", "twrp"],
   "user_actions": {
-    "confirm_oemunlock": {
-      "title": "Unlock your bootloader",
-      "description": "Please make sure the bootloader is unlocked",
-      "link": "https://androidmtk.com/unlock-bootloader-oneplus-2"
-    },
     "update": {
       "title": "Update to latest available version",
       "description": "Before installing anything, make sure the OnePlus2 is updated to the latest version of OxygenOS (3.6.1).",
@@ -53,7 +48,6 @@
     "untested": {
       "title": "Untested",
       "description": "Sorry, this configuration has not yet been fully tested. You might run into issues. If you want to help us improve, click the link below to see the config file.",
-      "link": "https://github.com/ubports/installer-configs/blob/master/v1/yggdrasil.json",
       "button": true
     }
   },
@@ -75,20 +69,12 @@
           "name": "Wipe Userdata",
           "tooltip": "Wipe personal data",
           "type": "checkbox"
-        },
-        {
-          "var": "bootstrap",
-          "name": "Bootstrap",
-          "tooltip": "Flash recovery partition using fastboot",
-          "type": "checkbox",
-          "value": true
         }
       ],
       "prerequisites": [],
       "steps": [
         {
           "type": "download",
-          "condition": {"var": "bootstrap", "value": true},
           "group": "firmware",
           "files": [
             {
@@ -99,13 +85,11 @@
         },
         {
           "type": "adb:reboot",
-          "condition": {"var": "bootstrap", "value": true},
           "to_state": "bootloader",
           "fallback_user_action": "bootloader"
         },
         {
           "type": "fastboot:flash",
-          "condition": {"var": "bootstrap", "value": true},
           "flash": [
             {
               "partition": "recovery",
@@ -116,12 +100,10 @@
         },
         {
           "type": "fastboot:erase",
-          "condition": {"var": "bootstrap", "value": true},
           "partition": "cache"
         },
         {
           "type": "fastboot:boot",
-          "condition": {"var": "bootstrap", "value": true},
           "file": "halium-unlocked-recovery_oneplus2.img",
           "fallback_user_action": "recovery",
           "group": "firmware"
