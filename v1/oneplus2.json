@@ -103,6 +103,11 @@
           "partition": "cache"
         },
         {
+          "type": "fastboot:format",
+          "condition": {"var": "wipe", "value": true},
+          "partition": "userdata"
+        },
+        {
           "type": "fastboot:boot",
           "file": "halium-unlocked-recovery_oneplus2.img",
           "fallback_user_action": "recovery",
