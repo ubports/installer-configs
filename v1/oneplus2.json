@@ -79,7 +79,10 @@
           "files": [
             {
               "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-oneplus2/2/artifact/halium-unlocked-recovery_oneplus2.img",
-              "checksum": "528ec709b0735a699484d0c748350a6c260ab8b8ae587395fe4a9dc16818c3be"
+              "checksum": {
+                "sum": "528ec709b0735a699484d0c748350a6c260ab8b8ae587395fe4a9dc16818c3be",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

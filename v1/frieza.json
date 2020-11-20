@@ -61,7 +61,10 @@
           "files": [
             {
               "url": "http://cdimage.ubports.com/devices/recovery-frieza.img",
-              "checksum": "374f184e2675f53651cf4790ee685ee363f59f2be98ea99a6d9d948bbc168c8b"
+              "checksum": {
+                "sum": "374f184e2675f53651cf4790ee685ee363f59f2be98ea99a6d9d948bbc168c8b",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

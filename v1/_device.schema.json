@@ -159,10 +159,13 @@
                     "fastboot:erase",
                     "fastboot:format",
                     "fastboot:flash",
+                    "fastboot:set_active",
                     "adb:reboot",
                     "adb:format",
+                    "adb:sideload",
                     "download",
-                    "unpack"
+                    "unpack",
+                    "manual_download"
                   ]
                 },
                 "optional": {
@@ -202,11 +205,19 @@
                         "description": "URL of the file to download"
                       },
                       "checksum": {
-                        "type": "string",
-                        "description": "Checksum (sha256) of the file to download"
+                        "type": "object",
+                        "properties": {
+                          "sum": {
+                            "type": "string",
+                            "description": "Checksum of the file to download"
+                          },
+                          "algorithm": {
+                            "type": "string",
+                            "description": "Hashing algorithm to use to calculate the checksum"
+                          }
+                        }
                       }
-                    },
-                    "required": ["url"]
+                    }
                   }
                 },
                 "partition": {

@@ -57,7 +57,10 @@
           "files": [
             {
               "url": "http://cdimage.ubports.com/devices/recovery-arale.img",
-              "checksum": "27160d1ce2d55bd940b38ebf643018b33e0516795dff179942129943fabdc3d8"
+              "checksum": {
+                "sum": "27160d1ce2d55bd940b38ebf643018b33e0516795dff179942129943fabdc3d8",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

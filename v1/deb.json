@@ -63,7 +63,10 @@
           "files": [
             {
               "url": "http://cdimage.ubports.com/devices/recovery-deb.img",
-              "checksum": "432ee1d970b3b18e74fc80e5c0d091d87598505fe371676b80d20b16df2ea089"
+              "checksum": {
+                "sum": "432ee1d970b3b18e74fc80e5c0d091d87598505fe371676b80d20b16df2ea089",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

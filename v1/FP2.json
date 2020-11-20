@@ -52,11 +52,17 @@
           "files": [
             {
               "url": "http://cdimage.ubports.com/devices/recovery-FP2.img",
-              "checksum": "534cc2da2add4a2bd8136b01069ed7dbe432076659fd4780910b6910b916f77b"
+              "checksum": {
+                "sum": "534cc2da2add4a2bd8136b01069ed7dbe432076659fd4780910b6910b916f77b",
+                "algorithm": "sha256"
+              }
             },
             {
               "url": "http://cdimage.ubports.com/devices/splash-FP2.img",
-              "checksum": "2bf76ec909af34d9896a954cd6c4ed5ad114d6053e59b7a856325b4fcfca43cd"
+              "checksum": {
+                "sum": "2bf76ec909af34d9896a954cd6c4ed5ad114d6053e59b7a856325b4fcfca43cd",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

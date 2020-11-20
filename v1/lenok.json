@@ -22,11 +22,17 @@
           "files": [
             {
               "url": "https://release.asteroidos.org/1.0/lenok/asteroid-image-lenok.ext4",
-              "checksum": "4df70ce3870aaf93c7f086369e83d9090e1c502d685ec4627e4bf3881979e2bc"
+              "checksum": {
+                "sum": "4df70ce3870aaf93c7f086369e83d9090e1c502d685ec4627e4bf3881979e2bc",
+                "algorithm": "sha256"
+              }
             },
             {
               "url": "https://release.asteroidos.org/1.0/lenok/zImage-dtb-lenok.fastboot",
-              "checksum": "f6b553d7ceface126133393bb5b79ea9a2efb1b85e8ff8fe22794fe94fba4bcc"
+              "checksum": {
+                "sum": "f6b553d7ceface126133393bb5b79ea9a2efb1b85e8ff8fe22794fe94fba4bcc",
+                "algorithm": "sha256"
+              }
             }
           ]
         },
