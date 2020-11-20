@@ -19,6 +19,6 @@
   "homepage": "https://github.com/ubports/installer-configs#readme",
   "dependencies": {},
   "devDependencies": {
-    "ajv-cli": "^3.1.0"
+    "ajv-cli": "^3.3.0"
   }
 }
