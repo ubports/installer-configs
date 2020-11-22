@@ -69,6 +69,13 @@
           "name": "Wipe Userdata",
           "tooltip": "Wipe personal data",
           "type": "checkbox"
+        },
+        {
+          "var": "logo",
+          "name": "Flash Logo",
+          "tooltip": "Flash new Ubuntu Touch splash screen logo (thanks to Ruben Carneiro)",
+          "link": "https://rubencarneiro.github.io/rubencarneiro.io/Ubuntu-Touch-Device-Bootlogos.markdown/",
+          "type": "checkbox"
         }
       ],
       "prerequisites": [],
@@ -81,6 +88,13 @@
               "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-oneplus2/2/artifact/halium-unlocked-recovery_oneplus2.img",
               "checksum": {
                 "sum": "528ec709b0735a699484d0c748350a6c260ab8b8ae587395fe4a9dc16818c3be",
+                "algorithm": "sha256"
+              }
+            },
+            {
+              "url": "https://raw.githubusercontent.com/rubencarneiro/rubencarneiro.io/main/assets/downloads/oneplus2/logo.bin",
+              "checksum": {
+                "sum": "55acbccc658df016868452e915f49f428cc2df7244f4ddec9aad337fe8bd0c91",
                 "algorithm": "sha256"
               }
             }
@@ -97,6 +111,17 @@
             {
               "partition": "recovery",
               "file": "halium-unlocked-recovery_oneplus2.img",
+              "group": "firmware"
+            }
+          ]
+        },
+        {
+          "type": "fastboot:flash",
+          "condition": {"var": "logo", "value": true},
+          "flash": [
+            {
+              "partition": "LOGO",
+              "file": "logo.bin",
               "group": "firmware"
             }
           ]
