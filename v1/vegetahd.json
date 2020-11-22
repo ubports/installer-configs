@@ -57,7 +57,10 @@
           "files": [
             {
               "url": "http://cdimage.ubports.com/devices/recovery-vegetahd.img",
-              "checksum": "20a48a1fa62381bde7a9427c902cb43fe46226f11e494ff8743593e81045a23b"
+              "checksum": {
+                "sum": "20a48a1fa62381bde7a9427c902cb43fe46226f11e494ff8743593e81045a23b",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

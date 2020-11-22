@@ -66,7 +66,10 @@
           "files": [
             {
               "url": "http://cdimage.ubports.com/devices/halium-unlocked-recovery_karin.img",
-              "checksum": "4232e216df832c34e4ed12120c2a35eb857324ad8f567609a4d3f8966f0efec3"
+              "checksum": {
+                "sum": "4232e216df832c34e4ed12120c2a35eb857324ad8f567609a4d3f8966f0efec3",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

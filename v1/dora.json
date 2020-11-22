@@ -67,7 +67,10 @@
           "files": [
             {
               "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-dora/9/artifact/halium-unlocked-recovery_dora.img",
-              "checksum": "069cf56a6b3251d31e253bf308a76f456400c21abfbc7e1850475fbed1f810cb"
+              "checksum": {
+                "sum": "069cf56a6b3251d31e253bf308a76f456400c21abfbc7e1850475fbed1f810cb",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

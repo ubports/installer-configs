@@ -66,7 +66,10 @@
           "files": [
             {
               "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-kagura/6/artifact/halium-unlocked-recovery_kagura.img",
-              "checksum": "c51f82c893d053965663140f9f8ccb15e0c80a01ac3a1a76e81ac49105ee978e"
+              "checksum": {
+                "sum": "c51f82c893d053965663140f9f8ccb15e0c80a01ac3a1a76e81ac49105ee978e",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

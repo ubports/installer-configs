@@ -72,15 +72,24 @@
           "files": [
             {
               "url": "https://ci.ubports.com/view/Device%20Compatibility%20Images/job/Device%20Compatibility%20Images/job/halium-santoni/196/artifact/halium-unlocked-recovery_santoni.img",
-              "checksum": "25798584952f29273d3ec2ebf63e7551db26f48e447493461627172330d616a5"
+              "checksum": {
+                "sum": "25798584952f29273d3ec2ebf63e7551db26f48e447493461627172330d616a5",
+                "algorithm": "sha256"
+              }
             },
             {
               "url": "https://ci.ubports.com/view/Device%20Compatibility%20Images/job/Device%20Compatibility%20Images/job/halium-santoni/196/artifact/halium-boot_santoni.img",
-              "checksum": "bb8f5aa0d3f6f9e406cda3549764441379d9f54ff770b44218e5f59c65700884"
+              "checksum": {
+                "sum": "bb8f5aa0d3f6f9e406cda3549764441379d9f54ff770b44218e5f59c65700884",
+                "algorithm": "sha256"
+              }
             },
             {
               "url": "https://github.com/ubports-santoni/android_device_xiaomi_santoni/raw/e7f3940a66166c756041cbf8fc55f88ab5f37821/ut-miscs/splash.img",
-              "checksum": "9b91dfb62c80cc533303687e132194a789da867524cbf4518d5e2bfa175e7bbd"
+              "checksum": {
+                "sum": "9b91dfb62c80cc533303687e132194a789da867524cbf4518d5e2bfa175e7bbd",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

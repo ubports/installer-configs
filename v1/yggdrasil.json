@@ -78,7 +78,10 @@
           "files": [
             {
               "url": "https://cdimage.ubports.com/devices/halium-unlocked-recovery_yggdrasil.img",
-              "checksum": "bf32cb85ba58d1f0791b37a91e44697c647440fd365a9f28ab77d9616fd36b2c"
+              "checksum": {
+                "sum": "bf32cb85ba58d1f0791b37a91e44697c647440fd365a9f28ab77d9616fd36b2c",
+                "algorithm": "sha256"
+              }
             }
           ]
         },
@@ -171,7 +174,10 @@
           "files": [
             {
               "url": "http://volla.tech/filedump/twrp.img",
-              "checksum": "c40c3c91c4d4de7651d2cc99b1265dd521f4a8175a260d0a55f62b9d8a8a3f69"
+              "checksum": {
+                "sum": "c40c3c91c4d4de7651d2cc99b1265dd521f4a8175a260d0a55f62b9d8a8a3f69",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

@@ -57,7 +57,10 @@
           "files": [
             {
               "url": "http://cdimage.ubports.com/devices/recovery-krillin.img",
-              "checksum": "d2b57e9f886e55c263bcff9ba7553d2cb0e00d74411490bfb62f252cda3a86e5"
+              "checksum": {
+                "sum": "d2b57e9f886e55c263bcff9ba7553d2cb0e00d74411490bfb62f252cda3a86e5",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

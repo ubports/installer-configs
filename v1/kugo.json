@@ -67,7 +67,10 @@
           "files": [
             {
               "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-kugo/129/artifact/halium-unlocked-recovery_kugo.img",
-              "checksum": "e0ab1aae3a18c33a6fe92fdcfc40ad87071296a3fcf7185dcdd355a963b7080e"
+              "checksum": {
+                "sum": "e0ab1aae3a18c33a6fe92fdcfc40ad87071296a3fcf7185dcdd355a963b7080e",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

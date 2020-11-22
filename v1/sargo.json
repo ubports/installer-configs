@@ -67,15 +67,24 @@
           "files": [
             {
               "url": "https://cdimage.ubports.com/devices/sargo/boot.img",
-              "checksum": "3125fa5cdd097cd69b8005af13e4c6a4a4cc61b83c6b13b219799def51fff2fa"
+              "checksum": {
+                "sum": "3125fa5cdd097cd69b8005af13e4c6a4a4cc61b83c6b13b219799def51fff2fa",
+                "algorithm": "sha256"
+              }
             },
             {
               "url": "https://cdimage.ubports.com/devices/sargo/dtbo.img",
-              "checksum": "51e63686ee4bb15e1ddc296f8809996d645d114347daebacc561cf02d2bfce2d"
+              "checksum": {
+                "sum": "51e63686ee4bb15e1ddc296f8809996d645d114347daebacc561cf02d2bfce2d",
+                "algorithm": "sha256"
+              }
             },
             {
               "url": "https://cdimage.ubports.com/devices/sargo/vbmeta.img",
-              "checksum": "854a2c2a5e82c2c49a5d9d62c70334002c7dcd9203f904952ff5fc43b2eac420"
+              "checksum": {
+                "sum": "854a2c2a5e82c2c49a5d9d62c70334002c7dcd9203f904952ff5fc43b2eac420",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

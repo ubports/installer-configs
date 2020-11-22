@@ -63,11 +63,17 @@
           "files": [
             {
               "url": "https://gitlab.com/ubports/community-ports/flo/raw/76f6151b1291fe1cf8739d2b080c83543a62a051/partitions/recovery.img",
-              "checksum": "cdbf7a58ff49a55a977b43a933625f6b8845687259d6b96bc5047f197bde49e6"
+              "checksum": {
+                "sum": "cdbf7a58ff49a55a977b43a933625f6b8845687259d6b96bc5047f197bde49e6",
+                "algorithm": "sha256"
+              }
             },
             {
               "url": "https://gitlab.com/ubports/community-ports/flo/raw/76f6151b1291fe1cf8739d2b080c83543a62a051/partitions/boot.img",
-              "checksum": "c288f81ae5e71b8be91c446932ff734dcd251c035bd368804a04f6b5fa21dcb6"
+              "checksum": {
+                "sum": "c288f81ae5e71b8be91c446932ff734dcd251c035bd368804a04f6b5fa21dcb6",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

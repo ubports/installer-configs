@@ -50,7 +50,10 @@
           "files": [
             {
               "url": "http://cdimage.ubports.com/devices/recovery-mako.img",
-              "checksum": "6954e171f21445d40f936b96f3e9db78d5ae890819a60dcd003e7d0749d5b26d"
+              "checksum": {
+                "sum": "6954e171f21445d40f936b96f3e9db78d5ae890819a60dcd003e7d0749d5b26d",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

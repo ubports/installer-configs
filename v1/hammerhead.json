@@ -63,11 +63,17 @@
           "files": [
             {
               "url": "http://cdimage.ubports.com/devices/recovery-hammerhead.img",
-              "checksum": "91b681a3287808a79e21c2ac17f85537c6c9b23fb009b5e491c2ccf28986856c"
+              "checksum": {
+                "sum": "91b681a3287808a79e21c2ac17f85537c6c9b23fb009b5e491c2ccf28986856c",
+                "algorithm": "sha256"
+              }
             },
             {
               "url": "http://cdimage.ubports.com/devices/boot-hammerhead.img",
-              "checksum": "3f39372bdac0a6a8bd6507683a87da16e74346152525e12d6ea46418a88c62c3"
+              "checksum": {
+                "sum": "3f39372bdac0a6a8bd6507683a87da16e74346152525e12d6ea46418a88c62c3",
+                "algorithm": "sha256"
+              }
             }
           ]
         },
