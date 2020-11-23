@@ -28,6 +28,10 @@ ubports-installer -f ./path/to/config.json
 - The `aliases.json` and `index.json` files from this repository will no longer be used and instead be generated and served by the server.
 - Every device may specify its known `aliases` in an array on the top level of its config file.
 - Multiple devices may claim the same alias. The UBports Installer will then consult the user to resolve the conflict.
+- The `fallback_user_action` property has been deprecated. You can now specify a list of steps as the `fallback` property. [ubports-installer#941](https://github.com/ubports/ubports-installer/issues/941)
+- Implement `group` step [ubports-installer#940](https://github.com/ubports/ubports-installer/issues/940)
+- Implement flexible oem and flashing unlock instructions [ubports-installer#1479](https://github.com/ubports/ubports-installer/issues/1479)
+- Implement more advanced conditional logic [ubports-installer#1537](https://github.com/ubports/ubports-installer/issues/1537)
 
 ### Helper scripts
 

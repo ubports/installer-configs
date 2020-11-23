@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "v2/schema/formfactor.schema.json",
+  "title": "Formfactor",
+  "type": "string",
+  "description": "What kind of device is it?",
+  "enum": [
+    "computer",
+    "laptop",
+    "phone",
+    "tablet",
+    "watch"
+  ]
+}

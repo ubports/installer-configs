@@ -19,6 +19,40 @@ async function getAliases(codename) {
     .filter((a) => a);
 }
 
+function transformStep(step) {
+  if (step.fallback_user_action) {
+    step.fallback = [
+      {
+        type: "user_action",
+        action: step.fallback_user_action,
+      },
+    ];
+    delete step.fallback_user_action;
+  }
+  return step;
+}
+
+function transformOSs(os) {
+  return {
+    steps: os.steps.map(transformStep),
+    ...os,
+  };
+}
+
+function getFormfactor(codename) {
+  switch (codename) {
+    case "cooler":
+    case "frieza":
+    case "flo":
+    case "deb":
+      return "tablet";
+    case "lenok":
+      return "watch";
+    default:
+      return "phone";
+  }
+}
+
 fs.mkdir(path.join("v2", "data", "devices"), { recursive: true })
   .then(() => fs.readdir("v1"))
   .then((configs) =>
@@ -28,25 +62,29 @@ fs.mkdir(path.join("v2", "data", "devices"), { recursive: true })
         .map((configPath) =>
           readJSON(path.join("v1", configPath))
             .then(async (config) => ({
-              name: config.name,
-              codename: config.codename,
-              aliases: await getAliases(config.codename),
               $schema:
                 "https://raw.githubusercontent.com/ubports/installer-configs/master/v2/schema/device.schema.json",
+              name: config.name,
+              codename: config.codename,
+              formfactor: getFormfactor(config.codename),
+              aliases: await getAliases(config.codename),
+              doppelgangers: [],
+              user_actions: config.user_actions || [],
+              unlock: config.unlock || [],
+              operating_systems: config.operating_systems.map(transformOSs),
               ...config,
             }))
             .then((config) =>
               writeYAML(
-                path.join(
-                  "v2",
-                  "data",
-                  "devices",
-                  configPath.replace(".json", ".yml")
-                ),
+                path.join("v2", "data", "devices", `${config.codename}.yml`),
                 config
               ).then(() => ({
                 name: config.name,
                 codename: config.codename,
+                formfactor: config.formfactor,
+                operating_systems: config.operating_systems.map(
+                  (os) => os.name
+                ),
                 aliases: config.aliases,
               }))
             )
@@ -56,7 +94,11 @@ fs.mkdir(path.join("v2", "data", "devices"), { recursive: true })
   .then((configs) =>
     configs.reduce(
       (acc, curr) => {
-        acc.index[curr.codename] = curr.name;
+        acc.index[curr.codename] = {
+          name: curr.name,
+          formfactor: curr.formfactor,
+          operating_systems: curr.operating_systems,
+        };
         curr.aliases.forEach((alias) => {
           if (acc.aliases[alias]) {
             acc.aliases[alias].push(curr.codename);
