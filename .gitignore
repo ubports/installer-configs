@@ -1,1 +1,5 @@
 node_modules
+
+#ignore generated data
+v2/data
+v2/docs
