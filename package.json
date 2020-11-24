@@ -10,7 +10,8 @@
     "lint": "npx prettier v2/**/*.js -w",
     "v2:migrate": "node v2/migrate.js",
     "v2:validate": "npx ajv-cli -s v2/schema/device.schema.json -r \"v2/schema/*.schema.json\" -d \"v2/data/devices/[a-zA-Z]*.yml\" && npx ajv-cli -s v2/schema/index.schema.json -r \"v2/schema/*.schema.json\" -d \"v2/data/index.yml\" && npx ajv-cli -s v2/schema/aliases.schema.json -d \"v2/data/aliases.yml\"",
-    "v2:docs": "(rm v2/docs/* || true) && npx @adobe/jsonschema2md -d v2/schema/ -o v2/docs -x -"
+    "v2:docs": "(rm v2/docs/* || true) && ./v2/buildSchema.js && npx @adobe/jsonschema2md -d v2/schema/bundle/ -o v2/docs -x -",
+    "v2:serve": "npx markserv v2/docs/"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,10 @@
   "homepage": "https://github.com/ubports/installer-configs#readme",
   "devDependencies": {
     "@adobe/jsonschema2md": "^4.2.1",
+    "@apidevtools/json-schema-ref-parser": "^9.0.6",
     "ajv-cli": "^3.3.0",
     "json-to-pretty-yaml": "^1.2.2",
+    "markserv": "^1.17.4",
     "prettier": "^2.2.0"
   }
 }

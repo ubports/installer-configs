@@ -41,6 +41,7 @@ NPM Scripts have been created in the `v2` namespace to aid the planning and tran
 npm run v2:migrate # Migrate all v1 configs from this repository to v2 structure and save them under v2/data/devices/<codename>.yml. The aliases.yml and index.yml files will be generated in v2/data.
 npm run v2:validate # Validate the generated yml files using the JSON-schema definitions from v2/schema.
 npm run v2:docs # build schema documentation as markdown documentation files in v2/docs.
+npm run v2:serve # serve docs on port 8642
 npm run lint # enforce prettier code style on js scripts
 ```
 
