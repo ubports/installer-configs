@@ -4,220 +4,6 @@ title: "Step"
 type: "object"
 description: "Installation step."
 properties:
-  user_action:
-    title: "user_action step"
-    type: "object"
-    properties:
-      action:
-        title: User action
-        type: "string"
-        description: "user action to run"
-    additionalProperties: false
-  fastboot:reboot_bootloader:
-    title: "fastboot:reboot_bootloader step"
-    type: "null"
-    additionalProperties: false
-  fastboot:update:
-    title: "fastboot:update step"
-    type: "object"
-    additionalProperties: false
-  systemimage:
-    title: "systemimage step"
-    type: "null"
-    additionalProperties: false
-  fastboot:boot:
-    title: "fastboot:boot step"
-    type: "object"
-    properties:
-      file:
-        title: File
-        type: string
-      group:
-        title: Group
-        type: string
-    additionalProperties: false
-  fastboot:reboot:
-    title: "fastboot:reboot step"
-    type: "null"
-    additionalProperties: false
-  fastboot:continue:
-    title: "fastboot:continue step"
-    type: "null"
-    additionalProperties: false
-  fastboot:erase:
-    title: "fastboot:erase step"
-    type: "object"
-    properties:
-      partition:
-        title: Partition
-        type: "string"
-        description: "Partition to format."
-    additionalProperties: false
-  fastboot:format:
-    title: "fastboot:format step"
-    type: "object"
-    properties:
-      partition:
-        title: Partition
-        type: "string"
-        description: "Partition to format."
-      partitionType:
-        title: Partition type
-        type: "string"
-        description: "Partition type to use"
-        enum:
-          - ext2
-          - ext4
-    additionalProperties: false
-  fastboot:flash:
-    title: "fastboot:flash step"
-    type: "object"
-    properties:
-      partitions:
-        title: Partitions
-        type: array
-        description: Partitions to flash
-        items:
-          title: Partition
-          type: object
-          description: Partition to flash
-          properties:
-            partition:
-              title: Partition
-              type: string
-            file:
-              title: File
-              type: string
-            group:
-              title: Group
-              type: string
-    additionalProperties: false
-  fastboot:set_active:
-    title: "fastboot:set_active step"
-    type: "object"
-    properties:
-      slot:
-        title: To state
-        type: "string"
-        enum: ["a", "b"]
-    additionalProperties: false
-  adb:reboot:
-    title: "adb:reboot step"
-    type: "object"
-    properties:
-      to_state:
-        title: To state
-        type: "string"
-        description: "State to rebot to."
-        enum:
-          - "recovery"
-          - "system"
-          - "bootloader"
-    required: ["to_state"]
-    additionalProperties: false
-  adb:format:
-    title: "adb:format step"
-    type: "object"
-    properties:
-      partition:
-        title: Partition
-        type: "string"
-        description: "Partition to format."
-    additionalProperties: false
-  adb:sideload:
-    title: "adb:sideload step"
-    type: "object"
-    properties:
-      file:
-        title: Zip to sideload
-        type: string
-      group:
-        title: Group
-        type: string
-    additionalProperties: false
-  download:
-    title: "download step"
-    type: "object"
-    properties:
-      group:
-        title: Group
-        type: "string"
-        description: "Files group"
-      files:
-        title: Files
-        type: "array"
-        description: "Array of files to download."
-        items:
-          title: File
-          type: "object"
-          properties:
-            url:
-              type: "string"
-              description: "URL of the file to download"
-            checksum:
-              title: Checksum
-              type: "object"
-              properties:
-                sum:
-                  title: Hash
-                  type: "string"
-                  description: "Checksum of the file to download"
-                algorithm:
-                  title: Hashing algorithm
-                  type: "string"
-                  description: "Hashing algorithm to use to calculate the checksum"
-    required:
-      - group
-      - files
-    additionalProperties: false
-  unpack:
-    title: "unpack step"
-    type: "object"
-    properties:
-      group:
-        title: Group
-        type: string
-      files:
-        type: array
-        items:
-          type: object
-          properties:
-            archive:
-              title: Zip to sideload
-              type: string
-            dir:
-              title: Target directory
-              type: string
-    additionalProperties: false
-  manual_download:
-    title: "manual_download step"
-    type: "object"
-    properties:
-      group:
-        title: Group
-        type: "string"
-        description: "Files group"
-      file:
-        title: File
-        type: object
-        description: "File to download"
-        properties:
-          url:
-            type: "string"
-            description: "URL of the file to download"
-          checksum:
-            title: Checksum
-            type: "object"
-            properties:
-              sum:
-                title: Hash
-                type: "string"
-                description: "Checksum of the file to download"
-              algorithm:
-                title: Hashing algorithm
-                type: "string"
-                description: "Hashing algorithm to use to calculate the checksum"
-    additionalProperties: false
   optional:
     type: "boolean"
     description: "If true, errors in this step will be ignored"
@@ -242,20 +28,271 @@ properties:
       - "var"
       - "value"
 oneOf:
-  - required: ["user_action"]
-  - required: ["fastboot:reboot_bootloader"]
-  - required: ["fastboot:update"]
-  - required: ["systemimage"]
-  - required: ["fastboot:boot"]
-  - required: ["fastboot:reboot"]
-  - required: ["fastboot:continue"]
-  - required: ["fastboot:erase"]
-  - required: ["fastboot:format"]
-  - required: ["fastboot:flash"]
-  - required: ["fastboot:set_active"]
-  - required: ["adb:reboot"]
-  - required: ["adb:format"]
-  - required: ["adb:sideload"]
-  - required: ["download"]
-  - required: ["unpack"]
-  - required: ["manual_download"]
+  - title: user_action step
+    required: ["user_action"]
+    properties:
+      user_action:
+        title: "user_action step"
+        type: "object"
+        properties:
+          action:
+            title: User action
+            type: "string"
+            description: "user action to run"
+        additionalProperties: false
+  - title: fastboot:reboot_bootloader step
+    required: ["fastboot:reboot_bootloader"]
+    properties:
+      fastboot:reboot_bootloader:
+        title: "fastboot:reboot_bootloader step"
+        type: "null"
+        additionalProperties: false
+  - title: fastboot:update step
+    required: ["fastboot:update"]
+    properties:
+      fastboot:update:
+        title: "fastboot:update step"
+        type: "object"
+        additionalProperties: false
+  - title: systemimage step
+    required: ["systemimage"]
+    properties:
+      systemimage:
+        title: "systemimage step"
+        type: "null"
+        additionalProperties: false
+  - title: fastboot:boot step
+    required: ["fastboot:boot"]
+    properties:
+      fastboot:boot:
+        title: "fastboot:boot step"
+        type: "object"
+        properties:
+          file:
+            title: File
+            type: string
+          group:
+            title: Group
+            type: string
+        additionalProperties: false
+  - title: fastboot:reboot step
+    required: ["fastboot:reboot"]
+    properties:
+      fastboot:reboot:
+        title: "fastboot:reboot step"
+        type: "null"
+        additionalProperties: false
+  - title: fastboot:continue step
+    required: ["fastboot:continue"]
+    properties:
+      fastboot:continue:
+        title: "fastboot:continue step"
+        type: "null"
+        additionalProperties: false
+  - title: fastboot:erase step
+    required: ["fastboot:erase"]
+    properties:
+      fastboot:erase:
+        title: "fastboot:erase step"
+        type: "object"
+        properties:
+          partition:
+            title: Partition
+            type: "string"
+            description: "Partition to format."
+        additionalProperties: false
+  - title: fastboot:format step
+    required: ["fastboot:format"]
+    properties:
+      fastboot:format:
+        title: "fastboot:format step"
+        type: "object"
+        properties:
+          partition:
+            title: Partition
+            type: "string"
+            description: "Partition to format."
+          partitionType:
+            title: Partition type
+            type: "string"
+            description: "Partition type to use"
+            enum:
+              - ext2
+              - ext4
+        additionalProperties: false
+  - title: fastboot:flash step
+    required: ["fastboot:flash"]
+    properties:
+      fastboot:flash:
+        title: "fastboot:flash step"
+        type: "object"
+        properties:
+          partitions:
+            title: Partitions
+            type: array
+            description: Partitions to flash
+            items:
+              title: Partition
+              type: object
+              description: Partition to flash
+              properties:
+                partition:
+                  title: Partition
+                  type: string
+                file:
+                  title: File
+                  type: string
+                group:
+                  title: Group
+                  type: string
+        additionalProperties: false
+  - title: fastboot:set_active step
+    required: ["fastboot:set_active"]
+    properties:
+      fastboot:set_active:
+        title: "fastboot:set_active step"
+        type: "object"
+        properties:
+          slot:
+            title: To state
+            type: "string"
+            enum: ["a", "b"]
+        additionalProperties: false
+  - title: adb:reboot step
+    required: ["adb:reboot"]
+    properties:
+      adb:reboot:
+        title: "adb:reboot step"
+        type: "object"
+        properties:
+          to_state:
+            title: To state
+            type: "string"
+            description: "State to rebot to."
+            enum:
+              - "recovery"
+              - "system"
+              - "bootloader"
+        required: ["to_state"]
+        additionalProperties: false
+  - title: adb:format step
+    required: ["adb:format"]
+    properties:
+      adb:format:
+        title: "adb:format step"
+        type: "object"
+        properties:
+          partition:
+            title: Partition
+            type: "string"
+            description: "Partition to format."
+        additionalProperties: false
+  - title: adb:sideload step
+    required: ["adb:sideload"]
+    properties:
+      adb:sideload:
+        title: "adb:sideload step"
+        type: "object"
+        properties:
+          file:
+            title: Zip to sideload
+            type: string
+          group:
+            title: Group
+            type: string
+        required:
+          - file
+          - group
+        additionalProperties: false
+  - title: download step
+    required: ["download"]
+    properties:
+      download:
+        title: "download step"
+        type: "object"
+        properties:
+          group:
+            title: Group
+            type: "string"
+            description: "Files group"
+          files:
+            title: Files
+            type: "array"
+            description: "Array of files to download."
+            items:
+              title: File
+              type: "object"
+              properties:
+                url:
+                  type: "string"
+                  description: "URL of the file to download"
+                checksum:
+                  title: Checksum
+                  type: "object"
+                  properties:
+                    sum:
+                      title: Hash
+                      type: "string"
+                      description: "Checksum of the file to download"
+                    algorithm:
+                      title: Hashing algorithm
+                      type: "string"
+                      description: "Hashing algorithm to use to calculate the checksum"
+        required:
+          - group
+          - files
+        additionalProperties: false
+  - title: unpack step
+    required: ["unpack"]
+    properties:
+      unpack:
+        title: "unpack step"
+        type: "object"
+        properties:
+          group:
+            title: Group
+            type: string
+          files:
+            type: array
+            items:
+              type: object
+              properties:
+                archive:
+                  title: Zip to sideload
+                  type: string
+                dir:
+                  title: Target directory
+                  type: string
+        additionalProperties: false
+  - title: manual_download step
+    required: ["manual_download"]
+    properties:
+      manual_download:
+        title: "manual_download step"
+        type: "object"
+        properties:
+          group:
+            title: Group
+            type: "string"
+            description: "Files group"
+          file:
+            title: File
+            type: object
+            description: "File to download"
+            properties:
+              url:
+                type: "string"
+                description: "URL of the file to download"
+              checksum:
+                title: Checksum
+                type: "object"
+                properties:
+                  sum:
+                    title: Hash
+                    type: "string"
+                    description: "Checksum of the file to download"
+                  algorithm:
+                    title: Hashing algorithm
+                    type: "string"
+                    description: "Hashing algorithm to use to calculate the checksum"
+        additionalProperties: false
