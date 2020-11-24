@@ -37,6 +37,27 @@ oneOf:
             type: "string"
             description: "user action to run"
         additionalProperties: false
+  - title: fastboot:oem-unlock step
+    required: ["fastboot:oem-unlock"]
+    properties:
+      fastboot:oem-unlock:
+        title: "fastboot:oem-unlock step"
+        oneOf:
+          - type: "null"
+          - type: "object"
+            properties:
+              code_url:
+                title: Code url
+                type: string
+                description: Website to obtain an unlock code
+            additionalProperties: false
+  - title: fastboot:flashing-unlock step
+    required: ["fastboot:flashing-unlock"]
+    properties:
+      fastboot:flashing-unlock:
+        title: "fastboot:flashing-unlock step"
+        type: "null"
+        additionalProperties: false
   - title: fastboot:reboot_bootloader step
     required: ["fastboot:reboot_bootloader"]
     properties:

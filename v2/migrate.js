@@ -74,6 +74,44 @@ function getFormfactor(codename) {
   }
 }
 
+function getHandlers(codename) {
+  switch (codename) {
+    case "suzu":
+      return {
+        bootloader_locked: [
+          {
+            "fastboot:oem-unlock": {
+              code_url:
+                "https://developer.sony.com/develop/open-devices/get-started/unlock-bootloader/",
+            },
+          },
+        ],
+      };
+    case "sargo":
+    case "santoni":
+    case "yggdrasil":
+      return {
+        bootloader_locked: [
+          {
+            "fastboot:flashing-unlock": {
+              yml: undefined, // HACK needed for proper yml formatting
+            },
+          },
+        ],
+      };
+    default:
+      return {
+        bootloader_locked: [
+          {
+            "fastboot:oem-unlock": {
+              yml: undefined, // HACK needed for proper yml formatting
+            },
+          },
+        ],
+      };
+  }
+}
+
 fs.mkdir(path.join("v2", "data", "devices"), { recursive: true })
   .then(() => fs.readdir("v1"))
   .then((configs) =>
@@ -90,6 +128,7 @@ fs.mkdir(path.join("v2", "data", "devices"), { recursive: true })
               doppelgangers: [],
               user_actions: config.user_actions || [],
               unlock: config.unlock || [],
+              handlers: getHandlers(config.codename),
               operating_systems: config.operating_systems.map((os) =>
                 transformOSs(os)
               ),

@@ -30,6 +30,17 @@ properties:
       type: "string"
   user_actions:
     $ref: "user_actions.schema.yml#"
+  handlers:
+    title: Handlers
+    type: "object"
+    description: "Steps to run to handle specific known errors"
+    properties:
+      bootloader_locked:
+        title: Handle a bootloader locked error
+        type: array
+        items:
+          $ref: "step.schema.yml#"
+    additionalProperties: false
   unlock:
     title: Unlock actions
     type: "array"
