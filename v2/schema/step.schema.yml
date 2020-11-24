@@ -28,6 +28,14 @@ properties:
       - "var"
       - "value"
 oneOf:
+  - title: group step
+    required: ["group"]
+    properties:
+      group:
+        title: "group step"
+        type: "array"
+        items:
+          $ref: "#"
   - title: user_action step
     required: ["user_action"]
     properties:
@@ -112,13 +120,17 @@ oneOf:
             title: Partition
             type: "string"
             description: "Partition to format."
-          partitionType:
+          type:
             title: Partition type
             type: "string"
             description: "Partition type to use"
             enum:
               - ext2
               - ext4
+          size:
+            title: Partition size
+            type: number
+            description: "Partition size"
         additionalProperties: false
   - title: fastboot:flash step
     required: ["fastboot:flash"]

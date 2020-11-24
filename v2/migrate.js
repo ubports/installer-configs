@@ -36,6 +36,8 @@ function transformStep(step) {
       files: step.files,
       partitions: step.flash,
       partition: step.partition,
+      type: step.partitionType,
+      size: step.size,
       action: step.action,
       to_state: step.to_state,
       file: step.file,
