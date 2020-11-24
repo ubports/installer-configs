@@ -14,19 +14,8 @@ properties:
       $ref: "#"
   condition:
     title: Condition
-    type: "object"
     description: "Query an installation option to determine if the step should be run"
-    properties:
-      var:
-        title: Property var
-        type: "string"
-        description: "Reference to an option defined for this operating system"
-      value:
-        title: Property value
-        description: "Value to expect"
-    required:
-      - "var"
-      - "value"
+    $ref: "expression.schema.yml"
 oneOf:
   - title: group step
     required: ["group"]
