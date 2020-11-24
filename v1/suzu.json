@@ -142,8 +142,7 @@
         },
         {
           "type": "fastboot:reboot",
-          "fallback_user_action": "boot",
-          "group": "firmware"
+          "fallback_user_action": "boot"
         },
         {
           "type": "systemimage"

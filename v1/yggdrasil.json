@@ -120,8 +120,7 @@
         {
           "type": "fastboot:reboot",
           "fallback_user_action": "boot",
-          "condition": {"var": "bootstrap", "value": true},
-          "group": "firmware"
+          "condition": {"var": "bootstrap", "value": true}
         },
         {
           "type": "adb:reboot",
@@ -286,8 +285,7 @@
         },
         {
           "type": "fastboot:continue",
-          "fallback_user_action": "boot",
-          "group": "firmware"
+          "fallback_user_action": "boot"
         }
       ],
       "slideshow": []
