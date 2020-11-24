@@ -32,6 +32,7 @@ ubports-installer -f ./path/to/config.json
 - Implement `group` step [ubports-installer#940](https://github.com/ubports/ubports-installer/issues/940)
 - Implement flexible oem and flashing unlock instructions [ubports-installer#1479](https://github.com/ubports/ubports-installer/issues/1479)
 - Implement more advanced conditional logic [ubports-installer#1537](https://github.com/ubports/ubports-installer/issues/1537)
+- Steps as keyed objects [#17](https://github.com/ubports/installer-configs/issues/17)
 
 ### Helper scripts
 

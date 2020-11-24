@@ -23,19 +23,37 @@ function transformStep(step) {
   if (step.fallback_user_action) {
     step.fallback = [
       {
-        type: "user_action",
-        action: step.fallback_user_action,
+        user_action: {
+          action: step.fallback_user_action,
+        },
       },
     ];
     delete step.fallback_user_action;
   }
-  return step;
+  return {
+    [step.type]: {
+      group: step.group,
+      files: step.files,
+      partitions: step.flash,
+      partition: step.partition,
+      action: step.action,
+      to_state: step.to_state,
+      file: step.file,
+      slot: step.slot,
+    },
+    optional: step.optional,
+    fallback: step.fallback,
+    condition: step.condition,
+  };
 }
 
 function transformOSs(os) {
   delete os.sanity_check;
+  const steps = os.steps.map(transformStep);
+  os.steps = steps;
   return {
-    steps: os.steps.map(transformStep),
+    steps,
+    test: "this",
     ...os,
   };
 }
@@ -70,7 +88,9 @@ fs.mkdir(path.join("v2", "data", "devices"), { recursive: true })
               doppelgangers: [],
               user_actions: config.user_actions || [],
               unlock: config.unlock || [],
-              operating_systems: config.operating_systems.map(transformOSs),
+              operating_systems: config.operating_systems.map((os) =>
+                transformOSs(os)
+              ),
               ...config,
             }))
             .then((config) =>
