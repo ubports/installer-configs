@@ -1,0 +1,38 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "v2/schema/user_actions.schema.yml"
+title: "User actions"
+type: "object"
+description: "Object that contains instructions for the user for later reference."
+patternProperties:
+  \w:
+    title: "User action"
+    type: "object"
+    description: "Instruction that can be referenced and presented to the user. Eg key combinations to reboot to recovery or bootloader."
+    properties:
+      title:
+        title: Title
+        type: "string"
+        description: "Identifier of the step. Eg. 'Enable USB-debugging'"
+      description:
+        title: Description
+        type: "string"
+        description: "Short description of the step. For simple tasks, the full instructions can be put here."
+      image:
+        title: Image
+        type: "string"
+        description: "String referring to a picture in the installer."
+        enum:
+          - "phone_power_up"
+          - "phone_power_down"
+      button:
+        title: Button
+        type: "boolean"
+        description: "Specify whether there should be a done-button displayed."
+      link:
+        title: Link
+        type: "string"
+        description: "A link to a more extensive tutorial."
+    required:
+      - "title"
+      - "description"
+additionalProperties: false

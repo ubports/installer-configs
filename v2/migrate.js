@@ -62,8 +62,6 @@ fs.mkdir(path.join("v2", "data", "devices"), { recursive: true })
         .map((configPath) =>
           readJSON(path.join("v1", configPath))
             .then(async (config) => ({
-              $schema:
-                "https://raw.githubusercontent.com/ubports/installer-configs/master/v2/schema/device.schema.json",
               name: config.name,
               codename: config.codename,
               formfactor: getFormfactor(config.codename),
