@@ -29,17 +29,21 @@ properties:
     type: "boolean"
     description: "If true, errors in this step will be ignored"
   fallback:
+    title: Fallback steps
     type: "array"
     items:
       $ref: "#"
   condition:
+    title: Condition
     type: "object"
     description: "Query an installation option to determine if the step should be run"
     properties:
       var:
+        title: Property var
         type: "string"
         description: "Reference to an option defined for this operating system"
       value:
+        title: Property value
         description: "Value to expect"
     required:
       - "var"
@@ -48,30 +52,38 @@ properties:
     type: "string"
     description: "[type: download] [required] Group of files."
   files:
+    title: Files
     type: "array"
     description: "[type: download] [required] Array of files to download."
     items:
+      title: File
       type: "object"
       properties:
         url:
           type: "string"
           description: "URL of the file to download"
         checksum:
+          title: Checksum
           type: "object"
           properties:
             sum:
+              title: Hash
               type: "string"
               description: "Checksum of the file to download"
             algorithm:
+              title: Hashing algorithm
               type: "string"
               description: "Hashing algorithm to use to calculate the checksum"
   partition:
+    title: Partition
     type: "string"
     description: "[type: adb:format] [required] Partition to format."
   action:
+    title: User action
     type: "string"
     description: "[type: user_action] [required] user action to run"
   to_state:
+    title: To state
     type: "string"
     description: "[type: adb:reboot] [required] State to rebot to."
     enum:

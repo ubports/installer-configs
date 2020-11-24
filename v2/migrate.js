@@ -33,6 +33,7 @@ function transformStep(step) {
 }
 
 function transformOSs(os) {
+  delete os.sanity_check;
   return {
     steps: os.steps.map(transformStep),
     ...os,

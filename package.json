@@ -10,7 +10,7 @@
     "lint": "npx prettier v2/**/*.js -w",
     "v2:migrate": "node v2/migrate.js",
     "v2:validate": "npx ajv-cli -s v2/schema/device.schema.yml -r \"v2/schema/*.schema.yml\" -d \"v2/data/devices/[a-zA-Z]*.yml\" && npx ajv-cli -s v2/schema/index.schema.yml -r \"v2/schema/*.schema.yml\" -d \"v2/data/index.yml\" && npx ajv-cli -s v2/schema/aliases.schema.yml -d \"v2/data/aliases.yml\"",
-    "v2:docs": "(rm v2/docs/* || true) && ./v2/buildSchema.js && npx @adobe/jsonschema2md -d v2/schema/bundle/ -o v2/docs -x -",
+    "v2:docs": "./v2/buildSchema.js && npx @adobe/jsonschema2md -d v2/schema/bundle/ -o v2/docs -x -",
     "v2:serve": "npx markserv v2/docs/"
   },
   "repository": {

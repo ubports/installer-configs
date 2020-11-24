@@ -22,6 +22,7 @@ properties:
     items:
       type: "string"
   doppelgangers:
+    title: Doppelgangers
     type: "array"
     description: "Codenames of devices this device should not be confused with."
     uniqueItems: true
@@ -30,102 +31,14 @@ properties:
   user_actions:
     $ref: "user_actions.schema.yml#"
   unlock:
+    title: Unlock actions
     type: "array"
     description: "An array of strings referring to user_actions defined above that are needed to unlock the device. This might include simple things like enabling adb access or bigger steps like using a leaked oem tool to flash highly questionable images that unlock the bootloader. Whatever is needed to make installations possible."
     uniqueItems: true
     items:
       type: "string"
   operating_systems:
-    title: Operating systems
-    type: "array"
-    description: "An array of objects describing operating systems available for installation."
-    uniqueItems: true
-    items:
-      type: "object"
-      description: "An operating system available for installation"
-      properties:
-        name:
-          type: "string"
-          description: "Human-readable name of the operating system."
-        options:
-          type: "array"
-          description: "Options for the installation."
-          items:
-            type: "object"
-            description: "Option for the installation."
-            properties:
-              var:
-                type: "string"
-                description: "Variable the setting will be stored in."
-              name:
-                type: "string"
-                description: "Human-readable identifier of the setting."
-              tooltip:
-                type: "string"
-                description: "A very short help text describing the setting."
-              link:
-                type: "string"
-                description: "A link to the docs describing the setting."
-              type:
-                type: "string"
-                description: "Describes what values are accepted by the setting and how they are provided."
-                enum:
-                  - "checkbox"
-                  - "input"
-                  - "select"
-              remote_values:
-                type: "object"
-                description: "If the values can be generated from a remote source like the systemimage api, this provides the required information for that."
-                properties:
-                  type:
-                    type: "string"
-                    enum:
-                      - "systemimagechannels"
-              value:
-                description: "Default value of the option"
-              values:
-                type: "array"
-                description: "List of values for the select."
-            required:
-              - "var"
-              - "name"
-              - "type"
-        prerequisites:
-          type: "array"
-          description: "An array of strings referring to user_actions defined above that are needed before the installation. This should not include the steps from the generic unlock block, but actions specific to the installation of this operating system."
-          values:
-            type: "string"
-            description: "Reference to user_action that's needed before the installation of this OS. Steps required for every OS should be put in the generic unlock block instead."
-        steps:
-          type: "array"
-          description: "An ordered array of objects describing steps required to install the operating system."
-          items:
-            $ref: "step.schema.yml#"
-        slideshow:
-          type: "array"
-          description: "An array of slides presenting the operating system's most compelling features."
-          items:
-            type: "object"
-            description: "Slide about the operating system"
-            properties:
-              title:
-                type: "string"
-                description: "Title of the slide"
-              text:
-                type: "string"
-                description: "Text body of the slide, Markdown supported here."
-              image:
-                type: "string"
-                description: "Image displayed on the slide."
-        video:
-          type: "string"
-          description: "A video introducing the user to the operating system they just installed."
-        donate:
-          type: "string"
-          description: "A link to donate to the developer of the operating system."
-        get_involved:
-          type: "string"
-          description: "A link to the OSs get involved page."
+    $ref: operating_systems.schema.yml#
 required:
   - "name"
   - "codename"
