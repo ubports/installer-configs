@@ -23,6 +23,7 @@ oneOf:
             title: User action
             type: "string"
             description: "user action to run"
+        required: ["action"]
         additionalProperties: false
   - title: fastboot:oem-unlock action
     required: ["fastboot:oem-unlock"]
