@@ -1,0 +1,287 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "v2/schema/action.schema.yml"
+title: "Action"
+type: "object"
+description: "Atomic action"
+oneOf:
+  - title: core:group action
+    required: ["core:group"]
+    properties:
+      core:group:
+        title: "core:group action"
+        type: "array"
+        items:
+          $ref: "step.schema.yml"
+  - title: core:user_action action
+    required: ["core:user_action"]
+    properties:
+      core:user_action:
+        title: "core:user_action action"
+        type: "object"
+        properties:
+          action:
+            title: User action
+            type: "string"
+            description: "user action to run"
+        additionalProperties: false
+  - title: fastboot:oem-unlock action
+    required: ["fastboot:oem-unlock"]
+    properties:
+      fastboot:oem-unlock:
+        title: "fastboot:oem-unlock action"
+        oneOf:
+          - type: "null"
+          - type: "object"
+            properties:
+              code_url:
+                title: Code url
+                type: string
+                description: Website to obtain an unlock code
+            additionalProperties: false
+  - title: fastboot:flashing-unlock action
+    required: ["fastboot:flashing-unlock"]
+    properties:
+      fastboot:flashing-unlock:
+        title: "fastboot:flashing-unlock action"
+        type: "null"
+        additionalProperties: false
+  - title: fastboot:reboot_bootloader action
+    required: ["fastboot:reboot_bootloader"]
+    properties:
+      fastboot:reboot_bootloader:
+        title: "fastboot:reboot_bootloader action"
+        type: "null"
+        additionalProperties: false
+  - title: fastboot:update action
+    required: ["fastboot:update"]
+    properties:
+      fastboot:update:
+        title: "fastboot:update action"
+        type: "object"
+        additionalProperties: false
+  - title: systemimage:install action
+    required: ["systemimage:install"]
+    properties:
+      systemimage:install:
+        title: "systemimage:install action"
+        type: "null"
+        additionalProperties: false
+  - title: fastboot:boot action
+    required: ["fastboot:boot"]
+    properties:
+      fastboot:boot:
+        title: "fastboot:boot action"
+        type: "object"
+        properties:
+          file:
+            title: File
+            type: string
+          group:
+            title: Group
+            type: string
+        additionalProperties: false
+  - title: fastboot:reboot action
+    required: ["fastboot:reboot"]
+    properties:
+      fastboot:reboot:
+        title: "fastboot:reboot action"
+        type: "null"
+        additionalProperties: false
+  - title: fastboot:continue action
+    required: ["fastboot:continue"]
+    properties:
+      fastboot:continue:
+        title: "fastboot:continue action"
+        type: "null"
+        additionalProperties: false
+  - title: fastboot:erase action
+    required: ["fastboot:erase"]
+    properties:
+      fastboot:erase:
+        title: "fastboot:erase action"
+        type: "object"
+        properties:
+          partition:
+            title: Partition
+            type: "string"
+            description: "Partition to format."
+        additionalProperties: false
+  - title: fastboot:format action
+    required: ["fastboot:format"]
+    properties:
+      fastboot:format:
+        title: "fastboot:format action"
+        type: "object"
+        properties:
+          partition:
+            title: Partition
+            type: "string"
+            description: "Partition to format."
+          type:
+            title: Partition type
+            type: "string"
+            description: "Partition type to use"
+            enum:
+              - ext2
+              - ext4
+          size:
+            title: Partition size
+            type: number
+            description: "Partition size"
+        additionalProperties: false
+  - title: fastboot:flash action
+    required: ["fastboot:flash"]
+    properties:
+      fastboot:flash:
+        title: "fastboot:flash action"
+        type: "object"
+        properties:
+          partitions:
+            title: Partitions
+            type: array
+            description: Partitions to flash
+            items:
+              title: Partition
+              type: object
+              description: Partition to flash
+              properties:
+                partition:
+                  title: Partition
+                  type: string
+                file:
+                  title: File
+                  type: string
+                group:
+                  title: Group
+                  type: string
+        additionalProperties: false
+  - title: fastboot:set_active action
+    required: ["fastboot:set_active"]
+    properties:
+      fastboot:set_active:
+        title: "fastboot:set_active action"
+        type: "object"
+        properties:
+          slot:
+            title: To state
+            type: "string"
+            enum: ["a", "b"]
+        additionalProperties: false
+  - title: adb:reboot action
+    required: ["adb:reboot"]
+    properties:
+      adb:reboot:
+        title: "adb:reboot action"
+        type: "object"
+        properties:
+          to_state:
+            title: To state
+            type: "string"
+            description: "State to rebot to."
+            enum:
+              - "recovery"
+              - "system"
+              - "bootloader"
+        required: ["to_state"]
+        additionalProperties: false
+  - title: adb:format action
+    required: ["adb:format"]
+    properties:
+      adb:format:
+        title: "adb:format action"
+        type: "object"
+        properties:
+          partition:
+            title: Partition
+            type: "string"
+            description: "Partition to format."
+        additionalProperties: false
+  - title: adb:sideload action
+    required: ["adb:sideload"]
+    properties:
+      adb:sideload:
+        title: "adb:sideload action"
+        type: "object"
+        properties:
+          file:
+            title: Zip to sideload
+            type: string
+          group:
+            title: Group
+            type: string
+        required:
+          - file
+          - group
+        additionalProperties: false
+  - title: core:download action
+    required: ["core:download"]
+    properties:
+      core:download:
+        title: "core:download action"
+        type: "object"
+        properties:
+          group:
+            title: Group
+            type: "string"
+            description: "Files group"
+          files:
+            title: Files
+            type: "array"
+            description: "Array of files to download."
+            items:
+              title: File
+              type: "object"
+              properties:
+                url:
+                  type: "string"
+                  description: "URL of the file to download"
+                checksum:
+                  $ref: checksum.schema.yml#
+        required:
+          - group
+          - files
+        additionalProperties: false
+  - title: core:unpack action
+    required: ["core:unpack"]
+    properties:
+      core:unpack:
+        title: "core:unpack action"
+        type: "object"
+        properties:
+          group:
+            title: Group
+            type: string
+          files:
+            type: array
+            items:
+              type: object
+              properties:
+                archive:
+                  title: Zip to sideload
+                  type: string
+                dir:
+                  title: Target directory
+                  type: string
+        additionalProperties: false
+  - title: core:manual_download action
+    required: ["core:manual_download"]
+    properties:
+      core:manual_download:
+        title: "core:manual_download action"
+        type: "object"
+        properties:
+          group:
+            title: Group
+            type: "string"
+            description: "Files group"
+          file:
+            title: File
+            type: object
+            description: "File to download"
+            properties:
+              url:
+                type: "string"
+                description: "URL of the file to download"
+              checksum:
+                $ref: checksum.schema.yml#
+        additionalProperties: false

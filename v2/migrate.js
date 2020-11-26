@@ -19,11 +19,16 @@ async function getAliases(codename) {
     .filter((a) => a);
 }
 
+function getType(type) {
+  if (type === "systemimage") return "systemimage:install";
+  return type.includes(":") ? type : `core:${type}`;
+}
+
 function transformStep(step) {
   if (step.fallback_user_action) {
     step.fallback = [
       {
-        user_action: {
+        "core:user_action": {
           action: step.fallback_user_action,
         },
       },
@@ -31,18 +36,22 @@ function transformStep(step) {
     delete step.fallback_user_action;
   }
   return {
-    [step.type]: {
-      group: step.group,
-      files: step.files,
-      partitions: step.flash,
-      partition: step.partition,
-      type: step.partitionType,
-      size: step.size,
-      action: step.action,
-      to_state: step.to_state,
-      file: step.file,
-      slot: step.slot,
-    },
+    actions: [
+      {
+        [getType(step.type)]: {
+          group: step.group,
+          files: step.files,
+          partitions: step.flash,
+          partition: step.partition,
+          type: step.partitionType,
+          size: step.size,
+          action: step.action,
+          to_state: step.to_state,
+          file: step.file,
+          slot: step.slot,
+        },
+      },
+    ],
     optional: step.optional,
     fallback: step.fallback,
     condition: step.condition,
@@ -78,36 +87,42 @@ function getHandlers(codename) {
   switch (codename) {
     case "suzu":
       return {
-        bootloader_locked: [
-          {
-            "fastboot:oem-unlock": {
-              code_url:
-                "https://developer.sony.com/develop/open-devices/get-started/unlock-bootloader/",
+        bootloader_locked: {
+          actions: [
+            {
+              "fastboot:oem-unlock": {
+                code_url:
+                  "https://developer.sony.com/develop/open-devices/get-started/unlock-bootloader/",
+              },
             },
-          },
-        ],
+          ],
+        },
       };
     case "sargo":
     case "santoni":
     case "yggdrasil":
       return {
-        bootloader_locked: [
-          {
-            "fastboot:flashing-unlock": {
-              yml: undefined, // HACK needed for proper yml formatting
+        bootloader_locked: {
+          actions: [
+            {
+              "fastboot:flashing-unlock": {
+                yml: undefined, // HACK needed for proper yml formatting
+              },
             },
-          },
-        ],
+          ],
+        },
       };
     default:
       return {
-        bootloader_locked: [
-          {
-            "fastboot:oem-unlock": {
-              yml: undefined, // HACK needed for proper yml formatting
+        bootloader_locked: {
+          actions: [
+            {
+              "fastboot:oem-unlock": {
+                yml: undefined, // HACK needed for proper yml formatting
+              },
             },
-          },
-        ],
+          ],
+        },
       };
   }
 }
