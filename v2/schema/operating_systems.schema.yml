@@ -28,6 +28,10 @@ items:
       description: "An ordered array of objects describing steps required to install the operating system."
       items:
         $ref: "step.schema.yml#"
+    eula:
+      title: EULA
+      type: "object"
+      description: "An end-user license agreement"
     slideshow:
       title: Slideshow
       type: "array"
