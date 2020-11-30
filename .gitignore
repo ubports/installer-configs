@@ -2,5 +2,6 @@ node_modules
 
 #ignore generated data
 v2/data
+v2/json
 v2/docs
 v2/schema/bundle

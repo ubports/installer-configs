@@ -9,7 +9,13 @@ function readJSON(file) {
 }
 
 function writeYAML(file, data) {
-  return fs.writeFile(file, YAML.stringify(data));
+  return Promise.all([
+    fs.writeFile(file, YAML.stringify(data)),
+    fs.writeFile(
+      file.replace("/data/", "/json/").replace(".yml", ".json"),
+      JSON.stringify(data)
+    ),
+  ]);
 }
 
 const aliases = readJSON("aliases.json");
@@ -22,6 +28,17 @@ async function getAliases(codename) {
 function getType(type) {
   if (type === "systemimage") return "systemimage:install";
   return type.includes(":") ? type : `core:${type}`;
+}
+
+function transformOption(options) {
+  if (options.remote_values) {
+    options.remote_values = {
+      "systemimage:channels": {
+        yml: undefined, // HACK needed for proper yml formatting
+      },
+    };
+  }
+  return options;
 }
 
 function transformStep(step) {
@@ -62,9 +79,11 @@ function transformOSs(os) {
   delete os.sanity_check;
   const steps = os.steps.map(transformStep);
   os.steps = steps;
+  const options = os.options.map(transformOption);
+  os.options = options;
   return {
     steps,
-    test: "this",
+    options,
     ...os,
   };
 }
@@ -90,7 +109,7 @@ function getHandlers(codename) {
         bootloader_locked: {
           actions: [
             {
-              "fastboot:oem-unlock": {
+              "fastboot:oem_unlock": {
                 code_url:
                   "https://developer.sony.com/develop/open-devices/get-started/unlock-bootloader/",
               },
@@ -105,7 +124,7 @@ function getHandlers(codename) {
         bootloader_locked: {
           actions: [
             {
-              "fastboot:flashing-unlock": {
+              "fastboot:flashing_unlock": {
                 yml: undefined, // HACK needed for proper yml formatting
               },
             },
@@ -117,7 +136,7 @@ function getHandlers(codename) {
         bootloader_locked: {
           actions: [
             {
-              "fastboot:oem-unlock": {
+              "fastboot:oem_unlock": {
                 yml: undefined, // HACK needed for proper yml formatting
               },
             },
@@ -128,6 +147,7 @@ function getHandlers(codename) {
 }
 
 fs.mkdir(path.join("v2", "data", "devices"), { recursive: true })
+  .then(() => fs.mkdir(path.join("v2", "json", "devices"), { recursive: true }))
   .then(() => fs.readdir("v1"))
   .then((configs) =>
     Promise.all(
@@ -169,11 +189,12 @@ fs.mkdir(path.join("v2", "data", "devices"), { recursive: true })
   .then((configs) =>
     configs.reduce(
       (acc, curr) => {
-        acc.index[curr.codename] = {
+        acc.index.push({
           name: curr.name,
+          codename: curr.codename,
           formfactor: curr.formfactor,
           operating_systems: curr.operating_systems,
-        };
+        });
         curr.aliases.forEach((alias) => {
           if (acc.aliases[alias]) {
             acc.aliases[alias].push(curr.codename);
@@ -184,7 +205,7 @@ fs.mkdir(path.join("v2", "data", "devices"), { recursive: true })
         return acc;
       },
       {
-        index: {},
+        index: [],
         aliases: {},
       }
     )

@@ -25,11 +25,11 @@ oneOf:
             description: "user action to run"
         required: ["action"]
         additionalProperties: false
-  - title: fastboot:oem-unlock action
-    required: ["fastboot:oem-unlock"]
+  - title: fastboot:oem_unlock action
+    required: ["fastboot:oem_unlock"]
     properties:
-      fastboot:oem-unlock:
-        title: "fastboot:oem-unlock action"
+      fastboot:oem_unlock:
+        title: "fastboot:oem_unlock action"
         oneOf:
           - type: "null"
           - type: "object"
@@ -39,11 +39,11 @@ oneOf:
                 type: string
                 description: Website to obtain an unlock code
             additionalProperties: false
-  - title: fastboot:flashing-unlock action
-    required: ["fastboot:flashing-unlock"]
+  - title: fastboot:flashing_unlock action
+    required: ["fastboot:flashing_unlock"]
     properties:
-      fastboot:flashing-unlock:
-        title: "fastboot:flashing-unlock action"
+      fastboot:flashing_unlock:
+        title: "fastboot:flashing_unlock action"
         type: "null"
         additionalProperties: false
   - title: fastboot:reboot_bootloader action
