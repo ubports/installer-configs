@@ -1,0 +1,24 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "v2/schema/step.schema.yml"
+title: "Step"
+type: "object"
+description: "Installation step."
+properties:
+  actions:
+    title: "group step"
+    type: "array"
+    items:
+      $ref: "action.schema.yml"
+  fallback:
+    title: Fallback steps
+    type: "array"
+    items:
+      $ref: "action.schema.yml"
+  optional:
+    type: "boolean"
+    description: "If true, errors in this step will be ignored"
+  condition:
+    title: Condition
+    description: "Query an installation option to determine if the step should be run"
+    $ref: "expression.schema.yml"
+additionalProperties: false

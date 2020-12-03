@@ -1,0 +1,56 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "v2/schema/device.schema.yml"
+title: "Device"
+description: "Device configuration for the UBports Installer"
+type: "object"
+properties:
+  name:
+    title: Name
+    type: "string"
+    description: "The human-readable name under which the device was marketed. This includes the name of the manufacturer if it makes sense. I.e. you would not refer to the 'Oneplus One' as 'One', but you would not call the 'iPhone 9' 'Apple iPhone 9'. Use common sense."
+  codename:
+    title: Codename
+    type: "string"
+    description: "A short codename that is used internally to identify the device. This (with the extension '.yml') should also be the filename. If there are multiple codenames in use for the exact same device, only create a single one with the most prominent one and add the correct aliases to aliases.json."
+  formfactor:
+    $ref: "formfactor.schema.yml#"
+  aliases:
+    title: Aliases
+    type: "array"
+    description: "Alternative codenames this device might be identified as."
+    uniqueItems: true
+    items:
+      type: "string"
+  doppelgangers:
+    title: Doppelgangers
+    type: "array"
+    description: "Codenames of devices this device should not be confused with."
+    uniqueItems: true
+    items:
+      type: "string"
+  user_actions:
+    $ref: "user_actions.schema.yml#"
+  handlers:
+    title: Handlers
+    type: "object"
+    description: "Steps to run to handle specific known errors"
+    properties:
+      bootloader_locked:
+        title: Handle a bootloader locked error
+        $ref: "step.schema.yml#"
+    additionalProperties: false
+  unlock:
+    title: Unlock actions
+    type: "array"
+    description: "An array of strings referring to user_actions defined above that are needed to unlock the device. This might include simple things like enabling adb access or bigger steps like using a leaked oem tool to flash highly questionable images that unlock the bootloader. Whatever is needed to make installations possible."
+    uniqueItems: true
+    items:
+      type: "string"
+  operating_systems:
+    $ref: operating_systems.schema.yml#
+required:
+  - "name"
+  - "codename"
+  - "operating_systems"
+  - "formfactor"
+additionalProperties: false

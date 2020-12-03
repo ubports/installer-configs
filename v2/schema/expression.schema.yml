@@ -1,0 +1,43 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "v2/schema/expression.schema.yml"
+title: "Expression"
+type: "object"
+description: "Evaluate install settings"
+oneOf:
+  - properties:
+      AND:
+        title: logical and
+        type: array
+        items:
+          $ref: "#"
+    required:
+      - "AND"
+    additionalProperties: false
+  - properties:
+      OR:
+        title: logical or
+        type: array
+        items:
+          $ref: "#"
+    required:
+      - "OR"
+    additionalProperties: false
+  - properties:
+      NOT:
+        title: logical not
+        $ref: "#"
+    required:
+      - "NOT"
+    additionalProperties: false
+  - properties:
+      var:
+        title: Property var
+        type: "string"
+        description: "Reference to an option defined for this operating system"
+      value:
+        title: Property value
+        description: "Value to expect"
+    required:
+      - "var"
+      - "value"
+    additionalProperties: false
