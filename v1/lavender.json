@@ -1,7 +1,7 @@
 {
-  "name": "Sony Xperia X (F5121 & F5122)",
-  "codename": "suzu",
-  "unlock": ["confirm_model", "ta_backup", "unlock"],
+  "name": "Xiaomi Redmi Note 7",
+  "codename": "lavender",
+  "unlock": ["confirm_model", "unlock"],
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
@@ -11,7 +11,7 @@
     },
     "bootloader": {
       "title": "Reboot to Bootloader",
-      "description": "With the device powered off, hold Volume Up and insert a USB cable. The LED indicator has to light up blue.",
+      "description": "With the device powered off, hold Volume Up + Power.",
       "image": "phone_power_up",
       "button": true
     },
@@ -23,22 +23,12 @@
     },
     "confirm_model": {
       "title": "Confirm your model",
-      "description": "Please double-check that your device is a Sony Xperia X (F5121 or F5122)."
-    },
-    "ta_backup": {
-      "title": "Backup the TA partition",
-      "description": "In case you later wish to return to factory state, you will have to back up your TA partition before unlocking the bootloader. You can't do this step at a later stage!",
-      "link": "https://together.jolla.com/question/168711/xperia-x-backup-ta-partition-before-unlocking-bootloader/"
+      "description": "Please double-check that your device is a Xiaomi Redmi Note 7 (lavender)."
     },
     "unlock": {
-      "title": "Unlock the bootloader",
-      "description": "You have to unlock the bootloader to install third-party operating systems on your device.",
-      "link": "https://developer.sony.com/develop/open-devices/get-started/unlock-bootloader/"
-    },
-    "upgrade_android": {
-      "title": "Upgrade Android",
-      "description": "If the device is running Android, you might have to upgrade to Android 8.0.",
-      "link": "https://forums.ubports.com/topic/3229/sony-xperia-x-suzu-f5121"
+      "title": "OEM unlock",
+      "description": "If you haven't done so already, make sure to OEM unlock your device first.",
+      "link": "https://en.miui.com/unlock/"
     }
   },
   "operating_systems": [
@@ -68,31 +58,20 @@
           "value": true
         }
       ],
-      "prerequisites": ["upgrade_android"],
+      "prerequisites": [],
       "steps": [
         {
           "type": "manual_download",
           "condition": {"var": "bootstrap", "value": true},
           "group": "firmware",
           "file": {
-            "name": "SW_binaries_for_Xperia_AOSP_N_MR1_5.7_r1_v08_loire.zip",
-            "url": "https://developer.sony.com/file/download/software-binaries-for-aosp-nougat-android-7-1-kernel-4-4-loire/",
+            "name": "vendor.img",
+            "url": "https://www.androidfilehost.com/?fid=10763459528675594236",
             "checksum": {
-              "sum": "9d9d6df01f0816e74b386daf82658768a54e515161ee9fb907a7aae292167e51",
+              "sum": "7b26a7ddc779079c04dbddd983dc1e6108a7711cac26cff06bc9f4309a4edbc7",
               "algorithm": "sha256"
             }
           }
-        },
-        {
-          "type": "unpack",
-          "condition": {"var": "bootstrap", "value": true},
-          "group": "firmware",
-          "files": [
-            {
-              "archive": "SW_binaries_for_Xperia_AOSP_N_MR1_5.7_r1_v08_loire.zip",
-              "dir": "unpacked"
-            }
-          ]
         },
         {
           "type": "download",
@@ -100,9 +79,23 @@
           "group": "firmware",
           "files": [
             {
-              "url": "http://cdimage.ubports.com/devices/halium-unlocked-recovery_suzu.img",
+              "url": "https://cdimage.ubports.com/devices/lavender/dtbo.img",
               "checksum": {
-                "sum": "d230df1a9d4d5d8e92232ec272e365996ef5a77edb60aaddbfcd5aa97e058dc1",
+                "sum": "84ce5cc1549a87da0ac9e6545251f1317de5ce2322d54c384c366c9bd2d8efc6",
+                "algorithm": "sha256"
+              }
+            },
+            {
+              "url": "https://cdimage.ubports.com/devices/lavender/recovery.img",
+              "checksum": {
+                "sum": "990a377a0a87809a9ceb4f85c693e7c7c190224ff98e18a8a0e21966688bda0b",
+                "algorithm": "sha256"
+              }
+            },
+            {
+              "url": "https://cdimage.ubports.com/devices/lavender/vbmeta.img",
+              "checksum": {
+                "sum": "65f5493e01ede7e538a14df063013a921ecd122680c7d3b3598d46fc7a916517",
                 "algorithm": "sha256"
               }
             }
@@ -115,17 +108,17 @@
           "fallback_user_action": "bootloader"
         },
         {
-          "type": "fastboot:erase",
+          "type": "fastboot:format",
           "condition": {"var": "bootstrap", "value": true},
           "partition": "system"
         },
         {
-          "type": "fastboot:erase",
+          "type": "fastboot:format",
           "condition": {"var": "bootstrap", "value": true},
           "partition": "cache"
         },
         {
-          "type": "fastboot:erase",
+          "type": "fastboot:format",
           "condition": {"var": "wipe", "value": true},
           "partition": "userdata"
         },
@@ -135,25 +128,35 @@
           "flash": [
             {
               "partition": "boot",
-              "file": "halium-unlocked-recovery_suzu.img",
-              "group": "firmware",
-              "raw": true
-            },
-            {
-              "partition": "recovery",
-              "file": "halium-unlocked-recovery_suzu.img",
+              "file": "recovery.img",
               "group": "firmware"
             },
             {
-              "partition": "oem",
-              "file": "unpacked/SW_binaries_for_Xperia_AOSP_N_MR1_5.7_r1_v08_loire.img",
+              "partition": "recovery",
+              "file": "recovery.img",
+              "group": "firmware"
+            },
+            {
+              "partition": "dtbo",
+              "file": "dtbo.img",
+              "group": "firmware"
+            },
+            {
+              "partition": "vendor",
+              "file": "vendor.img",
+              "group": "firmware"
+            },
+            {
+              "partition": "vbmeta",
+              "file": "vbmeta.img",
               "group": "firmware"
             }
           ]
         },
         {
           "type": "fastboot:reboot",
-          "fallback_user_action": "boot"
+          "fallback_user_action": "boot",
+          "group": "firmware"
         },
         {
           "type": "systemimage"
