@@ -80,9 +80,10 @@ function transformOSs(os) {
   if (os.name === "VollaOS")
     os.eula = {
       title: "EULA",
-      description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BANDED VOLLA PHONE. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Hallo Welt Systeme UG (haftungsbeschränkt) for the Volla OS and agree to it.",
-      link: "https://volla.online/license"
-    }
+      description:
+        "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BANDED VOLLA PHONE. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Hallo Welt Systeme UG (haftungsbeschränkt) for the Volla OS and agree to it.",
+      link: "https://volla.online/license",
+    };
   const steps = os.steps.map(transformStep);
   os.steps = steps;
   const options = os.options.map(transformOption);
@@ -216,6 +217,12 @@ fs.mkdir(path.join("v2", "data", "devices"), { recursive: true })
       }
     )
   )
+  .then(({ index, aliases }) => ({
+    index: index.sort((a, b) =>
+      a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
+    ),
+    aliases,
+  }))
   .then(({ index, aliases }) =>
     Promise.all([
       writeYAML(path.join("v2", "data", "index.yml"), index),
