@@ -128,7 +128,7 @@
           ]
         },
         {
-          "type": "fastboot:reboot",
+          "type": "adb:reboot",
           "to_state": "recovery",
           "fallback_user_action": "recovery"
         },
