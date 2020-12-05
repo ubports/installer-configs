@@ -19,26 +19,6 @@
       "title": "Reboot the device",
       "description": "Hold down the Volume Down + Home + Power button until the device vibrates, then release all buttons.",
       "button": true
-    },
-    "twrp_unlock": {
-      "title": "TWRP unlock",
-      "description": "Your device will boot Team Win Recovery Project (TWRP). If the screen is off, hit the power button once to light it up, then swipe the bar in the bottom to the right where it says to \"Swipe to allow modifications.\"",
-      "button": true
-    },
-    "twrp_sideload": {
-      "title": "TWRP sideload",
-      "description": "Select \"Advanced\" and then \"ADB Sideload\". Check the boxes \"Wipe Dalvik Cache\" and \"Wipe Cache\" and then swipe the bar in the bottom where it says \"Swipe to Start Sideload\".",
-      "button": true
-    },
-    "twrp_sideload_reboot": {
-      "title": "Sideload complete!",
-      "description": "Follow the on-screen instructions to complete the sideload. Your device will reboot to the new OS next.",
-      "button": true
-    },
-    "trlte_check": {
-      "title": "Unlock Bootloader",
-      "description": "You need to ensure you have an unlocked bootloader, which can be tested by installing TWRP. The Verizon variant should be the only variant with a locked bootloader, click 'More...' for instructions to unlock your Verizon Note 4, there is currently no solution for unlocking the AT&T variant, Sorry. :(",
-      "link": "https://forum.xda-developers.com/t/howto-bootloader-unlock-and-upgrade-to-marshmallow-n910vvru2cql1.3398144/"
     }
   },
   "operating_systems": [
@@ -68,7 +48,7 @@
           "group": "firmware",
           "files": [
             {
-              "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-samsung_trltetmo/lastSuccessfulBuild/artifact/halium-unlocked-recovery_trltetmo.img",
+              "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-samsung_trltetmo/lastSuccessfulBuild/artifact/halium-unlocked-recovery_trltetmo.img"
             }
           ]
         },
