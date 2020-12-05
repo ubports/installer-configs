@@ -12,7 +12,7 @@
     "download": {
       "title": "Reboot to Download Mode",
       "description": "If your device did not reboot to Download Mode, then press, and hold Volume Down + Home + Power, until you see the Warning about Custom OS installations, press Volume Up to Continue, then you may have to unplug and plug the USB cord back in.",
-      "image": "phone_power_up",
+      "image": "phone_power_down",
       "button": true
     },
     "boot": {
@@ -20,7 +20,6 @@
       "description": "Hold down the Volume Down + Home + Power button until the device vibrates, then release all buttons.",
       "button": true
     }
-  },
   "operating_systems": [
     {
       "name": "Ubuntu Touch",
