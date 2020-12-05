@@ -163,6 +163,7 @@
                     "adb:reboot",
                     "adb:format",
                     "adb:sideload",
+                    "heimdall:flash",
                     "download",
                     "unpack",
                     "manual_download"
