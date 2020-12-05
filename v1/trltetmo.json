@@ -20,7 +20,7 @@
       "description": "Hold down the Volume Down + Home + Power button until the device vibrates, then release all buttons.",
       "button": true
     }
-  }
+  },
   "operating_systems": [
     {
       "name": "Ubuntu Touch",
