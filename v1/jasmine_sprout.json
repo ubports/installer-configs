@@ -19,14 +19,14 @@
     },
     "bootloader": {
       "title": "Reboot to Bootloader",
-      "description": "With the device powered off, press and hold the volume down and power buttons until the screen turns on. It should show a menu selection screen.",
+      "description": "With the device powered off, press and hold the VOLUME DOWN and POWER buttons until the screen turns on",
       "image": "phone_power_down",
       "button": true
     },
     "recovery": {
       "title": "Reboot to Recovery",
-      "description": "With the device still at the 'Fastboot Mode' screen (if not, power off the device and press and hold volume down and power buttons until the screen turns on), select the 'Recovery Mode' option by using the volume buttons and press the power button to enter.",
-      "image": "phone_power_down",
+      "description": "With the device still at the 'Fastboot Mode' screen and press and hold VOLUME UP and POWER buttons until the screen turns on",
+      "image": "phone_power_up",
       "button": true
     }
   },
@@ -78,7 +78,7 @@
           "group": "firmware",
           "files": [
             {
-              "name":"boot.img",
+              "name": "boot.img",
               "url": "https://github.com/ubports-xiaomi-sdm660/artifacts/releases/download/v0.1/boot.img",
               "checksum": {
                 "sum": "2782a791ee472438ebf30f8fa00e626ec6796c3a3e6acca57d33245e7c6bd7b8",
@@ -116,9 +116,9 @@
           "condition": {"var": "bootstrap", "value": true},
           "flash": [
             {
-              "partition":"vendor",
-              "file":"vendor.img",
-              "group":"firmware"
+              "partition": "vendor",
+              "file": "vendor.img",
+              "group": "firmware"
             },
             {
               "partition": "boot",
@@ -129,7 +129,7 @@
         },
         {
           "type": "fastboot:reboot",
-          "to_state":"recovery",
+          "to_state": "recovery",
           "fallback_user_action": "recovery"
         },
         {
