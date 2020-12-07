@@ -45,7 +45,7 @@ Some of the high-level changes include:
 - Many steps have been renamed to allow namespacing for the UBports Installer's new plugin system.
 - Steps may now specify a range of actions that belong together [#17](https://github.com/ubports/installer-configs/issues/17)
 
-### Migrate
+#### Migrate
 
 You can use the migration script to quickly migrate a `v1` config to `v2`:
 
@@ -72,3 +72,13 @@ The initial specification of the UBports Installer config files was drafted for 
 The specification includes two general files, that are written manually: The `index.json` file lists all available devices. If the installer detects a device automatically, it can query `aliases.json` to resolve the detected string to the canonical codename for the device.
 
 Every device is configured by a `<codename>.json` file that contains information about the device, as well as a list of steps to install different operating systems. Re-usable instructions for the user ("user actions") can also be specified, as well as configuration options for each available operating system.
+
+## License
+
+Original development by [Jan Sprinz](https://spri.nz). Copyright (C) 2019-2020 [UBports Foundation](https://ubports.com).
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.

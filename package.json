@@ -1,6 +1,6 @@
 {
   "name": "installer-configs",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Configuration files for the UBports Installer.",
   "scripts": {
     "lint": "npx prettier \"**\" --ignore-path=.gitignore --arrow-parens=avoid --trailing-comma=none -uw",
@@ -14,6 +14,7 @@
     "url": "git+https://github.com/ubports/installer-configs.git"
   },
   "author": "Jan Sprinz <jan@ubports.com>",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/ubports/installer-configs/issues"
   },
