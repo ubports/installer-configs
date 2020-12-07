@@ -45,16 +45,20 @@ Some of the high-level changes include:
 - Many steps have been renamed to allow namespacing for the UBports Installer's new plugin system.
 - Steps may now specify a range of actions that belong together [#17](https://github.com/ubports/installer-configs/issues/17)
 
-### Helper scripts
+### Migrate
 
-NPM Scripts have been created in the `v2` namespace to aid the planning and transition process:
+You can use the migration script to quickly migrate a `v1` config to `v2`:
 
-```bash
-npm run v2:migrate # Migrate all v1 configs from this repository to v2 structure and save them under v2/data/devices/<codename>.yml. The aliases.yml and index.yml files will be generated in v2/data.
-npm run v2:validate # Validate the generated yml files using the JSON-schema definitions from v2/schema.
-npm run v2:docs # build schema documentation as markdown documentation files in v2/docs.
-npm run v2:serve # serve docs on port 8642
-npm run lint # enforce prettier code style on js scripts
+```
+$ ./v2/migrate.js -h
+Usage: ./v2/migrate.js -i ./path/to.json
+
+migrate a v1 JSON config to v2 YAML
+
+Options:
+  -V, --version               output the version number
+  -i, --input <path to json>  v1 file (default: undefined)
+  -h, --help                  output usage information
 ```
 
 ### v1
