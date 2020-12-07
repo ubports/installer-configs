@@ -1,7 +1,7 @@
 {
   "name": "Xiaomi Mi A2",
   "codename": "jasmine_sprout",
-  "unlock": ["confirm_model", "confirm_os", "unlock"],
+  "unlock": ["confirm_model", "confirm_os", "unlock", "warning"],
   "user_actions": {
     "confirm_model": {
       "title": "Confirm your model",
@@ -16,6 +16,10 @@
       "title": "OEM unlock",
       "description": "If you haven't done so already, make sure to OEM unlock your device first.",
       "link": "https://source.android.com/devices/bootloader/locking_unlocking#unlocking-bootloader"
+    },
+    "warning": {
+      "title":"Warning",
+      "description":"For unknown reason some pc may not work with device fastboot mode, if installer fails or bootloop your device try to run it from other pc"
     },
     "bootloader": {
       "title": "Reboot to Bootloader",
