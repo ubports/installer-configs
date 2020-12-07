@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Configuration files for the UBports Installer.",
   "scripts": {
-    "lint": "npx prettier v2/**/*.js -w",
+    "lint": "npx prettier \"**\" --ignore-path=.gitignore --arrow-parens=avoid --trailing-comma=none -uw",
     "validate": "npx ajv-cli -s v2/schema/device.schema.yml -r \"v2/schema/*.schema.yml\" -d \"v2/devices/[a-zA-Z]*.yml\"",
     "buildschema": "./v2/buildSchema.js",
     "docs": "npm run buildschema && npx @adobe/jsonschema2md -d public/v2/ -o public/v2/docs -x -"
