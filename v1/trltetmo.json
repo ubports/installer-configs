@@ -19,6 +19,11 @@
       "title": "Reboot the device",
       "description": "Hold down the Volume Down + Home + Power button until the device vibrates, then release all buttons.",
       "button": true
+    },
+    "trlte_check": {
+      "title": "Unlock Bootloader",
+      "description": "You need to ensure you have an unlocked bootloader, which can be tested by installing TWRP. The Verizon variant should be the only variant with a locked bootloader, click 'More...' for instructions to unlock your Verizon Note 4, there is currently no solution for unlocking the AT&T variant, Sorry. :(",
+      "link": "https://forum.xda-developers.com/t/howto-bootloader-unlock-and-upgrade-to-marshmallow-n910vvru2cql1.3398144/"
     }
   },
   "operating_systems": [
