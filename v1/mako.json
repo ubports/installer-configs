@@ -45,7 +45,7 @@
       "steps": [
         {
           "type": "download",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "group": "firmware",
           "files": [
             {
@@ -59,13 +59,13 @@
         },
         {
           "type": "adb:reboot",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "to_state": "bootloader",
           "fallback_user_action": "bootloader"
         },
         {
           "type": "fastboot:flash",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "flash": [
             {
               "partition": "recovery",
@@ -76,19 +76,19 @@
         },
         {
           "type": "fastboot:erase",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "partition": "cache"
         },
         {
           "type": "fastboot:boot",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "file": "recovery-mako.img",
           "fallback_user_action": "recovery",
           "group": "firmware"
         },
         {
           "type": "adb:reboot",
-          "condition": {"var": "bootstrap", "value": false},
+          "condition": { "var": "bootstrap", "value": false },
           "to_state": "recovery",
           "fallback_user_action": "recovery"
         },

@@ -10,13 +10,13 @@ function writeJSON(file, data) {
 
 fs.mkdir(path.join("public", "v2", "devices"), { recursive: true })
   .then(() => fs.readdir("v2/devices"))
-  .then((files) =>
+  .then(files =>
     Promise.all(
-      files.map((f) =>
+      files.map(f =>
         fs
           .readFile(path.join("v2", "devices", f))
-          .then((cfg) => YAML.parse(cfg.toString()))
-          .then((cfg) =>
+          .then(cfg => YAML.parse(cfg.toString()))
+          .then(cfg =>
             writeJSON(
               path.join("public", "v2", "devices", `${cfg.codename}.json`),
               cfg
@@ -25,16 +25,16 @@ fs.mkdir(path.join("public", "v2", "devices"), { recursive: true })
       )
     )
   )
-  .then((configs) =>
+  .then(configs =>
     configs.reduce(
       (acc, curr) => {
         acc.index.push({
           name: curr.name,
           codename: curr.codename,
           formfactor: curr.formfactor,
-          operating_systems: curr.operating_systems.map((os) => os.name),
+          operating_systems: curr.operating_systems.map(os => os.name)
         });
-        curr.aliases.forEach((alias) => {
+        curr.aliases.forEach(alias => {
           if (acc.aliases[alias]) {
             acc.aliases[alias].push(curr.codename);
           } else {
@@ -45,7 +45,7 @@ fs.mkdir(path.join("public", "v2", "devices"), { recursive: true })
       },
       {
         index: [],
-        aliases: {},
+        aliases: {}
       }
     )
   )
@@ -53,11 +53,11 @@ fs.mkdir(path.join("public", "v2", "devices"), { recursive: true })
     index: index.sort((a, b) =>
       a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
     ),
-    aliases,
+    aliases
   }))
   .then(({ index, aliases }) =>
     Promise.all([
       writeJSON(path.join("public", "v2", "index.json"), index),
-      writeJSON(path.join("public", "v2", "aliases.json"), aliases),
+      writeJSON(path.join("public", "v2", "aliases.json"), aliases)
     ])
   );

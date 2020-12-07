@@ -1,7 +1,12 @@
 {
   "name": "Nexus 6P",
   "codename": "angler",
-  "unlock": ["confirm_model", "confirm_vendorimage", "confirm_oemunlock", "confirm_formatting"],
+  "unlock": [
+    "confirm_model",
+    "confirm_vendorimage",
+    "confirm_oemunlock",
+    "confirm_formatting"
+  ],
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
@@ -67,19 +72,19 @@
       "steps": [
         {
           "type": "adb:reboot",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "to_state": "bootloader",
           "fallback_user_action": "bootloader"
         },
         {
           "type": "adb:reboot",
-          "condition": {"var": "bootstrap", "value": false},
+          "condition": { "var": "bootstrap", "value": false },
           "to_state": "recovery",
           "fallback_user_action": "recovery"
         },
         {
           "type": "download",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "group": "firmware",
           "files": [
             {
@@ -93,7 +98,7 @@
         },
         {
           "type": "fastboot:flash",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "flash": [
             {
               "partition": "recovery",
@@ -111,7 +116,7 @@
         },
         {
           "type": "fastboot:reboot",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "fallback_user_action": "boot"
         },
         {

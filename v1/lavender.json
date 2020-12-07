@@ -62,7 +62,7 @@
       "steps": [
         {
           "type": "manual_download",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "group": "firmware",
           "file": {
             "name": "vendor.img",
@@ -75,7 +75,7 @@
         },
         {
           "type": "download",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "group": "firmware",
           "files": [
             {
@@ -103,28 +103,28 @@
         },
         {
           "type": "adb:reboot",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "to_state": "bootloader",
           "fallback_user_action": "bootloader"
         },
         {
           "type": "fastboot:format",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "partition": "system"
         },
         {
           "type": "fastboot:format",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "partition": "cache"
         },
         {
           "type": "fastboot:format",
-          "condition": {"var": "wipe", "value": true},
+          "condition": { "var": "wipe", "value": true },
           "partition": "userdata"
         },
         {
           "type": "fastboot:flash",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "flash": [
             {
               "partition": "boot",
