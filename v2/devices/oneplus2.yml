@@ -2,6 +2,7 @@ name: "Oneplus 2"
 codename: "oneplus2"
 formfactor: "phone"
 aliases:
+  - "msm8994"
   - "OnePlus2"
 doppelgangers: []
 user_actions:
