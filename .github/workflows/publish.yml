@@ -1,14 +1,13 @@
-name: Continuous Integration
+name: Publish
 
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    branches:
+      - master
 
 jobs:
-  prerequisites:
-    name: Prerequisites
+  deploy:
+    name: Publish
     runs-on: ubuntu-latest
 
     steps:
@@ -32,15 +31,16 @@ jobs:
 
       - name: npm install
         run: npm install
-      - name: npm audit
-        run: npm audit
-      - name: npm run lint
-        run: npm run lint
-      - name: npm run validate
-        run: npm run validate
       - name: npm run buildconfigs
         run: npm run buildconfigs
       - name: npm run buildschema
         run: npm run buildschema
       - name: npm run docs
         run: npm run docs
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          enable_jekyll: true
