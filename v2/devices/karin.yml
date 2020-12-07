@@ -1,0 +1,114 @@
+name: "Sony Xperia Z4 Tablet4 (SGP771)"
+codename: "karin"
+formfactor: "phone"
+aliases:
+  - "SGP771"
+doppelgangers: []
+user_actions:
+  recovery:
+    title: "Reboot to Recovery"
+    description: "With the device powered off, hold Volume Down + Power."
+    image: "phone_power_down"
+    button: true
+  bootloader:
+    title: "Reboot to Bootloader"
+    description: "With the device powered off, hold Volume Up and insert a USB cable. The LED indicator has to light up blue."
+    image: "phone_power_up"
+    button: true
+  boot:
+    title: "Boot the device"
+    description: "Power on the device."
+    image: "phone_power_up"
+    button: true
+  confirm_model:
+    title: "Confirm your model"
+    description: "Please double-check that your device is a Sony Xperia Z4 Tablet (SGP771 & SGP712)."
+  upgrade_android:
+    title: "Upgrade Android"
+    description: "If the device is running Android, you might have to upgrade to Android 8.0."
+unlock:
+  - "confirm_model"
+  - "upgrade_android"
+handlers:
+  bootloader_locked:
+    actions:
+      - fastboot:oem_unlock:
+operating_systems:
+  - name: "Ubuntu Touch"
+    options:
+      - var: "channel"
+        name: "Channel"
+        tooltip: "The release channel"
+        link: "https://docs.ubports.com/en/latest/about/process/release-schedule.html"
+        type: "select"
+        remote_values:
+          systemimage:channels:
+      - var: "wipe"
+        name: "Wipe Userdata"
+        tooltip: "Wipe personal data"
+        type: "checkbox"
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Flash system partitions using fastboot"
+        type: "checkbox"
+        value: true
+    prerequisites: []
+    steps:
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "http://cdimage.ubports.com/devices/halium-unlocked-recovery_karin.img"
+                  checksum:
+                    sum: "4232e216df832c34e4ed12120c2a35eb857324ad8f567609a4d3f8966f0efec3"
+                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "boot"
+                  file: "halium-unlocked-recovery_karin.img"
+                  group: "firmware"
+                - partition: "recovery"
+                  file: "halium-unlocked-recovery_karin.img"
+                  group: "firmware"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:erase:
+              partition: "cache"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:erase:
+              partition: "userdata"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - fastboot:reboot:
+        fallback:
+          - core:user_action:
+              action: "boot"
+      - actions:
+          - systemimage:install:
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+    slideshow: []
