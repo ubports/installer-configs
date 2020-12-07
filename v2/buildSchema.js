@@ -4,9 +4,7 @@ const $RefParser = require("@apidevtools/json-schema-ref-parser");
 const fs = require("fs/promises");
 const path = require("path");
 
-fs.mkdir(path.join("v2", "schema", "bundle"), { recursive: true })
+fs.mkdir(path.join("public", "v2"), { recursive: true })
   .then(() => $RefParser.bundle("v2/schema/device.schema.yml"))
   .then(JSON.stringify)
-  .then((schema) =>
-    fs.writeFile("v2/schema/bundle/device.schema.json", schema)
-  );
+  .then(schema => fs.writeFile("public/v2/device.schema.json", schema));
