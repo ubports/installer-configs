@@ -4,6 +4,32 @@ title: "Action"
 type: "object"
 description: "Atomic action"
 oneOf:
+  - title: heimdall:flash action
+    required: ["heimdall:flash"]
+    properties:
+      heimdall:flash:
+        title: "heimdall:flash action"
+        type: "object"
+        properties:
+          partitions:
+            title: Partitions
+            type: array
+            description: Partitions to flash
+            items:
+              title: Partition
+              type: object
+              description: Partition to flash
+              properties:
+                partition:
+                  title: Partition
+                  type: string
+                file:
+                  title: File
+                  type: string
+                group:
+                  title: Group
+                  type: string
+        additionalProperties: false
   - title: core:group action
     required: ["core:group"]
     properties:

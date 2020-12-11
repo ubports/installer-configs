@@ -1,23 +1,20 @@
 {
   "name": "installer-configs",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Configuration files for the UBports Installer.",
   "scripts": {
-    "validate": "npm run validate:index && npm run validate:aliases && npm run validate:devices",
-    "validate:index": "npx ajv-cli validate -s _index.schema.json -d index.json",
-    "validate:aliases": "npx ajv-cli validate -s _aliases.schema.json -d aliases.json",
-    "validate:devices": "npx ajv-cli -s v1/_device.schema.json -d \"v1/[a-zA-Z]*.json\"",
-    "lint": "npx prettier v2/**/*.js -w",
-    "v2:migrate": "node v2/migrate.js",
-    "v2:validate": "npx ajv-cli -s v2/schema/device.schema.yml -r \"v2/schema/*.schema.yml\" -d \"v2/data/devices/[a-zA-Z]*.yml\" && npx ajv-cli -s v2/schema/index.schema.yml -r \"v2/schema/*.schema.yml\" -d \"v2/data/index.yml\" && npx ajv-cli -s v2/schema/aliases.schema.yml -d \"v2/data/aliases.yml\"",
-    "v2:docs": "./v2/buildSchema.js && npx @adobe/jsonschema2md -d v2/schema/bundle/ -o v2/docs -x -",
-    "v2:serve": "npx markserv v2/docs/"
+    "lint": "npx prettier \"**\" --ignore-path=.gitignore --arrow-parens=avoid --trailing-comma=none -uw",
+    "validate": "npx ajv-cli -s v2/schema/device.schema.yml -r \"v2/schema/*.schema.yml\" -d \"v2/devices/[a-zA-Z]*.yml\"",
+    "buildconfigs": "./v2/buildConfigs.js",
+    "buildschema": "./v2/buildSchema.js",
+    "docs": "npm run buildschema && npx @adobe/jsonschema2md -d public/v2/ -o public/v2/docs -x -"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubports/installer-configs.git"
   },
   "author": "Jan Sprinz <jan@ubports.com>",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/ubports/installer-configs/issues"
   },
@@ -26,8 +23,9 @@
     "@adobe/jsonschema2md": "^4.2.1",
     "@apidevtools/json-schema-ref-parser": "^9.0.6",
     "ajv-cli": "^3.3.0",
+    "commander": "^2.20.3",
     "json-to-pretty-yaml": "^1.2.2",
-    "markserv": "^1.17.4",
-    "prettier": "^2.2.0"
+    "prettier": "^2.2.0",
+    "yaml": "^1.10.0"
   }
 }

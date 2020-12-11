@@ -62,7 +62,7 @@
       "steps": [
         {
           "type": "download",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "group": "firmware",
           "files": [
             {
@@ -90,7 +90,7 @@
         },
         {
           "type": "adb:reboot",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "to_state": "bootloader",
           "fallback_user_action": "bootloader"
         },
@@ -100,7 +100,7 @@
         },
         {
           "type": "fastboot:flash",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "flash": [
             {
               "partition": "boot",
@@ -122,18 +122,18 @@
         },
         {
           "type": "fastboot:format",
-          "condition": {"var": "wipe", "value": true},
+          "condition": { "var": "wipe", "value": true },
           "partition": "userdata",
           "partitionType": "ext4"
         },
         {
           "type": "user_action",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "action": "recovery"
         },
         {
           "type": "adb:reboot",
-          "condition": {"var": "bootstrap", "value": false},
+          "condition": { "var": "bootstrap", "value": false },
           "to_state": "recovery",
           "fallback_user_action": "recovery"
         },

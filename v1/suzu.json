@@ -72,7 +72,7 @@
       "steps": [
         {
           "type": "manual_download",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "group": "firmware",
           "file": {
             "name": "SW_binaries_for_Xperia_AOSP_N_MR1_5.7_r1_v08_loire.zip",
@@ -85,7 +85,7 @@
         },
         {
           "type": "unpack",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "group": "firmware",
           "files": [
             {
@@ -96,7 +96,7 @@
         },
         {
           "type": "download",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "group": "firmware",
           "files": [
             {
@@ -110,28 +110,28 @@
         },
         {
           "type": "adb:reboot",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "to_state": "bootloader",
           "fallback_user_action": "bootloader"
         },
         {
           "type": "fastboot:erase",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "partition": "system"
         },
         {
           "type": "fastboot:erase",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "partition": "cache"
         },
         {
           "type": "fastboot:erase",
-          "condition": {"var": "wipe", "value": true},
+          "condition": { "var": "wipe", "value": true },
           "partition": "userdata"
         },
         {
           "type": "fastboot:flash",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "flash": [
             {
               "partition": "boot",

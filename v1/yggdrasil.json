@@ -73,7 +73,7 @@
       "steps": [
         {
           "type": "download",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "group": "firmware",
           "files": [
             {
@@ -87,13 +87,13 @@
         },
         {
           "type": "adb:reboot",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "to_state": "bootloader",
           "fallback_user_action": "bootloader"
         },
         {
           "type": "fastboot:flash",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "flash": [
             {
               "partition": "boot",
@@ -109,24 +109,24 @@
         },
         {
           "type": "fastboot:erase",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "partition": "cache"
         },
         {
           "type": "fastboot:erase",
-          "condition": {"var": "wipe", "value": true},
+          "condition": { "var": "wipe", "value": true },
           "partition": "userdata"
         },
         {
           "type": "fastboot:reboot",
           "fallback_user_action": "boot",
-          "condition": {"var": "bootstrap", "value": true}
+          "condition": { "var": "bootstrap", "value": true }
         },
         {
           "type": "adb:reboot",
           "to_state": "recovery",
           "fallback_user_action": "recovery",
-          "condition": {"var": "bootstrap", "value": false}
+          "condition": { "var": "bootstrap", "value": false }
         },
         {
           "type": "systemimage"
@@ -169,7 +169,7 @@
         {
           "type": "download",
           "group": "firmware",
-          "condition": {"var": "install_twrp", "value": true},
+          "condition": { "var": "install_twrp", "value": true },
           "files": [
             {
               "url": "http://volla.tech/filedump/twrp.img",
@@ -182,13 +182,13 @@
         },
         {
           "type": "adb:reboot",
-          "condition": {"var": "install_twrp", "value": true},
+          "condition": { "var": "install_twrp", "value": true },
           "to_state": "bootloader",
           "fallback_user_action": "bootloader"
         },
         {
           "type": "fastboot:flash",
-          "condition": {"var": "install_twrp", "value": true},
+          "condition": { "var": "install_twrp", "value": true },
           "flash": [
             {
               "partition": "recovery",
@@ -204,7 +204,7 @@
         },
         {
           "type": "user_action",
-          "condition": {"var": "install_twrp", "value": true},
+          "condition": { "var": "install_twrp", "value": true },
           "action": "recovery"
         },
         {

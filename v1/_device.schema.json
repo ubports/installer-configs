@@ -32,10 +32,7 @@
             "image": {
               "type": "string",
               "description": "String referring to a picture in the installer.",
-              "enum": [
-                "phone_power_up",
-                "phone_power_down"
-              ]
+              "enum": ["phone_power_up", "phone_power_down"]
             },
             "button": {
               "type": "boolean",
@@ -46,10 +43,7 @@
               "description": "A link to a more extensive tutorial."
             }
           },
-          "required": [
-            "title",
-            "description"
-          ]
+          "required": ["title", "description"]
         }
       }
     },
@@ -99,11 +93,7 @@
                 "type": {
                   "type": "string",
                   "description": "Describes what values are accepted by the setting and how they are provided.",
-                  "enum": [
-                    "checkbox",
-                    "input",
-                    "select"
-                  ]
+                  "enum": ["checkbox", "input", "select"]
                 },
                 "remote_values": {
                   "type": "object",
@@ -123,11 +113,7 @@
                   "description": "List of values for the select."
                 }
               },
-              "required": [
-                "var",
-                "name",
-                "type"
-              ]
+              "required": ["var", "name", "type"]
             }
           },
           "prerequisites": {
@@ -163,6 +149,7 @@
                     "adb:reboot",
                     "adb:format",
                     "adb:sideload",
+                    "heimdall:flash",
                     "download",
                     "unpack",
                     "manual_download"
@@ -271,9 +258,5 @@
       }
     }
   },
-  "required": [
-    "name",
-    "codename",
-    "operating_systems"
-  ]
+  "required": ["name", "codename", "operating_systems"]
 }

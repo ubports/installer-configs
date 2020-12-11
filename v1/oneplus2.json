@@ -6,7 +6,7 @@
     "update": {
       "title": "Update to latest available version",
       "description": "Before installing anything, make sure the OnePlus2 is updated to the latest version of OxygenOS (3.6.1).",
-      "link" :"https://www.oneplus.com/support/softwareupgrade/details?code=PM1574156053972"
+      "link": "https://www.oneplus.com/support/softwareupgrade/details?code=PM1574156053972"
     },
     "twrp": {
       "title": "TWRP",
@@ -117,7 +117,7 @@
         },
         {
           "type": "fastboot:flash",
-          "condition": {"var": "logo", "value": true},
+          "condition": { "var": "logo", "value": true },
           "flash": [
             {
               "partition": "LOGO",
@@ -132,7 +132,7 @@
         },
         {
           "type": "fastboot:format",
-          "condition": {"var": "wipe", "value": true},
+          "condition": { "var": "wipe", "value": true },
           "partition": "userdata"
         },
         {
@@ -174,10 +174,10 @@
           "name": "Lineage Version",
           "tooltip": "The version of LineageOS to install",
           "type": "select",
-          "values":[
+          "values": [
             {
-              "value":"16",
-              "label":"LineageOS 16 (Android 9)"
+              "value": "16",
+              "label": "LineageOS 16 (Android 9)"
             }
           ]
         }
@@ -187,7 +187,7 @@
         {
           "type": "download",
           "group": "LineageOS",
-          "condition": {"var": "LineageVersion", "value": "16"},
+          "condition": { "var": "LineageVersion", "value": "16" },
           "files": [
             {
               "url": "https://archive.org/download/lineage-16.0-20200418-nightly-oneplus2-signed/lineage-16.0-20200418-nightly-oneplus2-signed.zip",
@@ -201,7 +201,7 @@
         {
           "type": "download",
           "group": "firmware",
-          "condition": {"var": "installTWRP", "value": true},
+          "condition": { "var": "installTWRP", "value": true },
           "files": [
             {
               "url": "https://ia800105.us.archive.org/28/items/twrp-oneplus2/twrp-3.2.1-0-oneplus2.img",
@@ -214,7 +214,7 @@
         },
         {
           "type": "download",
-          "condition": {"var": "gapps", "value": true},
+          "condition": { "var": "gapps", "value": true },
           "group": "OpenGApps",
           "files": [
             {
@@ -243,7 +243,7 @@
         },
         {
           "type": "fastboot:flash",
-          "condition": {"var": "installTWRP", "value": true},
+          "condition": { "var": "installTWRP", "value": true },
           "flash": [
             {
               "partition": "recovery",
@@ -277,18 +277,18 @@
         },
         {
           "type": "adb:sideload",
-          "condition": {"var": "LineageVersion", "value": "16"},
+          "condition": { "var": "LineageVersion", "value": "16" },
           "file": "lineage-16.0-20200418-nightly-oneplus2-signed.zip",
           "group": "LineageOS"
         },
         {
           "type": "user_action",
-          "condition": {"var": "gapps", "value": true},
+          "condition": { "var": "gapps", "value": true },
           "action": "twrp_sideload"
         },
         {
           "type": "adb:sideload",
-          "condition": {"var": "gapps", "value": true},
+          "condition": { "var": "gapps", "value": true },
           "file": "open_gapps-arm64-9.0-nano-20200615.zip",
           "group": "OpenGApps"
         },
@@ -306,4 +306,3 @@
     }
   ]
 }
-

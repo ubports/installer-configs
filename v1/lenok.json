@@ -8,7 +8,7 @@
       "description": "You should be seeing the 'FASTBOOT MENU' on the device now. If not, reboot the device and swipe from the top left to the bottom right edge of the screen while booting.",
       "button": true
     }
-   },
+  },
   "operating_systems": [
     {
       "name": "Asteroid OS",
