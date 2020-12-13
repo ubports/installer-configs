@@ -4,10 +4,6 @@ formfactor: "phone"
 aliases: []
 doppelgangers: []
 user_actions:
-  unlock:
-    title: "OEM unlock"
-    description: "If you haven't done so already, make sure to OEM unlock your device first."
-    link: "https://source.android.com/devices/bootloader/locking_unlocking#unlocking-bootloader"
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, press and hold the volume down and power buttons until the screen turns on. It should say 'Fastboot Mode' underneath the warning sign."
@@ -27,7 +23,6 @@ user_actions:
     description: "For details about Ubuntu Touch support for the Pixel 3a, please head over to the UBports forum thread."
     link: "https://forums.ubports.com/topic/4621/google-pixel-3a-sargo"
 unlock:
-  - "unlock"
   - "downgrade_android"
   - "support"
 handlers:

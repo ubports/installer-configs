@@ -20,9 +20,6 @@ user_actions:
   confirm_vendorimage:
     title: "Confirm Android version"
     description: "Please reset your device to stock Android 7.1.2 - Critical vendor files are otherwise missing!"
-  confirm_oemunlock:
-    title: "Unlock your bootloader"
-    description: "Please unlock the bootloader with the command fastboot flashing unlock!"
   confirm_formatting:
     title: "Reformat all partitions with TWRP"
     description: "Please install TWRP recovery and format all partitions due to the encryption applied by the stock ROM!"
@@ -32,12 +29,11 @@ user_actions:
 unlock:
   - "confirm_model"
   - "confirm_vendorimage"
-  - "confirm_oemunlock"
   - "confirm_formatting"
 handlers:
   bootloader_locked:
     actions:
-      - fastboot:oem_unlock:
+      - fastboot:flashing_unlock:
 operating_systems:
   - name: "Ubuntu Touch"
     options:

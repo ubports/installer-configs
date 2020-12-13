@@ -122,6 +122,9 @@ function getHandlers(codename) {
     case "sargo":
     case "santoni":
     case "yggdrasil":
+    case "angler":
+    case "pro1":
+    case "jasmine_sprout":
       return {
         bootloader_locked: {
           actions: [
