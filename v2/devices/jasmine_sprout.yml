@@ -6,7 +6,8 @@ doppelgangers: []
 user_actions:
   confirm_model:
     title: "Confirm your model"
-    description: "Please double-check that your device is a Xiaomi Mi A2 (jasmine_sprout). Xiaomi Mi 6x and Xiaomi Mi A2 Lite are NOT SUPPORTED."
+    description: "Please double-check that your device is a Xiaomi Mi A2 (jasmine_sprout). Xiaomi Mi 6x and Xiaomi Mi A2 Lite are NOT SUPPORTED. You also NEED to check your device LCD name, you can use an app (click on more link, requires rooted android device) to check if it's called *jdi*. In that case it is also unsupported. (Work is being done to add support for such devices as well)"
+    link: "https://play.google.com/store/apps/details?id=ru.andr7e.deviceinfohw"
   confirm_os:
     title: "Confirm OS version"
     description: "Your device must be running a specific android 9 build before installing Ubuntu Touch. You can use the link below to download it. You can use either use stock recovery or TWRP recovery to flash it. Flash it to both slots to be safe."
