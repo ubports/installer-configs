@@ -79,9 +79,6 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
-          - fastboot:set_active:
-              slot: "b"
-      - actions:
           - fastboot:flash:
               partitions:
                 - partition: "boot"
