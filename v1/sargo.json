@@ -95,10 +95,6 @@
           "fallback_user_action": "bootloader"
         },
         {
-          "type": "fastboot:set_active",
-          "slot": "b"
-        },
-        {
           "type": "fastboot:flash",
           "condition": { "var": "bootstrap", "value": true },
           "flash": [
