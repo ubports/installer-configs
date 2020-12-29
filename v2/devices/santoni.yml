@@ -63,13 +63,13 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://ci.ubports.com/view/Device%20Compatibility%20Images/job/Device%20Compatibility%20Images/job/halium-santoni/196/artifact/halium-unlocked-recovery_santoni.img"
+                - url: "https://cdimage.ubports.com/devices/santoni/halium-unlocked-recovery_santoni.img"
                   checksum:
-                    sum: "25798584952f29273d3ec2ebf63e7551db26f48e447493461627172330d616a5"
+                    sum: "f7826ebba7460117fb1aa43f37b3e432a943741a04a6d70cf633d7b8ccd7a582"
                     algorithm: "sha256"
-                - url: "https://ci.ubports.com/view/Device%20Compatibility%20Images/job/Device%20Compatibility%20Images/job/halium-santoni/196/artifact/halium-boot_santoni.img"
+                - url: "https://cdimage.ubports.com/devices/santoni/halium-boot_santoni.img"
                   checksum:
-                    sum: "bb8f5aa0d3f6f9e406cda3549764441379d9f54ff770b44218e5f59c65700884"
+                    sum: "ab372e4ee9da5dfb8f73ae5509710411861947a2cac01080a5b35d907f272870"
                     algorithm: "sha256"
                 - url: "https://github.com/ubports-santoni/android_device_xiaomi_santoni/raw/e7f3940a66166c756041cbf8fc55f88ab5f37821/ut-miscs/splash.img"
                   checksum:

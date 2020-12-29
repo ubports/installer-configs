@@ -53,7 +53,11 @@
           "group": "firmware",
           "files": [
             {
-              "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-samsung_trlte/lastSuccessfulBuild/artifact/halium-unlocked-recovery_trlte.img"
+              "url": "https://cdimage.ubports.com/devices/trlte/halium-unlocked-recovery_trlte.img",
+              "checksum": {
+                "sum": "6e09e581fef7aa30fef50d289e415f2e8c963573db3fcaa0cd00e357efb53202",
+                "algorithm": "sha256"
+              }
             }
           ]
         },

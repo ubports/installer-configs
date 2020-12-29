@@ -59,9 +59,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-kugo/129/artifact/halium-unlocked-recovery_kugo.img"
+                - url: "https://cdimage.ubports.com/devices/kugo/halium-unlocked-recovery_kugo.img"
                   checksum:
-                    sum: "e0ab1aae3a18c33a6fe92fdcfc40ad87071296a3fcf7185dcdd355a963b7080e"
+                    sum: "db070dcca99cf70771b2c95b30655c2073d0fe714971aa13263b507bd4614ac1"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"

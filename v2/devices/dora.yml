@@ -60,9 +60,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-dora/9/artifact/halium-unlocked-recovery_dora.img"
+                - url: "https://cdimage.ubports.com/devices/dora/halium-unlocked-recovery_dora.img"
                   checksum:
-                    sum: "069cf56a6b3251d31e253bf308a76f456400c21abfbc7e1850475fbed1f810cb"
+                    sum: "bbc74ef50b5f7b87aeed5c338999e9c3b546a7b63c32fd81d7b6978c93a3416e"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
