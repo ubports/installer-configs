@@ -65,9 +65,9 @@
           "group": "firmware",
           "files": [
             {
-              "url": "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-kagura/6/artifact/halium-unlocked-recovery_kagura.img",
+              "url": "https://cdimage.ubports.com/devices/kagura/halium-unlocked-recovery_kagura.img",
               "checksum": {
-                "sum": "c51f82c893d053965663140f9f8ccb15e0c80a01ac3a1a76e81ac49105ee978e",
+                "sum": "37ea6d5f374b02dc70595177e5e162738a9bf967329152c9441746ff388a6fad",
                 "algorithm": "sha256"
               }
             }

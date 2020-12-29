@@ -51,7 +51,10 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://ci.ubports.com/job/Device%20Compatibility%20Images/job/halium-samsung_trltespr/lastSuccessfulBuild/artifact/halium-unlocked-recovery_trltespr.img"
+                - url: "https://cdimage.ubports.com/devices/trltespr/halium-unlocked-recovery_trltespr.img"
+                  checksum:
+                    sum: "db6c1f3366a8116b1335abcb6bdf1b69301499ee1bfd69200aa03f7122f47149"
+                    algorithm: "sha256"
       - actions:
           - adb:reboot:
               to_state: "bootloader"
