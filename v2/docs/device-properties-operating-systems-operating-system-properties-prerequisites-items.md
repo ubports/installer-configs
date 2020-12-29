@@ -1,7 +1,7 @@
 # Untitled string in Device Schema
 
 ```txt
-v2/schema/operating_systems.schema.yml#/properties/operating_systems/items/properties/prerequisites/values
+v2/schema/operating_systems.schema.yml#/properties/operating_systems/items/properties/prerequisites/items
 ```
 
 Reference to user_action that's needed before the installation of this OS. Steps required for every OS should be put in the generic unlock block instead.
@@ -11,6 +11,6 @@ Reference to user_action that's needed before the installation of this OS. Steps
 | :------------------ | ---------- | -------------- | ----------------------- | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
 | Can be instantiated | No         | Unknown status | Unknown identifiability | Forbidden         | Allowed               | none                | [device.schema.json\*](../device.schema.json "open original schema") |
 
-## values Type
+## items Type
 
 `string`

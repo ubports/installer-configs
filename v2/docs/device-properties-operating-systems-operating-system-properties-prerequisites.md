@@ -13,4 +13,4 @@ An array of strings referring to user_actions defined above that are needed befo
 
 ## prerequisites Type
 
-`array` ([Prerequisites](device-properties-operating-systems-operating-system-properties-prerequisites.md))
+`string[]`

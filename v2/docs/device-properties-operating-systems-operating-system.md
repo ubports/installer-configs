@@ -69,13 +69,13 @@ An array of strings referring to user_actions defined above that are needed befo
 `prerequisites`
 
 -   is optional
--   Type: `array` ([Prerequisites](device-properties-operating-systems-operating-system-properties-prerequisites.md))
+-   Type: `string[]`
 -   cannot be null
 -   defined in: [Device](device-properties-operating-systems-operating-system-properties-prerequisites.md "v2/schema/operating_systems.schema.yml#/properties/operating_systems/items/properties/prerequisites")
 
 ### prerequisites Type
 
-`array` ([Prerequisites](device-properties-operating-systems-operating-system-properties-prerequisites.md))
+`string[]`
 
 ## steps
 
