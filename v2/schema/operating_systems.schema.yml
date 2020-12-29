@@ -19,7 +19,7 @@ items:
       title: Prerequisites
       type: "array"
       description: "An array of strings referring to user_actions defined above that are needed before the installation. This should not include the steps from the generic unlock block, but actions specific to the installation of this operating system."
-      values:
+      items:
         type: "string"
         description: "Reference to user_action that's needed before the installation of this OS. Steps required for every OS should be put in the generic unlock block instead."
     steps:

@@ -71,14 +71,12 @@ oneOf:
       fastboot:flashing_unlock:
         title: "fastboot:flashing_unlock action"
         type: "null"
-        additionalProperties: false
   - title: fastboot:reboot_bootloader action
     required: ["fastboot:reboot_bootloader"]
     properties:
       fastboot:reboot_bootloader:
         title: "fastboot:reboot_bootloader action"
         type: "null"
-        additionalProperties: false
   - title: fastboot:update action
     required: ["fastboot:update"]
     properties:
@@ -92,7 +90,6 @@ oneOf:
       systemimage:install:
         title: "systemimage:install action"
         type: "null"
-        additionalProperties: false
   - title: fastboot:boot action
     required: ["fastboot:boot"]
     properties:
@@ -113,14 +110,12 @@ oneOf:
       fastboot:reboot:
         title: "fastboot:reboot action"
         type: "null"
-        additionalProperties: false
   - title: fastboot:continue action
     required: ["fastboot:continue"]
     properties:
       fastboot:continue:
         title: "fastboot:continue action"
         type: "null"
-        additionalProperties: false
   - title: fastboot:erase action
     required: ["fastboot:erase"]
     properties:
