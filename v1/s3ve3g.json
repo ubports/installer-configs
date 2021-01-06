@@ -66,13 +66,13 @@
         },
         {
           "type": "adb:reboot",
-          "condition": {"var": "bootstrap", "value": false},
+          "condition": { "var": "bootstrap", "value": false },
           "to_state": "recovery",
           "fallback_user_action": "recovery"
         },
         {
           "type": "download",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "group": "firmware",
           "files": [
             {
@@ -83,7 +83,7 @@
         },
         {
           "type": "heimdall:flash",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "flash": [
             {
               "partition": "RECOVERY",
@@ -99,7 +99,7 @@
         },
         {
           "type": "user_action",
-          "condition": {"var": "bootstrap", "value": true},
+          "condition": { "var": "bootstrap", "value": true },
           "action": "confirm_replug"
         },
         {
