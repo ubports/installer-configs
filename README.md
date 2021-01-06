@@ -8,7 +8,7 @@ If you want to propose changes to the structure or propose a new action, open an
 
 ## Contributing
 
-If you want to add a or improve a device, run `npm run validate` to make sure your file follows the specification and `npm run lint` to make it pretty.
+If you want to add a or improve a device, run `npm run validate` to make sure your file follows the specification and `npm run lint` to make it pretty. You can use `npm run checkdownloads` to make sure all files download successfully.
 
 You can use your local config file with the [UBports Installer](https://github.com/ubports/ubports-installer) by supplying the `--file` or `-f` flag:
 
