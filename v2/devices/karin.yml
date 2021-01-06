@@ -58,9 +58,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "http://cdimage.ubports.com/devices/halium-unlocked-recovery_karin.img"
+                - url: "https://cdimage.ubports.com/devices/karin/halium-unlocked-recovery_karin.img"
                   checksum:
-                    sum: "4232e216df832c34e4ed12120c2a35eb857324ad8f567609a4d3f8966f0efec3"
+                    sum: "4eaa2fbd64f74ec53fa38047567478eb3632cf5a1210e8c5972e703c3fb2641d"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
