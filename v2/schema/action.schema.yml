@@ -90,6 +90,12 @@ oneOf:
       systemimage:install:
         title: "systemimage:install action"
         type: "null"
+  - title: asteroid_os:download action
+    required: ["asteroid_os:download"]
+    properties:
+      asteroid_os:download:
+        title: "asteroid_os:download action"
+        type: "null"
   - title: fastboot:boot action
     required: ["fastboot:boot"]
     properties:
