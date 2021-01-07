@@ -1,7 +1,7 @@
-# Untitled undefined type in Device Schema
+# asteroid_os:download action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/14/properties
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/8/properties/asteroid_os:download
 ```
 
 
@@ -11,6 +11,6 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 | :------------------ | ---------- | -------------- | ----------------------- | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
 | Can be instantiated | No         | Unknown status | Unknown identifiability | Forbidden         | Allowed               | none                | [device.schema.json\*](../device.schema.json "open original schema") |
 
-## properties Type
+## asteroid_os:download Type
 
-unknown
+`null`, the value must be null ([asteroid_os:download action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-asteroid_osdownload-action-properties-asteroid_osdownload-action.md))

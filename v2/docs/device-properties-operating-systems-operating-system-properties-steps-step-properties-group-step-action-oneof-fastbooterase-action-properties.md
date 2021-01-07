@@ -1,7 +1,7 @@
 # Untitled undefined type in Device Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/11/properties
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/12/properties
 ```
 
 

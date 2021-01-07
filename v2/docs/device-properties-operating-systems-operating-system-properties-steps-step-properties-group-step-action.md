@@ -25,6 +25,7 @@ one (and only one) of
 -   [fastboot:reboot_bootloader action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootreboot_bootloader-action.md "check type definition")
 -   [fastboot:update action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootupdate-action.md "check type definition")
 -   [systemimage:install action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-systemimageinstall-action.md "check type definition")
+-   [asteroid_os:download action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-asteroid_osdownload-action.md "check type definition")
 -   [fastboot:boot action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootboot-action.md "check type definition")
 -   [fastboot:reboot action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootreboot-action.md "check type definition")
 -   [fastboot:continue action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootcontinue-action.md "check type definition")
