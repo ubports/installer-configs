@@ -194,11 +194,6 @@
               "partition": "recovery",
               "file": "twrp.img",
               "group": "firmware"
-            },
-            {
-              "partition": "boot",
-              "file": "unpacked/boot.img",
-              "group": "VollaOS"
             }
           ]
         },

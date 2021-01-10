@@ -176,9 +176,6 @@ operating_systems:
                 - partition: "recovery"
                   file: "twrp.img"
                   group: "firmware"
-                - partition: "boot"
-                  file: "unpacked/boot.img"
-                  group: "VollaOS"
         condition:
           var: "install_twrp"
           value: true
