@@ -58,6 +58,10 @@ operating_systems:
       - var: "bootstrap"
         name: "Bootstrap"
         tooltip: "Flash system partitions using fastboot"
+        var: "logo"
+        name: "Flash Logo"
+        tooltip: "Flash new Ubuntu Touch splash screen logo (thanks to Ruben Carneiro)"
+        link: "https://rubencarneiro.github.io/rubencarneiro.io/Ubuntu-Touch-Device-Bootlogos.markdown/"
         type: "checkbox"
         value: true
     prerequisites: []
@@ -69,6 +73,10 @@ operating_systems:
                 - url: "https://cdimage.ubports.com/devices/halium-unlocked-recovery_yggdrasil.img"
                   checksum:
                     sum: "bf32cb85ba58d1f0791b37a91e44697c647440fd365a9f28ab77d9616fd36b2c"
+                    algorithm: "sha256"
+                  url: "https://github.com/rubencarneiro/rubencarneiro.io/blob/main/assets/downloads/volla/logo.bin"
+                  checksum:
+                  sum: "b432b7b72a1fe2761f5715252c79c011687ff7276aeb57612d0e6f5c1f590e5c"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -93,6 +101,15 @@ operating_systems:
                   group: "firmware"
         condition:
           var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "logo"
+                  file: "logo.bin"
+                  group: "firmware"
+        condition:
+          var: "logo"
           value: true
       - actions:
           - fastboot:erase:
