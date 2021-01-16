@@ -74,7 +74,7 @@ operating_systems:
                   checksum:
                     sum: "bf32cb85ba58d1f0791b37a91e44697c647440fd365a9f28ab77d9616fd36b2c"
                     algorithm: "sha256"
-                - url: "https:https://raw.githubusercontent.com/rubencarneiro/rubencarneiro.io/main/assets/downloads/volla/logo.bin"
+                - url: "https://raw.githubusercontent.com/rubencarneiro/rubencarneiro.io/main/assets/downloads/volla/logo.bin"
                   checksum:
                     sum: "b432b7b72a1fe2761f5715252c79c011687ff7276aeb57612d0e6f5c1f590e5c"
                     algorithm: "sha256"
