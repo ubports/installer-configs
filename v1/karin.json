@@ -25,10 +25,6 @@
       "title": "Confirm your model",
       "description": "Please double-check that your device is a Sony Xperia Z4 Tablet (SGP771 & SGP712)."
     },
-    "upgrade_android": {
-      "title": "Upgrade Android",
-      "description": "If the device is running Android, you might have to upgrade to Android 8.0."
-    }
   },
   "operating_systems": [
     {
