@@ -1,7 +1,7 @@
 {
   "name": "Sony Xperia Z4 Tablet4 (SGP771)",
   "codename": "karin",
-  "unlock": ["confirm_model", "upgrade_android"],
+  "unlock": ["confirm_model"],
   "user_actions": {
     "recovery": {
       "title": "Reboot to Recovery",
