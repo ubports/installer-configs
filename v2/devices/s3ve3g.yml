@@ -1,4 +1,4 @@
-name: "Samsung S3 Neo"
+name: "Samsung S3 Neo+ (GT-I9301I)"
 codename: "s3ve3g"
 formfactor: "phone"
 aliases: []
@@ -24,7 +24,7 @@ user_actions:
     button: true
   confirm_model:
     title: "Confirm your model"
-    description: "Please confirm that your device is a Samsung S3 Neo (s3ve3g). The Samsung S3, S3 Mini, etc are not compatible!"
+    description: "Please confirm that your device is a Samsung S3 Neo+ (GT-I9301I). The Samsung S3, S3 Neo, S3 Mini, etc are not compatible!"
 unlock:
   - "confirm_model"
 handlers:
