@@ -41,11 +41,6 @@ operating_systems:
         name: "Wipe Userdata"
         tooltip: "Wipe personal data"
         type: "checkbox"
-      - var: "bootstrap"
-        name: "Bootstrap"
-        tooltip: "Flash system partitions using fastboot"
-        type: "checkbox"
-        value: true
     prerequisites: []
     steps:
       - actions:
@@ -56,33 +51,21 @@ operating_systems:
                   checksum:
                     sum: "ca6359915a692523d7d12f6f0ca85e81d89328e7ad5bd46779e0af5c4b8c850b"
                     algorithm: "sha256"
-        condition:
-          var: "bootstrap"
-          value: true
       - actions:
           - adb:reboot:
               to_state: "bootloader"
         fallback:
           - core:user_action:
               action: "bootloader"
-        condition:
-          var: "bootstrap"
-          value: true
       - actions:
           - fastboot:flash:
               partitions:
                 - partition: "recovery"
                   file: "halium-unlocked-recovery_oneplus3.img"
                   group: "firmware"
-        condition:
-          var: "bootstrap"
-          value: true
       - actions:
           - fastboot:erase:
               partition: "cache"
-        condition:
-          var: "bootstrap"
-          value: true
       - actions:
           - fastboot:boot:
               group: "firmware"
@@ -90,9 +73,6 @@ operating_systems:
         fallback:
           - core:user_action:
               action: "recovery"
-        condition:
-          var: "bootstrap"
-          value: true
       - actions:
           - systemimage:install:
       - actions:
