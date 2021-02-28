@@ -7,6 +7,10 @@ aliases:
   - "OnePlus3T"
 doppelgangers: []
 user_actions:
+update:
+    title: "Update to latest available version"
+    description: "Before installing anything, make sure the OnePlus3/3T is updated to the latest version of OxygenOS (9.0.6)."
+    link: "https://www.oneplus.com/support/softwareupgrade/"
   recovery:
     title: "Reboot to Recovery"
     description: "With the device powered off, hold Volume Down + Power. You might have to unplug your device. Plug it back in as soon as it is in recovery mode and click the button below to continue."
@@ -19,9 +23,10 @@ user_actions:
     button: true
   twrp:
     title: "TWRP"
-    description: "The installation instructions for this device are not fully tested yet. In some cases, when coming from Android, you will have to install TWRP and format /data and /system from inside TWRP before you can install Ubuntu Touch."
+    description: "The installation instructions for this device are not fully tested yet. If you come from Android, you will have to install TWRP and format to ext4 /data and /system from inside TWRP before you can install Ubuntu Touch. \n if errors occures, it is recommended to wipe all partitions, reboot to recovery again, then wipe all partitions again."
     link: "https://twrp.me/oneplus/oneplusthree.html"
 unlock:
+  - "update"
   - "twrp"
 handlers:
   bootloader_locked:
