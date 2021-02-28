@@ -67,6 +67,12 @@ operating_systems:
           - fastboot:erase:
               partition: "cache"
       - actions:
+          - fastboot:format:
+              partition: "userdata"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
           - fastboot:boot:
               group: "firmware"
               file: "halium-unlocked-recovery_oneplus3.img"
