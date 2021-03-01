@@ -31,7 +31,7 @@ user_actions:
     button: true
   twrp_unlock:
     title: "TWRP unlock"
-    description: 'Your device will boot Team Win Recovery Project (TWRP). If the screen is off, hit the power button once to light it up, then swipe the bar in the bottom to the right where it says to "Swipe to allow modifications."'
+    description: 'Your device will boot Team Win Recovery Project (TWRP). If the screen is off, hit the power button once to light it up, if you set up a pattern or a password on Android, it may be asked to you, then swipe the bar in the bottom to the right where it says to "Swipe to allow modifications."'
     button: true
   twrp_sideload:
     title: "TWRP sideload"
@@ -40,6 +40,10 @@ user_actions:
   twrp_sideload_reboot:
     title: "Sideload complete!"
     description: "Follow the on-screen instructions to complete the sideload."
+    button: true
+  twrp_wipe_format:
+    title: "TWRP Wipe and Format Data"
+    description: "Select 'Wipe' and then 'Advanced Wipe'. \n Check all the boxes expept 'USB-OTG' and then swipe the bar in the bottom where it says 'Swipe to wipe'. \n Now press the home icon. Go to Wipe again, and select 'Format data' and type 'yes'."
     button: true
 unlock:
   - "update"
@@ -58,8 +62,12 @@ operating_systems:
         type: "select"
         remote_values:
           systemimage:channels:
+      - var: "firstInstall"
+        name: "First Install"
+        tooltip: "Select this option if Android 9 is currently installed"
+        type: "checkbox"
       - var: "wipe"
-        name: "Wipe Userdata"
+        name: "Factory Reset"
         tooltip: "Wipe personal data"
         type: "checkbox"
     prerequisites: []
@@ -73,6 +81,30 @@ operating_systems:
                     sum: "ca6359915a692523d7d12f6f0ca85e81d89328e7ad5bd46779e0af5c4b8c850b"
                     algorithm: "sha256"
       - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://archive.org/download/twrp-3.2.1-0-oneplus3/twrp-3.2.1-0-oneplus3.img"
+                  checksum:
+                    sum: "4df27c0e0ea7dde9139f7f4717206df3577c34163c2822bc3e8a26b15c60ccd4"
+                    algorithm: "sha256"
+        condition:
+          var: "firstInstall"
+          value: true
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+          - fastboot:boot:
+              group: "firmware"
+              file: "twrp-3.2.1-0-oneplus3.img"
+          - core:user_action:
+              action: "twrp_unlock"
+          - core:user_action:
+              action: "twrp_wipe_format"
+        condition:
+          var: "firstInstall"
+          value: true
+      - actions:
           - adb:reboot:
               to_state: "bootloader"
         fallback:
@@ -85,11 +117,13 @@ operating_systems:
                   file: "halium-unlocked-recovery_oneplus3.img"
                   group: "firmware"
       - actions:
-          - fastboot:erase:
+          - fastboot:format:
               partition: "cache"
+              type: "ext4"
       - actions:
           - fastboot:format:
               partition: "userdata"
+              type: "ext4"
         condition:
           var: "wipe"
           value: true
