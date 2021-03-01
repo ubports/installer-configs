@@ -94,6 +94,13 @@ operating_systems:
       - actions:
           - adb:reboot:
               to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+        condition:
+          var: "firstInstall"
+          value: true
+      - actions:
           - fastboot:boot:
               group: "firmware"
               file: "twrp-3.2.1-0-oneplus3.img"
