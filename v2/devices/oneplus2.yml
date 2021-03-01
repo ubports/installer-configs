@@ -250,3 +250,80 @@ operating_systems:
           - core:user_action:
               action: "reboot"
     slideshow: []
+  - name: "OxygenOS"
+    options:
+      - var: "version"
+        name: "OxygenOS version"
+        tooltip: "Which OxygenOS version do you want to install?"
+        type: "select"
+        values:
+          - value: "bloppy"
+            label: "OxygenOS 3.6.1"
+      - var: "installTWRP"
+        name: "Install TWRP"
+        tooltip: "Install TWRP 3.2.1-0 to recovery (recommended)"
+        type: "checkbox"
+        value: true
+    prerequisites: []
+    steps:
+      - actions:
+          - core:download:
+              group: "OxygenOS"
+              files:
+                - url: "https://oxygenos.oneplus.net/OnePlus2Oxygen_14_OTA_032_all_1710240102_5aab6a62151e4407.zip"
+                  checksum:
+                    sum: "031294228f1642e983c91042961dfce0"
+                    algorithm: "md5"
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://archive.org/download/twrp-oneplus2/twrp-3.2.1-0-oneplus2.img"
+                  checksum:
+                    sum: "343691d4e85d24896afe2bd7ab6125a5047a70aa1fb4bfbb2b1cd54f744a20c9"
+                    algorithm: "sha256"
+        condition:
+          var: "installTWRP"
+          value: true
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "recovery"
+                  file: "twrp-3.2.1-0-oneplus2.img"
+                  group: "firmware"
+        condition:
+          var: "installTWRP"
+          value: true
+      - actions:
+          - fastboot:boot:
+              group: "firmware"
+              file: "twrp-3.2.1-0-oneplus2.img"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+      - actions:
+          - core:user_action:
+              action: "twrp_unlock"
+      - actions:
+          - core:user_action:
+              action: "twrp_sideload"
+      - actions:
+          - adb:sideload:
+              group: "OxygenOS"
+              file: "OnePlus2Oxygen_14_OTA_032_all_1710240102_5aab6a62151e4407.zip"
+      - actions:
+          - core:user_action:
+              action: "twrp_sideload_reboot"
+      - actions:
+          - adb:reboot:
+              to_state: "system"
+        fallback:
+          - core:user_action:
+              action: "reboot"
+    slideshow: []
