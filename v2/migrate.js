@@ -151,6 +151,10 @@ function getHandlers(codename) {
   }
 }
 
+console.warn(
+  "ATTENTION! Since the aliases.json file has been deleted, this script will no longer work properly. It is kept for the time being for demonstration purposes."
+);
+
 cli
   .version(require("../package.json").version)
   .description("migrate a v1 JSON config to v2 YAML")
