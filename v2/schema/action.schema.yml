@@ -241,6 +241,37 @@ oneOf:
           - file
           - group
         additionalProperties: false
+  - title: adb:push action
+    required: ["adb:push"]
+    properties:
+      adb:push:
+        title: "adb:push action"
+        type: "object"
+        properties:
+          files:
+            title: Files
+            description: File names to push
+            type: array
+            items:
+              type: string
+          group:
+            title: Group
+            type: string
+          dest:
+            title: Destination path
+            description: Path on the device to push files to
+            type: string
+        required:
+          - file
+          - group
+        additionalProperties: false
+  - title: adb:preparesystemimage action
+    required: ["adb:preparesystemimage"]
+    properties:
+      adb:preparesystemimage:
+        type: "null"
+        additionalProperties: false
+    additionalProperties: false
   - title: core:download action
     required: ["core:download"]
     properties:
@@ -268,6 +299,23 @@ oneOf:
         required:
           - group
           - files
+        additionalProperties: false
+  - title: core:write action
+    required: ["core:write"]
+    properties:
+      core:write:
+        title: "core:write action"
+        type: "object"
+        properties:
+          group:
+            title: Group
+            type: string
+          file:
+            title: File
+            type: string
+          content:
+            title: Content
+            type: string
         additionalProperties: false
   - title: core:unpack action
     required: ["core:unpack"]
