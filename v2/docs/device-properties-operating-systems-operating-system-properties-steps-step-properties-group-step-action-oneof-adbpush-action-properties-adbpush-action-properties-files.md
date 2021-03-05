@@ -1,16 +1,16 @@
-# Untitled undefined type in Device Schema
+# Files Schema
 
 ```txt
-v2/schema/checksum.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/core:manual_download/properties/file/properties/checksum/properties
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/19/properties/adb:push/properties/files
 ```
 
-
+File names to push
 
 
 | Abstract            | Extensible | Status         | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                           |
 | :------------------ | ---------- | -------------- | ----------------------- | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
 | Can be instantiated | No         | Unknown status | Unknown identifiability | Forbidden         | Allowed               | none                | [device.schema.json\*](../device.schema.json "open original schema") |
 
-## properties Type
+## files Type
 
-unknown
+`string[]`

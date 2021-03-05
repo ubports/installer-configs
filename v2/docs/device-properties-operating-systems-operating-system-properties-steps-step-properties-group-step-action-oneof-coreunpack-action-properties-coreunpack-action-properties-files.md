@@ -1,7 +1,7 @@
 # Untitled array in Device Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/20/properties/core:unpack/properties/files
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/23/properties/core:unpack/properties/files
 ```
 
 

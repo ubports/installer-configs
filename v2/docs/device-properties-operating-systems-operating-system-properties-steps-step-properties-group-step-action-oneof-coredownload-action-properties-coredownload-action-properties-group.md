@@ -1,7 +1,7 @@
 # Group Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/19/properties/core:download/properties/group
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/21/properties/core:download/properties/group
 ```
 
 Files group

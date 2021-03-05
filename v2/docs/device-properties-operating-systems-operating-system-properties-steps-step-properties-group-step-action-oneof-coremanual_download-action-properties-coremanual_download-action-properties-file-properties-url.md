@@ -1,7 +1,7 @@
 # Untitled string in Device Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/21/properties/core:manual_download/properties/file/properties/url
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/core:manual_download/properties/file/properties/url
 ```
 
 URL of the file to download

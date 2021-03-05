@@ -1,7 +1,7 @@
 # core:download action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/19
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/21
 ```
 
 
@@ -11,7 +11,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 | :------------------ | ---------- | -------------- | ------------ | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
 | Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [device.schema.json\*](../device.schema.json "open original schema") |
 
-## 19 Type
+## 21 Type
 
 unknown ([core:download action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coredownload-action.md))
 
@@ -19,7 +19,7 @@ unknown ([core:download action](device-properties-operating-systems-operating-sy
 
 | Property                       | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                                        |
 | :----------------------------- | -------- | -------- | -------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [core:download](#coredownload) | `object` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coredownload-action-properties-coredownload-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/19/properties/core:download") |
+| [core:download](#coredownload) | `object` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coredownload-action-properties-coredownload-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/21/properties/core:download") |
 
 ## core:download
 
@@ -31,7 +31,7 @@ unknown ([core:download action](device-properties-operating-systems-operating-sy
 -   is required
 -   Type: `object` ([core:download action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coredownload-action-properties-coredownload-action.md))
 -   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coredownload-action-properties-coredownload-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/19/properties/core:download")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coredownload-action-properties-coredownload-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/21/properties/core:download")
 
 ### core:download Type
 

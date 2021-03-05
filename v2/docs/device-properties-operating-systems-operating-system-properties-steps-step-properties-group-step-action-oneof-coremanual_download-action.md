@@ -1,7 +1,7 @@
 # core:manual_download action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/21
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24
 ```
 
 
@@ -11,7 +11,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 | :------------------ | ---------- | -------------- | ------------ | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
 | Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [device.schema.json\*](../device.schema.json "open original schema") |
 
-## 21 Type
+## 24 Type
 
 unknown ([core:manual_download action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action.md))
 
@@ -19,7 +19,7 @@ unknown ([core:manual_download action](device-properties-operating-systems-opera
 
 | Property                                     | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                                                             |
 | :------------------------------------------- | -------- | -------- | -------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [core:manual_download](#coremanual_download) | `object` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/21/properties/core:manual_download") |
+| [core:manual_download](#coremanual_download) | `object` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/core:manual_download") |
 
 ## core:manual_download
 
@@ -31,7 +31,7 @@ unknown ([core:manual_download action](device-properties-operating-systems-opera
 -   is required
 -   Type: `object` ([core:manual_download action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action.md))
 -   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/21/properties/core:manual_download")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/core:manual_download")
 
 ### core:manual_download Type
 
