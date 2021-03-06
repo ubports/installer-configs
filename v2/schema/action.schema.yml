@@ -338,10 +338,15 @@ oneOf:
               type: "object"
               properties:
                 url:
-                  type: "string"
-                  description: "URL of the file to download"
+                  type: string
+                  description: URL of the file to download
+                name:
+                  type: string
+                  description: Name to save the file under on disk
                 checksum:
                   $ref: checksum.schema.yml#
+              required: ["url"]
+              additionalProperties: false
         required:
           - group
           - files
