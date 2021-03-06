@@ -317,7 +317,6 @@ oneOf:
     properties:
       adb:preparesystemimage:
         type: "null"
-        additionalProperties: false
     additionalProperties: false
   - title: core:download action
     required: ["core:download"]
