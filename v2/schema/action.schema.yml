@@ -30,6 +30,37 @@ oneOf:
                   title: Group
                   type: string
         additionalProperties: false
+  - title: core:info action
+    required: ["core:info"]
+    properties:
+      core:info:
+        title: "core:info action"
+        type: "object"
+        properties:
+          status:
+            title: Status message
+            type: string
+            description: Message displayed in the upper line of the footer
+          dots:
+            title: Dots (waiting animation)
+            type: boolean
+            description: Dots (waiting animation) in the upper line of the footer
+          info:
+            title: Info message
+            type: string
+            description: Message displayed in the lower line of the footer
+          progress:
+            title: Progress
+            type: number
+            description: Progress bar (omit to hide)
+            minimum: 0
+            maximum: 1
+          speed:
+            title: Speed
+            type: number
+            description: speed in MB/s (omit to hide)
+            minimum: 0
+            maximum: 5000
   - title: core:group action
     required: ["core:group"]
     properties:
@@ -194,6 +225,22 @@ oneOf:
             title: To state
             type: "string"
             enum: ["a", "b"]
+        additionalProperties: false
+  - title: adb:shell action
+    required: ["adb:shell"]
+    properties:
+      adb:reboot:
+        title: "adb:shell action"
+        type: "object"
+        description: Run a command on the device via adb shell
+        properties:
+          args:
+            title: Arguments
+            type: "array"
+            description: "Shell arguments"
+            items:
+              type: string
+        required: ["args"]
         additionalProperties: false
   - title: adb:reboot action
     required: ["adb:reboot"]
