@@ -1,7 +1,7 @@
 # Partition Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/12/properties/fastboot:erase/properties/partition
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/13/properties/fastboot:erase/properties/partition
 ```
 
 Partition to format.

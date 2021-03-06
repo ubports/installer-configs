@@ -1,7 +1,7 @@
 # fastboot:continue action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/11/properties/fastboot:continue
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/12/properties/fastboot:continue
 ```
 
 

@@ -1,7 +1,7 @@
 # User action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/2/properties/core:user_action/properties/action
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/3/properties/core:user_action/properties/action
 ```
 
 user action to run

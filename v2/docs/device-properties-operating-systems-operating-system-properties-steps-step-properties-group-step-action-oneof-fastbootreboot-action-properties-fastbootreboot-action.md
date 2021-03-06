@@ -1,7 +1,7 @@
 # fastboot:reboot action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/10/properties/fastboot:reboot
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/11/properties/fastboot:reboot
 ```
 
 

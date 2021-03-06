@@ -1,7 +1,7 @@
 # fastboot:format action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/13/properties/fastboot:format
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/14/properties/fastboot:format
 ```
 
 
@@ -19,9 +19,9 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 
 | Property                | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                                                                                        |
 | :---------------------- | -------- | -------- | -------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [partition](#partition) | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/13/properties/fastboot:format/properties/partition") |
-| [type](#type)           | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition-type.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/13/properties/fastboot:format/properties/type") |
-| [size](#size)           | `number` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition-size.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/13/properties/fastboot:format/properties/size") |
+| [partition](#partition) | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/14/properties/fastboot:format/properties/partition") |
+| [type](#type)           | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition-type.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/14/properties/fastboot:format/properties/type") |
+| [size](#size)           | `number` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition-size.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/14/properties/fastboot:format/properties/size") |
 
 ## partition
 
@@ -33,7 +33,7 @@ Partition to format.
 -   is optional
 -   Type: `string` ([Partition](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition.md))
 -   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/13/properties/fastboot:format/properties/partition")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/14/properties/fastboot:format/properties/partition")
 
 ### partition Type
 
@@ -49,7 +49,7 @@ Partition type to use
 -   is optional
 -   Type: `string` ([Partition type](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition-type.md))
 -   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition-type.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/13/properties/fastboot:format/properties/type")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition-type.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/14/properties/fastboot:format/properties/type")
 
 ### type Type
 
@@ -74,7 +74,7 @@ Partition size
 -   is optional
 -   Type: `number` ([Partition size](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition-size.md))
 -   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition-size.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/13/properties/fastboot:format/properties/size")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action-properties-fastbootformat-action-properties-partition-size.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/14/properties/fastboot:format/properties/size")
 
 ### size Type
 

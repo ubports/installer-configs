@@ -1,7 +1,7 @@
 # fastboot:oem_unlock action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/3
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/4
 ```
 
 
@@ -11,7 +11,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 | :------------------ | ---------- | -------------- | ------------ | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
 | Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [device.schema.json\*](../device.schema.json "open original schema") |
 
-## 3 Type
+## 4 Type
 
 unknown ([fastboot:oem_unlock action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootoem_unlock-action.md))
 
@@ -19,7 +19,7 @@ unknown ([fastboot:oem_unlock action](device-properties-operating-systems-operat
 
 | Property                                   | Type   | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                                                         |
 | :----------------------------------------- | ------ | -------- | -------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [fastboot:oem_unlock](#fastbootoem_unlock) | Merged | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootoem_unlock-action-properties-fastbootoem_unlock-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/3/properties/fastboot:oem_unlock") |
+| [fastboot:oem_unlock](#fastbootoem_unlock) | Merged | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootoem_unlock-action-properties-fastbootoem_unlock-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/4/properties/fastboot:oem_unlock") |
 
 ## fastboot:oem_unlock
 
@@ -31,7 +31,7 @@ unknown ([fastboot:oem_unlock action](device-properties-operating-systems-operat
 -   is required
 -   Type: merged type ([fastboot:oem_unlock action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootoem_unlock-action-properties-fastbootoem_unlock-action.md))
 -   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootoem_unlock-action-properties-fastbootoem_unlock-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/3/properties/fastboot:oem_unlock")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootoem_unlock-action-properties-fastbootoem_unlock-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/4/properties/fastboot:oem_unlock")
 
 ### fastboot:oem_unlock Type
 

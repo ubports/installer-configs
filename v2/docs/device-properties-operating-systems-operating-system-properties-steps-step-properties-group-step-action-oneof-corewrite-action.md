@@ -1,7 +1,7 @@
 # core:write action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/22
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24
 ```
 
 
@@ -11,7 +11,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 | :------------------ | ---------- | -------------- | ------------ | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
 | Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [device.schema.json\*](../device.schema.json "open original schema") |
 
-## 22 Type
+## 24 Type
 
 unknown ([core:write action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action.md))
 
@@ -19,7 +19,7 @@ unknown ([core:write action](device-properties-operating-systems-operating-syste
 
 | Property                 | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                               |
 | :----------------------- | -------- | -------- | -------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [core:write](#corewrite) | `object` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/22/properties/core:write") |
+| [core:write](#corewrite) | `object` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/core:write") |
 
 ## core:write
 
@@ -31,7 +31,7 @@ unknown ([core:write action](device-properties-operating-systems-operating-syste
 -   is required
 -   Type: `object` ([core:write action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action.md))
 -   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/22/properties/core:write")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/core:write")
 
 ### core:write Type
 

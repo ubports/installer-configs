@@ -18,6 +18,7 @@ Atomic action
 one (and only one) of
 
 -   [heimdall:flash action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-heimdallflash-action.md "check type definition")
+-   [core:info action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coreinfo-action.md "check type definition")
 -   [core:group action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coregroup-action.md "check type definition")
 -   [core:user_action action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coreuser_action-action.md "check type definition")
 -   [fastboot:oem_unlock action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootoem_unlock-action.md "check type definition")
@@ -33,6 +34,7 @@ one (and only one) of
 -   [fastboot:format action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootformat-action.md "check type definition")
 -   [fastboot:flash action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflash-action.md "check type definition")
 -   [fastboot:set_active action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootset_active-action.md "check type definition")
+-   [adb:shell action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbshell-action.md "check type definition")
 -   [adb:reboot action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbreboot-action.md "check type definition")
 -   [adb:format action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbformat-action.md "check type definition")
 -   [adb:sideload action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action.md "check type definition")

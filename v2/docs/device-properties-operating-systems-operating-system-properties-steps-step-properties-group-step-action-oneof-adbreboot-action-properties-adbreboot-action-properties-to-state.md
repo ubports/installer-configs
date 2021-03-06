@@ -1,7 +1,7 @@
 # To state Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/16/properties/adb:reboot/properties/to_state
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/18/properties/adb:reboot/properties/to_state
 ```
 
 State to rebot to.

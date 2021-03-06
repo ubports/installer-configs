@@ -1,7 +1,7 @@
 # fastboot:reboot_bootloader action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/5
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/6
 ```
 
 
@@ -11,7 +11,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 | :------------------ | ---------- | -------------- | ------------ | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
 | Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [device.schema.json\*](../device.schema.json "open original schema") |
 
-## 5 Type
+## 6 Type
 
 unknown ([fastboot:reboot_bootloader action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootreboot_bootloader-action.md))
 
@@ -19,7 +19,7 @@ unknown ([fastboot:reboot_bootloader action](device-properties-operating-systems
 
 | Property                                                 | Type          | Required | Nullable    | Defined by                                                                                                                                                                                                                                                                                                                                                              |
 | :------------------------------------------------------- | ------------- | -------- | ----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [fastboot:reboot_bootloader](#fastbootreboot_bootloader) | Not specified | Required | can be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootreboot_bootloader-action-properties-fastbootreboot_bootloader-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/5/properties/fastboot:reboot_bootloader") |
+| [fastboot:reboot_bootloader](#fastbootreboot_bootloader) | Not specified | Required | can be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootreboot_bootloader-action-properties-fastbootreboot_bootloader-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/6/properties/fastboot:reboot_bootloader") |
 
 ## fastboot:reboot_bootloader
 
@@ -31,7 +31,7 @@ unknown ([fastboot:reboot_bootloader action](device-properties-operating-systems
 -   is required
 -   Type: `null`, the value must be null ([fastboot:reboot_bootloader action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootreboot_bootloader-action-properties-fastbootreboot_bootloader-action.md))
 -   can be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootreboot_bootloader-action-properties-fastbootreboot_bootloader-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/5/properties/fastboot:reboot_bootloader")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootreboot_bootloader-action-properties-fastbootreboot_bootloader-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/6/properties/fastboot:reboot_bootloader")
 
 ### fastboot:reboot_bootloader Type
 

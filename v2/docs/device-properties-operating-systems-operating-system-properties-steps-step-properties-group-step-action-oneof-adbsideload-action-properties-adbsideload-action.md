@@ -1,7 +1,7 @@
 # adb:sideload action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/18/properties/adb:sideload
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/20/properties/adb:sideload
 ```
 
 
@@ -19,8 +19,8 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 
 | Property        | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                                                                                |
 | :-------------- | -------- | -------- | -------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [file](#file)   | `string` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action-properties-zip-to-sideload.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/18/properties/adb:sideload/properties/file") |
-| [group](#group) | `string` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action-properties-group.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/18/properties/adb:sideload/properties/group")          |
+| [file](#file)   | `string` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action-properties-zip-to-sideload.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/20/properties/adb:sideload/properties/file") |
+| [group](#group) | `string` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action-properties-group.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/20/properties/adb:sideload/properties/group")          |
 
 ## file
 
@@ -32,7 +32,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 -   is required
 -   Type: `string` ([Zip to sideload](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action-properties-zip-to-sideload.md))
 -   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action-properties-zip-to-sideload.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/18/properties/adb:sideload/properties/file")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action-properties-zip-to-sideload.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/20/properties/adb:sideload/properties/file")
 
 ### file Type
 
@@ -48,7 +48,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 -   is required
 -   Type: `string` ([Group](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action-properties-group.md))
 -   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action-properties-group.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/18/properties/adb:sideload/properties/group")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action-properties-group.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/20/properties/adb:sideload/properties/group")
 
 ### group Type
 

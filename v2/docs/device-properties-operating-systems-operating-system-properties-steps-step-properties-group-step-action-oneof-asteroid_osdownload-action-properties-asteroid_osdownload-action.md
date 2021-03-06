@@ -1,7 +1,7 @@
 # asteroid_os:download action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/8/properties/asteroid_os:download
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/9/properties/asteroid_os:download
 ```
 
 

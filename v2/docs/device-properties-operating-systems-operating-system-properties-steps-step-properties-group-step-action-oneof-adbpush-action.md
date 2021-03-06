@@ -1,7 +1,7 @@
 # adb:push action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/19
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/21
 ```
 
 
@@ -11,7 +11,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 | :------------------ | ---------- | -------------- | ------------ | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
 | Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [device.schema.json\*](../device.schema.json "open original schema") |
 
-## 19 Type
+## 21 Type
 
 unknown ([adb:push action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbpush-action.md))
 
@@ -19,7 +19,7 @@ unknown ([adb:push action](device-properties-operating-systems-operating-system-
 
 | Property             | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                         |
 | :------------------- | -------- | -------- | -------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [adb:push](#adbpush) | `object` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbpush-action-properties-adbpush-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/19/properties/adb:push") |
+| [adb:push](#adbpush) | `object` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbpush-action-properties-adbpush-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/21/properties/adb:push") |
 
 ## adb:push
 
@@ -31,7 +31,7 @@ unknown ([adb:push action](device-properties-operating-systems-operating-system-
 -   is required
 -   Type: `object` ([adb:push action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbpush-action-properties-adbpush-action.md))
 -   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbpush-action-properties-adbpush-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/19/properties/adb:push")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbpush-action-properties-adbpush-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/21/properties/adb:push")
 
 ### adb:push Type
 

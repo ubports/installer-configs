@@ -1,7 +1,7 @@
 # fastboot:erase action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/12/properties/fastboot:erase
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/13/properties/fastboot:erase
 ```
 
 
@@ -19,7 +19,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 
 | Property                | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                                                                                     |
 | :---------------------- | -------- | -------- | -------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [partition](#partition) | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbooterase-action-properties-fastbooterase-action-properties-partition.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/12/properties/fastboot:erase/properties/partition") |
+| [partition](#partition) | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbooterase-action-properties-fastbooterase-action-properties-partition.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/13/properties/fastboot:erase/properties/partition") |
 
 ## partition
 
@@ -31,7 +31,7 @@ Partition to format.
 -   is optional
 -   Type: `string` ([Partition](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbooterase-action-properties-fastbooterase-action-properties-partition.md))
 -   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbooterase-action-properties-fastbooterase-action-properties-partition.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/12/properties/fastboot:erase/properties/partition")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbooterase-action-properties-fastbooterase-action-properties-partition.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/13/properties/fastboot:erase/properties/partition")
 
 ### partition Type
 

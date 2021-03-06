@@ -1,7 +1,7 @@
 # adb:reboot action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/16/properties/adb:reboot
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/18/properties/adb:reboot
 ```
 
 
@@ -19,7 +19,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                                                                       |
 | :-------------------- | -------- | -------- | -------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [to_state](#to_state) | `string` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbreboot-action-properties-adbreboot-action-properties-to-state.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/16/properties/adb:reboot/properties/to_state") |
+| [to_state](#to_state) | `string` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbreboot-action-properties-adbreboot-action-properties-to-state.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/18/properties/adb:reboot/properties/to_state") |
 
 ## to_state
 
@@ -31,7 +31,7 @@ State to rebot to.
 -   is required
 -   Type: `string` ([To state](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbreboot-action-properties-adbreboot-action-properties-to-state.md))
 -   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbreboot-action-properties-adbreboot-action-properties-to-state.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/16/properties/adb:reboot/properties/to_state")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbreboot-action-properties-adbreboot-action-properties-to-state.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/18/properties/adb:reboot/properties/to_state")
 
 ### to_state Type
 

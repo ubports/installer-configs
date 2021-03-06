@@ -1,7 +1,7 @@
 # Partition Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/14/properties/fastboot:flash/properties/partitions/items/properties/partition
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/15/properties/fastboot:flash/properties/partitions/items/properties/partition
 ```
 
 

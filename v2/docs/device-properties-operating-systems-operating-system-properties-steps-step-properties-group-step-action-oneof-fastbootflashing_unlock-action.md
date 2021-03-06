@@ -1,7 +1,7 @@
 # fastboot:flashing_unlock action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/4
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/5
 ```
 
 
@@ -11,7 +11,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 | :------------------ | ---------- | -------------- | ------------ | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
 | Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [device.schema.json\*](../device.schema.json "open original schema") |
 
-## 4 Type
+## 5 Type
 
 unknown ([fastboot:flashing_unlock action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflashing_unlock-action.md))
 
@@ -19,7 +19,7 @@ unknown ([fastboot:flashing_unlock action](device-properties-operating-systems-o
 
 | Property                                             | Type          | Required | Nullable    | Defined by                                                                                                                                                                                                                                                                                                                                                        |
 | :--------------------------------------------------- | ------------- | -------- | ----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [fastboot:flashing_unlock](#fastbootflashing_unlock) | Not specified | Required | can be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflashing_unlock-action-properties-fastbootflashing_unlock-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/4/properties/fastboot:flashing_unlock") |
+| [fastboot:flashing_unlock](#fastbootflashing_unlock) | Not specified | Required | can be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflashing_unlock-action-properties-fastbootflashing_unlock-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/5/properties/fastboot:flashing_unlock") |
 
 ## fastboot:flashing_unlock
 
@@ -31,7 +31,7 @@ unknown ([fastboot:flashing_unlock action](device-properties-operating-systems-o
 -   is required
 -   Type: `null`, the value must be null ([fastboot:flashing_unlock action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflashing_unlock-action-properties-fastbootflashing_unlock-action.md))
 -   can be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflashing_unlock-action-properties-fastbootflashing_unlock-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/4/properties/fastboot:flashing_unlock")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflashing_unlock-action-properties-fastbootflashing_unlock-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/5/properties/fastboot:flashing_unlock")
 
 ### fastboot:flashing_unlock Type
 

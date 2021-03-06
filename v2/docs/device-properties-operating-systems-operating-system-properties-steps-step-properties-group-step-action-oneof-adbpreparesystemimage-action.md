@@ -1,7 +1,7 @@
 # adb:preparesystemimage action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/20
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/22
 ```
 
 
@@ -11,7 +11,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 | :------------------ | ---------- | -------------- | ------------ | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
 | Can be instantiated | No         | Unknown status | No           | Forbidden         | Forbidden             | none                | [device.schema.json\*](../device.schema.json "open original schema") |
 
-## 20 Type
+## 22 Type
 
 unknown ([adb:preparesystemimage action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbpreparesystemimage-action.md))
 
@@ -19,7 +19,7 @@ unknown ([adb:preparesystemimage action](device-properties-operating-systems-ope
 
 | Property                                         | Type          | Required | Nullable    | Defined by                                                                                                                                                                                                                                                                                                                                            |
 | :----------------------------------------------- | ------------- | -------- | ----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [adb:preparesystemimage](#adbpreparesystemimage) | Not specified | Required | can be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbpreparesystemimage-action-properties-adbpreparesystemimage.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/20/properties/adb:preparesystemimage") |
+| [adb:preparesystemimage](#adbpreparesystemimage) | Not specified | Required | can be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbpreparesystemimage-action-properties-adbpreparesystemimage.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/22/properties/adb:preparesystemimage") |
 
 ## adb:preparesystemimage
 
@@ -31,7 +31,7 @@ unknown ([adb:preparesystemimage action](device-properties-operating-systems-ope
 -   is required
 -   Type: `null`, the value must be null
 -   can be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbpreparesystemimage-action-properties-adbpreparesystemimage.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/20/properties/adb:preparesystemimage")
+-   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbpreparesystemimage-action-properties-adbpreparesystemimage.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/22/properties/adb:preparesystemimage")
 
 ### adb:preparesystemimage Type
 

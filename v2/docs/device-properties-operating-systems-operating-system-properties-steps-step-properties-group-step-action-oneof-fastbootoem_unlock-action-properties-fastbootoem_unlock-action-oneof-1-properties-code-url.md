@@ -1,7 +1,7 @@
 # Code url Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/3/properties/fastboot:oem_unlock/oneOf/1/properties/code_url
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/4/properties/fastboot:oem_unlock/oneOf/1/properties/code_url
 ```
 
 Website to obtain an unlock code

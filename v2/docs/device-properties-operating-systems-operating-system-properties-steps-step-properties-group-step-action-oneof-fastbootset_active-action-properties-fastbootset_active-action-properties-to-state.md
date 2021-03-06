@@ -1,7 +1,7 @@
 # To state Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/15/properties/fastboot:set_active/properties/slot
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/16/properties/fastboot:set_active/properties/slot
 ```
 
 

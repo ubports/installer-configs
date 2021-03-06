@@ -1,7 +1,7 @@
 # fastboot:flashing_unlock action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/4/properties/fastboot:flashing_unlock
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/5/properties/fastboot:flashing_unlock
 ```
 
 

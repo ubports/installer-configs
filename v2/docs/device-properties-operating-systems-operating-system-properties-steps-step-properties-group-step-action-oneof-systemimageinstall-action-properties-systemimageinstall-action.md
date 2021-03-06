@@ -1,7 +1,7 @@
 # systemimage:install action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/7/properties/systemimage:install
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/8/properties/systemimage:install
 ```
 
 
