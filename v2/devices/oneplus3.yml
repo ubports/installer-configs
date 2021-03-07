@@ -150,6 +150,61 @@ operating_systems:
           - core:user_action:
               action: "recovery"
     slideshow: []
+  - name: "LineageOS"
+    options:
+      - var: "channel"
+        name: "LineageOS version"
+        tooltip: "Which LineageOS channel do you want to install?"
+        type: "select"
+        remote_values:
+          lineage_os:channels:
+      - var: "installTWRP"
+        name: "Install TWRP"
+        tooltip: "Install TWRP 3.2.1-0 to recovery (recommended)"
+        type: "checkbox"
+        value: true
+    prerequisites: []
+    steps:
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://archive.org/download/twrp-3.2.1-0-oneplus3/twrp-3.2.1-0-oneplus3.img"
+                  checksum:
+                    sum: "4df27c0e0ea7dde9139f7f4717206df3577c34163c2822bc3e8a26b15c60ccd4"
+                    algorithm: "sha256"
+        condition:
+          var: "installTWRP"
+          value: true
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "recovery"
+                  file: "twrp-3.2.1-0-oneplus3.img"
+                  group: "firmware"
+        condition:
+          var: "installTWRP"
+          value: true
+      - actions:
+          - fastboot:boot:
+              group: "firmware"
+              file: "twrp-3.2.1-0-oneplus3.img"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+      - actions:
+          - lineage_os:install:
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+    slideshow: []
+
   - name: "OxygenOS"
     options:
       - var: "version"
