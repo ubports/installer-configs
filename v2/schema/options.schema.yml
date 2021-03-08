@@ -37,6 +37,7 @@ items:
           type: "string"
           enum:
             - "systemimagechannels"
+            - "lineage_oschannels"
     value:
       description: "Default value of the option"
     values:
