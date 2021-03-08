@@ -1,7 +1,7 @@
-# Remote value Schema
+# Untitled null in Device Schema
 
 ```txt
-v2/schema/options.schema.yml#/properties/operating_systems/items/properties/options/items/properties/remote_values/properties/type
+v2/schema/options.schema.yml#/properties/operating_systems/items/properties/options/items/properties/remote_values/properties/asteroid_os:channels
 ```
 
 
@@ -11,14 +11,6 @@ v2/schema/options.schema.yml#/properties/operating_systems/items/properties/opti
 | :------------------ | ---------- | -------------- | ----------------------- | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
 | Can be instantiated | No         | Unknown status | Unknown identifiability | Forbidden         | Allowed               | none                | [device.schema.json\*](../device.schema.json "open original schema") |
 
-## type Type
+## asteroid_os:channels Type
 
-`string` ([Remote value](device-properties-operating-systems-operating-system-properties-options-option-properties-remote-values-properties-remote-value.md))
-
-## type Constraints
-
-**enum**: the value of this property must be equal to one of the following values:
-
-| Value                   | Explanation |
-| :---------------------- | ----------- |
-| `"systemimagechannels"` |             |
+`null`, the value must be null

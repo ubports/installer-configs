@@ -134,6 +134,10 @@ If the values can be generated from a remote source like the systemimage api, th
 
 `object` ([Remote values](device-properties-operating-systems-operating-system-properties-options-option-properties-remote-values.md))
 
+### remote_values Constraints
+
+**maximum number of properties**: the maximum number of properties for this object is: `1`
+
 ## value
 
 Default value of the option
