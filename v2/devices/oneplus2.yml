@@ -130,37 +130,22 @@ operating_systems:
           - core:user_action:
               action: "recovery"
     slideshow: []
+    
   - name: "LineageOS"
     options:
-      - var: "gapps"
-        name: "Install OpenGApps"
-        tooltip: "Install Google Play and Google Services"
-        type: "checkbox"
+      - var: "channel"
+        name: "LineageOS version"
+        tooltip: "Which LineageOS channel do you want to install?"
+        type: "select"
+        remote_values:
+          lineage_os:channels:
       - var: "installTWRP"
         name: "Install TWRP"
         tooltip: "Install TWRP 3.2.1-0 to recovery (recommended)"
         type: "checkbox"
         value: true
-      - var: "LineageVersion"
-        name: "Lineage Version"
-        tooltip: "The version of LineageOS to install"
-        type: "select"
-        values:
-          - value: "16"
-            label: "LineageOS 16 (Android 9)"
     prerequisites: []
     steps:
-      - actions:
-          - core:download:
-              group: "LineageOS"
-              files:
-                - url: "https://archive.org/download/lineage-16.0-20200418-nightly-oneplus2-signed/lineage-16.0-20200418-nightly-oneplus2-signed.zip"
-                  checksum:
-                    sum: "5aaf16d27abbd14a535086cbd4503cbac0aa78ef057caace4a72729aa4e21c94"
-                    algorithm: "sha256"
-        condition:
-          var: "LineageVersion"
-          value: "16"
       - actions:
           - core:download:
               group: "firmware"
@@ -172,23 +157,6 @@ operating_systems:
         condition:
           var: "installTWRP"
           value: true
-      - actions:
-          - core:download:
-              group: "OpenGApps"
-              files:
-                - url: "https://archive.org/download/opengapps-nano-20200615/open_gapps-arm64-9.0-nano-20200615.zip"
-                  checksum:
-                    sum: "74ca6374d0c6c476d5ea1106c841ce65b7d108a253fdb2434be4b93166c2cd43"
-                    algorithm: "sha256"
-        condition:
-          var: "gapps"
-          value: true
-      - actions:
-          - core:unpack:
-              group: "LineageOS"
-              files:
-                - archive: "lineage-16.0-20200418-nightly-oneplus2-signed.zip"
-                  dir: "unpacked"
       - actions:
           - adb:reboot:
               to_state: "bootloader"
@@ -205,50 +173,17 @@ operating_systems:
           var: "installTWRP"
           value: true
       - actions:
-          - fastboot:flash:
-              partitions:
-                - partition: "boot"
-                  file: "unpacked/boot.img"
-                  group: "LineageOS"
-                  raw: true
-      - actions:
+          - fastboot:boot:
+              group: "firmware"
+              file: "twrp-3.2.1-0-oneplus2.img"
+        fallback:
           - core:user_action:
               action: "recovery"
       - actions:
-          - core:user_action:
-              action: "twrp_unlock"
-      - actions:
-          - core:user_action:
-              action: "twrp_sideload"
-      - actions:
-          - adb:sideload:
-              group: "LineageOS"
-              file: "lineage-16.0-20200418-nightly-oneplus2-signed.zip"
-        condition:
-          var: "LineageVersion"
-          value: "16"
-      - actions:
-          - core:user_action:
-              action: "twrp_sideload"
-        condition:
-          var: "gapps"
-          value: true
-      - actions:
-          - adb:sideload:
-              group: "OpenGApps"
-              file: "open_gapps-arm64-9.0-nano-20200615.zip"
-        condition:
-          var: "gapps"
-          value: true
-      - actions:
-          - core:user_action:
-              action: "twrp_sideload_reboot"
+          - lineage_os:install:
       - actions:
           - adb:reboot:
-              to_state: "system"
-        fallback:
-          - core:user_action:
-              action: "reboot"
+              to_state: "recovery"
     slideshow: []
   - name: "OxygenOS"
     options:
