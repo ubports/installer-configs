@@ -232,7 +232,12 @@ operating_systems:
       description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Hallo Welt Systeme UG (haftungsbeschränkt) for the Volla OS and agree to it."
       link: "https://volla.online/license"
   - name: "SailfishOS"
-    options: []
+    options:
+      - var: "flash_vollaos_system"
+        name: "Install VollaOS system image"
+        tooltip: "Keep enabled if Ubuntu Touch is installed as your OS currently"
+        type: "checkbox"
+        value: true
     prerequisites:
       - "untested"
     steps:
@@ -242,11 +247,31 @@ operating_systems:
               files:
                 - url: "https://gitlab.com/sailfishos-porters-ci/yggdrasil-ci/-/jobs/artifacts/master/download?job=run-build-lvm"
       - actions:
+          - core:download:
+              group: "SailfishOS"
+              files:
+                - url: "https://volla.tech/filedump/vollaos-system.zip"
+                  checksum:
+                    sum: "a9ec7f25aeead28654fc8b9bbd55bc18e83a63fe4bc967d2e307739de1faa694"
+                    algorithm: "sha256"
+        condition:
+          var: "flash_vollaos_system"
+          value: true
+      - actions:
           - core:unpack:
               group: "SailfishOS"
               files:
                 - archive: "download?job=run-build-lvm"
                   dir: "unpacked"
+      - actions:
+          - core:unpack:
+              group: "SailfishOS"
+              files:
+                - archive: "vollaos-system.zip"
+                  dir: "unpacked"
+        condition:
+          var: "flash_vollaos_system"
+          value: true
       - actions:
           - adb:reboot:
               to_state: "bootloader"
@@ -268,6 +293,15 @@ operating_systems:
                 - partition: "lk"
                   file: "unpacked/sfe-yggdrasil/Sailfish_OS/lk-yggdrasil.img"
                   group: "SailfishOS"
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "system"
+                  file: "unpacked/system.img"
+                  group: "SailfishOS"
+        condition:
+          var: "flash_vollaos_system"
+          value: true
       - actions:
           - fastboot:continue:
         fallback:
