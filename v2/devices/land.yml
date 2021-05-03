@@ -65,11 +65,11 @@ operating_systems:
               files:
                 - url: "https://cdimage.ubports.com/devices/land/ubports-recovery-land.img"
                   checksum:
-                    sum: "f7826ebba7460117fb1aa43f37b3e432a943741a04a6d70cf633d7b8ccd7a582"
+                    sum: "6cf2008ae504c6b7c91761cf2eedc86f60ab3422d9fe10f2753aa79c0fce2883"
                     algorithm: "sha256"
                 - url: "https://cdimage.ubports.com/devices/land/halium-boot-land.img"
                   checksum:
-                    sum: "ab372e4ee9da5dfb8f73ae5509710411861947a2cac01080a5b35d907f272870"
+                    sum: "1d7490418564ef8afa23b13f51e89baff21f914f09c2954e196004c633ecd1b0"
                     algorithm: "sha256"
                 - url: "https://github.com/Ubports-Land/Ubports-CI/raw/master/splash.img"
                   checksum:
