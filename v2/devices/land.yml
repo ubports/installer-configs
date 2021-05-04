@@ -63,13 +63,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://cdimage.ubports.com/devices/land/ubports-recovery-land.img"
+                - url: "https://cdimage.ubports.com/devices/land/recovery.img"
                   checksum:
-                    sum: "6cf2008ae504c6b7c91761cf2eedc86f60ab3422d9fe10f2753aa79c0fce2883"
-                    algorithm: "sha256"
-                - url: "https://cdimage.ubports.com/devices/land/halium-boot-land.img"
-                  checksum:
-                    sum: "1d7490418564ef8afa23b13f51e89baff21f914f09c2954e196004c633ecd1b0"
+                    sum: "33f8f775c4e297fe024bae1075b76041add0987ff66aa80a5e37a4704b88dbda"
                     algorithm: "sha256"
                 - url: "https://github.com/Ubports-Land/Ubports-CI/raw/master/splash.img"
                   checksum:
