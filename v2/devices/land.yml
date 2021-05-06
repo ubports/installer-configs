@@ -65,7 +65,7 @@ operating_systems:
               files:
                 - url: "https://cdimage.ubports.com/devices/land/recovery.img"
                   checksum:
-                    sum: "33f8f775c4e297fe024bae1075b76041add0987ff66aa80a5e37a4704b88dbda"
+                    sum: "4468a0c48e719a40273e4de1b1e0e6793e945cd665a812567990cb1b39a61b1f"
                     algorithm: "sha256"
                 - url: "https://github.com/Ubports-Land/Ubports-CI/raw/master/splash.img"
                   checksum:
