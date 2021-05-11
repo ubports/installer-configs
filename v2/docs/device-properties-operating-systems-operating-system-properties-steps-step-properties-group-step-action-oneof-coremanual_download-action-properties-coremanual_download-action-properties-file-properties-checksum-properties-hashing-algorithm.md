@@ -6,10 +6,9 @@ v2/schema/checksum.schema.yml#/properties/operating_systems/items/properties/ste
 
 Hashing algorithm to use to calculate the checksum
 
-
-| Abstract            | Extensible | Status         | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                           |
-| :------------------ | ---------- | -------------- | ----------------------- | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
-| Can be instantiated | No         | Unknown status | Unknown identifiability | Forbidden         | Allowed               | none                | [device.schema.json\*](../device.schema.json "open original schema") |
+| Abstract            | Extensible | Status         | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                          |
+| :------------------ | :--------- | :------------- | :---------------------- | :---------------- | :-------------------- | :------------------ | :------------------------------------------------------------------ |
+| Can be instantiated | No         | Unknown status | Unknown identifiability | Forbidden         | Allowed               | none                | [device.schema.json*](../device.schema.json "open original schema") |
 
 ## algorithm Type
 
@@ -20,7 +19,7 @@ Hashing algorithm to use to calculate the checksum
 **enum**: the value of this property must be equal to one of the following values:
 
 | Value                                  | Explanation |
-| :------------------------------------- | ----------- |
+| :------------------------------------- | :---------- |
 | `"RSA-MD4"`                            |             |
 | `"RSA-MD5"`                            |             |
 | `"RSA-MDC2"`                           |             |

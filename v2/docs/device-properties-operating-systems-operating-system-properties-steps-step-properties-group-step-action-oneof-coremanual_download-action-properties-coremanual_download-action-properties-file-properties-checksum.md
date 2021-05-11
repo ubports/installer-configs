@@ -6,19 +6,18 @@ v2/schema/checksum.schema.yml#/properties/operating_systems/items/properties/ste
 
 Verify a file's integrity by checking it with a hashing algorithm
 
-
-| Abstract            | Extensible | Status         | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                           |
-| :------------------ | ---------- | -------------- | ------------ | :---------------- | --------------------- | ------------------- | -------------------------------------------------------------------- |
-| Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [device.schema.json\*](../device.schema.json "open original schema") |
+| Abstract            | Extensible | Status         | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                          |
+| :------------------ | :--------- | :------------- | :----------- | :---------------- | :-------------------- | :------------------ | :------------------------------------------------------------------ |
+| Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [device.schema.json*](../device.schema.json "open original schema") |
 
 ## checksum Type
 
 `object` ([Checksum](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action-properties-file-properties-checksum.md))
 
-# Checksum Properties
+# checksum Properties
 
 | Property                | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| :---------------------- | -------- | -------- | -------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :---------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [sum](#sum)             | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action-properties-file-properties-checksum-properties-hash.md "v2/schema/checksum.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:manual_download/properties/file/properties/checksum/properties/sum")                    |
 | [algorithm](#algorithm) | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action-properties-file-properties-checksum-properties-hashing-algorithm.md "v2/schema/checksum.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:manual_download/properties/file/properties/checksum/properties/algorithm") |
 
@@ -26,13 +25,15 @@ Verify a file's integrity by checking it with a hashing algorithm
 
 Checksum of the file to download
 
-
 `sum`
 
--   is optional
--   Type: `string` ([Hash](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action-properties-file-properties-checksum-properties-hash.md))
--   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action-properties-file-properties-checksum-properties-hash.md "v2/schema/checksum.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:manual_download/properties/file/properties/checksum/properties/sum")
+*   is optional
+
+*   Type: `string` ([Hash](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action-properties-file-properties-checksum-properties-hash.md))
+
+*   cannot be null
+
+*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action-properties-file-properties-checksum-properties-hash.md "v2/schema/checksum.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:manual_download/properties/file/properties/checksum/properties/sum")
 
 ### sum Type
 
@@ -42,13 +43,15 @@ Checksum of the file to download
 
 Hashing algorithm to use to calculate the checksum
 
-
 `algorithm`
 
--   is optional
--   Type: `string` ([Hashing algorithm](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action-properties-file-properties-checksum-properties-hashing-algorithm.md))
--   cannot be null
--   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action-properties-file-properties-checksum-properties-hashing-algorithm.md "v2/schema/checksum.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:manual_download/properties/file/properties/checksum/properties/algorithm")
+*   is optional
+
+*   Type: `string` ([Hashing algorithm](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action-properties-file-properties-checksum-properties-hashing-algorithm.md))
+
+*   cannot be null
+
+*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-coremanual_download-action-properties-coremanual_download-action-properties-file-properties-checksum-properties-hashing-algorithm.md "v2/schema/checksum.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:manual_download/properties/file/properties/checksum/properties/algorithm")
 
 ### algorithm Type
 
@@ -59,7 +62,7 @@ Hashing algorithm to use to calculate the checksum
 **enum**: the value of this property must be equal to one of the following values:
 
 | Value                                  | Explanation |
-| :------------------------------------- | ----------- |
+| :------------------------------------- | :---------- |
 | `"RSA-MD4"`                            |             |
 | `"RSA-MD5"`                            |             |
 | `"RSA-MDC2"`                           |             |
