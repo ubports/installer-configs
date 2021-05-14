@@ -70,6 +70,19 @@ operating_systems:
                   checksum:
                     sum: "bf32cb85ba58d1f0791b37a91e44697c647440fd365a9f28ab77d9616fd36b2c"
                     algorithm: "sha256"
+                - url: "https://volla.tech/filedump/volla-yggdrasil-9.0-ubports-installer-bootstrap.zip"
+                  checksum:
+                    sum: "77bcf3842cc676c329afae433be0087bc71ac34001977ca1957f40b7a126c400"
+                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "volla-yggdrasil-9.0-ubports-installer-bootstrap.zip"
+                  dir: "unpacked"
         condition:
           var: "bootstrap"
           value: true
@@ -85,11 +98,50 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
+                - partition: "recovery"
+                  file: "halium-unlocked-recovery_yggdrasil.img"
+                  group: "firmware"
+                - partition: "vendor"
+                  file: "unpacked/vendor.img"
+                  group: "firmware"
                 - partition: "boot"
                   file: "halium-unlocked-recovery_yggdrasil.img"
                   group: "firmware"
-                - partition: "recovery"
-                  file: "halium-unlocked-recovery_yggdrasil.img"
+                - partition: "dtbo"
+                  file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "logo"
+                  file: "unpacked/logo.bin"
+                  group: "firmware"
+                - partition: "md1dsp"
+                  file: "unpacked/md1dsp.img"
+                  group: "firmware"
+                - partition: "md1img"
+                  file: "unpacked/md1img.img"
+                  group: "firmware"
+                - partition: "spmfw"
+                  file: "unpacked/spmfw.img"
+                  group: "firmware"
+                - partition: "lk2"
+                  file: "unpacked/lk.img"
+                  group: "firmware"
+                - partition: "sspm_2"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
+                - partition: "tee2"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "preloader"
+                  file: "unpacked/preloader_k63v2_64_bsp.bin"
+                  group: "firmware"
+                - partition: "lk"
+                  file: "unpacked/lk.img"
+                  group: "firmware"
+                - partition: "sspm_1"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
+                - partition: "tee1"
+                  file: "unpacked/tee.img"
                   group: "firmware"
         condition:
           var: "bootstrap"
@@ -97,6 +149,8 @@ operating_systems:
       - actions:
           - fastboot:erase:
               partition: "cache"
+          - fastboot:erase:
+              partition: "system"
         condition:
           var: "bootstrap"
           value: true
@@ -233,44 +287,52 @@ operating_systems:
       link: "https://volla.online/license"
   - name: "SailfishOS"
     options:
-      - var: "flash_vollaos_system"
-        name: "Install VollaOS system image"
-        tooltip: "Keep enabled if Ubuntu Touch is installed as your OS currently"
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Flash system partitions using fastboot. Keep enabled if coming from Ubuntu Touch or Volla OS 10"
         type: "checkbox"
         value: true
-    prerequisites:
-      - "untested"
     steps:
       - actions:
           - core:download:
               group: "SailfishOS"
               files:
-                - url: "https://gitlab.com/sailfishos-porters-ci/yggdrasil-ci/-/jobs/artifacts/master/download?job=run-build-lvm"
+                - url: "https://gitlab.com/sailfishos-porters-ci/yggdrasil-ci/-/jobs/artifacts/master/download?job=run-build-lvm-testing"
       - actions:
           - core:download:
-              group: "SailfishOS"
+              group: "firmware"
               files:
+                - url: "https://volla.tech/filedump/volla-yggdrasil-9.0-ubports-installer-bootstrap.zip"
+                  checksum:
+                    sum: "77bcf3842cc676c329afae433be0087bc71ac34001977ca1957f40b7a126c400"
+                    algorithm: "sha256"
                 - url: "https://volla.tech/filedump/vollaos-system.zip"
                   checksum:
                     sum: "a9ec7f25aeead28654fc8b9bbd55bc18e83a63fe4bc967d2e307739de1faa694"
                     algorithm: "sha256"
+                - url: "http://volla.tech/filedump/twrp.img"
+                  checksum:
+                    sum: "c40c3c91c4d4de7651d2cc99b1265dd521f4a8175a260d0a55f62b9d8a8a3f69"
+                    algorithm: "sha256"
         condition:
-          var: "flash_vollaos_system"
+          var: "bootstrap"
           value: true
       - actions:
           - core:unpack:
               group: "SailfishOS"
               files:
-                - archive: "download?job=run-build-lvm"
+                - archive: "download?job=run-build-lvm-testing"
                   dir: "unpacked"
       - actions:
           - core:unpack:
-              group: "SailfishOS"
+              group: "firmware"
               files:
+                - archive: "volla-yggdrasil-9.0-ubports-installer-bootstrap.zip"
+                  dir: "unpacked"
                 - archive: "vollaos-system.zip"
                   dir: "unpacked"
         condition:
-          var: "flash_vollaos_system"
+          var: "bootstrap"
           value: true
       - actions:
           - adb:reboot:
@@ -278,6 +340,57 @@ operating_systems:
         fallback:
           - core:user_action:
               action: "bootloader"
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "recovery"
+                  file: "twrp.img"
+                  group: "firmware"
+                - partition: "vendor"
+                  file: "unpacked/vendor.img"
+                  group: "firmware"
+                - partition: "dtbo"
+                  file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "logo"
+                  file: "unpacked/logo.bin"
+                  group: "firmware"
+                - partition: "md1dsp"
+                  file: "unpacked/md1dsp.img"
+                  group: "firmware"
+                - partition: "md1img"
+                  file: "unpacked/md1img.img"
+                  group: "firmware"
+                - partition: "spmfw"
+                  file: "unpacked/spmfw.img"
+                  group: "firmware"
+                - partition: "lk2"
+                  file: "unpacked/lk.img"
+                  group: "firmware"
+                - partition: "sspm_2"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
+                - partition: "tee2"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "preloader"
+                  file: "unpacked/preloader_k63v2_64_bsp.bin"
+                  group: "firmware"
+                - partition: "lk"
+                  file: "unpacked/lk.img"
+                  group: "firmware"
+                - partition: "sspm_1"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
+                - partition: "tee1"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "system"
+                  file: "unpacked/system.img"
+                  group: "firmware"
+        condition:
+          var: "bootstrap"
+          value: true
       - actions:
           - fastboot:flash:
               partitions:
@@ -294,16 +407,7 @@ operating_systems:
                   file: "unpacked/sfe-yggdrasil/Sailfish_OS/lk-yggdrasil.img"
                   group: "SailfishOS"
       - actions:
-          - fastboot:flash:
-              partitions:
-                - partition: "system"
-                  file: "unpacked/system.img"
-                  group: "SailfishOS"
-        condition:
-          var: "flash_vollaos_system"
-          value: true
-      - actions:
-          - fastboot:continue:
+          - fastboot:reboot:
         fallback:
           - core:user_action:
               action: "boot"
