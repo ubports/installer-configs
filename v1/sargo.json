@@ -1,5 +1,5 @@
 {
-  "name": "Google Pixel 3a",
+  "name": "Google Pixel 3a/3a XL",
   "codename": "sargo",
   "unlock": ["unlock", "downgrade_android", "support"],
   "user_actions": {
@@ -27,7 +27,7 @@
     },
     "support": {
       "title": "Support",
-      "description": "For details about Ubuntu Touch support for the Pixel 3a, please head over to the UBports forum thread.",
+      "description": "For details about Ubuntu Touch support for the Pixel 3a & 3a XL, please head over to the UBports forum thread.",
       "link": "https://forums.ubports.com/topic/4621/google-pixel-3a-sargo"
     }
   },
