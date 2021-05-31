@@ -200,7 +200,7 @@ operating_systems:
           - core:download:
               group: "VollaOS"
               files:
-                - url: "https://ota.volla.tech/builds/volla-9.0-20201019-nightly-k63v2_64_bsp-signed.zip"
+                - url: "https://ota.volla.tech/volla-9.0-20201019-nightly-k63v2_64_bsp-signed.zip"
                   checksum:
                     sum: "0837f19481c9962e9ff3f1249b809942e2563e478f8735236436bd719b49fd5c"
                     algorithm: "sha256"
@@ -284,7 +284,7 @@ operating_systems:
     eula:
       title: "EULA"
       description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Hallo Welt Systeme UG (haftungsbeschränkt) for the Volla OS and agree to it."
-      link: "https://volla.online/license"
+      link: "https://volla.online/en/eula/index.html"
   - name: "SailfishOS"
     options:
       - var: "bootstrap"
