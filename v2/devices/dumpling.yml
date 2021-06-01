@@ -75,9 +75,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://ci.ubports.com/job/UBportsCommunityPortsJenkinsCI/job/ubports%252Fcommunity-ports%252Fjenkins-ci%252Fdumpling-cheeseburger/job/main/64/artifact/halium-unlocked-recovery_dumpling.img"
+                - url: "https://cdimage.ubports.com/devices/dumpling_cheeseburger/halium-unlocked-recovery_dumpling.img"
                   checksum:
-                    sum: "8675fa1b35e9e4a9c0d55f7a4a6cdfbacbc627688ff8f2d388a58e112ebe18ee"
+                    sum: "c8487fe1273c1f65c96391b9f216fbef972c96811c3ff36082ffe8367dd382e7"
                     algorithm: "sha256"
       - actions:
           - core:download:
