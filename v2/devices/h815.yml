@@ -104,8 +104,8 @@ operating_systems:
           - systemimage:install:
       - actions:
           - adb:reboot:
-              to_state: "system"
+              to_state: "recovery"
         fallback:
           - core:user_action:
-              action: "reboot"
+              action: "recovery"
     slideshow: []
