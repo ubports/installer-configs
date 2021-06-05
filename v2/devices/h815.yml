@@ -79,7 +79,7 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
-          - fastboot:format:
+          - fastboot:erase:
               partition: "userdata"
               type: "ext4"
         condition:
@@ -104,8 +104,8 @@ operating_systems:
           - systemimage:install:
       - actions:
           - adb:reboot:
-              to_state: "recovery"
+              to_state: "system"
         fallback:
           - core:user_action:
-              action: "recovery"
+              action: "reboot"
     slideshow: []
