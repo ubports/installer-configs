@@ -6,7 +6,7 @@ doppelgangers: []
 user_actions:
   confirm_model:
     title: "Confirm your model"
-    description: "Please double-check that your device is a Xiaomi Mi A2 (jasmine_sprout). Xiaomi Mi 6x and Xiaomi Mi A2 Lite are NOT SUPPORTED. You also NEED to check your device LCD name, you can use an app (click on more link, requires rooted android device) to check if it's called *jdi*. In that case it is also unsupported. (Work is being done to add support for such devices as well)"
+    description: "Please double-check that your device is a Xiaomi Mi A2 (jasmine_sprout). Xiaomi Mi 6x and Xiaomi Mi A2 Lite are NOT SUPPORTED. You also NEED to check your device LCD name, you can use an app (click on more link, requires rooted android device) to check if it's called *jdi*. In that case you will need to choose devel channel instead of stable until OTA-19."
     link: "https://play.google.com/store/apps/details?id=ru.andr7e.deviceinfohw"
   confirm_os:
     title: "Confirm OS version"
@@ -73,7 +73,7 @@ operating_systems:
                 - name: "boot.img"
                   url: "https://github.com/ubports-xiaomi-sdm660/artifacts/releases/download/v0.1/boot.img"
                   checksum:
-                    sum: "2782a791ee472438ebf30f8fa00e626ec6796c3a3e6acca57d33245e7c6bd7b8"
+                    sum: "07111aba0f8c8720baae6ea6d31c898a8b8fe0dc942185cdc39f2d114ef1702d"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
