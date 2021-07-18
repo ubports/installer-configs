@@ -38,6 +38,8 @@ items:
           type: "null"
         asteroid_os:channels:
           type: "null"
+        lineage_os:channels:
+          type: "null"
     value:
       description: "Default value of the option"
     values:
