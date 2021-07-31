@@ -1,7 +1,10 @@
 name: "OnePlus 6/6T"
 codename: "enchilada"
 formfactor: "phone"
-aliases: []
+aliases:
+  - "fajita"
+  - "OnePlus6"
+  - "OnePlus6T"
 doppelgangers: []
 user_actions:
   bootloader:
