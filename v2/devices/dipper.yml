@@ -62,9 +62,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://github.com/ubports-dipper/artifacts/releases/download/stable-v1/firmware-update.zip"
+                - url: "https://github.com/ubports-dipper/artifacts/releases/download/v1/firmware-update.zip"
                   checksum:
-                    sum: "7c223391e6dc04fc6ee2259daa54b05438b098be34710688999a81c2b19c8994"
+                    sum: "a937ea333ca5a8c348f56fdfc3d876b3ccbb3da8247b68b47c889170e4437307"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -111,10 +111,6 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
-                # UT Halium-9.0 Kernel
-                - partition: "boot"
-                  file: "boot.img"
-                  group: "firmware"
                 # Ubports Recovery
                 - partition: "recovery"
                   file: "unpacked/recovery.img"
