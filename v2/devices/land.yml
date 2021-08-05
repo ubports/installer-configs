@@ -86,11 +86,8 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
-                - partition: "boot"
-                  file: "halium-boot-land.img"
-                  group: "firmware"
                 - partition: "recovery"
-                  file: "ubports-recovery-land.img"
+                  file: "recovery.img"
                   group: "firmware"
                 - partition: "splash"
                   file: "splash.img"
@@ -113,7 +110,7 @@ operating_systems:
       - actions:
           - fastboot:boot:
               group: "firmware"
-              file: "ubports-recovery-land.img"
+              file: "recovery.img"
         fallback:
           - core:user_action:
               action: "recovery"
