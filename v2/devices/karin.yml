@@ -80,6 +80,7 @@ operating_systems:
                 - partition: "boot"
                   file: "halium-unlocked-recovery_karin.img"
                   group: "firmware"
+                  raw: true
                 - partition: "recovery"
                   file: "halium-unlocked-recovery_karin.img"
                   group: "firmware"

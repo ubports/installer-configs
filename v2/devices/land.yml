@@ -1,17 +1,17 @@
-name: "Xiaomi Redmi Note 7"
-codename: "lavender"
+name: "Xiaomi Redmi 3S 3X 3SP"
+codename: "land"
 formfactor: "phone"
 aliases: []
 doppelgangers: []
 user_actions:
   recovery:
     title: "Reboot to Recovery"
-    description: "With the device powered off, hold Volume Up + Power."
+    description: "With the device powered off, hold Volume Up + Power, Not working ? try to unplug cable and hold Vol Up + Vol Down + Power."
     image: "phone_power_up"
     button: true
   bootloader:
     title: "Reboot to Bootloader"
-    description: "With the device powered off, hold Volume Down + Power."
+    description: "With the device powered off, hold Volume Down + Power"
     image: "phone_power_down"
     button: true
   boot:
@@ -19,20 +19,25 @@ user_actions:
     description: "Power on the device."
     image: "phone_power_up"
     button: true
-  confirm_model:
-    title: "Confirm your model"
-    description: "Please double-check that your device is a Xiaomi Redmi Note 7 (lavender)."
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."
-    link: "https://en.miui.com/unlock/"
+    link: "https://en.miui.com/unlock"
+  support:
+    title: "Support"
+    description: "For details about Ubuntu Touch support for the Redmi 3s/3x/3sp, please head over to the UBports forum thread."
+    link: "https://t.me/utland"
+  confirm_model:
+    title: "Confirm your model"
+    description: "Please double-check that your device is a Xiaomi Redmi 3S/3X/3SP (land)."
 unlock:
   - "confirm_model"
   - "unlock"
+  - "support"
 handlers:
   bootloader_locked:
     actions:
-      - fastboot:oem_unlock:
+      - fastboot:flashing_unlock:
 operating_systems:
   - name: "Ubuntu Touch"
     options:
@@ -45,7 +50,7 @@ operating_systems:
           systemimage:channels:
       - var: "wipe"
         name: "Wipe Userdata"
-        tooltip: "Wipe personal data"
+        tooltip: "Wipe personal data (required if device is from Android)"
         type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
@@ -55,32 +60,16 @@ operating_systems:
     prerequisites: []
     steps:
       - actions:
-          - core:manual_download:
-              group: "firmware"
-              file:
-                name: "vendor.img"
-                url: "https://www.androidfilehost.com/?fid=10763459528675594236"
-                checksum:
-                  sum: "7b26a7ddc779079c04dbddd983dc1e6108a7711cac26cff06bc9f4309a4edbc7"
-                  algorithm: "sha256"
-        condition:
-          var: "bootstrap"
-          value: true
-      - actions:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://cdimage.ubports.com/devices/lavender/dtbo.img"
+                - url: "https://cdimage.ubports.com/devices/land/recovery.img"
                   checksum:
-                    sum: "84ce5cc1549a87da0ac9e6545251f1317de5ce2322d54c384c366c9bd2d8efc6"
+                    sum: "4468a0c48e719a40273e4de1b1e0e6793e945cd665a812567990cb1b39a61b1f"
                     algorithm: "sha256"
-                - url: "https://cdimage.ubports.com/devices/lavender/recovery.img"
+                - url: "https://github.com/Ubports-Land/Ubports-CI/raw/master/splash.img"
                   checksum:
-                    sum: "990a377a0a87809a9ceb4f85c693e7c7c190224ff98e18a8a0e21966688bda0b"
-                    algorithm: "sha256"
-                - url: "https://cdimage.ubports.com/devices/lavender/vbmeta.img"
-                  checksum:
-                    sum: "65f5493e01ede7e538a14df063013a921ecd122680c7d3b3598d46fc7a916517"
+                    sum: "9b91dfb62c80cc533303687e132194a789da867524cbf4518d5e2bfa175e7bbd"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -95,8 +84,14 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
-          - fastboot:format:
-              partition: "system"
+          - fastboot:flash:
+              partitions:
+                - partition: "recovery"
+                  file: "recovery.img"
+                  group: "firmware"
+                - partition: "splash"
+                  file: "splash.img"
+                  group: "firmware"
         condition:
           var: "bootstrap"
           value: true
@@ -113,31 +108,15 @@ operating_systems:
           var: "wipe"
           value: true
       - actions:
-          - fastboot:flash:
-              partitions:
-                - partition: "boot"
-                  file: "recovery.img"
-                  group: "firmware"
-                - partition: "recovery"
-                  file: "recovery.img"
-                  group: "firmware"
-                - partition: "dtbo"
-                  file: "dtbo.img"
-                  group: "firmware"
-                - partition: "vendor"
-                  file: "vendor.img"
-                  group: "firmware"
-                - partition: "vbmeta"
-                  file: "vbmeta.img"
-                  group: "firmware"
+          - fastboot:boot:
+              group: "firmware"
+              file: "recovery.img"
+        fallback:
+          - core:user_action:
+              action: "recovery"
         condition:
           var: "bootstrap"
           value: true
-      - actions:
-          - fastboot:reboot:
-        fallback:
-          - core:user_action:
-              action: "boot"
       - actions:
           - systemimage:install:
       - actions:

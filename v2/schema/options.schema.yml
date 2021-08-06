@@ -31,12 +31,13 @@ items:
       title: Remote values
       type: "object"
       description: "If the values can be generated from a remote source like the systemimage api, this provides the required information for that."
+      additionalProperties: false
+      maxProperties: 1
       properties:
-        type:
-          title: Remote value
-          type: "string"
-          enum:
-            - "systemimagechannels"
+        systemimage:channels:
+          type: "null"
+        asteroid_os:channels:
+          type: "null"
     value:
       description: "Default value of the option"
     values:
