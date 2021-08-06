@@ -81,7 +81,7 @@ operating_systems:
               files:
                 - url: "https://gitlab.com/ubports/community-ports/android9/fairphone-3/fairphone-fp3/-/jobs/1484388474/artifacts/raw/out/boot.img"
                   checksum:
-                    sum: "1585837cdfedfe0f4411eeb6c00893c0a2cd61a507378b2dfbb04be2ba2eb7fb"
+                    sum: "96e2639cfa9f5bc0a7cc81be8fd3c38a1d443bbd0b42c719bc3186841927b787"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"

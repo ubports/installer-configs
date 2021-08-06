@@ -21,6 +21,8 @@
   "kugo": "Sony Xperia X Compact (F5321)",
   "karin": "Sony Xperia Z4 Tablet (SGP771 & SGP712)",
   "santoni": "Xiaomi Redmi 4X",
+  "walleye": "Google Pixel 2 (walleye)",
+  "taimen": "Google Pixel 2 XL (taimen)",
   "sargo": "Google Pixel 3a (sargo)",
   "oneplus2": "Oneplus 2",
   "pro1": "F(x)tec Pro1",
@@ -29,5 +31,6 @@
   "trltespr": "Samsung Galaxy Note 4 910P",
   "trltetmo": "Samsung Galaxy Note 4 910T",
   "jasmine_sprout": "Xiaomi Mi A2",
-  "s3ve3g": "Samsung S3 Neo (GT-I9301)"
+  "s3ve3g": "Samsung S3 Neo (GT-I9301)",
+  "h815": "LG G4 International (h815)"
 }

@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/ubports/installer-configs#readme",
   "devDependencies": {
-    "@adobe/jsonschema2md": "^4.2.1",
+    "@adobe/jsonschema2md": "^6.0.3",
     "@apidevtools/json-schema-ref-parser": "^9.0.6",
     "ajv-cli": "^4.0.1",
     "commander": "^2.20.3",
