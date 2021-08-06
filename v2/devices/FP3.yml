@@ -1,0 +1,147 @@
+name: "Fairphone 3"
+codename: "fp3"
+formfactor: "phone"
+aliases: []
+doppelgangers: []
+user_actions:
+  confirm_model:
+    title: "Confirm your model"
+    description: "Please double-check that your device is a Fairphone 3 (FP3), not Fairphone 3+ (FP3+). The new camera and audio modules are not supported in this version, and will not work! Please have a look at the UBports forum if you want to install Ubuntu Touch on your FP3+."
+    link: "https://forums.ubports.com/topic/5939/fairphone-3-3-fp3-fp3-port-halium-10"
+  unlock_bootloader:
+    title: "Unlock your phone"
+    description: 'Your device must be "unlocked" in order to be able to flash it. Please check the link below and follow the instructions.'
+    link: "https://www.fairphone.com/en/bootloader-unlocking-code-for-fairphone-3"
+  bootloader:
+    title: "Reboot to Bootloader"
+    description: "With the device powered off, press and hold the VOLUME DOWN and POWER buttons at the same time until the phone vibrates. After some seconds you'll see the fastboot mode. Or just reboot, press a VOLUME BUTTON within 5 seconds and select the Fastboot mode with the VOLUME BUTTONS. Confirm with the POWER BUTTON."
+    image: "phone_power_down"
+    button: true
+  recovery:
+    title: "Reboot to Recovery"
+    description: "With the device still at the \"Fastboot Mode\" (green), use the Volume buttons to switch to \"Recovery Mode\" (red) and push the power button to confirm your selection."
+    image: "phone_power_up"
+    button: true
+unlock:
+  - "confirm_model"
+  - "unlock_bootloader"
+handlers:
+  bootloader_locked:
+    actions:
+      - fastboot:oem_unlock:
+operating_systems:
+  - name: "Ubuntu Touch"
+    options:
+      - var: "channel"
+        name: "Channel"
+        tooltip: "The release channel"
+        link: "https://docs.ubports.com/en/latest/about/process/release-schedule.html"
+        type: "select"
+        remote_values:
+          systemimage:channels:
+      - var: "wipe"
+        name: "Wipe Userdata"
+        tooltip: "Wipe personal data"
+        type: "checkbox"
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Flash system partitions using fastboot"
+        type: "checkbox"
+        value: true
+      - var: "flashvendor"
+        name: "Flash Android 9 vendor-partition"
+        tooltip: "Needed, if the device is currently running Android 10."
+        type: "checkbox"
+        value: true
+    prerequisites: []
+    steps:
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://gitlab.com/fairphone-3/fp3-assets/-/raw/main/fp3-android9-stock-vendor-img.zip"
+                  checksum:
+                    sum: "051175f14b30a2d793c733c06f195082d528632f3cc7f1a3b82bf77b853b87fb"
+                    algorithm: "sha256"
+        condition:
+          var: "flashvendor"
+          value: true
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "fp3-android9-stock-vendor-img.zip"
+                  dir: "unpacked"
+        condition:
+          var: "flashvendor"
+          value: true
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://gitlab.com/ubports/community-ports/android9/fairphone-3/fairphone-fp3/-/jobs/1484388474/artifacts/raw/out/boot.img"
+                  checksum:
+                    sum: "96e2639cfa9f5bc0a7cc81be8fd3c38a1d443bbd0b42c719bc3186841927b787"
+                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "boot"
+                  file: "boot.img"
+                  group: "firmware"
+                  raw: true
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "vendor"
+                  file: "unpacked/vendor.img"
+                  group: "firmware"
+        condition:
+          var: "flashvendor"
+          value: true
+      - actions:
+          - fastboot:format:
+              partition: "userdata"
+              type: "ext4"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - core:user_action:
+              action: "recovery"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+        condition:
+          var: "bootstrap"
+          value: false
+      - actions:
+          - systemimage:install:
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+    slideshow: []
