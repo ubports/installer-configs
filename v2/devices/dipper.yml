@@ -66,6 +66,10 @@ operating_systems:
                   checksum:
                     sum: "a937ea333ca5a8c348f56fdfc3d876b3ccbb3da8247b68b47c889170e4437307"
                     algorithm: "sha256"
+                - url: "https://github.com/ubports-dipper/artifacts/releases/download/v1/recovery.img"
+                  checksum:
+                    sum: "4a7314a8a0ace1002b6d0921dc05d09272bf2d4896a24f3a49aebb1651fb8b42"
+                    algorithm: "sha256"
         condition:
           var: "bootstrap"
           value: true
@@ -113,7 +117,7 @@ operating_systems:
               partitions:
                 # Ubports Recovery
                 - partition: "recovery"
-                  file: "unpacked/recovery.img"
+                  file: "recovery.img"
                   group: "firmware"
                 # MIUI V11.0.6.0.PEAMIXM A9 vendor
                 - partition: "vendor"
