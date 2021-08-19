@@ -58,11 +58,20 @@ operating_systems:
           - core:manual_download:
               group: "firmware"
               file:
-                name: "vendor.img"
+                name: "lineage-16.0-20200226-lavender-vendor.zip"
                 url: "https://www.androidfilehost.com/?fid=10763459528675594236"
                 checksum:
-                  sum: "7b26a7ddc779079c04dbddd983dc1e6108a7711cac26cff06bc9f4309a4edbc7"
+                  sum: "140caa043fd163965126f511fc3d0fd0afd857befa7fb86f9d9e035e40351107"
                   algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "lineage-16.0-20200226-lavender-vendor.zip"
+                  dir: "unpacked"
         condition:
           var: "bootstrap"
           value: true
@@ -132,7 +141,7 @@ operating_systems:
                   file: "splash.img"
                   group: "firmware"
                 - partition: "vendor"
-                  file: "vendor.img"
+                  file: "unpacked/vendor.img"
                   group: "firmware"
                 - partition: "vbmeta"
                   file: "vbmeta.img"
