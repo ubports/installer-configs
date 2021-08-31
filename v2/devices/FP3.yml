@@ -1,20 +1,23 @@
 name: "Fairphone 3"
-codename: "fp3"
+codename: "FP3"
 formfactor: "phone"
-aliases: []
+aliases: ["Fairphone 3+, FP3+"]
 doppelgangers: []
 user_actions:
   confirm_model:
     title: "Confirm your model"
-    description: "Please double-check that your device is a Fairphone 3 (FP3), not Fairphone 3+ (FP3+). The new camera and audio modules are not supported in this version, and will not work! Please have a look at the UBports forum if you want to install Ubuntu Touch on your FP3+."
-    link: "https://forums.ubports.com/topic/5939/fairphone-3-3-fp3-fp3-port-halium-10"
+    description: "Please check that your device is a Fairphone 3 (FP3) or Fairphone 3+ (FP3+)."
+  confirm_os:
+    title: "Confirm OS version"
+    description: "Your device must be running Android 10 before installing Ubuntu Touch. If it is already running the previous Halium 9 version of Ubuntu Touch and you want to upgrade to the Halium 10 (recommended), you can download and flash the Android 10 stock rom from the link below (More...), which leaves your userdata partition untouched. Afterwards run this installer again."
+    link: "https://androidfilehost.com/?fid=7161016148664787652"
   unlock_bootloader:
     title: "Unlock your phone"
-    description: 'Your device must be "unlocked" in order to be able to flash it. Please check the link below and follow the instructions.'
+    description: 'Your device must be "unlocked" in order to be able to flash it. Unlocking the bootloader will delete your personal data! Please check the link below (More...) and follow the instructions. If your bootloader is already unlocked, you can skip the step.'
     link: "https://www.fairphone.com/en/bootloader-unlocking-code-for-fairphone-3"
   bootloader:
     title: "Reboot to Bootloader"
-    description: "With the device powered off, press and hold the VOLUME DOWN and POWER buttons at the same time until the phone vibrates. After some seconds you'll see the fastboot mode. Or just reboot, press a VOLUME BUTTON within 5 seconds and select the Fastboot mode with the VOLUME BUTTONS. Confirm with the POWER BUTTON."
+    description: "With the device powered off, press and hold the VOLUME DOWN and POWER buttons at the same time until the phone vibrates. After some seconds you'll see the fastboot mode. Or just reboot and press and hold VOLUME DOWN BUTTON while rebooting."
     image: "phone_power_down"
     button: true
   recovery:
@@ -24,6 +27,7 @@ user_actions:
     button: true
 unlock:
   - "confirm_model"
+  - "confirm_os"
   - "unlock_bootloader"
 handlers:
   bootloader_locked:
@@ -48,40 +52,15 @@ operating_systems:
         tooltip: "Flash system partitions using fastboot"
         type: "checkbox"
         value: true
-      - var: "flashvendor"
-        name: "Flash Android 9 vendor-partition"
-        tooltip: "Needed, if the device is currently running Android 10."
-        type: "checkbox"
-        value: true
     prerequisites: []
     steps:
       - actions:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://gitlab.com/fairphone-3/fp3-assets/-/raw/main/fp3-android9-stock-vendor-img.zip"
+                - url: "https://gitlab.com/fairphone-3/fp3-assets/-/raw/main/boot.img"
                   checksum:
-                    sum: "051175f14b30a2d793c733c06f195082d528632f3cc7f1a3b82bf77b853b87fb"
-                    algorithm: "sha256"
-        condition:
-          var: "flashvendor"
-          value: true
-      - actions:
-          - core:unpack:
-              group: "firmware"
-              files:
-                - archive: "fp3-android9-stock-vendor-img.zip"
-                  dir: "unpacked"
-        condition:
-          var: "flashvendor"
-          value: true
-      - actions:
-          - core:download:
-              group: "firmware"
-              files:
-                - url: "https://gitlab.com/ubports/community-ports/android9/fairphone-3/fairphone-fp3/-/jobs/1484388474/artifacts/raw/out/boot.img"
-                  checksum:
-                    sum: "96e2639cfa9f5bc0a7cc81be8fd3c38a1d443bbd0b42c719bc3186841927b787"
+                    sum: "3fe15b9da2bc0550318a027f133516114f3a3fb202162fba177f1d608e5f347a"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -104,15 +83,6 @@ operating_systems:
                   raw: true
         condition:
           var: "bootstrap"
-          value: true
-      - actions:
-          - fastboot:flash:
-              partitions:
-                - partition: "vendor"
-                  file: "unpacked/vendor.img"
-                  group: "firmware"
-        condition:
-          var: "flashvendor"
           value: true
       - actions:
           - fastboot:format:
