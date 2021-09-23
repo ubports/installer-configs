@@ -1,0 +1,115 @@
+name: "Lenovo Smart Tab M10 X605F/L"
+codename: "X605"
+formfactor: "tablet"
+aliases: ["lenovo-x605, tb-x605"]
+doppelgangers: []
+user_actions:
+  confirm_model:
+    title: "Confirm your model"
+    description: "Please check that your device is a Lenovo Smart Tab M10 X605L or X605F."
+  confirm_os:
+    title: "Confirm OS version"
+    description: "Your device must be running Android 9 before installing Ubuntu Touch. For instructions how to flash the Android 9 stock rom, please see the install section in the link below:"
+    link: "https://gitlab.com/ubports/community-ports/android9/lenovo-tab-m10-fhd/lenovo-x605#install"
+  unlock_bootloader:
+    title: "Unlock your device"
+    description: 'Unlock the device bootloader following usual unlock procedure (enable Developer mode, turn on "OEM unlocking" option, then reboot to bootloader and execute `fastboot flashing unlock`. If your bootloader is already unlocked, you can skip this step.'
+  bootloader:
+    title: "Reboot to Bootloader"
+    description: "With the device powered off, press and hold the VOLUME DOWN and POWER buttons at the same time until the device turns on. The bootloader mode is indicated by the red 'Fastboot Mode' text in the left down corner."
+    image: "phone_power_down"
+    button: true
+  recovery:
+    title: "Reboot to Recovery"
+    description: "With the device still at the \"Fastboot Mode\" press and hold the VOLUME UP, VOLUME DOWN and the POWER buttons at the same time until it reboots. Then only release the POWER button and keep holding the VOLUME buttons until the UBports recovery appears."
+    button: true
+unlock:
+  - "confirm_model"
+  - "confirm_os"
+  - "unlock_bootloader"
+handlers:
+  bootloader_locked:
+    actions:
+      - fastboot:flashing_unlock:
+operating_systems:
+  - name: "Ubuntu Touch"
+    options:
+      - var: "channel"
+        name: "Channel"
+        tooltip: "The release channel"
+        link: "https://docs.ubports.com/en/latest/about/process/release-schedule.html"
+        type: "select"
+        remote_values:
+          systemimage:channels:
+      - var: "wipe"
+        name: "Wipe Userdata"
+        tooltip: "Wipe personal data"
+        type: "checkbox"
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Flash system partitions using fastboot"
+        type: "checkbox"
+        value: true
+    prerequisites: []
+    steps:
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://gitlab.com/ubports/community-ports/android9/lenovo-tab-m10-fhd/lenovo-x605/-/jobs/1618124815/artifacts/raw/out/boot.img"
+                  checksum:
+                    sum: "91b050f5323f657a2be6c55843803f4aa5b730bebdf3933ffc6d99fe44a33a5a"
+                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "boot"
+                  file: "boot.img"
+                  group: "firmware"
+                  raw: true
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:format:
+              partition: "userdata"
+              type: "ext4"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - core:user_action:
+              action: "recovery"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+        condition:
+          var: "bootstrap"
+          value: false
+      - actions:
+          - systemimage:install:
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+    slideshow: []
