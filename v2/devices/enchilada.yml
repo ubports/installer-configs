@@ -57,12 +57,12 @@ operating_systems:
               group: "firmware"
               files:
                 - name: "boot.img"
-                  url: "https://gitlab.com/SevralT/ubports-oneplus6/-/raw/master/halium/boot.img"
+                  url: "https://cdimage.ubports.com/devices/enchilada_fajita/boot.img"
                   checksum:
                     sum: "e931800a0ab4f7743c395cfccdac1919f0fab6d9b3cb7582c71fbd4f30fa9612"
                     algorithm: "sha256"
                 - name: "vbmeta.img"
-                  url: "https://gitlab.com/SevralT/ubports-oneplus6/-/raw/master/vbmeta.img"
+                  url: "https://cdimage.ubports.com/devices/enchilada_fajita/vbmeta.img"
                   checksum:
                     sum: "f406f8c2c89aaeeecaaa8719b832a3c6011d36c49a8d7db26b452638f9cb091c"
                     algorithm: "sha256"
