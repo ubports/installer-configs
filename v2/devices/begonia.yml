@@ -1,6 +1,7 @@
 name: "Xiaomi Redmi Note 8 Pro"
 codename: "begonia"
 formfactor: "phone"
+aliases: []
 doppelgangers: []
 user_actions:
   recovery:
