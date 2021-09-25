@@ -1,6 +1,7 @@
 name: "Volla Phone X"
 codename: "yggdrasilx"
 formfactor: "phone"
+aliases: []
 doppelgangers: ["yggdrasil"]
 user_actions:
   recovery:
