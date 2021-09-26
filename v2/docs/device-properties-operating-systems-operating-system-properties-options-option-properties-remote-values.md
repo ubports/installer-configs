@@ -24,6 +24,7 @@ If the values can be generated from a remote source like the systemimage api, th
 | :------------------------------------------- | :------------ | :------- | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [systemimage:channels](#systemimagechannels) | Not specified | Optional | can be null | [Device](device-properties-operating-systems-operating-system-properties-options-option-properties-remote-values-properties-systemimagechannels.md "v2/schema/options.schema.yml#/properties/operating_systems/items/properties/options/items/properties/remote_values/properties/systemimage:channels") |
 | [asteroid_os:channels](#asteroid_oschannels) | Not specified | Optional | can be null | [Device](device-properties-operating-systems-operating-system-properties-options-option-properties-remote-values-properties-asteroid_oschannels.md "v2/schema/options.schema.yml#/properties/operating_systems/items/properties/options/items/properties/remote_values/properties/asteroid_os:channels") |
+| [lineage_os:channels](#lineage_oschannels)   | Not specified | Optional | can be null | [Device](device-properties-operating-systems-operating-system-properties-options-option-properties-remote-values-properties-lineage_oschannels.md "v2/schema/options.schema.yml#/properties/operating_systems/items/properties/options/items/properties/remote_values/properties/lineage_os:channels")   |
 
 ## systemimage:channels
 
@@ -58,5 +59,23 @@ If the values can be generated from a remote source like the systemimage api, th
 *   defined in: [Device](device-properties-operating-systems-operating-system-properties-options-option-properties-remote-values-properties-asteroid_oschannels.md "v2/schema/options.schema.yml#/properties/operating_systems/items/properties/options/items/properties/remote_values/properties/asteroid_os:channels")
 
 ### asteroid_os:channels Type
+
+`null`, the value must be null
+
+## lineage_os:channels
+
+
+
+`lineage_os:channels`
+
+*   is optional
+
+*   Type: `null`, the value must be null
+
+*   can be null
+
+*   defined in: [Device](device-properties-operating-systems-operating-system-properties-options-option-properties-remote-values-properties-lineage_oschannels.md "v2/schema/options.schema.yml#/properties/operating_systems/items/properties/options/items/properties/remote_values/properties/lineage_os:channels")
+
+### lineage_os:channels Type
 
 `null`, the value must be null

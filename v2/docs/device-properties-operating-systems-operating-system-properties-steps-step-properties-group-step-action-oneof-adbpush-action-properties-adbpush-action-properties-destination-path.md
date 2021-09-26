@@ -1,7 +1,7 @@
 # Destination path Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/21/properties/adb:push/properties/dest
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/23/properties/adb:push/properties/dest
 ```
 
 Path on the device to push files to

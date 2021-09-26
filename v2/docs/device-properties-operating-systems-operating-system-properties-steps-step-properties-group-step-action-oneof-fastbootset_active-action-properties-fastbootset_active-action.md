@@ -1,7 +1,7 @@
 # fastboot:set_active action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/16/properties/fastboot:set_active
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/18/properties/fastboot:set_active
 ```
 
 
@@ -18,7 +18,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 
 | Property      | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                                                                                              |
 | :------------ | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [slot](#slot) | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootset_active-action-properties-fastbootset_active-action-properties-to-state.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/16/properties/fastboot:set_active/properties/slot") |
+| [slot](#slot) | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootset_active-action-properties-fastbootset_active-action-properties-to-state.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/18/properties/fastboot:set_active/properties/slot") |
 
 ## slot
 
@@ -32,7 +32,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 
 *   cannot be null
 
-*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootset_active-action-properties-fastbootset_active-action-properties-to-state.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/16/properties/fastboot:set_active/properties/slot")
+*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootset_active-action-properties-fastbootset_active-action-properties-to-state.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/18/properties/fastboot:set_active/properties/slot")
 
 ### slot Type
 

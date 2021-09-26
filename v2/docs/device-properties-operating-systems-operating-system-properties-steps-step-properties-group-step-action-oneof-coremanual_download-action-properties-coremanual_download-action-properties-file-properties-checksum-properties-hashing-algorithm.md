@@ -1,7 +1,7 @@
 # Hashing algorithm Schema
 
 ```txt
-v2/schema/checksum.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:manual_download/properties/file/properties/checksum/properties/algorithm
+v2/schema/checksum.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/28/properties/core:manual_download/properties/file/properties/checksum/properties/algorithm
 ```
 
 Hashing algorithm to use to calculate the checksum

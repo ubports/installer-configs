@@ -1,7 +1,7 @@
 # core:write action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/core:write
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:write
 ```
 
 
@@ -18,9 +18,9 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 
 | Property            | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                                                                     |
 | :------------------ | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [group](#group)     | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action-properties-group.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/core:write/properties/group")     |
-| [file](#file)       | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action-properties-file.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/core:write/properties/file")       |
-| [content](#content) | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action-properties-content.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/core:write/properties/content") |
+| [group](#group)     | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action-properties-group.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:write/properties/group")     |
+| [file](#file)       | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action-properties-file.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:write/properties/file")       |
+| [content](#content) | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action-properties-content.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:write/properties/content") |
 
 ## group
 
@@ -34,7 +34,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 
 *   cannot be null
 
-*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action-properties-group.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/core:write/properties/group")
+*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action-properties-group.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:write/properties/group")
 
 ### group Type
 
@@ -52,7 +52,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 
 *   cannot be null
 
-*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action-properties-file.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/core:write/properties/file")
+*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action-properties-file.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:write/properties/file")
 
 ### file Type
 
@@ -70,7 +70,7 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 
 *   cannot be null
 
-*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action-properties-content.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/core:write/properties/content")
+*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-corewrite-action-properties-corewrite-action-properties-content.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/26/properties/core:write/properties/content")
 
 ### content Type
 

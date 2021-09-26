@@ -1,7 +1,7 @@
 # Untitled string in Device Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/17/properties/adb:reboot/properties/args/items
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/19/properties/adb:reboot/properties/args/items
 ```
 
 

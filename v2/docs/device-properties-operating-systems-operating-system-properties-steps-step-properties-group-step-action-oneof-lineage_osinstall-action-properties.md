@@ -1,7 +1,7 @@
-# Untitled null in Device Schema
+# Untitled undefined type in Device Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/24/properties/adb:preparesystemimage
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/11/properties
 ```
 
 
@@ -10,6 +10,6 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 | :------------------ | :--------- | :------------- | :---------------------- | :---------------- | :-------------------- | :------------------ | :------------------------------------------------------------------ |
 | Can be instantiated | No         | Unknown status | Unknown identifiability | Forbidden         | Allowed               | none                | [device.schema.json*](../device.schema.json "open original schema") |
 
-## adb:preparesystemimage Type
+## properties Type
 
-`null`, the value must be null
+unknown

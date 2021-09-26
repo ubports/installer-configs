@@ -36,6 +36,10 @@ one (and only one) of
 
 *   [asteroid_os:download action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-asteroid_osdownload-action.md "check type definition")
 
+*   [lineage_os:download action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-lineage_osdownload-action.md "check type definition")
+
+*   [lineage_os:install action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-lineage_osinstall-action.md "check type definition")
+
 *   [fastboot:boot action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootboot-action.md "check type definition")
 
 *   [fastboot:reboot action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootreboot-action.md "check type definition")

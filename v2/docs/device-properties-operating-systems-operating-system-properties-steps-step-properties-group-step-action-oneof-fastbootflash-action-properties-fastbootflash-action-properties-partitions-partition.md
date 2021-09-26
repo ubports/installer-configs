@@ -1,7 +1,7 @@
 # Partition Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/15/properties/fastboot:flash/properties/partitions/items
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/17/properties/fastboot:flash/properties/partitions/items
 ```
 
 Partition to flash
@@ -18,9 +18,9 @@ Partition to flash
 
 | Property                | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | :---------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [partition](#partition) | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflash-action-properties-fastbootflash-action-properties-partitions-partition-properties-partition.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/15/properties/fastboot:flash/properties/partitions/items/properties/partition") |
-| [file](#file)           | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflash-action-properties-fastbootflash-action-properties-partitions-partition-properties-file.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/15/properties/fastboot:flash/properties/partitions/items/properties/file")           |
-| [group](#group)         | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflash-action-properties-fastbootflash-action-properties-partitions-partition-properties-group.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/15/properties/fastboot:flash/properties/partitions/items/properties/group")         |
+| [partition](#partition) | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflash-action-properties-fastbootflash-action-properties-partitions-partition-properties-partition.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/17/properties/fastboot:flash/properties/partitions/items/properties/partition") |
+| [file](#file)           | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflash-action-properties-fastbootflash-action-properties-partitions-partition-properties-file.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/17/properties/fastboot:flash/properties/partitions/items/properties/file")           |
+| [group](#group)         | `string` | Optional | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflash-action-properties-fastbootflash-action-properties-partitions-partition-properties-group.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/17/properties/fastboot:flash/properties/partitions/items/properties/group")         |
 
 ## partition
 
@@ -34,7 +34,7 @@ Partition to flash
 
 *   cannot be null
 
-*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflash-action-properties-fastbootflash-action-properties-partitions-partition-properties-partition.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/15/properties/fastboot:flash/properties/partitions/items/properties/partition")
+*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflash-action-properties-fastbootflash-action-properties-partitions-partition-properties-partition.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/17/properties/fastboot:flash/properties/partitions/items/properties/partition")
 
 ### partition Type
 
@@ -52,7 +52,7 @@ Partition to flash
 
 *   cannot be null
 
-*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflash-action-properties-fastbootflash-action-properties-partitions-partition-properties-file.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/15/properties/fastboot:flash/properties/partitions/items/properties/file")
+*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflash-action-properties-fastbootflash-action-properties-partitions-partition-properties-file.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/17/properties/fastboot:flash/properties/partitions/items/properties/file")
 
 ### file Type
 
@@ -70,7 +70,7 @@ Partition to flash
 
 *   cannot be null
 
-*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflash-action-properties-fastbootflash-action-properties-partitions-partition-properties-group.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/15/properties/fastboot:flash/properties/partitions/items/properties/group")
+*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-fastbootflash-action-properties-fastbootflash-action-properties-partitions-partition-properties-group.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/17/properties/fastboot:flash/properties/partitions/items/properties/group")
 
 ### group Type
 

@@ -1,7 +1,7 @@
 # adb:sideload action Schema
 
 ```txt
-v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/20
+v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/22
 ```
 
 
@@ -10,15 +10,15 @@ v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps
 | :------------------ | :--------- | :------------- | :----------- | :---------------- | :-------------------- | :------------------ | :------------------------------------------------------------------ |
 | Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [device.schema.json*](../device.schema.json "open original schema") |
 
-## 20 Type
+## 22 Type
 
 unknown ([adb:sideload action](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action.md))
 
-# 20 Properties
+# 22 Properties
 
 | Property                     | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                                                                                                     |
 | :--------------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [adb:sideload](#adbsideload) | `object` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/20/properties/adb:sideload") |
+| [adb:sideload](#adbsideload) | `object` | Required | cannot be null | [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/22/properties/adb:sideload") |
 
 ## adb:sideload
 
@@ -32,7 +32,7 @@ unknown ([adb:sideload action](device-properties-operating-systems-operating-sys
 
 *   cannot be null
 
-*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/20/properties/adb:sideload")
+*   defined in: [Device](device-properties-operating-systems-operating-system-properties-steps-step-properties-group-step-action-oneof-adbsideload-action-properties-adbsideload-action.md "v2/schema/action.schema.yml#/properties/operating_systems/items/properties/steps/items/properties/actions/items/oneOf/22/properties/adb:sideload")
 
 ### adb:sideload Type
 
