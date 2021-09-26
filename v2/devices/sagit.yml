@@ -58,10 +58,10 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://github.com/UbuntuTouch-sagit/ubuntu-touch-sagit/releases/download/v1.0/vendor.zip"
+                - url: "https://github.com/UbuntuTouch-sagit/ubuntu-touch-sagit/releases/download/v1.1/vendor.zip"
                   name: "vendor.zip"
                   checksum:
-                    sum: "83a4b9a29e8f5bdae188f2ce2d0487edcdc43ddc51ddf5aa66c6f1758b69f8ed"
+                    sum: "13b018a5e72a966b22cc4fdabfacdd5eff434366269602b1bae713973f57aaa6"
                     algorithm: "sha256"
                 - url: "https://github.com/UbuntuTouch-sagit/ubuntu-touch-sagit/releases/download/v1.0/recovery.img"
                   name: "recovery.img"
