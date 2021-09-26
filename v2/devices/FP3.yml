@@ -1,34 +1,38 @@
-name: "Google Pixel 3a/3a XL"
-codename: "sargo"
+name: "Fairphone 3"
+codename: "FP3"
 formfactor: "phone"
-aliases: []
+aliases: ["Fairphone 3+, FP3+"]
 doppelgangers: []
 user_actions:
+  confirm_model:
+    title: "Confirm your model"
+    description: "Please check that your device is a Fairphone 3 (FP3) or Fairphone 3+ (FP3+)."
+  confirm_os:
+    title: "Confirm OS version"
+    description: "Your device must be running Android 10 before installing Ubuntu Touch. If it is already running the previous Halium 9 version of Ubuntu Touch and you want to upgrade to the Halium 10 (recommended), you can download and flash the Android 10 stock rom from the link below (More...), which leaves your userdata partition untouched. Afterwards run this installer again."
+    link: "https://androidfilehost.com/?fid=7161016148664787652"
+  unlock_bootloader:
+    title: "Unlock your phone"
+    description: 'Your device must be "unlocked" in order to be able to flash it. Unlocking the bootloader will delete your personal data! Please check the link below (More...) and follow the instructions. If your bootloader is already unlocked, you can skip the step.'
+    link: "https://www.fairphone.com/en/bootloader-unlocking-code-for-fairphone-3"
   bootloader:
     title: "Reboot to Bootloader"
-    description: "With the device powered off, press and hold the volume down and power buttons until the screen turns on. It should say 'Fastboot Mode' underneath the warning sign."
+    description: "With the device powered off, press and hold the VOLUME DOWN and POWER buttons at the same time until the phone vibrates. After some seconds you'll see the fastboot mode. Or just reboot and press and hold VOLUME DOWN BUTTON while rebooting."
     image: "phone_power_down"
     button: true
   recovery:
     title: "Reboot to Recovery"
-    description: "With the device still at the 'Fastboot Mode' screen (if not, power off the device and press and hold volume down and power buttons until the screen turns on), select the 'Recovery Mode' option by using the volume buttons and press the power button to enter."
-    image: "phone_power_down"
+    description: 'With the device still at the "Fastboot Mode" (green), use the Volume buttons to switch to "Recovery Mode" (red) and push the power button to confirm your selection.'
+    image: "phone_power_up"
     button: true
-  downgrade_android:
-    title: "Downgrade Android"
-    description: "If the device is running an Android version above 9.0, you have to downgrade to the last 9.0 release. Please make sure to flash version PQ3B.190801.002 of the factory image before proceeding."
-    link: "https://developers.google.com/android/images#sargo"
-  support:
-    title: "Support"
-    description: "For details about Ubuntu Touch support for the Pixel 3a & 3a XL, please head over to the UBports forum thread."
-    link: "https://forums.ubports.com/topic/4621/google-pixel-3a-sargo"
 unlock:
-  - "downgrade_android"
-  - "support"
+  - "confirm_model"
+  - "confirm_os"
+  - "unlock_bootloader"
 handlers:
   bootloader_locked:
     actions:
-      - fastboot:flashing_unlock:
+      - fastboot:oem_unlock:
 operating_systems:
   - name: "Ubuntu Touch"
     options:
@@ -54,17 +58,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://cdimage.ubports.com/devices/sargo/boot.img"
+                - url: "https://gitlab.com/fairphone-3/fp3-assets/-/raw/main/boot.img"
                   checksum:
-                    sum: "3125fa5cdd097cd69b8005af13e4c6a4a4cc61b83c6b13b219799def51fff2fa"
-                    algorithm: "sha256"
-                - url: "https://cdimage.ubports.com/devices/sargo/dtbo.img"
-                  checksum:
-                    sum: "51e63686ee4bb15e1ddc296f8809996d645d114347daebacc561cf02d2bfce2d"
-                    algorithm: "sha256"
-                - url: "https://cdimage.ubports.com/devices/sargo/vbmeta.img"
-                  checksum:
-                    sum: "854a2c2a5e82c2c49a5d9d62c70334002c7dcd9203f904952ff5fc43b2eac420"
+                    sum: "3fe15b9da2bc0550318a027f133516114f3a3fb202162fba177f1d608e5f347a"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -84,15 +80,7 @@ operating_systems:
                 - partition: "boot"
                   file: "boot.img"
                   group: "firmware"
-                - partition: "dtbo"
-                  file: "dtbo.img"
-                  group: "firmware"
-                - partition: "vbmeta"
-                  file: "vbmeta.img"
-                  group: "firmware"
-                  flags:
-                    - "--disable-verity"
-                    - "--disable-verification"
+                  raw: true
         condition:
           var: "bootstrap"
           value: true

@@ -1,5 +1,5 @@
-name: "Xiaomi Redmi Note 7"
-codename: "lavender"
+name: "Xiaomi Redmi Note 7 Pro"
+codename: "violet"
 formfactor: "phone"
 aliases: []
 doppelgangers: []
@@ -21,7 +21,7 @@ user_actions:
     button: true
   confirm_model:
     title: "Confirm your model"
-    description: "Please double-check that your device is a Xiaomi Redmi Note 7 (lavender)."
+    description: "Please double-check that your device is a Xiaomi Redmi Note 7 Pro (violet)."
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."
@@ -45,7 +45,7 @@ operating_systems:
           systemimage:channels:
       - var: "wipe"
         name: "Wipe Userdata"
-        tooltip: "Wipe personal data"
+        tooltip: "Wipe personal data (required if the previously installed OS is Android, MIUI or LineageOS)"
         type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
@@ -55,33 +55,47 @@ operating_systems:
     prerequisites: []
     steps:
       - actions:
-          - core:manual_download:
+          - core:download:
               group: "firmware"
-              file:
-                name: "vendor.img"
-                url: "https://www.androidfilehost.com/?fid=10763459528675594236"
-                checksum:
-                  sum: "7b26a7ddc779079c04dbddd983dc1e6108a7711cac26cff06bc9f4309a4edbc7"
-                  algorithm: "sha256"
+              files:
+                - url: "https://gitlab.com/ubports/community-ports/android9/xiaomi-redmi-note-7-pro/xiaomi-violet/-/jobs/artifacts/master/raw/out/splash.img?job=devel-flashable"
+                  name: "splash.img"
+                - url: "https://gitlab.com/ubports/community-ports/android9/xiaomi-redmi-note-7-pro/xiaomi-violet/-/jobs/artifacts/master/raw/out/recovery.img?job=devel-flashable"
+                  name: "recovery.img"
+                - url: "https://github.com/ubuntu-touch-violet/ubuntu-touch-violet/releases/download/20210510/vendor.zip"
+                  name: "vendor.zip"
+                  checksum:
+                    sum: "e49e199f7980c5200a0b90b489aa0fb6c3d3e612256d6dcac159414f965f0512"
+                    algorithm: "sha256"
+                - url: "https://github.com/ubuntu-touch-violet/ubuntu-touch-violet/releases/download/20210510/dtbo.img"
+                  name: "dtbo.img"
+                  checksum:
+                    sum: "dbeba15ce9345e1a43779b6509fd4dd76eb2c521610eb15203abdcecdb82261b"
+                    algorithm: "sha256"
+                - url: "https://github.com/ubuntu-touch-violet/ubuntu-touch-violet/releases/download/20210510/dsp.img"
+                  name: "dsp.img"
+                  checksum:
+                    sum: "67267993bc3256de9ddb367a8083f66eec2e9036347a1dc2374d8e7e5958462e"
+                    algorithm: "sha256"
+                - url: "https://github.com/ubuntu-touch-violet/ubuntu-touch-violet/releases/download/20210510/bluetooth.img"
+                  name: "bluetooth.img"
+                  checksum:
+                    sum: "b3d78c2c01ea17c78a49ef604cfcde3dc72dcdf7f34c9aa09ce72eded7cbc2f0"
+                    algorithm: "sha256"
+                - url: "https://github.com/ubuntu-touch-violet/ubuntu-touch-violet/releases/download/20210510/modem.img"
+                  name: "modem.img"
+                  checksum:
+                    sum: "e7155f8095a45f1a925bca9c81df145a2e8a90e359a85b5face3986f520ba71c"
+                    algorithm: "sha256"
         condition:
           var: "bootstrap"
           value: true
       - actions:
-          - core:download:
+          - core:unpack:
               group: "firmware"
               files:
-                - url: "https://cdimage.ubports.com/devices/lavender/dtbo.img"
-                  checksum:
-                    sum: "84ce5cc1549a87da0ac9e6545251f1317de5ce2322d54c384c366c9bd2d8efc6"
-                    algorithm: "sha256"
-                - url: "https://cdimage.ubports.com/devices/lavender/recovery.img"
-                  checksum:
-                    sum: "990a377a0a87809a9ceb4f85c693e7c7c190224ff98e18a8a0e21966688bda0b"
-                    algorithm: "sha256"
-                - url: "https://cdimage.ubports.com/devices/lavender/vbmeta.img"
-                  checksum:
-                    sum: "65f5493e01ede7e538a14df063013a921ecd122680c7d3b3598d46fc7a916517"
-                    algorithm: "sha256"
+                - archive: "vendor.zip"
+                  dir: "unpacked"
         condition:
           var: "bootstrap"
           value: true
@@ -109,6 +123,7 @@ operating_systems:
       - actions:
           - fastboot:format:
               partition: "userdata"
+              type: "ext4"
         condition:
           var: "wipe"
           value: true
@@ -121,14 +136,23 @@ operating_systems:
                 - partition: "recovery"
                   file: "recovery.img"
                   group: "firmware"
+                - partition: "splash"
+                  file: "splash.img"
+                  group: "firmware"
+                - partition: "bluetooth"
+                  file: "bluetooth.img"
+                  group: "firmware"
+                - partition: "dsp"
+                  file: "dsp.img"
+                  group: "firmware"
                 - partition: "dtbo"
                   file: "dtbo.img"
                   group: "firmware"
-                - partition: "vendor"
-                  file: "vendor.img"
+                - partition: "modem"
+                  file: "modem.img"
                   group: "firmware"
-                - partition: "vbmeta"
-                  file: "vbmeta.img"
+                - partition: "vendor"
+                  file: "unpacked/vendor.img"
                   group: "firmware"
         condition:
           var: "bootstrap"
@@ -137,7 +161,10 @@ operating_systems:
           - fastboot:reboot:
         fallback:
           - core:user_action:
-              action: "boot"
+              action: "recovery"
+        condition:
+          var: "bootstrap"
+          value: true
       - actions:
           - systemimage:install:
       - actions:

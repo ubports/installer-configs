@@ -30,6 +30,37 @@ oneOf:
                   title: Group
                   type: string
         additionalProperties: false
+  - title: core:info action
+    required: ["core:info"]
+    properties:
+      core:info:
+        title: "core:info action"
+        type: "object"
+        properties:
+          status:
+            title: Status message
+            type: string
+            description: Message displayed in the upper line of the footer
+          dots:
+            title: Dots (waiting animation)
+            type: boolean
+            description: Dots (waiting animation) in the upper line of the footer
+          info:
+            title: Info message
+            type: string
+            description: Message displayed in the lower line of the footer
+          progress:
+            title: Progress
+            type: number
+            description: Progress bar (omit to hide)
+            minimum: 0
+            maximum: 1
+          speed:
+            title: Speed
+            type: number
+            description: speed in MB/s (omit to hide)
+            minimum: 0
+            maximum: 5000
   - title: core:group action
     required: ["core:group"]
     properties:
@@ -195,6 +226,22 @@ oneOf:
             type: "string"
             enum: ["a", "b"]
         additionalProperties: false
+  - title: adb:shell action
+    required: ["adb:shell"]
+    properties:
+      adb:reboot:
+        title: "adb:shell action"
+        type: "object"
+        description: Run a command on the device via adb shell
+        properties:
+          args:
+            title: Arguments
+            type: "array"
+            description: "Shell arguments"
+            items:
+              type: string
+        required: ["args"]
+        additionalProperties: false
   - title: adb:reboot action
     required: ["adb:reboot"]
     properties:
@@ -241,6 +288,36 @@ oneOf:
           - file
           - group
         additionalProperties: false
+  - title: adb:push action
+    required: ["adb:push"]
+    properties:
+      adb:push:
+        title: "adb:push action"
+        type: "object"
+        properties:
+          files:
+            title: Files
+            description: File names to push
+            type: array
+            items:
+              type: string
+          group:
+            title: Group
+            type: string
+          dest:
+            title: Destination path
+            description: Path on the device to push files to
+            type: string
+        required:
+          - file
+          - group
+        additionalProperties: false
+  - title: adb:preparesystemimage action
+    required: ["adb:preparesystemimage"]
+    properties:
+      adb:preparesystemimage:
+        type: "null"
+    additionalProperties: false
   - title: core:download action
     required: ["core:download"]
     properties:
@@ -261,13 +338,35 @@ oneOf:
               type: "object"
               properties:
                 url:
-                  type: "string"
-                  description: "URL of the file to download"
+                  type: string
+                  description: URL of the file to download
+                name:
+                  type: string
+                  description: Name to save the file under on disk
                 checksum:
                   $ref: checksum.schema.yml#
+              required: ["url"]
+              additionalProperties: false
         required:
           - group
           - files
+        additionalProperties: false
+  - title: core:write action
+    required: ["core:write"]
+    properties:
+      core:write:
+        title: "core:write action"
+        type: "object"
+        properties:
+          group:
+            title: Group
+            type: string
+          file:
+            title: File
+            type: string
+          content:
+            title: Content
+            type: string
         additionalProperties: false
   - title: core:unpack action
     required: ["core:unpack"]
