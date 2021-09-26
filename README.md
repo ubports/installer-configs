@@ -45,22 +45,6 @@ Some of the high-level changes include:
 - Many steps have been renamed to allow namespacing for the UBports Installer's new plugin system.
 - Steps may now specify a range of actions that belong together [#17](https://github.com/ubports/installer-configs/issues/17)
 
-#### Migrate
-
-You can use the migration script to quickly migrate a `v1` config to `v2`:
-
-```
-$ ./v2/migrate.js -h
-Usage: ./v2/migrate.js -i ./path/to.json
-
-migrate a v1 JSON config to v2 YAML
-
-Options:
-  -V, --version               output the version number
-  -i, --input <path to json>  v1 file (default: undefined)
-  -h, --help                  output usage information
-```
-
 ### v1
 
 - **published: October 2019**
@@ -75,7 +59,7 @@ Every device is configured by a `<codename>.json` file that contains information
 
 ## License
 
-Original development by [Jan Sprinz](https://spri.nz). Copyright (C) 2019-2020 [UBports Foundation](https://ubports.com).
+Original development by [Jan Sprinz](https://spri.nz). Copyright (C) 2019-2021 [UBports Foundation](https://ubports.com).
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
