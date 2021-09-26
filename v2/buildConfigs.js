@@ -34,7 +34,7 @@ fs.mkdir(path.join("public", "v2", "devices"), { recursive: true })
           formfactor: curr.formfactor,
           operating_systems: curr.operating_systems.map(os => os.name)
         });
-        curr.aliases.forEach(alias => {
+        (curr.aliases || []).forEach(alias => {
           if (acc.aliases[alias]) {
             acc.aliases[alias].push(curr.codename);
           } else {
