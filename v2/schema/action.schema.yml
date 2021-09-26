@@ -127,6 +127,18 @@ oneOf:
       asteroid_os:download:
         title: "asteroid_os:download action"
         type: "null"
+  - title: lineage_os:download action
+    required: ["lineage_os:download"]
+    properties:
+      lineage_os:download:
+        title: "lineage_os:download action"
+        type: "null"
+  - title: lineage_os:install action
+    required: ["lineage_os:install"]
+    properties:
+      lineage_os:install:
+        title: "lineage_os:install action"
+        type: "null"
   - title: fastboot:boot action
     required: ["fastboot:boot"]
     properties:
