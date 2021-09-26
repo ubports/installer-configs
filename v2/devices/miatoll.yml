@@ -115,7 +115,7 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
-        - fastboot:reboot_bootloader:
+          - fastboot:reboot_bootloader:
         fallback:
           - core:user_action:
               action: "recovery"

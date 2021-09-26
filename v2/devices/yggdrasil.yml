@@ -267,7 +267,18 @@ operating_systems:
               progress: 0.8
               info: Restoring permissions
           - adb:shell:
-              args: ["find", "/mnt/vendor/nvdata", "-type", "f", "-exec", "restorecon", "-v", "{}", "+"]
+              args:
+                [
+                  "find",
+                  "/mnt/vendor/nvdata",
+                  "-type",
+                  "f",
+                  "-exec",
+                  "restorecon",
+                  "-v",
+                  "{}",
+                  "+"
+                ]
           - core:info:
               progress: 0.9
               info: Unmounting partition
@@ -425,7 +436,7 @@ operating_systems:
       - var: "version"
         name: "Image Version"
         type: "select"
-        values: 
+        values:
           - value: "stable"
             label: "Latest Release"
           - value: "stabledev"
