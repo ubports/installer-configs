@@ -34,7 +34,7 @@ fs.mkdir(path.join("public", "v2", "devices"), { recursive: true })
           formfactor: curr.formfactor,
           operating_systems: curr.operating_systems.map(os => os.name)
         });
-        curr.aliases.forEach(alias => {
+        (curr.aliases || []).forEach(alias => {
           if (acc.aliases[alias]) {
             acc.aliases[alias].push(curr.codename);
           } else {
@@ -60,4 +60,8 @@ fs.mkdir(path.join("public", "v2", "devices"), { recursive: true })
       writeJSON(path.join("public", "v2", "index.json"), index),
       writeJSON(path.join("public", "v2", "aliases.json"), aliases)
     ])
-  );
+  )
+  .catch(err => {
+    console.error(`Failed to build configs: ${err}`);
+    process.exit(-1);
+  });
