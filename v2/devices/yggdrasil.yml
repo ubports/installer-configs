@@ -38,7 +38,7 @@ user_actions:
   untested:
     title: "Untested"
     description: "Sorry, this configuration has not yet been fully tested. You might run into issues. If you want to help us improve, click the link below to see the config file."
-    link: "https://github.com/ubports/installer-configs/blob/master/v1/yggdrasil.json"
+    link: "https://github.com/ubports/installer-configs/blob/master/v2/devices/yggdrasil.yml"
     button: true
   droidian_alpha:
     title: "Alpha quality software"
