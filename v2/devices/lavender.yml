@@ -78,6 +78,10 @@ operating_systems:
                   checksum:
                     sum: "990a377a0a87809a9ceb4f85c693e7c7c190224ff98e18a8a0e21966688bda0b"
                     algorithm: "sha256"
+                - url: "https://cdimage.ubports.com/devices/lavender/splash.img"
+                  checksum:
+                    sum: "fd1ac18cb18a16b14d6d40da6abf0538724d3e83f4d5e60615d5b7038dce7c50"
+                    algorithm: "sha256"
                 - url: "https://cdimage.ubports.com/devices/lavender/vbmeta.img"
                   checksum:
                     sum: "65f5493e01ede7e538a14df063013a921ecd122680c7d3b3598d46fc7a916517"
@@ -123,6 +127,9 @@ operating_systems:
                   group: "firmware"
                 - partition: "dtbo"
                   file: "dtbo.img"
+                  group: "firmware"
+                - partition: "splash"
+                  file: "splash.img"
                   group: "firmware"
                 - partition: "vendor"
                   file: "vendor.img"
