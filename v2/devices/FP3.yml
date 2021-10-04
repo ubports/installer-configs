@@ -45,7 +45,7 @@ operating_systems:
           systemimage:channels:
       - var: "wipe"
         name: "Wipe Userdata"
-        tooltip: "Wipe personal data"
+        tooltip: "Wipe personal data. This is necessary, for first time installations."
         type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
@@ -58,9 +58,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://gitlab.com/fairphone-3/fp3-assets/-/raw/main/boot.img"
+                - url: "https://gitlab.com/fairphone-3/fp3-assets/-/raw/boot-wireguard/boot.img"
                   checksum:
-                    sum: "3fe15b9da2bc0550318a027f133516114f3a3fb202162fba177f1d608e5f347a"
+                    sum: "5c8815b9e96311d586658111d2df7b1b8c03d6349a6a591adbb51abec5f0efbb"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
