@@ -8,7 +8,7 @@
     "checkdownloads": "./v2/checkDownloads.js",
     "buildconfigs": "./v2/buildConfigs.js",
     "buildschema": "./v2/buildSchema.js",
-    "docs": "npm run buildschema && npx @adobe/jsonschema2md -d public/v2/ -o public/v2/docs -x -"
+    "docs": "npm run buildschema && npx @adobe/jsonschema2md -d build/v2/ -o build/v2/docs -x -"
   },
   "repository": {
     "type": "git",
@@ -22,12 +22,12 @@
   "homepage": "https://github.com/ubports/installer-configs#readme",
   "devDependencies": {
     "@adobe/jsonschema2md": "^6.0.3",
-    "@apidevtools/json-schema-ref-parser": "^9.0.6",
-    "ajv-cli": "^4.0.1",
-    "commander": "^2.20.3",
+    "@apidevtools/json-schema-ref-parser": "^9.0.9",
+    "ajv-cli": "^5.0.0",
+    "commander": "^8.2.0",
     "json-to-pretty-yaml": "^1.2.2",
-    "prettier": "^2.2.0",
-    "progressive-downloader": "^1.0.6",
-    "yaml": "^1.10.0"
+    "prettier": "^2.4.1",
+    "progressive-downloader": "^1.0.7",
+    "yaml": "^1.10.2"
   }
 }

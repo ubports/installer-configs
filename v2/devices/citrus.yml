@@ -1,10 +1,6 @@
-name: "Xiaomi Redmi Note 9 Pro/Pro Max/9S - Poco M2 Pro"
-codename: "miatoll"
-aliases:
-  - "joyeuse"
-  - "curtana"
-  - "excalibur"
-  - "gram"
+name: "Xiaomi Poco M3"
+codename: "citrus"
+aliases: []
 formfactor: "phone"
 doppelgangers: []
 user_actions:
@@ -18,18 +14,13 @@ user_actions:
     description: "With the device powered off, hold Volume Down + Power."
     image: "phone_power_down"
     button: true
-  boot:
-    title: "Boot the device"
-    description: "Power on the device."
-    image: "phone_power_up"
-    button: true
   confirm_model:
     title: "Confirm your model"
-    description: "Please double-check that your device is any of the following models: Xiaomi Redmi Note 9 Pro/Pro Max/9S - Poco M2 Pro (joyeuse, excalibur, curtana, gram)."
+    description: "Please double-check that your device is the following model: Xiaomi Poco M3 (citrus)."
   confirm_firmware:
     title: "Confirm your firmware"
     description: "Please double-check that your device is running the latest available stock Android 10 firmware."
-    link: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/blob/main/FIRMWARE.md"
+    link: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-merlin/blob/main/FIRMWARE.md"
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."
@@ -67,16 +58,35 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/releases/download/20211021/recovery.img"
+                - url: "https://github.com/ubuntu-touch-juice/ubuntu-touch-citrus/releases/download/20210929/recovery.img"
                   name: "recovery.img"
                   checksum:
-                    sum: "116d7ca8a0b241665cc1b52653242f3385d28c4dcac4eafe0ba6d437570a1d48"
+                    sum: "7230d19149e208dc4786e65b453de5dbf578ced87fec451f3d35b745aa4e4231"
                     algorithm: "sha256"
-                - url: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/releases/download/20211021/dtbo.img"
+                - url: "https://github.com/ubuntu-touch-juice/ubuntu-touch-citrus/releases/download/20210929/dtbo.img"
                   name: "dtbo.img"
                   checksum:
-                    sum: "a65c5a092604eb9b7e9d92c4504c3ae8bbde33d76060923be488bc031bacff79"
+                    sum: "6a0270409a8b40a0fa46fd2e488f3be6931ee69d43742681c8ca5b380c445d93"
                     algorithm: "sha256"
+                - url: "https://github.com/ubuntu-touch-juice/ubuntu-touch-citrus/releases/download/20210929/super.zip"
+                  name: "super.zip"
+                  checksum:
+                    sum: "2e54e32f1a1dcb858ea1880284a9aee92c32656211b1a337f233eaa1bb33fee8"
+                    algorithm: "sha256"
+                - url: "https://dl.google.com/developers/android/qt/images/gsi/vbmeta.img"
+                  name: "vbmeta.img"
+                  checksum:
+                    sum: "f6da5489fd877cb69cf61fa721cfd6d77e530084aefe9b96664f818947ff61f6"
+                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "super.zip"
+                  dir: "unpacked"
         condition:
           var: "bootstrap"
           value: true
@@ -91,12 +101,6 @@ operating_systems:
           value: true
       - actions:
           - fastboot:format:
-              partition: "cache"
-        condition:
-          var: "bootstrap"
-          value: true
-      - actions:
-          - fastboot:format:
               partition: "userdata"
               type: "ext4"
         condition:
@@ -105,17 +109,29 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
+                - partition: "vbmeta"
+                  file: "vbmeta.img"
+                  group: "firmware"
+                  flags:
+                    - "--disable-verity"
+                    - "--disable-verification"
+                - partition: "boot"
+                  file: "recovery.img"
+                  group: "firmware"
                 - partition: "recovery"
                   file: "recovery.img"
                   group: "firmware"
                 - partition: "dtbo"
                   file: "dtbo.img"
                   group: "firmware"
+                - partition: "super"
+                  file: "unpacked/super.img"
+                  group: "firmware"
         condition:
           var: "bootstrap"
           value: true
       - actions:
-          - fastboot:reboot_bootloader:
+          - fastboot:reboot:
         fallback:
           - core:user_action:
               action: "recovery"
@@ -123,12 +139,14 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
-          - fastboot:boot:
-              file: "recovery.img"
-              group: "firmware"
+          - adb:reboot:
+              to_state: "recovery"
         fallback:
           - core:user_action:
               action: "recovery"
+        condition:
+          var: "bootstrap"
+          value: false
       - actions:
           - systemimage:install:
       - actions:

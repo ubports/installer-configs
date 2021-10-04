@@ -1,11 +1,7 @@
-name: "Xiaomi Redmi Note 9 Pro/Pro Max/9S - Poco M2 Pro"
-codename: "miatoll"
-aliases:
-  - "joyeuse"
-  - "curtana"
-  - "excalibur"
-  - "gram"
+name: "Xiaomi Mi 6"
+codename: "sagit"
 formfactor: "phone"
+aliases: []
 doppelgangers: []
 user_actions:
   recovery:
@@ -25,18 +21,13 @@ user_actions:
     button: true
   confirm_model:
     title: "Confirm your model"
-    description: "Please double-check that your device is any of the following models: Xiaomi Redmi Note 9 Pro/Pro Max/9S - Poco M2 Pro (joyeuse, excalibur, curtana, gram)."
-  confirm_firmware:
-    title: "Confirm your firmware"
-    description: "Please double-check that your device is running the latest available stock Android 10 firmware."
-    link: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/blob/main/FIRMWARE.md"
+    description: "Please double-check that your device is a Xiaomi Mi 6 (sagit)."
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."
     link: "https://en.miui.com/unlock/"
 unlock:
   - "confirm_model"
-  - "confirm_firmware"
   - "unlock"
 handlers:
   bootloader_locked:
@@ -54,7 +45,7 @@ operating_systems:
           systemimage:channels:
       - var: "wipe"
         name: "Wipe Userdata"
-        tooltip: "Wipe personal data"
+        tooltip: "Wipe personal data (required if the previously installed OS is Android, MIUI or LineageOS)"
         type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
@@ -67,16 +58,25 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/releases/download/20211021/recovery.img"
+                - url: "https://github.com/UbuntuTouch-sagit/ubuntu-touch-sagit/releases/download/v1.1/vendor.zip"
+                  name: "vendor.zip"
+                  checksum:
+                    sum: "13b018a5e72a966b22cc4fdabfacdd5eff434366269602b1bae713973f57aaa6"
+                    algorithm: "sha256"
+                - url: "https://github.com/UbuntuTouch-sagit/ubuntu-touch-sagit/releases/download/v1.0/recovery.img"
                   name: "recovery.img"
                   checksum:
-                    sum: "116d7ca8a0b241665cc1b52653242f3385d28c4dcac4eafe0ba6d437570a1d48"
+                    sum: "bf857a093e1df99fba91252d4114ef8796d515e821657fcbfb504a5cdc8893c5"
                     algorithm: "sha256"
-                - url: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/releases/download/20211021/dtbo.img"
-                  name: "dtbo.img"
-                  checksum:
-                    sum: "a65c5a092604eb9b7e9d92c4504c3ae8bbde33d76060923be488bc031bacff79"
-                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "vendor.zip"
+                  dir: "unpacked"
         condition:
           var: "bootstrap"
           value: true
@@ -86,12 +86,6 @@ operating_systems:
         fallback:
           - core:user_action:
               action: "bootloader"
-        condition:
-          var: "bootstrap"
-          value: true
-      - actions:
-          - fastboot:format:
-              partition: "cache"
         condition:
           var: "bootstrap"
           value: true
@@ -108,27 +102,23 @@ operating_systems:
                 - partition: "recovery"
                   file: "recovery.img"
                   group: "firmware"
-                - partition: "dtbo"
-                  file: "dtbo.img"
+                - partition: "boot"
+                  file: "recovery.img"
+                  group: "firmware"
+                - partition: "cust"
+                  file: "unpacked/vendor.img"
                   group: "firmware"
         condition:
           var: "bootstrap"
           value: true
       - actions:
-          - fastboot:reboot_bootloader:
+          - fastboot:reboot:
         fallback:
           - core:user_action:
               action: "recovery"
         condition:
           var: "bootstrap"
           value: true
-      - actions:
-          - fastboot:boot:
-              file: "recovery.img"
-              group: "firmware"
-        fallback:
-          - core:user_action:
-              action: "recovery"
       - actions:
           - systemimage:install:
       - actions:

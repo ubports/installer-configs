@@ -1,8 +1,7 @@
 name: "Xiaomi Redmi Note 8 Pro"
 codename: "begonia"
 formfactor: "phone"
-aliases:
-  - "onc"
+aliases: []
 doppelgangers: []
 user_actions:
   recovery:
@@ -27,9 +26,13 @@ user_actions:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."
     link: "https://en.miui.com/unlock/"
+  adb_bug:
+    title: "Warning"
+    description: "This device is known to have problems with adb push, so the installer will flash latest stable image. Please switch to desired channel afterwards in System Settings."
 unlock:
   - "confirm_model"
   - "unlock"
+  - "adb_bug"
 handlers:
   bootloader_locked:
     actions:
@@ -88,6 +91,20 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
+          - core:download:
+              group: "Ubuntu Touch"
+              files:
+                - url: "https://github.com/ubuntu-touch-begonia/ubuntu-touch-begonia/releases/download/ota-19/system.zip"
+                  name: "system.zip"
+                  checksum:
+                    sum: "fff166da969228b6f9359a7c064710933397be6ad62efaae9162600027137341"
+                    algorithm: "sha256"
+                - url: "https://github.com/ubuntu-touch-begonia/ubuntu-touch-begonia/releases/download/ota-19/boot.img"
+                  name: "boot.img"
+                  checksum:
+                    sum: "fa92b082823be3b8527b81e720dc59835d13c8898fe513009f44285821e98d4f"
+                    algorithm: "sha256"
+      - actions:
           - core:unpack:
               group: "firmware"
               files:
@@ -99,14 +116,17 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
+          - core:unpack:
+              group: "Ubuntu Touch"
+              files:
+                - archive: "system.zip"
+                  dir: "unpacked"
+      - actions:
           - adb:reboot:
               to_state: "bootloader"
         fallback:
           - core:user_action:
               action: "bootloader"
-        condition:
-          var: "bootstrap"
-          value: true
       - actions:
           - fastboot:format:
               partition: "userdata"
@@ -187,19 +207,17 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "boot"
+                  file: "boot.img"
+                  group: "Ubuntu Touch"
+                - partition: "system"
+                  file: "unpacked/system.img"
+                  group: "Ubuntu Touch"
+      - actions:
           - fastboot:reboot:
         fallback:
           - core:user_action:
-              action: "recovery"
-        condition:
-          var: "bootstrap"
-          value: true
-      - actions:
-          - systemimage:install:
-      - actions:
-          - adb:reboot:
-              to_state: "recovery"
-        fallback:
-          - core:user_action:
-              action: "recovery"
+              action: "system"
     slideshow: []

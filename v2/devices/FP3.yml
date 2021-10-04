@@ -22,7 +22,7 @@ user_actions:
     button: true
   recovery:
     title: "Reboot to Recovery"
-    description: "With the device still at the \"Fastboot Mode\" (green), use the Volume buttons to switch to \"Recovery Mode\" (red) and push the power button to confirm your selection."
+    description: 'With the device still at the "Fastboot Mode" (green), use the Volume buttons to switch to "Recovery Mode" (red) and push the power button to confirm your selection.'
     image: "phone_power_up"
     button: true
 unlock:

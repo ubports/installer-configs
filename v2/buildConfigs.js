@@ -8,7 +8,7 @@ function writeJSON(file, data) {
   return fs.writeFile(file, JSON.stringify(data));
 }
 
-fs.mkdir(path.join("public", "v2", "devices"), { recursive: true })
+fs.mkdir(path.join("build", "v2", "devices"), { recursive: true })
   .then(() => fs.readdir("v2/devices"))
   .then(files =>
     Promise.all(
@@ -18,7 +18,7 @@ fs.mkdir(path.join("public", "v2", "devices"), { recursive: true })
           .then(cfg => YAML.parse(cfg.toString()))
           .then(cfg =>
             writeJSON(
-              path.join("public", "v2", "devices", `${cfg.codename}.json`),
+              path.join("build", "v2", "devices", `${cfg.codename}.json`),
               cfg
             ).then(() => cfg)
           )
@@ -34,7 +34,7 @@ fs.mkdir(path.join("public", "v2", "devices"), { recursive: true })
           formfactor: curr.formfactor,
           operating_systems: curr.operating_systems.map(os => os.name)
         });
-        curr.aliases.forEach(alias => {
+        (curr.aliases || []).forEach(alias => {
           if (acc.aliases[alias]) {
             acc.aliases[alias].push(curr.codename);
           } else {
@@ -57,7 +57,11 @@ fs.mkdir(path.join("public", "v2", "devices"), { recursive: true })
   }))
   .then(({ index, aliases }) =>
     Promise.all([
-      writeJSON(path.join("public", "v2", "index.json"), index),
-      writeJSON(path.join("public", "v2", "aliases.json"), aliases)
+      writeJSON(path.join("build", "v2", "index.json"), index),
+      writeJSON(path.join("build", "v2", "aliases.json"), aliases)
     ])
-  );
+  )
+  .catch(err => {
+    console.error(`Failed to build configs: ${err}`);
+    process.exit(-1);
+  });
