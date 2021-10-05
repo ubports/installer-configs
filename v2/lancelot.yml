@@ -16,7 +16,7 @@ user_actions:
     button: true
   confirm_model:
     title: "Confirm your model"
-    description: "Please double-check that your device is the following model: Xiaomi Redmi Note 9 (merlin)."
+    description: "Please double-check that your device is the following model: Xiaomi Redmi 9 (lancelot)."
   confirm_firmware:
     title: "Confirm your firmware"
     description: "Please double-check that your device is running the latest available stock Android 10 firmware."
