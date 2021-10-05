@@ -20,7 +20,7 @@ user_actions:
   confirm_firmware:
     title: "Confirm your firmware"
     description: "Please double-check that your device is running the latest available stock Android 10 firmware."
-    link: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-merlin/blob/main/FIRMWARE.md"
+    link: "https://github.com/ubuntu-touch-redmi-mt6768/lancelotfw/blob/main/README.md"
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."
