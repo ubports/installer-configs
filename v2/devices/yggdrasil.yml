@@ -321,17 +321,13 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/volla-yggdrasil-9.0-ubports-installer-bootstrap.zip"
+                - url: "https://volla.tech/filedump/volla-yggdrasil-10.0-ubports-installer-bootstrap.zip"
                   checksum:
-                    sum: "77bcf3842cc676c329afae433be0087bc71ac34001977ca1957f40b7a126c400"
+                    sum: "b50f732748d06fe8cf5ac7247cb5a3a9e49e1b7fa15e9f449e6c01271227af75"
                     algorithm: "sha256"
-                - url: "https://volla.tech/filedump/vollaos-system.zip"
+                - url: "https://volla.tech/filedump/vollaos/volla-yggdrasil-10.0-system.zip"
                   checksum:
-                    sum: "a9ec7f25aeead28654fc8b9bbd55bc18e83a63fe4bc967d2e307739de1faa694"
-                    algorithm: "sha256"
-                - url: "http://volla.tech/filedump/twrp.img"
-                  checksum:
-                    sum: "c40c3c91c4d4de7651d2cc99b1265dd521f4a8175a260d0a55f62b9d8a8a3f69"
+                    sum: "1e961421419ee7b92afc00b3e82f9bc1c553ac1a5d0d23d4218e51459f8b1490"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -346,9 +342,9 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-yggdrasil-9.0-ubports-installer-bootstrap.zip"
+                - archive: "volla-yggdrasil-10.0-ubports-installer-bootstrap.zip"
                   dir: "unpacked"
-                - archive: "vollaos-system.zip"
+                - archive: "volla-yggdrasil-10.0-system.zip"
                   dir: "unpacked"
         condition:
           var: "bootstrap"
@@ -363,7 +359,7 @@ operating_systems:
           - fastboot:flash:
               partitions:
                 - partition: "recovery"
-                  file: "twrp.img"
+                  file: "unpacked/recovery.img"
                   group: "firmware"
                 - partition: "vendor"
                   file: "unpacked/vendor.img"
