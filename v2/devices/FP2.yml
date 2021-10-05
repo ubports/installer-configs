@@ -32,7 +32,7 @@ operating_systems:
           systemimage:channels:
       - var: "wipe"
         name: "Wipe Userdata"
-        tooltip: "Wipe personal data"
+        tooltip: "Wipe personal data (recommended for first time installs)"
         type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
