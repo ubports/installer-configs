@@ -63,7 +63,7 @@ operating_systems:
                   checksum:
                     sum: "13b018a5e72a966b22cc4fdabfacdd5eff434366269602b1bae713973f57aaa6"
                     algorithm: "sha256"
-                - url: "https://github.com/UbuntuTouch-sagit/ubuntu-touch-sagit/releases/download/v1.0/recovery.img"
+                - url: "https://github.com/UbuntuTouch-sagit/ubuntu-touch-sagit/releases/download/v1.1/recovery.img"
                   name: "recovery.img"
                   checksum:
                     sum: "bf857a093e1df99fba91252d4114ef8796d515e821657fcbfb504a5cdc8893c5"
