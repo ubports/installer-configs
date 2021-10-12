@@ -274,3 +274,7 @@ operating_systems:
           - core:user_action:
               action: "boot"
     slideshow: []
+    eula:
+      title: "EULA"
+      description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE X. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Hallo Welt Systeme UG (haftungsbeschränkt) for the Volla OS and agree to it."
+      link: "https://volla.online/en/eula/index.html"
