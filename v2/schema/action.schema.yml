@@ -195,6 +195,7 @@ oneOf:
             enum:
               - ext2
               - ext4
+              - f2fs
           size:
             title: Partition size
             type: number
