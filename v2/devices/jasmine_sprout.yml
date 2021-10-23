@@ -6,12 +6,11 @@ doppelgangers: []
 user_actions:
   confirm_model:
     title: "Confirm your model"
-    description: "Please double-check that your device is a Xiaomi Mi A2 (jasmine_sprout). Xiaomi Mi 6x and Xiaomi Mi A2 Lite are NOT SUPPORTED. You also NEED to check your device LCD name, you can use an app (click on more link, requires rooted android device) to check if it's called *jdi*. In that case you will need to choose devel channel instead of stable until OTA-19."
-    link: "https://play.google.com/store/apps/details?id=ru.andr7e.deviceinfohw"
+    description: "Please double-check that your device is a Xiaomi Mi A2 (jasmine_sprout). Xiaomi Mi 6x and Xiaomi Mi A2 Lite are NOT SUPPORTED."
   confirm_os:
     title: "Confirm OS version"
-    description: "Your device must be running a specific android 9 build before installing Ubuntu Touch. You can use the link below to download it. You can use either use stock recovery or TWRP recovery to flash it. Flash it to both slots to be safe."
-    link: "https://github.com/ubports-xiaomi-sdm660/artifacts/releases/download/v0.1/jasmine_sprout_stock_android9.zip"
+    description: "Your device must be running a custom OS build before installing Ubuntu Touch. You can use the link below to download it. You can use TWRP recovery to flash it. Flash it to both A and B slots to be safe."
+    link: "https://github.com/ubports-xiaomi-sdm660/artifacts/releases/download/20211023/UBTouch-jasmine_sprout-23-10-2021.zip"
   warning:
     title: "Warning"
     description: "For unknown reason some pc may not work with device fastboot mode, if installer fails or bootloop your device try to run it from other pc"
@@ -55,25 +54,13 @@ operating_systems:
     prerequisites: []
     steps:
       - actions:
-          - core:manual_download:
-              group: "firmware"
-              file:
-                name: "vendor.img"
-                url: "https://github.com/ubports-xiaomi-sdm660/artifacts/releases/download/v0.1/vendor.img"
-                checksum:
-                  sum: "9fae2f99aafb45c9b6763bca815b1bcc20f27418edb2fd5097fc5cfc1aff828c"
-                  algorithm: "sha256"
-        condition:
-          var: "bootstrap"
-          value: true
-      - actions:
           - core:download:
               group: "firmware"
               files:
                 - name: "boot.img"
-                  url: "https://github.com/ubports-xiaomi-sdm660/artifacts/releases/download/v0.1/boot.img"
+                  url: "https://github.com/ubports-xiaomi-sdm660/artifacts/releases/download/20211023/boot.img"
                   checksum:
-                    sum: "07111aba0f8c8720baae6ea6d31c898a8b8fe0dc942185cdc39f2d114ef1702d"
+                    sum: "75fd5840f9f18903545695eb9e137915faa0d7848bef0bb290e118578f2429dc"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -111,9 +98,6 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
-                - partition: "vendor"
-                  file: "vendor.img"
-                  group: "firmware"
                 - partition: "boot"
                   file: "boot.img"
                   group: "firmware"
