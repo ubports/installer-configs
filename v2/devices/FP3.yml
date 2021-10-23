@@ -1,4 +1,4 @@
-name: "Fairphone 3"
+name: "Fairphone 3/3+"
 codename: "FP3"
 formfactor: "phone"
 aliases: ["Fairphone 3+, FP3+"]
@@ -9,7 +9,7 @@ user_actions:
     description: "Please check that your device is a Fairphone 3 (FP3) or Fairphone 3+ (FP3+)."
   confirm_os:
     title: "Confirm OS version"
-    description: "Your device must be running Android 10 before installing Ubuntu Touch. If it is already running the previous Halium 9 version of Ubuntu Touch and you want to upgrade to the Halium 10 (recommended), you can download and flash the Android 10 stock rom from the link below (More...), which leaves your userdata partition untouched. Afterwards run this installer again."
+    description: "Your device must be running the Fairphone OS version of Android 10 before installing Ubuntu Touch. With a previously installed /e/ OS, it won't work! Only if it is already running the previous Halium 9 version of Ubuntu Touch and you want to upgrade to the Halium 10 (recommended), you can download and flash the Android 10 stock rom from the link below (More...), which leaves your userdata partition untouched. Afterwards run this installer again."
     link: "https://androidfilehost.com/?fid=7161016148664787652"
   unlock_bootloader:
     title: "Unlock your phone"
