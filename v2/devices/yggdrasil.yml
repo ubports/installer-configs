@@ -194,111 +194,91 @@ operating_systems:
           - core:user_action:
               action: "recovery"
     slideshow: []
-  - name: "VollaOS"
-    options:
-      - var: "install_twrp"
-        name: "TWRP"
-        tooltip: "Install Team Win Recovery Project (TWRP) recovery"
-        type: "checkbox"
-        value: true
-    prerequisites:
-      - "untested"
+  - name: "Volla OS"
+    prerequisites: []
     steps:
-      - actions:
-          - core:download:
-              group: "VollaOS"
-              files:
-                - url: "https://ota.volla.tech/volla-9.0-20201019-nightly-k63v2_64_bsp-signed.zip"
-                  checksum:
-                    sum: "0837f19481c9962e9ff3f1249b809942e2563e478f8735236436bd719b49fd5c"
-                    algorithm: "sha256"
       - actions:
           - core:download:
               group: "firmware"
               files:
-                - url: "http://volla.tech/filedump/twrp.img"
+                - url: "https://volla.tech/filedump/vollaos-10.0-ubports.zip"
                   checksum:
-                    sum: "c40c3c91c4d4de7651d2cc99b1265dd521f4a8175a260d0a55f62b9d8a8a3f69"
+                    sum: "2b67c3618b54cf0101dd27556f32ce37f44dd3efdd9dd544b3039b43c2792178"
                     algorithm: "sha256"
-        condition:
-          var: "install_twrp"
-          value: true
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "vollaos-10.0-ubports.zip"
+                  dir: "unpacked"
       - actions:
           - adb:reboot:
               to_state: "bootloader"
         fallback:
           - core:user_action:
               action: "bootloader"
-        condition:
-          var: "install_twrp"
-          value: true
       - actions:
           - fastboot:flash:
               partitions:
                 - partition: "recovery"
-                  file: "twrp.img"
+                  file: "unpacked/recovery.img"
                   group: "firmware"
-        condition:
-          var: "install_twrp"
-          value: true
+                - partition: "boot"
+                  file: "unpacked/boot.img"
+                  group: "firmware"
+                - partition: "dtbo"
+                  file: "unpacked/dtbo-verified.img"
+                  group: "firmware"
+                - partition: "logo"
+                  file: "unpacked/logo-verified.bin"
+                  group: "firmware"
+                - partition: "md1dsp"
+                  file: "unpacked/md1dsp-verified.img"
+                  group: "firmware"
+                - partition: "md1img"
+                  file: "unpacked/md1img-verified.img"
+                  group: "firmware"
+                - partition: "spmfw"
+                  file: "unpacked/spmfw-verified.img"
+                  group: "firmware"
+                - partition: "lk2"
+                  file: "unpacked/lk-verified.img"
+                  group: "firmware"
+                - partition: "sspm_2"
+                  file: "unpacked/sspm-verified.img"
+                  group: "firmware"
+                - partition: "tee2"
+                  file: "unpacked/tee-verified.img"
+                  group: "firmware"
+                - partition: "lk"
+                  file: "unpacked/lk-verified.img"
+                  group: "firmware"
+                - partition: "sspm_1"
+                  file: "unpacked/sspm-verified.img"
+                  group: "firmware"
+                - partition: "tee1"
+                  file: "unpacked/tee-verified.img"
+                  group: "firmware"
+                - partition: "preloader"
+                  file: "unpacked/preloader_k63v2_64_bsp.bin"
+                  group: "firmware"
+                - partition: "system"
+                  file: "unpacked/system.img"
+                  group: "firmware"
+                - partition: "vendor"
+                  file: "unpacked/vendor.img"
+                  group: "firmware"
       - actions:
-          - core:user_action:
-              action: "recovery"
-        condition:
-          var: "install_twrp"
-          value: true
+          - fastboot:erase:
+              partition: "userdata"
       - actions:
-          - core:user_action:
-              action: "twrp_unlock"
+          - fastboot:erase:
+              partition: "nvdata"
       - actions:
-          - core:info:
-              status: "Restoring NVDATA partition"
-              dots: true
-              progress: 0.1
-              info: Creating directory
-          - adb:shell:
-              args: ["mkdir", "/mnt/vendor/nvdata"]
-          - core:info:
-              progress: 0.4
-              info: Mounting partition
-          - adb:shell:
-              args: ["mount", "/dev/block/by-name/nvdata", "/mnt/vendor/nvdata"]
-          - core:info:
-              progress: 0.8
-              info: Restoring permissions
-          - adb:shell:
-              args:
-                [
-                  "find",
-                  "/mnt/vendor/nvdata",
-                  "-type",
-                  "f",
-                  "-exec",
-                  "restorecon",
-                  "-v",
-                  "{}",
-                  "+"
-                ]
-          - core:info:
-              progress: 0.9
-              info: Unmounting partition
-          - adb:shell:
-              args: ["umount", "/mnt/vendor/nvdata"]
-          - core:info:
-              progress: 0
-      - actions:
-          - core:user_action:
-              action: "twrp_sideload"
-      - actions:
-          - adb:sideload:
-              group: "VollaOS"
-              file: "volla-9.0-20201019-nightly-k63v2_64_bsp-signed.zip"
-      - actions:
-          - adb:reboot:
-              to_state: "system"
+          - fastboot:reboot:
         fallback:
           - core:user_action:
-              action: "twrp_sideload_reboot"
+              action: "boot"
     slideshow: []
     eula:
       title: "EULA"
