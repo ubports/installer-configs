@@ -85,6 +85,12 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
+          - fastboot:erase:
+              partition: "userdata"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
           - fastboot:format:
               partition: "userdata"
               type: "ext4"
