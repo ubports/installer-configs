@@ -201,7 +201,7 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/vollaos-10.0-ubports.zip"
+                - url: "https://volla.tech/filedump/vollaos-10.0-16-nov-2021-ubports.zip"
                   checksum:
                     sum: "2b67c3618b54cf0101dd27556f32ce37f44dd3efdd9dd544b3039b43c2792178"
                     algorithm: "sha256"
