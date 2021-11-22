@@ -87,6 +87,11 @@ operating_systems:
                   checksum:
                     sum: "e7155f8095a45f1a925bca9c81df145a2e8a90e359a85b5face3986f520ba71c"
                     algorithm: "sha256"
+                - url: "https://github.com/ubuntu-touch-violet/ubuntu-touch-violet/releases/download/20210510/vbmeta.img"
+                  name: "vbmeta.img"
+                  checksum:
+                    sum: "f734812efec31d2c10a45dbcf9aa49b9994d3ad3cb221a5938e1a44362aa64ad"
+                    algorithm: "sha256"
         condition:
           var: "bootstrap"
           value: true
@@ -150,6 +155,9 @@ operating_systems:
                   group: "firmware"
                 - partition: "modem"
                   file: "modem.img"
+                  group: "firmware"
+                - partition: "vbmeta"
+                  file: "vbmeta.img"
                   group: "firmware"
                 - partition: "vendor"
                   file: "unpacked/vendor.img"
