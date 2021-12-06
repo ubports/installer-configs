@@ -1,0 +1,110 @@
+name: "Sony Xperia 10 II, dual SIM (xqau52)"
+codename: "seine-dual"
+formfactor: "phone"
+aliases:
+  - "XQ-AU52"
+doppelgangers: []
+user_actions:
+  recovery:
+    title: "Reboot to Recovery"
+    description: "With the device powered off, hold Volume Down + Power."
+    image: "phone_power_down"
+    button: true
+  bootloader:
+    title: "Reboot to Bootloader"
+    description: "With the device powered off, hold Volume Up and insert a USB cable. The LED indicator has to light up blue."
+    image: "phone_power_up"
+    button: true
+  boot:
+    title: "Boot the device"
+    description: "Power on the device."
+    image: "phone_power_up"
+    button: true
+  confirm_model:
+    title: "Confirm your model"
+    description: "Please double-check that your device is a Sony Xperia 10, dual SIM (i4113 of i4193)."
+  ta_backup:
+    title: "Backup the TA partition"
+    description: "In case you later wish to return to factory state, you will have to back up your TA partition before unlocking the bootloader. You can't do this step at a later stage!"
+    link: "https://together.jolla.com/question/168711/xperia-x-backup-ta-partition-before-unlocking-bootloader/"
+  unlock:
+    title: "Unlock the bootloader"
+    description: "You have to unlock the bootloader to install third-party operating systems on your device."
+    link: "https://developer.sony.com/develop/open-devices/get-started/unlock-bootloader/"
+unlock:
+  - "confirm_model"
+  - "ta_backup"
+  - "unlock"
+handlers:
+  bootloader_locked:
+    actions:
+      - fastboot:oem_unlock:
+          code_url: "https://developer.sony.com/develop/open-devices/get-started/unlock-bootloader/"
+operating_systems:
+  - name: "Sailfish OS"
+    options: []
+    prerequisites: []
+    steps:
+      - actions:
+          - core:manual_download:
+              group: "firmware"
+              file:
+                name: "SW_binaries_for_Xperia_Android_10.0.7.1_r1_v12b_seine.zip"
+                url: "https://developer.sony.com/file/download/software-binaries-for-aosp-pie-android-9-0-kernel-4-9-ganges/"
+                checksum:
+                  sum: "3f0b1610765002e4ed9cddfd49beb945582d57af94c845e9ddcf6f23ac7e3a12"
+                  algorithm: "sha256"
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "SW_binaries_for_Xperia_Android_10.0.7.1_r1_v12b_seine.zip"
+                  dir: "unpacked"
+      - actions:
+          - core:manual_download:
+              group: "firmware"
+              file:
+                name: "Sailfish_OS-Jolla-4.3.0.12-xqau52-0.0.2.51.zip"
+                url: "https://shop.jolla.com/downloads/"
+                checksum:
+                  sum: "bda059aa31b39c0e71ac2e1b239809f7937dd88836797c17d3ba270b51e9261d"
+                  algorithm: "sha256"
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "Sailfish_OS-Jolla-4.3.0.12-xqau52-0.0.2.51.zip"
+                  dir: "unpacked"
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "boot_a"
+                  file: "unpacked/Sailfish_OS-Jolla-4.3.0.12-xqau52-0.0.2.51/hybris-boot.img"
+                  group: "firmware"
+                - partition: "boot_b"
+                  file: "unpacked/Sailfish_OS-Jolla-4.3.0.12-xqau52-0.0.2.51/hybris-boot.img"
+                  group: "firmware"
+                - partition: "dtbo_a"
+                  file: "unpacked/Sailfish_OS-Jolla-4.3.0.12-xqau52-0.0.2.51/dtbo.img"
+                  group: "firmware"
+                - partition: "dtbo_b"
+                  file: "unpacked/Sailfish_OS-Jolla-4.3.0.12-xqau52-0.0.2.51/dtbo.img"
+                  group: "firmware"
+                - partition: "userdata"
+                  file: "unpacked/Sailfish_OS-Jolla-4.3.0.12-xqau52-0.0.2.51/sailfish.img001"
+                  group: "firmware"
+                - partition: "oem_a"
+                  file: "unpacked/SW_binaries_for_Xperia_Android_10.0.7.1_r1_v12b_seine.img"
+                  group: "firmware"
+      - actions:
+          - fastboot:reboot:
+        fallback:
+          - core:user_action:
+              action: "boot"
+    slideshow: []

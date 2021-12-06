@@ -1,0 +1,114 @@
+name: "Sony Xperia 10, dual SIM (i4113, i4193)"
+codename: "ganges-dual"
+formfactor: "phone"
+aliases:
+  - "i4113"
+  - "i4193"
+doppelgangers: []
+user_actions:
+  recovery:
+    title: "Reboot to Recovery"
+    description: "With the device powered off, hold Volume Down + Power."
+    image: "phone_power_down"
+    button: true
+  bootloader:
+    title: "Reboot to Bootloader"
+    description: "With the device powered off, hold Volume Up and insert a USB cable. The LED indicator has to light up blue."
+    image: "phone_power_up"
+    button: true
+  boot:
+    title: "Boot the device"
+    description: "Power on the device."
+    image: "phone_power_up"
+    button: true
+  confirm_model:
+    title: "Confirm your model"
+    description: "Please double-check that your device is a Sony Xperia 10, dual SIM (i4113 of i4193)."
+  ta_backup:
+    title: "Backup the TA partition"
+    description: "In case you later wish to return to factory state, you will have to back up your TA partition before unlocking the bootloader. You can't do this step at a later stage!"
+    link: "https://together.jolla.com/question/168711/xperia-x-backup-ta-partition-before-unlocking-bootloader/"
+  unlock:
+    title: "Unlock the bootloader"
+    description: "You have to unlock the bootloader to install third-party operating systems on your device."
+    link: "https://developer.sony.com/develop/open-devices/get-started/unlock-bootloader/"
+unlock:
+  - "confirm_model"
+  - "ta_backup"
+  - "unlock"
+handlers:
+  bootloader_locked:
+    actions:
+      - fastboot:oem_unlock:
+          code_url: "https://developer.sony.com/develop/open-devices/get-started/unlock-bootloader/"
+operating_systems:
+  - name: "Sailfish OS"
+    options: []
+    prerequisites: []
+    steps:
+      - actions:
+          - core:manual_download:
+              group: "firmware"
+              file:
+                name: "SW_binaries_for_Xperia_Android_9.0_2.3.2_v9_ganges.zip"
+                url: "https://developer.sony.com/file/download/software-binaries-for-aosp-pie-android-9-0-kernel-4-9-ganges/"
+                checksum:
+                  sum: "eec82358cc6eaca5b020c2f579b68c092f42bd6f9118ed11c2907e56a50661fd"
+                  algorithm: "sha256"
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "SW_binaries_for_Xperia_Android_9.0_2.3.2_v9_ganges.zip"
+                  dir: "unpacked"
+      - actions:
+          - core:manual_download:
+              group: "firmware"
+              file:
+                name: "Sailfish_OS-Jolla-4.3.0.12-i4113-0.0.6.8.zip"
+                url: "https://shop.jolla.com/downloads/"
+                checksum:
+                  sum: "ab4b9b85d416ffb0eec9b8ac3f4e2603e6e08f8566bbf9b79667aa06a84a11a6"
+                  algorithm: "sha256"
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "Sailfish_OS-Jolla-4.3.0.12-i4113-0.0.6.8.zip"
+                  dir: "unpacked"
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "boot_a"
+                  file: "unpacked/Sailfish_OS-Jolla-4.3.0.12-i4113-0.0.6.8/hybris-boot.img"
+                  group: "firmware"
+                - partition: "boot_b"
+                  file: "unpacked/Sailfish_OS-Jolla-4.3.0.12-i4113-0.0.6.8/hybris-boot.img"
+                  group: "firmware"
+                - partition: "userdata"
+                  file: "unpacked/Sailfish_OS-Jolla-4.3.0.12-i4113-0.0.6.8/sailfish.img001"
+                  group: "firmware"
+                - partition: "system_b"
+                  file: "unpacked/Sailfish_OS-Jolla-4.3.0.12-i4113-0.0.6.8/fimage.img001"
+                  group: "firmware"
+                - partition: "vendor_a"
+                  file: "unpacked/Sailfish_OS-Jolla-4.3.0.12-i4113-0.0.6.8/vendor.img001"
+                  group: "firmware"
+                - partition: "vendor_b"
+                  file: "unpacked/Sailfish_OS-Jolla-4.3.0.12-i4113-0.0.6.8/vendor.img001"
+                  group: "firmware"
+                - partition: "oem_a"
+                  file: "unpacked/SW_binaries_for_Xperia_Android_9.0_2.3.2_v9_ganges.img"
+                  group: "firmware"
+      - actions:
+          - fastboot:reboot:
+        fallback:
+          - core:user_action:
+              action: "boot"
+    slideshow: []
