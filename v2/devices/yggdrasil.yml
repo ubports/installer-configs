@@ -209,7 +209,7 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "vollaos-10.0-ubports.zip"
+                - archive: "vollaos-10.0-16-nov-2021-ubports.zip"
                   dir: "unpacked"
       - actions:
           - adb:reboot:
