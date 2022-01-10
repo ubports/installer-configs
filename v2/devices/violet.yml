@@ -65,7 +65,7 @@ operating_systems:
                 - url: "https://github.com/ubuntu-touch-violet/ubuntu-touch-violet/releases/download/20210510/vendor.zip"
                   name: "vendor.zip"
                   checksum:
-                    sum: "e49e199f7980c5200a0b90b489aa0fb6c3d3e612256d6dcac159414f965f0512"
+                    sum: "3aa2db9ce47698d568ca9368c5e23e1b2f19f69f58552b1b8dd63728c7e9b8cc"
                     algorithm: "sha256"
                 - url: "https://github.com/ubuntu-touch-violet/ubuntu-touch-violet/releases/download/20210510/dtbo.img"
                   name: "dtbo.img"
