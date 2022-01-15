@@ -56,7 +56,7 @@ operating_systems:
               files:
                 - url: "https://cdimage.ubports.com/devices/walleye/boot.img"
                   checksum:
-                    sum: "ae3cefe83a05dfa8aa619fab9636c29fd13b23bb4415adab5f2669466b3e9617"
+                    sum: "b3c54817559580217a137e897174f5c0c59d4b1a682d4e1d12b170d290df6f01"
                     algorithm: "sha256"
                 - url: "https://cdimage.ubports.com/devices/walleye/dtbo.img"
                   checksum:

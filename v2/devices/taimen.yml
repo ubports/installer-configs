@@ -56,7 +56,7 @@ operating_systems:
               files:
                 - url: "https://cdimage.ubports.com/devices/taimen/boot.img"
                   checksum:
-                    sum: "f03afb829cbc2b5538ece9087d1cb8770addff0347f98eac82b8f0893df06101"
+                    sum: "3b81339938fc541ff07f0b6562af1865d599a83a662f896cd0bb8ca237c26bb9"
                     algorithm: "sha256"
                 - url: "https://cdimage.ubports.com/devices/taimen/dtbo.img"
                   checksum:
