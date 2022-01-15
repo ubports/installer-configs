@@ -127,4 +127,3 @@ operating_systems:
           - core:user_action:
               action: "recovery"
     slideshow: []
-diff --git a/v2/devices/taimen.yml b/v2/devices/taimen.yml
