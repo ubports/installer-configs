@@ -71,7 +71,7 @@ operating_systems:
               files:
                 - url: "https://volla.tech/filedump/volla-yggdrasilx-9.0-ubports-installer-bootstrap.zip"
                   checksum:
-                    sum: "2331fda4bb147614b28a3f3bb3e3a7620c353a834e9e1f2c2a47fb5349e50572"
+                    sum: "af7af1c780a743bf4ef7d3bcc4139f24c4ab55a5c0a6c4845a252b62c30b9107"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
