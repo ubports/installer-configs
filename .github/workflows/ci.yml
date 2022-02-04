@@ -42,5 +42,3 @@ jobs:
         run: npm run buildconfigs
       - name: npm run buildschema
         run: npm run buildschema
-      - name: npm run docs
-        run: npm run docs
