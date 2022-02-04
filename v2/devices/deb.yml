@@ -51,7 +51,7 @@ operating_systems:
         tooltip: "Needed if the device is coming from android. This will lead to data-loss."
         type: "checkbox"
         value: false
-    prerequisites: []
+    prerequisites: ["partition_layout"]
     steps:
       - actions:
           - core:download:
