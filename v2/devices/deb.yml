@@ -16,7 +16,11 @@ user_actions:
     button: true
   confirm_model:
     title: "Confirm your model"
-    description: "Please double-check that your device is an LG Nexus 7 2013 LTE (deb). If you have the wifi-only version (flo), you have to select that instead. The 2012 version is not compatible."
+    description: 'Please double-check that your device is an LG Nexus 7 2013 LTE (deb). If you have the wifi-only version (flo), you have to select that instead. The 2012 version is not compatible.'
+  partition_layout:
+    title: "Partition layout"
+    description: 'If a recent version of LineageOS (>16.0, July 2019 or later) was installed before, the partition layout might have been altered, and you will have to revert to the original partition layout. If you are unsure whether this is the case, you may go ahead now and revisit the instructions linked above if you encounter "Error: systemimage: Push failed: Failed push: Failed to push file 0: Push failed: out of space" while flashing the device.'
+    link: 'https://github.com/ubports/ubports-installer/issues/1895'
 unlock:
   - "confirm_model"
 handlers:
@@ -47,7 +51,7 @@ operating_systems:
         tooltip: "Needed if the device is coming from android. This will lead to data-loss."
         type: "checkbox"
         value: false
-    prerequisites: []
+    prerequisites: ["partition_layout"]
     steps:
       - actions:
           - core:download:
