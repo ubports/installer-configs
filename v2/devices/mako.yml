@@ -12,10 +12,10 @@ user_actions:
     title: "Reboot to Bootloader"
     description: "Press and hold the volume buttons and the power button until the phone reboots."
     button: true
-  confirm_model:
-    title: "Confirm your model"
-    description: 'Note, that issues can be encountered while flashing Nexus 4 (mako) due to altered partition layouts. If you''ve previously had a recent version of LineageOS installed (>16.0, July 2019 or later) the partition layout has probably been altered. See https://github.com/ubports/ubports-installer/issues/1895 for instructions on how to revert to the original partition layout. If you''re unsure whether this is the case you may go ahead now and revisit the instructions linked above if you encounter "Error: systemimage: Push failed: Failed push: Failed to push file 0: Push failed: out of space" while flashing the device.'
-  
+  partition_layout:
+    title: "Partition Layout"
+    description: 'If a recent version of LineageOS (>16.0, July 2019 or later) was installed before, the partition layout might have been altered, and you will have to revert to the original partition layout. If you are unsure whether this is the case, you may go ahead now and revisit the instructions linked above if you encounter "Error: systemimage: Push failed: Failed push: Failed to push file 0: Push failed: out of space" while flashing the device.'
+    link: 'https://github.com/ubports/ubports-installer/issues/1895'
 unlock: []
 handlers:
   bootloader_locked:
