@@ -68,7 +68,7 @@ operating_systems:
         type: "checkbox"
       - var: "wipe"
         name: "Factory Reset"
-        tooltip: "Wipe personal data"
+        tooltip: "Wipe personal data (required for new installs)"
         type: "checkbox"
     prerequisites: []
     steps:
