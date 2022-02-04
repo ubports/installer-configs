@@ -183,7 +183,7 @@ operating_systems:
           - core:user_action:
               action: "recovery"
     slideshow: []
-    
+
   - name: "Volla OS"
     prerequisites: []
     steps:
