@@ -40,7 +40,7 @@ operating_systems:
         tooltip: "Flash system partitions using fastboot"
         type: "checkbox"
         value: true
-    prerequisites: []
+    prerequisites: ["partition_layout"]
     steps:
       - actions:
           - core:download:
