@@ -54,7 +54,7 @@ operating_systems:
           systemimage:channels:
       - var: "wipe"
         name: "Wipe Userdata"
-        tooltip: "Wipe personal data"
+        tooltip: "Wipe personal data (required for new installs)"
         type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
@@ -67,15 +67,15 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/releases/download/20211021/recovery.img"
+                - url: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/releases/download/stable/recovery.img"
                   name: "recovery.img"
                   checksum:
-                    sum: "116d7ca8a0b241665cc1b52653242f3385d28c4dcac4eafe0ba6d437570a1d48"
+                    sum: "b006329baa05bab0812f5a0a80b7de2ce876257ed56632b67bf60d8e6c2e3302"
                     algorithm: "sha256"
-                - url: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/releases/download/20211021/dtbo.img"
+                - url: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/releases/download/stable/dtbo.img"
                   name: "dtbo.img"
                   checksum:
-                    sum: "a65c5a092604eb9b7e9d92c4504c3ae8bbde33d76060923be488bc031bacff79"
+                    sum: "d408a9ecd7d2c6098cc06ec7dab03f69a532741f3626e6188d57b7557f421eb8"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
