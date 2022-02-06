@@ -61,15 +61,15 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://gitlab.com/ubports/community-ports/android9/xiaomi-mi-a3/xiaomi-laurel_sprout/-/jobs/2005822461/artifacts/raw/out/boot.img"
+                - url: "https://fs.nightcore.monster/ubports/laurel_sprout/boot.img"
                   checksum:
                     sum: "89876301997f4299d27be397a9544d1b2dc5afd145cbba866b83ebb8b1c14816"
                     algorithm: "sha256"
-                - url: "https://gitlab.com/nixeko/halium-ports/laurel_sprout/lunecrash/-/jobs/2004894571/artifacts/raw/output/arch/arm64/boot/dtbo.img"
+                - url: "https://fs.nightcore.monster/ubports/laurel_sprout/dtbo.img"
                   checksum:
                     sum: "a0266fba49eb2d3ed035a1e0fc87759eba1ad9ffd247e35e50229f45d3698629"
                     algorithm: "sha256"
-                - url: "https://cdimage.ubports.com/devices/lavender/vbmeta.img"
+                - url: "https://fs.nightcore.monster/ubports/laurel_sprout/vbmeta.img"
                   checksum:
                     sum: "65f5493e01ede7e538a14df063013a921ecd122680c7d3b3598d46fc7a916517"
                     algorithm: "sha256"
@@ -154,7 +154,7 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://gitlab.com/nixeko/halium-ports/laurel_sprout/lunecrash/-/jobs/2004894571/artifacts/raw/output/arch/arm64/boot/dtbo.img"
+                - url: "https://fs.nightcore.monster/ubports/laurel_sprout/dtbo.img"
                   checksum:
                     sum: "a0266fba49eb2d3ed035a1e0fc87759eba1ad9ffd247e35e50229f45d3698629"
                     algorithm: "sha256"
