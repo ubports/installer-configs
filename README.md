@@ -59,7 +59,7 @@ Every device is configured by a `<codename>.json` file that contains information
 
 ## License
 
-Original development by [Jan Sprinz](https://spri.nz). Copyright (C) 2019-2021 [UBports Foundation](https://ubports.com).
+Original development by [Johannah Sprinz](https://spri.nz). Copyright (C) 2019-2022 [UBports Foundation](https://ubports.com).
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
