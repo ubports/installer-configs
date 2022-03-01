@@ -191,9 +191,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/vollaos/volla-10.1-20211002-RELEASE-SPFLASH-yggdrasilx.zip"
+                - url: "https://volla.tech/filedump/vollaos/volla-10.1-20220103-RELEASE-SPFLASH-yggdrasilx.zip"
                   checksum:
-                    sum: "2efe7a22e00a77e83db804b39efc28ba08fe62ca9bd5e54edb44f8326ef42436"
+                    sum: "48255205e5fd3ca7f7032a0a2542dff48aec50e0a904ccd55583b55ff8c29d10"
                     algorithm: "sha256"
                 - url: "https://volla.tech/filedump/vollaos-10.1-ygdrassilx-preloader.bin"
                   checksum:
@@ -203,7 +203,7 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-10.1-20211002-RELEASE-SPFLASH-yggdrasilx.zip"
+                - archive: "volla-10.1-20220103-RELEASE-SPFLASH-yggdrasilx.zip"
                   dir: "unpacked"
       - actions:
           - adb:reboot:
