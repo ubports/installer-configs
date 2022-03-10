@@ -108,6 +108,18 @@ oneOf:
       fastboot:reboot_bootloader:
         title: "fastboot:reboot_bootloader action"
         type: "null"
+  - title: fastboot:reboot_fastboot action
+    required: ["fastboot:reboot_fastboot"]
+    properties:
+      fastboot:reboot_fastboot:
+        title: "fastboot:reboot_fastboot action"
+        type: "null"
+  - title: fastboot:reboot_recovery action
+    required: ["fastboot:reboot_recovery"]
+    properties:
+      fastboot:reboot_recovery:
+        title: "fastboot:reboot_recovery action"
+        type: "null"
   - title: fastboot:update action
     required: ["fastboot:update"]
     properties:
