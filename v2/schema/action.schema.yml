@@ -239,6 +239,25 @@ oneOf:
                   title: Group
                   type: string
         additionalProperties: false
+  - title: fastboot:wipe_super action
+    required: ["fastboot:wipe_super"]
+    properties:
+      fastboot:wipe_super:
+        title: "fastboot:wipe_super action"
+        type: "object"
+        properties:
+          image:
+            title: Image
+            type: object
+            properties:
+              file:
+                title: File
+                type: string
+              group:
+                title: Group
+                type: string
+        required: ["image"]
+        additionalProperties: false
   - title: fastboot:set_active action
     required: ["fastboot:set_active"]
     properties:
