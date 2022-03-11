@@ -6,7 +6,7 @@ doppelgangers: []
 user_actions:
   poweroff:
     title: "Force power off"
-    description: "Hold the power button for 10 to 15 seconds. The device will reboot, then shut down. Stop pressing the power button when it shuts down while showing the JingPad logo."
+    description: "Hold the power button for 15 seconds. The device will reboot, then shut down. Stop pressing the power button when it shuts down while showing the JingPad logo."
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, press & hold the power button and hold the volume down button 1 second afterwards. Select 'Reboot to bootloader' using the volume and power buttons. It should say 'Fastboot Mode' in the corner of the screen."
@@ -17,10 +17,13 @@ user_actions:
     description: "With the device powered off, press & hold the power button and hold the volume down button 1 second afterwards."
     image: "phone_power_down"
     button: true
+  factoryreset:
+    title: "Factory reset/wipe"
+    description: "Select 'Factory reset' and 'Format data/factory reset' in the recovery using the volume and power buttons."
   support:
     title: "Support"
-    description: "For details about Ubuntu Touch support for the JingPad A1, please head over to the UBports forum thread."
-    link: "https://forums.ubports.com/topic/4621/google-pixel-3a-sargo"
+    description: "For details about Ubuntu Touch support for the JingPad A1, please head over to the UBports forum."
+    link: "https://forums.ubports.com/category/107/jingpad-a1"
 unlock:
   - "poweroff"
   - "support"
@@ -49,9 +52,13 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://gitlab.com/ubports/community-ports/android10/jingpad-a1/jingpad-a1/-/jobs/2186449420/artifacts/raw/out/recovery.img"
+                - url: "https://cdimage.ubports.com/devices/jingpad_a1/recovery.img"
                   checksum:
                     sum: "f0e9c17c9ae4611f52a73e6ac983b4fcd2e04f32d4813bd6dbd1b763fa74924a"
+                    algorithm: "sha256"
+                - url: "https://cdimage.ubports.com/devices/jingpad_a1/vendor.img"
+                  checksum:
+                    sum: "283db49ee2bd010938b6af26efdea2761a7b72cd066e865a112734aa34026825"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -71,21 +78,23 @@ operating_systems:
                 - partition: "recovery"
                   file: "recovery.img"
                   group: "firmware"
+                - partition: "vendor"
+                  file: "vendor.img"
+                  group: "firmware"
         condition:
           var: "bootstrap"
-          value: true
-      - actions:
-          - fastboot:format:
-              partition: "userdata"
-              type: "f2fs"
-        condition:
-          var: "wipe"
           value: true
       - actions:
           - core:user_action:
               action: "recovery"
         condition:
           var: "bootstrap"
+          value: true
+      - actions:
+          - core:user_action:
+              action: "factoryreset"
+        condition:
+          var: "wipe"
           value: true
       - actions:
           - adb:reboot:
