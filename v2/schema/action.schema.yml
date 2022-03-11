@@ -108,6 +108,18 @@ oneOf:
       fastboot:reboot_bootloader:
         title: "fastboot:reboot_bootloader action"
         type: "null"
+  - title: fastboot:reboot_fastboot action
+    required: ["fastboot:reboot_fastboot"]
+    properties:
+      fastboot:reboot_fastboot:
+        title: "fastboot:reboot_fastboot action"
+        type: "null"
+  - title: fastboot:reboot_recovery action
+    required: ["fastboot:reboot_recovery"]
+    properties:
+      fastboot:reboot_recovery:
+        title: "fastboot:reboot_recovery action"
+        type: "null"
   - title: fastboot:update action
     required: ["fastboot:update"]
     properties:
@@ -226,6 +238,25 @@ oneOf:
                 group:
                   title: Group
                   type: string
+        additionalProperties: false
+  - title: fastboot:wipe_super action
+    required: ["fastboot:wipe_super"]
+    properties:
+      fastboot:wipe_super:
+        title: "fastboot:wipe_super action"
+        type: "object"
+        properties:
+          image:
+            title: Image
+            type: object
+            properties:
+              file:
+                title: File
+                type: string
+              group:
+                title: Group
+                type: string
+        required: ["image"]
         additionalProperties: false
   - title: fastboot:set_active action
     required: ["fastboot:set_active"]
