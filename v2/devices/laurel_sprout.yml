@@ -173,6 +173,6 @@ operating_systems:
       - actions:
           - fastboot:reboot:
         fallback:
-          - core:use_action:
+          - core:user_action:
               action: "boot"
     slideshow: []
