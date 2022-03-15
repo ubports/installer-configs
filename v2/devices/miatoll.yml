@@ -67,12 +67,12 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/releases/download/stable/recovery.img"
+                - url: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/releases/download/stable-installer-fix/recovery.img"
                   name: "recovery.img"
                   checksum:
-                    sum: "b006329baa05bab0812f5a0a80b7de2ce876257ed56632b67bf60d8e6c2e3302"
+                    sum: "461259015c4bdd0e8fb36c7412454f9c8c9e8ae6b1413e79598bd1c6ec0095ea"
                     algorithm: "sha256"
-                - url: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/releases/download/stable/dtbo.img"
+                - url: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/releases/download/stable-installer-fix/dtbo.img"
                   name: "dtbo.img"
                   checksum:
                     sum: "d408a9ecd7d2c6098cc06ec7dab03f69a532741f3626e6188d57b7557f421eb8"
