@@ -21,7 +21,8 @@ user_actions:
     button: true
   recovery:
     title: "Reboot to Recovery"
-    description: "Booting to recovery is not a very reliable process on this device. So you need to turn off the device first:
+    description:
+      "Booting to recovery is not a very reliable process on this device. So you need to turn off the device first:
       Unplug USB-cable and press and hold the POWER button until display turns off. If it is rebooting, repeat this until the device stays off!
       If it is off, press and hold the VOLUME UP, VOLUME DOWN and the POWER buttons at the same time until it boots.
       Then only release the POWER button and keep holding the VOLUME buttons until the UBports recovery appears."
