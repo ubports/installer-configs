@@ -1,24 +1,25 @@
-name: "F(x)tec Pro1/Pro1 X"
-codename: "pro1"
+name: "Xiaomi 3/4"
+codename: "cancro"
 formfactor: "phone"
-aliases: []
+aliases:
+  - "MI 3/4"
 doppelgangers: []
 user_actions:
-  bootloader:
-    title: "Reboot to Bootloader"
-    description: "With the device powered off, press and hold the volume down and power buttons until the screen turns on. It should show a menu selection screen."
-    image: "phone_power_down"
-    button: true
   recovery:
     title: "Reboot to Recovery"
-    description: "With the device still at the 'Fastboot Mode' screen (if not, power off the device and press and hold volume down and power buttons until the screen turns on), select the 'Recovery Mode' option by using the volume buttons and press the power button to enter."
+    description: "With the device powered off, hold Volume Up + Power."
+    image: "phone_power_up"
+    button: true
+  bootloader:
+    title: "Reboot to Bootloader"
+    description: "With the device powered off, hold Volume Down + Power."
     image: "phone_power_down"
     button: true
 unlock: []
 handlers:
   bootloader_locked:
     actions:
-      - fastboot:flashing_unlock:
+      - fastboot:oem_unlock:
 operating_systems:
   - name: "Ubuntu Touch"
     options:
@@ -31,7 +32,7 @@ operating_systems:
           systemimage:channels:
       - var: "wipe"
         name: "Wipe Userdata"
-        tooltip: "Wipe personal data (required for new installs)"
+        tooltip: "Wipe personal data"
         type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
@@ -44,13 +45,13 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://cdimage.ubports.com/devices/pro1/boot.img"
+                - url: "https://gitlab.com/ubports/community-ports/cancro/-/raw/master/partitions/recovery.img"
                   checksum:
-                    sum: "2204c2478854d4dfd1bb16fae2651f80ae07f4af4452eb4c0ff9bbc6ee3f6414"
+                    sum: "0de4dc607e2de3ead3354e79e538cd61f177f3a5101ffe8c99121c73934b67a4"
                     algorithm: "sha256"
-                - url: "https://raw.githubusercontent.com/rubencarneiro/rubencarneiro.io/main/assets/downloads/pro1/splash.img"
+                - url: "https://gitlab.com/ubports/community-ports/cancro/-/raw/master/partitions/boot.img"
                   checksum:
-                    sum: "1446ae64f7fcbe17c684706d9f37e911807cf14e4b5c10a6e3b6398fc8777ee6"
+                    sum: "541fd1fdd7dfd304c6271700d1ef89188961f2b57a63efab3dd47fcbe80ccfb8"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -67,25 +68,18 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
+                - partition: "recovery"
+                  file: "recovery.img"
+                  group: "firmware"
                 - partition: "boot"
                   file: "boot.img"
-                  group: "firmware"
-                - partition: "splash"
-                  file: "splash.img"
                   group: "firmware"
         condition:
           var: "bootstrap"
           value: true
       - actions:
           - fastboot:format:
-              partition: "userdata"
-              type: "ext4"
-        condition:
-          var: "wipe"
-          value: true
-      - actions:
-          - core:user_action:
-              action: "recovery"
+              partition: "cache"
         condition:
           var: "bootstrap"
           value: true
@@ -95,9 +89,6 @@ operating_systems:
         fallback:
           - core:user_action:
               action: "recovery"
-        condition:
-          var: "bootstrap"
-          value: false
       - actions:
           - systemimage:install:
       - actions:

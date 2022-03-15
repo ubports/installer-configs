@@ -42,7 +42,7 @@ operating_systems:
           systemimage:channels:
       - var: "wipe"
         name: "Wipe Userdata"
-        tooltip: "Wipe personal data"
+        tooltip: "Wipe personal data (required for new installs)"
         type: "checkbox"
     prerequisites:
       - "trlte_check"

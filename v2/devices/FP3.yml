@@ -58,9 +58,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://gitlab.com/fairphone-3/fp3-assets/-/raw/boot-wireguard/boot.img"
+                - url: "https://gitlab.com/ubports/community-ports/android10/fairphone/fairphone_fp3/-/jobs/2036462451/artifacts/raw/out/boot.img"
                   checksum:
-                    sum: "5c8815b9e96311d586658111d2df7b1b8c03d6349a6a591adbb51abec5f0efbb"
+                    sum: "9dc7528b3573b32fff5504d58a05f157b4ca4fcca894e8894afcea4f602a23cd"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -83,6 +83,12 @@ operating_systems:
                   raw: true
         condition:
           var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:erase:
+              partition: "userdata"
+        condition:
+          var: "wipe"
           value: true
       - actions:
           - fastboot:format:

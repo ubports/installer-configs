@@ -65,7 +65,7 @@ operating_systems:
                 - url: "https://github.com/ubuntu-touch-violet/ubuntu-touch-violet/releases/download/20210510/vendor.zip"
                   name: "vendor.zip"
                   checksum:
-                    sum: "e49e199f7980c5200a0b90b489aa0fb6c3d3e612256d6dcac159414f965f0512"
+                    sum: "3aa2db9ce47698d568ca9368c5e23e1b2f19f69f58552b1b8dd63728c7e9b8cc"
                     algorithm: "sha256"
                 - url: "https://github.com/ubuntu-touch-violet/ubuntu-touch-violet/releases/download/20210510/dtbo.img"
                   name: "dtbo.img"
@@ -86,6 +86,11 @@ operating_systems:
                   name: "modem.img"
                   checksum:
                     sum: "e7155f8095a45f1a925bca9c81df145a2e8a90e359a85b5face3986f520ba71c"
+                    algorithm: "sha256"
+                - url: "https://github.com/ubuntu-touch-violet/ubuntu-touch-violet/releases/download/20210510/vbmeta.img"
+                  name: "vbmeta.img"
+                  checksum:
+                    sum: "f734812efec31d2c10a45dbcf9aa49b9994d3ad3cb221a5938e1a44362aa64ad"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -150,6 +155,9 @@ operating_systems:
                   group: "firmware"
                 - partition: "modem"
                   file: "modem.img"
+                  group: "firmware"
+                - partition: "vbmeta"
+                  file: "vbmeta.img"
                   group: "firmware"
                 - partition: "vendor"
                   file: "unpacked/vendor.img"

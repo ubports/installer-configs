@@ -12,6 +12,10 @@ user_actions:
     title: "Reboot to Bootloader"
     description: "Press and hold the volume buttons and the power button until the phone reboots."
     button: true
+  partition_layout:
+    title: "Partition Layout"
+    description: 'If a recent version of LineageOS (>16.0, July 2019 or later) was installed before, the partition layout might have been altered, and you will have to revert to the original partition layout. If you are unsure whether this is the case, you may go ahead now and revisit the instructions linked above if you encounter "Error: systemimage: Push failed: Failed push: Failed to push file 0: Push failed: out of space" while flashing the device.'
+    link: "https://github.com/ubports/ubports-installer/issues/1895"
 unlock: []
 handlers:
   bootloader_locked:
@@ -29,14 +33,14 @@ operating_systems:
           systemimage:channels:
       - var: "wipe"
         name: "Wipe Userdata"
-        tooltip: "Wipe personal data"
+        tooltip: "Wipe personal data (required for new installs)"
         type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
         tooltip: "Flash system partitions using fastboot"
         type: "checkbox"
         value: true
-    prerequisites: []
+    prerequisites: ["partition_layout"]
     steps:
       - actions:
           - core:download:
