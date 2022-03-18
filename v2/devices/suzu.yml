@@ -92,7 +92,7 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "http://cdimage.ubports.com/devices/halium-unlocked-recovery_suzu.img"
+                - url: "https://cdimage.ubports.com/devices/halium-unlocked-recovery_suzu.img"
                   checksum:
                     sum: "d230df1a9d4d5d8e92232ec272e365996ef5a77edb60aaddbfcd5aa97e058dc1"
                     algorithm: "sha256"
