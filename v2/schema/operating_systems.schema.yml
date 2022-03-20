@@ -13,6 +13,9 @@ items:
       title: OS name
       type: "string"
       description: "Human-readable name of the operating system."
+    compatible_installer:
+      title: Compatible Installer
+      type: "string"
     options:
       $ref: options.schema.yml#
     prerequisites:
