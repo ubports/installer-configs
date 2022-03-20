@@ -34,7 +34,6 @@ Promise.all([
     )
     .then(devices => devices.flat())
 ])
-  // .then(([latest_installer, devices]) => console.log(devices))
   .then(([latest_installer, devices]) =>
     Promise.all(
       devices.map(device =>
