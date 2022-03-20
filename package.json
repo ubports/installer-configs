@@ -6,6 +6,7 @@
     "lint": "npx prettier \"**\" --ignore-path=.gitignore --arrow-parens=avoid --trailing-comma=none -uw",
     "validate": "npx ajv-cli -s v2/schema/device.schema.yml -r \"v2/schema/!(device.schema.yml)\" -d \"v2/devices/[a-zA-Z]*.yml\" --errors=text",
     "checkdownloads": "./v2/checkDownloads.js",
+    "checksemver": "./v2/checkSemver.js",
     "buildconfigs": "./v2/buildConfigs.js",
     "buildschema": "./v2/buildSchema.js"
   },
@@ -22,10 +23,12 @@
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "ajv-cli": "^5.0.0",
+    "axios": "^0.26.1",
     "commander": "^9.0.0",
     "json-to-pretty-yaml": "^1.2.2",
     "prettier": "^2.5.1",
     "progressive-downloader": "^1.0.7",
+    "semver": "^7.3.5",
     "yaml": "^1.10.2"
   }
 }
