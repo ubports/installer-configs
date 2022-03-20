@@ -6,6 +6,9 @@ const YAML = require("yaml");
 const axios = require("axios");
 const semver = require("semver");
 
+console.log(
+  "This script will check whether the latest installer satisfies all configs. Note: This is not a requirement to merge configs, just a handy helper to track open work items."
+);
 Promise.all([
   axios
     .get(

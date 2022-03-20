@@ -110,6 +110,7 @@ oneOf:
         type: "null"
   - title: fastboot:reboot_fastboot action
     required: ["fastboot:reboot_fastboot"]
+    ubports_installer-compatibility: ">=0.9.2-beta"
     properties:
       fastboot:reboot_fastboot:
         title: "fastboot:reboot_fastboot action"

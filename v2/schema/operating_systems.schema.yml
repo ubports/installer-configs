@@ -16,6 +16,7 @@ items:
     compatible_installer:
       title: Compatible Installer
       type: "string"
+      ubports_semver:
     options:
       $ref: options.schema.yml#
     prerequisites:
