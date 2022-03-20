@@ -13,7 +13,7 @@ user_actions:
     link: "http://bigota.d.miui.com/V10.3.16.0.PFQMIXM/laurel_sprout_global_images_V10.3.16.0.PFQMIXM_20200324.0000.00_9.0_4a60d662bd.tgz"
   troubleshooting:
     title: "Post-Install troubleshooting"
-    description: "If after installing Ubuntu Touch you can't connect to Wi-Fi, pair Bluetooth devices or use cellular data, run the installer again and pick \"Reflash dtbo\" when you're prompted to select an OS."
+    description: 'If after installing Ubuntu Touch you can''t connect to Wi-Fi, pair Bluetooth devices or use cellular data, run the installer again and pick "Reflash dtbo" when you''re prompted to select an OS.'
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, press and hold the VOLUME DOWN and POWER buttons until the screen turns on"
@@ -162,8 +162,8 @@ operating_systems:
           - adb:reboot:
               to_state: "bootloader"
         fallback:
-              - core:user_action:
-                  action: "bootloader"
+          - core:user_action:
+              action: "bootloader"
       - actions:
           - fastboot:flash:
               partitions:
