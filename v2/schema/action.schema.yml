@@ -71,6 +71,7 @@ properties:
         title: User action
         type: "string"
         description: "user action to run"
+        ubports_user-action:
     required: ["action"]
     additionalProperties: false
   fastboot:oem_unlock:

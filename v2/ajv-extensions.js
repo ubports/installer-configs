@@ -1,6 +1,16 @@
 "use strict";
 const semver = require("semver");
 module.exports = function (ajv) {
+  // ensure a user_action string is a valid reference
+  ajv.addKeyword({
+    keyword: "ubports_user-action",
+    type: "string",
+    compile() {
+      return (action, { rootData }) => !!rootData.user_actions[action];
+    }
+  });
+
+  // ensure a semver string is a valid reference
   ajv.addKeyword({
     keyword: "ubports_semver",
     type: "string",
@@ -8,6 +18,8 @@ module.exports = function (ajv) {
       return data => semver.validRange(data, { loose: true });
     }
   });
+
+  // ensure the compatible_installer specified for the operating_system satisfies every action
   ajv.addKeyword({
     keyword: "ubports_installer-compatibility",
     compile(required_by_action) {
