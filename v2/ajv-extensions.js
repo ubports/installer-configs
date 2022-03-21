@@ -14,6 +14,20 @@ module.exports = function (ajv) {
     }
   });
 
+  // ensure a user_action is not already specified in the devices unlock block
+  ajv.addKeyword({
+    keyword: "ubports_not-in-unlock",
+    type: "string",
+    compile:
+      () =>
+      (action, { rootData }) =>
+        !(rootData?.unlock?.indexOf(action) !== -1),
+    error: {
+      message:
+        "unlock and operating_systems.prerequisites should be mutually exclusive"
+    }
+  });
+
   // ensure a semver string is a valid reference
   ajv.addKeyword({
     keyword: "ubports_semver",
