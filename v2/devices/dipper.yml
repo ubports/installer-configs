@@ -14,11 +14,6 @@ user_actions:
     description: "With the device powered off, hold Volume Up + Power."
     image: "phone_power_up"
     button: true
-  boot:
-    title: "Boot the device"
-    description: "Power on the device."
-    image: "phone_power_up"
-    button: true
   confirm_model:
     title: "Confirm your model"
     description: "Please double-check that your device is a Xiaomi Mi 8 (dipper)."

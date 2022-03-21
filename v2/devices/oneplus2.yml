@@ -40,10 +40,6 @@ user_actions:
     title: "Sideload complete!"
     description: "Follow the on-screen instructions to complete the sideload."
     button: true
-  untested:
-    title: "Untested"
-    description: "Sorry, this configuration has not yet been fully tested. You might run into issues. If you want to help us improve, click the link below to see the config file."
-    button: true
 unlock:
   - "update"
   - "twrp"

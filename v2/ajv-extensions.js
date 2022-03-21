@@ -28,6 +28,38 @@ module.exports = function (ajv) {
     }
   });
 
+  // ensure a user_action is used somewhere
+  ajv.addKeyword({
+    keyword: "ubports_no-unused-user_actions",
+    type: "object",
+    compile:
+      () =>
+      (_, { rootData, parentDataProperty: action }) =>
+        rootData?.unlock?.indexOf(action) !== -1 ||
+        rootData?.operating_systems?.reduce(
+          (prev, { prerequisites, steps }) =>
+            prev ||
+            prerequisites?.indexOf(action) !== -1 ||
+            steps
+              .map(({ actions, fallback }) => [
+                ...(actions || []),
+                ...(fallback || [])
+              ])
+              .flat()
+              .filter(a => {
+                if (a["core:group"])
+                  throw new Error(
+                    "core:group desctructuring not yet implemented"
+                  );
+                else return a["core:user_action"]?.action === action;
+              }).length,
+          false
+        ),
+    error: {
+      message: "no unused user_actions"
+    }
+  });
+
   // ensure a semver string is a valid reference
   ajv.addKeyword({
     keyword: "ubports_semver",

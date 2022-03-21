@@ -14,11 +14,6 @@ user_actions:
     description: "With the device powered off, hold Volume Down + Power"
     image: "phone_power_down"
     button: true
-  boot:
-    title: "Boot the device"
-    description: "Power on the device."
-    image: "phone_power_up"
-    button: true
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."

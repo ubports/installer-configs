@@ -14,11 +14,6 @@ user_actions:
     description: "With the device powered off, hold Volume Down + Power."
     image: "phone_power_down"
     button: true
-  boot:
-    title: "Boot the device"
-    description: "Power on the device."
-    image: "phone_power_up"
-    button: true
   confirm_model:
     title: "Confirm your model"
     description: "Please double-check that your device is a Xiaomi Mi MIX 3 (perseus)."

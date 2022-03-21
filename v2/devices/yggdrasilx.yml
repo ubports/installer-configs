@@ -18,27 +18,6 @@ user_actions:
     title: "Reboot the device"
     description: "Hold down the power button until the device powers down. Then, release it briefly and hold it down again until the device boots."
     button: true
-  twrp_unlock:
-    title: "TWRP unlock"
-    description: 'Your device will boot Team Win Recovery Project (TWRP). If the screen is off, hit the power button once to light it up, then swipe the bar in the bottom to the right where it says to "Swipe to allow modifications."'
-    button: true
-  twrp_sideload:
-    title: "TWRP sideload"
-    description: 'Select "Advanced" and then "ADB Sideload". Check the boxes "Wipe Dalvik Cache" and "Wipe Cache" and then swipe the bar in the bottom where it says "Swipe to Start Sideload".'
-    button: true
-  twrp_sideload_again:
-    title: "TWRP sideload"
-    description: 'Select "Back" and then select "ADB Sideload" again. Ensure the boxes "Wipe Dalvik Cache" and "Wipe Cache" are checked and then swipe the bar in the bottom where it says "Swipe to Start Sideload".'
-    button: true
-  twrp_sideload_reboot:
-    title: "Sideload complete!"
-    description: "Follow the on-screen instructions to complete the sideload. Your device will reboot to the new OS next."
-    button: true
-  untested:
-    title: "Untested"
-    description: "Sorry, this configuration has not yet been fully tested. You might run into issues. If you want to help us improve, click the link below to see the config file."
-    link: "https://github.com/ubports/installer-configs/blob/master/v1/yggdrasil.json"
-    button: true
 unlock: []
 handlers:
   bootloader_locked:

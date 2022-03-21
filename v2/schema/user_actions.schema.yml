@@ -8,6 +8,7 @@ patternProperties:
     title: "User action"
     type: "object"
     description: "Instruction that can be referenced and presented to the user. Eg key combinations to reboot to recovery or bootloader."
+    ubports_no-unused-user_actions:
     properties:
       title:
         title: Title
