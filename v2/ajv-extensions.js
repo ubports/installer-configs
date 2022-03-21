@@ -5,12 +5,12 @@ module.exports = function (ajv) {
   ajv.addKeyword({
     keyword: "ubports_user-action",
     type: "string",
-    compile() {
-      return (action, { rootData, instancePath }) =>
-        !!rootData.user_actions[action] ||
-        ajv.logger.error(
-          `undefined user_action at v2/devices/yggdrasil.yml${rootData.codename}.yml#${instancePath}`
-        );
+    compile:
+      () =>
+      (action, { rootData }) =>
+        rootData.user_actions[action],
+    error: {
+      message: "undefined user_action"
     }
   });
 
@@ -18,16 +18,18 @@ module.exports = function (ajv) {
   ajv.addKeyword({
     keyword: "ubports_semver",
     type: "string",
-    compile() {
-      return data => semver.validRange(data, { loose: true });
+    compile: () => data => semver.validRange(data, { loose: true }),
+    error: {
+      message: "invalid semver range"
     }
   });
 
   // ensure the compatible_installer specified for the operating_system satisfies every action
   ajv.addKeyword({
     keyword: "ubports_installer-compatibility",
-    compile(required_by_action) {
-      return (_, { rootData, instancePath }) =>
+    compile:
+      required_by_action =>
+      (_, { rootData, instancePath }) =>
         !instancePath.startsWith("/operating_systems/") ||
         semver.subset(
           // semver range specified in the installer configs for this os
@@ -37,7 +39,9 @@ module.exports = function (ajv) {
           // minimum required version specifyed in the schema for this action
           required_by_action,
           { loose: true, includePrerelease: true }
-        );
+        ),
+    error: {
+      message: ({ schema }) => `requires compatible_installer ${schema}`
     },
     metaSchema: {
       type: "string",
