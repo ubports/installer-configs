@@ -6,7 +6,11 @@ module.exports = function (ajv) {
     keyword: "ubports_user-action",
     type: "string",
     compile() {
-      return (action, { rootData }) => !!rootData.user_actions[action];
+      return (action, { rootData, instancePath }) =>
+        !!rootData.user_actions[action] ||
+        ajv.logger.error(
+          `undefined user_action at v2/devices/yggdrasil.yml${rootData.codename}.yml#${instancePath}`
+        );
     }
   });
 
