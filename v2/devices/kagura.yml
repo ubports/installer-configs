@@ -46,6 +46,7 @@ handlers:
           code_url: "https://developer.sony.com/develop/open-devices/get-started/unlock-bootloader/"
 operating_systems:
   - name: "Ubuntu Touch"
+    compatible_installer: ">=0.9.2-beta"
     options:
       - var: "channel"
         name: "Channel"

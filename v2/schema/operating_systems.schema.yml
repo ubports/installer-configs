@@ -8,6 +8,10 @@ items:
   title: Operating system
   type: "object"
   description: "An operating system available for installation"
+  required:
+    - "name"
+    - "compatible_installer"
+    - "steps"
   properties:
     name:
       title: OS name
