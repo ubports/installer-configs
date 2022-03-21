@@ -1,5 +1,29 @@
 "use strict";
 const semver = require("semver");
+
+/**
+ * get all actions used in a series of steps
+ * @param {Array<Object>} steps steps to deconstruct
+ * @returns {Array<Object>} unordered flat array of all actions
+ */
+const deconstructSteps = steps =>
+  steps
+    .map(({ actions, fallback }) => [...(actions || []), ...(fallback || [])])
+    .flat()
+    .map(a => (a["core:group"] ? deconstructSteps(a["core:group"]) : a))
+    .flat();
+
+/**
+ * get all actions used in a config
+ * @param {Object} steps ubports installer config for a device
+ * @returns {Array<Object>} unordered flat array of all actions
+ */
+const getActions = config =>
+  deconstructSteps([
+    ...Object.entries(config?.handlers || {}).map(s => s[1]),
+    ...config.operating_systems.map(({ steps }) => steps).flat()
+  ]);
+
 module.exports = function (ajv) {
   // ensure a user_action string is a valid reference
   ajv.addKeyword({
@@ -37,24 +61,13 @@ module.exports = function (ajv) {
       (_, { rootData, parentDataProperty: action }) =>
         rootData?.unlock?.indexOf(action) !== -1 ||
         rootData?.operating_systems?.reduce(
-          (prev, { prerequisites, steps }) =>
-            prev ||
-            prerequisites?.indexOf(action) !== -1 ||
-            steps
-              .map(({ actions, fallback }) => [
-                ...(actions || []),
-                ...(fallback || [])
-              ])
-              .flat()
-              .filter(a => {
-                if (a["core:group"])
-                  throw new Error(
-                    "core:group desctructuring not yet implemented"
-                  );
-                else return a["core:user_action"]?.action === action;
-              }).length,
+          (prev, { prerequisites }) =>
+            prev || prerequisites?.indexOf(action) !== -1,
           false
-        ),
+        ) ||
+        getActions(rootData).filter(
+          a => a["core:user_action"]?.action === action
+        ).length,
     error: {
       message: "no unused user_actions"
     }
