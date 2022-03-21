@@ -30,6 +30,7 @@ unlock:
   - "support"
 operating_systems:
   - name: "Ubuntu Touch"
+    compatible_installer: ">=0.9.2-beta"
     options:
       - var: "channel"
         name: "Channel"

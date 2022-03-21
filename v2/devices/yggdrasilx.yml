@@ -46,6 +46,7 @@ handlers:
       - fastboot:flashing_unlock:
 operating_systems:
   - name: "Ubuntu Touch"
+    compatible_installer: ">=0.9.2-beta"
     options:
       - var: "channel"
         name: "Channel"
@@ -185,6 +186,7 @@ operating_systems:
     slideshow: []
 
   - name: "Volla OS"
+    compatible_installer: ">=0.9.2-beta"
     prerequisites: []
     steps:
       - actions:
