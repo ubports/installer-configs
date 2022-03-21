@@ -46,6 +46,7 @@ properties:
     uniqueItems: true
     items:
       type: "string"
+      ubports_user-action:
   operating_systems:
     $ref: operating_systems.schema.yml#
 required:

@@ -220,5 +220,5 @@ operating_systems:
           - fastboot:reboot:
         fallback:
           - core:user_action:
-              action: "system"
+              action: "boot"
     slideshow: []
