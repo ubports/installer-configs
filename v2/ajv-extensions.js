@@ -12,6 +12,7 @@ module.exports = function (ajv) {
     keyword: "ubports_installer-compatibility",
     compile(required_by_action) {
       return (_, { rootData, instancePath }) =>
+        !instancePath.startsWith("/operating_systems/") ||
         semver.subset(
           // semver range specified in the installer configs for this os
           rootData.operating_systems[
