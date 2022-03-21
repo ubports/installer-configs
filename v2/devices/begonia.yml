@@ -4,11 +4,6 @@ formfactor: "phone"
 aliases: []
 doppelgangers: []
 user_actions:
-  recovery:
-    title: "Reboot to Recovery"
-    description: "With the device powered off, hold Volume Up + Power."
-    image: "phone_power_up"
-    button: true
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, hold Volume Down + Power."

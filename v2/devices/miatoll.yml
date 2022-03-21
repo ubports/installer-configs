@@ -18,11 +18,6 @@ user_actions:
     description: "With the device powered off, hold Volume Down + Power."
     image: "phone_power_down"
     button: true
-  boot:
-    title: "Boot the device"
-    description: "Power on the device."
-    image: "phone_power_up"
-    button: true
   confirm_model:
     title: "Confirm your model"
     description: "Please double-check that your device is any of the following models: Xiaomi Redmi Note 9 Pro/Pro Max/9S - Poco M2 Pro (joyeuse, excalibur, curtana, gram)."

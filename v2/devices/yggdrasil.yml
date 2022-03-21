@@ -288,6 +288,7 @@ operating_systems:
       link: "https://volla.online/en/eula/index.html"
   - name: "SailfishOS"
     compatible_installer: ">=0.9.2-beta"
+    prerequisites: []
     options:
       - var: "bootstrap"
         name: "Bootstrap"

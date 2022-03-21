@@ -14,10 +14,6 @@ user_actions:
     description: 'With the device powered off, hold Volume Down + Power. You might be prompted to select a mode to boot into. If that happens, follow the on-screen instructions and select "Download" mode.'
     image: "phone_power_down"
     button: true
-  confirm_download:
-    title: "Confirm Download Mode"
-    description: "Wait until the phone has entered download mode. You should see a green robot and a warning."
-    button: true
   confirm_replug:
     title: "Unplug and Replug"
     description: "Wait until the phone has rebooted and shows a small red text. Unplug and replug once the USB cable"
