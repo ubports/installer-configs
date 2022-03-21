@@ -38,20 +38,19 @@ Promise.all([
     .then(devices => devices.flat())
 ])
   .then(([latest_installer, devices]) =>
-    Promise.all(
-      devices.map(device =>
-        semver.satisfies(latest_installer, device.compatible_installer, {
+    devices.forEach(device => {
+      if (
+        !semver.satisfies(latest_installer, device.compatible_installer, {
           includePrerelease: true
         })
-          ? Promise.resolve()
-          : Promise.reject(
-              new Error(
-                `${device.codename}: ${device.name}: compatible_installer ${device.compatible_installer} does not satisfy latest installer version ${latest_installer}`
-              )
-            )
-      )
-    )
+      ) {
+        throw new Error(
+          `${device.codename}: ${device.name}: compatible_installer ${device.compatible_installer} does not satisfy latest installer version ${latest_installer}`
+        );
+      }
+    })
   )
+  .then(() => console.log("all actions compatible with latest installer"))
   .catch(e => {
     console.error("Failed to validate semver:", e.message);
     process.exit(-1);
