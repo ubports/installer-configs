@@ -10,7 +10,6 @@ module.exports = function (ajv) {
   });
   ajv.addKeyword({
     keyword: "ubports_installer-compatibility",
-    type: "object",
     compile(required_by_action) {
       return (_, { rootData, instancePath }) =>
         semver.subset(
