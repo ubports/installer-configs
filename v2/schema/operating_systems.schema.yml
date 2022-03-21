@@ -31,6 +31,7 @@ items:
         type: "string"
         description: "Reference to user_action that's needed before the installation of this OS. Steps required for every OS should be put in the generic unlock block instead."
         ubports_user-action:
+        ubports_not-in-unlock:
     steps:
       title: Steps
       type: "array"
