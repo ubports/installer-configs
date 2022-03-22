@@ -48,7 +48,7 @@ operating_systems:
         name: "Wipe personal data"
         tooltip: "This is required for new installations"
         type: "checkbox"
-        value: true
+        value: false
       - var: "bootstrap"
         name: "Bootstrap"
         tooltip: "Setup required partitions for running Ubuntu Touch"
