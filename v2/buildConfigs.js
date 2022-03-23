@@ -19,7 +19,7 @@ fs.mkdir(path.join("build", "v2", "devices"), { recursive: true })
           .then(cfg =>
             writeJSON(
               path.join("build", "v2", "devices", `${cfg.codename}.json`),
-              cfg
+              process.env.GITHUB_SHA ? {sha: process.env.GITHUB_SHA, ...cfg} : cfg
             ).then(() => cfg)
           )
       )
