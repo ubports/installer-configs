@@ -104,7 +104,17 @@ properties:
     additionalProperties: false
   systemimage:install:
     title: "systemimage:install action"
-    type: "null"
+    oneOf:
+      - type: "object"
+        ubports_installer-compatibility: ">=0.9.4-beta"
+        additionalProperties: false
+        properties:
+          verify_recovery:
+            title: "Verify Recovery"
+            type: "boolean"
+            description: "Verify that the recovery is capable of installing Ubuntu Touch by asserting that `adb getprop ro.ubuntu.recovery`. Defaults to false."
+      - type: "null"
+        ubports_installer-compatibility: ">=0.9.2-beta"
   asteroid_os:download:
     title: "asteroid_os:download action"
     type: "null"
@@ -209,6 +219,26 @@ properties:
         type: "string"
         enum: ["a", "b"]
     additionalProperties: false
+  fastboot:assert_var:
+    title: "fastboot:assert_var"
+    type: "object"
+    additionalProperties: false
+    minProperties: 2
+    maxProperties: 2
+    oneOf:
+      - required: ["variable", "value"]
+      - required: ["variable", "regex"]
+    properties:
+      variable:
+        title: "Variable"
+        type: "string"
+        description: "Variable to assert using fastboot getvar"
+      value:
+        title: "Value"
+        type: "string"
+        description: "Asserted variable value"
+      regex:
+        $ref: regex.schema.yml#
   adb:shell:
     title: "adb:shell action"
     type: "object"
@@ -281,7 +311,29 @@ properties:
       - group
     additionalProperties: false
   adb:preparesystemimage:
+    title: "adb:preparesystemimage action"
     type: "null"
+  adb:assert_prop:
+    title: "adb:assert_prop action"
+    type: "object"
+    additionalProperties: false
+    minProperties: 2
+    maxProperties: 2
+    oneOf:
+      - required: ["prop", "value"]
+      - required: ["prop", "regex"]
+    properties:
+      prop:
+        title: "Property"
+        type: "string"
+        description: "Property to assert using adb getprop"
+      value:
+        title: "Value"
+        type: "string"
+        description: "Asserted property value"
+      regex:
+        $ref: regex.schema.yml#
+    ubports_installer-compatibility: ">=0.9.4-beta"
   core:download:
     title: "core:download action"
     type: "object"
