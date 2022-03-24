@@ -223,6 +223,8 @@ properties:
     title: "fastboot:assert_var"
     type: "object"
     additionalProperties: false
+    minProperties: 2
+    maxProperties: 2
     oneOf:
       - required: ["variable", "value"]
       - required: ["variable", "regex"]
@@ -315,6 +317,8 @@ properties:
     title: "adb:assert_prop action"
     type: "object"
     additionalProperties: false
+    minProperties: 2
+    maxProperties: 2
     oneOf:
       - required: ["prop", "value"]
       - required: ["prop", "regex"]
