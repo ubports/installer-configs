@@ -11,9 +11,6 @@ user_actions:
     title: "Confirm OS version"
     description: "Your device must be running Android 9 before installing Ubuntu Touch. This seems to be already the case for the most devices of this type. But if you still need to flash the Android 9 stock rom, please see the install section in the link below:"
     link: "https://gitlab.com/ubports/community-ports/android9/lenovo-tab-m10-fhd/lenovo-x605#install"
-  unlock_bootloader:
-    title: "Unlock your device"
-    description: 'Unlock the device bootloader following usual unlock procedure (enable Developer mode, turn on "OEM unlocking" option, then reboot to bootloader and execute `fastboot flashing unlock`. If your bootloader is already unlocked, you can skip this step.'
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, press and hold the VOLUME DOWN and POWER buttons at the same time until the device turns on. The bootloader mode is indicated by the red 'Fastboot Mode' text in the left down corner."
@@ -34,7 +31,6 @@ user_actions:
 unlock:
   - "confirm_model"
   - "confirm_os"
-  - "unlock_bootloader"
 handlers:
   bootloader_locked:
     actions:

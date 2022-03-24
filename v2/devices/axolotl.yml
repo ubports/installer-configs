@@ -11,10 +11,6 @@ user_actions:
     title: "Confirm OS version"
     description: "Please double-check that your device is running the latest available stock Android 10 firmware (type: release)."
     link: "https://downloads.shiftphones.com/axolotl"
-  unlock_bootloader:
-    title: "Unlock your phone"
-    description: 'Your device must be "unlocked" in order to be able to flash it. Unlocking the bootloader will delete your personal data!<br><br>If your bootloader is already unlocked, you are good to go. Otherwise please check the link below (More...) and follow the instructions.'
-    link: "https://wiki.lineageos.org/devices/axolotl/install#unlocking-the-bootloader"
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, hold Volume Up + Power."
@@ -28,7 +24,6 @@ user_actions:
 unlock:
   - "confirm_model"
   - "confirm_os"
-  - "unlock_bootloader"
 handlers:
   bootloader_locked:
     actions:
