@@ -7,238 +7,9 @@ maxProperties: 1
 minProperties: 1
 additionalProperties: false
 properties:
-  heimdall:flash:
-    title: "heimdall:flash action"
-    type: "object"
-    properties:
-      partitions:
-        title: Partitions
-        type: array
-        description: Partitions to flash
-        items:
-          title: Partition
-          type: object
-          description: Partition to flash
-          properties:
-            partition:
-              title: Partition
-              type: string
-            file:
-              title: File
-              type: string
-            group:
-              title: Group
-              type: string
-    additionalProperties: false
-  core:info:
-    title: "core:info action"
-    type: "object"
-    properties:
-      status:
-        title: Status message
-        type: string
-        description: Message displayed in the upper line of the footer
-      dots:
-        title: Dots (waiting animation)
-        type: boolean
-        description: Dots (waiting animation) in the upper line of the footer
-      info:
-        title: Info message
-        type: string
-        description: Message displayed in the lower line of the footer
-      progress:
-        title: Progress
-        type: number
-        description: Progress bar (omit to hide)
-        minimum: 0
-        maximum: 1
-      speed:
-        title: Speed
-        type: number
-        description: speed in MB/s (omit to hide)
-        minimum: 0
-        maximum: 5000
-  core:group:
-    title: "core:group action"
-    type: "array"
-    items:
-      $ref: "step.schema.yml"
-  core:user_action:
-    title: "core:user_action action"
-    type: "object"
-    properties:
-      action:
-        title: User action
-        type: "string"
-        description: "user action to run"
-        ubports_user-action:
-    required: ["action"]
-    additionalProperties: false
-  fastboot:oem_unlock:
-    title: "fastboot:oem_unlock action"
-    oneOf:
-      - type: "null"
-      - type: "object"
-        properties:
-          code_url:
-            title: Code url
-            type: string
-            description: Website to obtain an unlock code
-        additionalProperties: false
-  fastboot:flashing_unlock:
-    title: "fastboot:flashing_unlock action"
-    type: "null"
-  fastboot:reboot_bootloader:
-    title: "fastboot:reboot_bootloader action"
-    type: "null"
-  fastboot:reboot_fastboot:
-    title: "fastboot:reboot_fastboot action"
-    type: "null"
-    ubports_installer-compatibility: ">=0.9.2-beta"
-  fastboot:reboot_recovery:
-    title: "fastboot:reboot_recovery action"
-    type: "null"
-  fastboot:update:
-    title: "fastboot:update action"
-    type: "object"
-    additionalProperties: false
-  systemimage:install:
-    title: "systemimage:install action"
-    oneOf:
-      - type: "object"
-        ubports_installer-compatibility: ">=0.9.4-beta"
-        additionalProperties: false
-        properties:
-          verify_recovery:
-            title: "Verify Recovery"
-            type: "boolean"
-            description: "Verify that the recovery is capable of installing Ubuntu Touch by asserting that `adb getprop ro.ubuntu.recovery`. Defaults to false."
-      - type: "null"
-        ubports_installer-compatibility: ">=0.9.2-beta"
-  asteroid_os:download:
-    title: "asteroid_os:download action"
-    type: "null"
-  lineage_os:download:
-    title: "lineage_os:download action"
-    type: "null"
-  lineage_os:install:
-    title: "lineage_os:install action"
-    type: "null"
-  fastboot:boot:
-    title: "fastboot:boot action"
-    type: "object"
-    properties:
-      file:
-        title: File
-        type: string
-      group:
-        title: Group
-        type: string
-    additionalProperties: false
-  fastboot:reboot:
-    title: "fastboot:reboot action"
-    type: "null"
-  fastboot:continue:
-    title: "fastboot:continue action"
-    type: "null"
-  fastboot:erase:
-    title: "fastboot:erase action"
-    type: "object"
-    properties:
-      partition:
-        title: Partition
-        type: "string"
-        description: "Partition to format."
-    additionalProperties: false
-  fastboot:format:
-    title: "fastboot:format action"
-    type: "object"
-    properties:
-      partition:
-        title: Partition
-        type: "string"
-        description: "Partition to format."
-      type:
-        title: Partition type
-        type: "string"
-        description: "Partition type to use"
-        enum:
-          - ext2
-          - ext4
-          - f2fs
-      size:
-        title: Partition size
-        type: number
-        description: "Partition size"
-    additionalProperties: false
-  fastboot:flash:
-    title: "fastboot:flash action"
-    type: "object"
-    properties:
-      partitions:
-        title: Partitions
-        type: array
-        description: Partitions to flash
-        items:
-          title: Partition
-          type: object
-          description: Partition to flash
-          properties:
-            partition:
-              title: Partition
-              type: string
-            file:
-              title: File
-              type: string
-            group:
-              title: Group
-              type: string
-    additionalProperties: false
-  fastboot:wipe_super:
-    title: "fastboot:wipe_super action"
-    type: "object"
-    properties:
-      image:
-        title: Image
-        type: object
-        properties:
-          file:
-            title: File
-            type: string
-          group:
-            title: Group
-            type: string
-    required: ["image"]
-    additionalProperties: false
-  fastboot:set_active:
-    title: "fastboot:set_active action"
-    type: "object"
-    properties:
-      slot:
-        title: To state
-        type: "string"
-        enum: ["a", "b"]
-    additionalProperties: false
-  fastboot:assert_var:
-    title: "fastboot:assert_var"
-    type: "object"
-    additionalProperties: false
-    minProperties: 2
-    maxProperties: 2
-    oneOf:
-      - required: ["variable", "value"]
-      - required: ["variable", "regex"]
-    properties:
-      variable:
-        title: "Variable"
-        type: "string"
-        description: "Variable to assert using fastboot getvar"
-      value:
-        title: "Value"
-        type: "string"
-        description: "Asserted variable value"
-      regex:
-        $ref: regex.schema.yml#
+  ###############################
+  # adb plugin ##################
+  ###############################
   adb:shell:
     title: "adb:shell action"
     type: "object"
@@ -252,6 +23,7 @@ properties:
           type: string
     required: ["args"]
     additionalProperties: false
+
   adb:reboot:
     title: "adb:reboot action"
     type: "object"
@@ -266,6 +38,7 @@ properties:
           - "bootloader"
     required: ["to_state"]
     additionalProperties: false
+
   adb:format:
     title: "adb:format action"
     type: "object"
@@ -275,6 +48,7 @@ properties:
         type: "string"
         description: "Partition to format."
     additionalProperties: false
+
   adb:sideload:
     title: "adb:sideload action"
     type: "object"
@@ -289,6 +63,7 @@ properties:
       - file
       - group
     additionalProperties: false
+
   adb:push:
     title: "adb:push action"
     type: "object"
@@ -310,9 +85,11 @@ properties:
       - file
       - group
     additionalProperties: false
+
   adb:preparesystemimage:
     title: "adb:preparesystemimage action"
     type: "null"
+
   adb:assert_prop:
     title: "adb:assert_prop action"
     type: "object"
@@ -334,6 +111,17 @@ properties:
       regex:
         $ref: regex.schema.yml#
     ubports_installer-compatibility: ">=0.9.4-beta"
+
+  ###############################
+  # asteroid_os plugin ##########
+  ###############################
+  asteroid_os:download:
+    title: "asteroid_os:download action"
+    type: "null"
+
+  ###############################
+  # core plugin #################
+  ###############################
   core:download:
     title: "core:download action"
     type: "object"
@@ -364,6 +152,7 @@ properties:
       - group
       - files
     additionalProperties: false
+
   core:write:
     title: "core:write action"
     type: "object"
@@ -378,6 +167,7 @@ properties:
         title: Content
         type: string
     additionalProperties: false
+
   core:unpack:
     title: "core:unpack action"
     type: "object"
@@ -397,6 +187,7 @@ properties:
               title: Target directory
               type: string
     additionalProperties: false
+
   core:manual_download:
     title: "core:manual_download action"
     type: "object"
@@ -416,3 +207,265 @@ properties:
           checksum:
             $ref: checksum.schema.yml#
     additionalProperties: false
+
+  core:info:
+    title: "core:info action"
+    type: "object"
+    properties:
+      status:
+        title: Status message
+        type: string
+        description: Message displayed in the upper line of the footer
+      dots:
+        title: Dots (waiting animation)
+        type: boolean
+        description: Dots (waiting animation) in the upper line of the footer
+      info:
+        title: Info message
+        type: string
+        description: Message displayed in the lower line of the footer
+      progress:
+        title: Progress
+        type: number
+        description: Progress bar (omit to hide)
+        minimum: 0
+        maximum: 1
+      speed:
+        title: Speed
+        type: number
+        description: speed in MB/s (omit to hide)
+        minimum: 0
+        maximum: 5000
+
+  core:group:
+    title: "core:group action"
+    type: "array"
+    items:
+      $ref: "step.schema.yml"
+
+  core:user_action:
+    title: "core:user_action action"
+    type: "object"
+    properties:
+      action:
+        title: User action
+        type: "string"
+        description: "user action to run"
+        ubports_user-action:
+    required: ["action"]
+    additionalProperties: false
+
+  ###############################
+  # fastboot plugin #############
+  ###############################
+  fastboot:oem_unlock:
+    title: "fastboot:oem_unlock action"
+    oneOf:
+      - type: "null"
+      - type: "object"
+        properties:
+          code_url:
+            title: Code url
+            type: string
+            description: Website to obtain an unlock code
+        additionalProperties: false
+
+  fastboot:flashing_unlock:
+    title: "fastboot:flashing_unlock action"
+    type: "null"
+
+  fastboot:reboot_bootloader:
+    title: "fastboot:reboot_bootloader action"
+    type: "null"
+
+  fastboot:reboot_fastboot:
+    title: "fastboot:reboot_fastboot action"
+    type: "null"
+    ubports_installer-compatibility: ">=0.9.2-beta"
+
+  fastboot:reboot_recovery:
+    title: "fastboot:reboot_recovery action"
+    type: "null"
+
+  fastboot:update:
+    title: "fastboot:update action"
+    type: "object"
+    additionalProperties: false
+  fastboot:boot:
+    title: "fastboot:boot action"
+    type: "object"
+    properties:
+      file:
+        title: File
+        type: string
+      group:
+        title: Group
+        type: string
+    additionalProperties: false
+
+  fastboot:reboot:
+    title: "fastboot:reboot action"
+    type: "null"
+
+  fastboot:continue:
+    title: "fastboot:continue action"
+    type: "null"
+
+  fastboot:erase:
+    title: "fastboot:erase action"
+    type: "object"
+    properties:
+      partition:
+        title: Partition
+        type: "string"
+        description: "Partition to format."
+    additionalProperties: false
+
+  fastboot:format:
+    title: "fastboot:format action"
+    type: "object"
+    properties:
+      partition:
+        title: Partition
+        type: "string"
+        description: "Partition to format."
+      type:
+        title: Partition type
+        type: "string"
+        description: "Partition type to use"
+        enum:
+          - ext2
+          - ext4
+          - f2fs
+      size:
+        title: Partition size
+        type: number
+        description: "Partition size"
+    additionalProperties: false
+
+  fastboot:flash:
+    title: "fastboot:flash action"
+    type: "object"
+    properties:
+      partitions:
+        title: Partitions
+        type: array
+        description: Partitions to flash
+        items:
+          title: Partition
+          type: object
+          description: Partition to flash
+          properties:
+            partition:
+              title: Partition
+              type: string
+            file:
+              title: File
+              type: string
+            group:
+              title: Group
+              type: string
+    additionalProperties: false
+
+  fastboot:wipe_super:
+    title: "fastboot:wipe_super action"
+    type: "object"
+    properties:
+      image:
+        title: Image
+        type: object
+        properties:
+          file:
+            title: File
+            type: string
+          group:
+            title: Group
+            type: string
+    required: ["image"]
+    additionalProperties: false
+
+  fastboot:set_active:
+    title: "fastboot:set_active action"
+    type: "object"
+    properties:
+      slot:
+        title: To state
+        type: "string"
+        enum: ["a", "b"]
+    additionalProperties: false
+
+  fastboot:assert_var:
+    title: "fastboot:assert_var"
+    type: "object"
+    additionalProperties: false
+    minProperties: 2
+    maxProperties: 2
+    oneOf:
+      - required: ["variable", "value"]
+      - required: ["variable", "regex"]
+    properties:
+      variable:
+        title: "Variable"
+        type: "string"
+        description: "Variable to assert using fastboot getvar"
+      value:
+        title: "Value"
+        type: "string"
+        description: "Asserted variable value"
+      regex:
+        $ref: regex.schema.yml#
+
+  ###############################
+  # heimdall plugin #############
+  ###############################
+  heimdall:flash:
+    title: "heimdall:flash action"
+    type: "object"
+    properties:
+      partitions:
+        title: Partitions
+        type: array
+        description: Partitions to flash
+        items:
+          title: Partition
+          type: object
+          description: Partition to flash
+          properties:
+            partition:
+              title: Partition
+              type: string
+            file:
+              title: File
+              type: string
+            group:
+              title: Group
+              type: string
+    additionalProperties: false
+
+  ###############################
+  # lineage_os plugin ###########
+  ###############################
+  lineage_os:download:
+    title: "lineage_os:download action"
+    type: "null"
+
+  lineage_os:install:
+    title: "lineage_os:install action"
+    type: "null"
+
+  ###############################
+  # systemimage plugin ##########
+  ###############################
+  systemimage:install:
+    title: "systemimage:install action"
+    oneOf:
+      - type: "object"
+        ubports_installer-compatibility: ">=0.9.4-beta"
+        additionalProperties: false
+        properties:
+          verify_recovery:
+            title: "Verify Recovery"
+            type: "boolean"
+            description: "Verify that the recovery is capable of installing Ubuntu Touch by asserting that `adb getprop ro.ubuntu.recovery`. Defaults to false."
+      - type: "null"
+        ubports_installer-compatibility: ">=0.9.2-beta"
