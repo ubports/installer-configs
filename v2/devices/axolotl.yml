@@ -11,13 +11,25 @@ user_actions:
     button: true
   fastbootd:
     title: "Reboot to Fastbootd"
-    description: "With the device powered off, hold Volume Down + Power to boot into recovery.\n\nInside the recovery, press on 'Advanced' and select 'Enter fastboot'."
+    description: "With the device powered off, hold Volume Down + Power to boot into recovery.<br><br>Inside the recovery, press on 'Advanced' and select 'Enter fastboot'."
     image: "phone_power_down"
     button: true
   recovery:
     title: "Reboot to Recovery"
     description: "With the device powered off, hold Volume Down + Power."
     image: "phone_power_down"
+    button: true
+  shiftos_reboot_system:
+    title: "Recovery - Reboot system now"
+    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Reboot system now'.<br>Confirm with pressing the Power key.<br><br>Warning: Do NOT lock your bootloader, this is not supported yet."
+    button: true
+  shiftos_sideload:
+    title: "Recovery - Apply update from ADB"
+    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Apply update from ADB'.<br>Confirm with pressing the Power key."
+    button: true
+  shiftos_wipe_data:
+    title: "Recovery - Wipe data/factory reset"
+    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Wipe data/factory reset'.<br>Confirm with pressing the Power key."
     button: true
 unlock: []
 handlers:
@@ -206,3 +218,156 @@ operating_systems:
       ###
       ######################################################################
     slideshow: []
+
+  ##################################################################################################
+
+  - name: "ShiftOS - G / L"
+    compatible_installer: ">=0.9.4-beta"
+    options:
+      - var: "shiftos_l"
+        name: "ShiftOS type"
+        tooltip: "Check to install ShiftOS-L, uncheck to install ShiftOS-G"
+        type: "checkbox"
+        value: false
+      - var: "wipe"
+        name: "Wipe personal data"
+        tooltip: "This is required for new installations or when switching between G and L"
+        type: "checkbox"
+        value: false
+    prerequisites: []
+    steps:
+      ######################################################################
+      ###
+      ### Ensure we always start in bootloader mode
+      ###
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      ### As this is an A/B device, force all future operations in "a" slot.
+      - actions:
+          - fastboot:set_active:
+              slot: "a"
+      ###
+      ######################################################################
+
+      ######################################################################
+      ###
+      ### (Optional) Wipe steps
+      ###
+      # 1) Format userdata as f2fs
+      - actions:
+          - fastboot:format:
+              partition: "userdata"
+              type: "f2fs"
+        condition:
+          var: "wipe"
+          value: true
+      # 2) Format metadata as ext4
+      - actions:
+          - fastboot:format:
+              partition: "metadata"
+              type: "ext4"
+        condition:
+          var: "wipe"
+          value: true
+      # 3) Erase misc
+      - actions:
+          - fastboot:erase:
+              partition: "misc"
+        condition:
+          var: "wipe"
+          value: true
+      ###
+      ######################################################################
+
+      ######################################################################
+      ###
+      ### ShiftOS Installation
+      ###
+      # 1) Download firmware images
+      - actions:
+          - core:download:
+              group: "firmware_shiftos"
+              files:
+                - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/2a546b464b03391124b13e109ef8e1f0bb818f71/axolotl/images/recovery_stock.img"
+                  name: "recovery.img"
+                  checksum:
+                    sum: "1fdaae67afd64d8394e0ea9199ab115a70942e70ccd16a1fa5d3b16eea1f4626"
+                    algorithm: "sha256"
+                - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/06fa047c3afcceb0532f90e8b503ff6a963bec56/axolotl/images/super_empty.img"
+                  name: "super_empty.img"
+                  checksum:
+                    sum: "0a0aa8a7b0faad8de4003ded16b6ffb83ba4bffde0ea29ecba12d99a9162ae3d"
+                    algorithm: "sha256"
+      # 1.1) ShiftOS G
+      - actions:
+          - core:download:
+              group: "firmware_shiftos"
+              files:
+                - url: "https://downloads.shiftphones.com/public/SHIFT6mq/release/SHIFT6MQ.SOS.3.6.G.20220225/FULL-OTA/SHIFT6MQ.SOS.3.6.G.20220225-RELEASE-OTA.zip"
+                  name: "update.zip"
+                  checksum:
+                    sum: "5df6f33fd80296f04439378f49e5d10c172d0e8ecd7ab2d813e68abd52a71b17"
+                    algorithm: "sha256"
+        condition:
+          var: "shiftos_l"
+          value: false
+      # 1.2) ShiftOS L
+      - actions:
+          - core:download:
+              group: "firmware_shiftos"
+              files:
+                - url: "https://downloads.shiftphones.com/public/SHIFT6mq/release-light/SHIFT6MQ.SOS.3.7.L.20220314/FULL-OTA/SHIFT6MQ.SOS.3.7.L.20220314-RELEASE-LIGHT-OTA.zip"
+                  name: "update.zip"
+                  checksum:
+                    sum: "094f0bca3a0808d8cc557e4eadb03fa732cd73fa27638ce237b676efe004de09"
+                    algorithm: "sha256"
+        condition:
+          var: "shiftos_l"
+          value: true
+      # 2) Flash firmware images in bootloader fastboot mode
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "recovery"
+                  file: "recovery.img"
+                  group: "firmware_shiftos"
+      # 3) Flash firmware images in fastbootd mode
+      - actions:
+          - fastboot:reboot_fastboot:
+        fallback:
+          - core:user_action:
+              action: "fastbootd"
+      - actions:
+          - fastboot:wipe_super:
+              image:
+                file: "super_empty.img"
+                group: "firmware_shiftos"
+      # 4) Reboot back into bootloader to activate new super scheme, then into recovery mode and sideload update.zip
+      - actions:
+          - fastboot:reboot_bootloader:
+          - fastboot:reboot_recovery:
+          - core:user_action:
+              action: "shiftos_sideload"
+      - actions:
+          - adb:sideload:
+              file: "update.zip"
+              group: "firmware_shiftos"
+      - actions:
+          - core:user_action:
+              action: "shiftos_wipe_data"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - core:user_action:
+              action: "shiftos_reboot_system"
+
+      ###
+      ######################################################################
+    slideshow: []
+
+  ##################################################################################################
