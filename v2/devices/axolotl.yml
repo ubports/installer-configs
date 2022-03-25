@@ -108,10 +108,10 @@ operating_systems:
                   checksum:
                     sum: "471a08f3bfaeb13f25e54b5e3aa84f573955da8578326564a6d2fe1c1d739512"
                     algorithm: "sha256"
-                - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/06fa047c3afcceb0532f90e8b503ff6a963bec56/axolotl/images/recovery.img"
+                - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/493b8e9cc53c270b2834a180dc3f6fd886b54a5f/axolotl/images/recovery.img"
                   name: "recovery.img"
                   checksum:
-                    sum: "a4a42acb7a2fe4f608c46c7cfe7114f634e6d0c0e9402874de92e6a27ce7b3c3"
+                    sum: "110cf4cd28a19658434c30c816fdeb4e271e3bd55fbd184e544d86fcbc0ab2ab"
                     algorithm: "sha256"
                 - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/06fa047c3afcceb0532f90e8b503ff6a963bec56/axolotl/images/super_mainline.img"
                   name: "super_mainline.img"
