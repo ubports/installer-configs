@@ -4,17 +4,6 @@ formfactor: "phone"
 aliases: []
 doppelgangers: []
 user_actions:
-  confirm_model:
-    title: "Confirm your model"
-    description: "Please check that your device is a SHIFT6mq (axolotl)."
-  confirm_os:
-    title: "Confirm OS version"
-    description: "Please double-check that your device is running the latest available stock Android 10 firmware (type: release)."
-    link: "https://downloads.shiftphones.com/axolotl"
-  unlock_bootloader:
-    title: "Unlock your phone"
-    description: 'Your device must be "unlocked" in order to be able to flash it. Unlocking the bootloader will delete your personal data!<br><br>If your bootloader is already unlocked, you are good to go. Otherwise please check the link below (More...) and follow the instructions.'
-    link: "https://wiki.lineageos.org/devices/axolotl/install#unlocking-the-bootloader"
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, hold Volume Up + Power."
@@ -25,17 +14,14 @@ user_actions:
     description: "With the device powered off, hold Volume Down + Power."
     image: "phone_power_down"
     button: true
-unlock:
-  - "confirm_model"
-  - "confirm_os"
-  - "unlock_bootloader"
+unlock: []
 handlers:
   bootloader_locked:
     actions:
       - fastboot:flashing_unlock:
 operating_systems:
   - name: "Ubuntu Touch"
-    compatible_installer: ">=0.9.2-beta"
+    compatible_installer: ">=0.9.4-beta"
     options:
       - var: "channel"
         name: "Channel"
@@ -205,6 +191,7 @@ operating_systems:
       # 2) Start systemimage installation
       - actions:
           - systemimage:install:
+              verify_recovery: true
       # 3) Reboot to recovery to trigger installation
       - actions:
           - adb:reboot:
