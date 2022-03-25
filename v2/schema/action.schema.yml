@@ -2,7 +2,7 @@ $schema: "http://json-schema.org/draft-07/schema#"
 $id: "v2/schema/action.schema.yml"
 title: "Action"
 type: "object"
-description: "Atomic action"
+description: "Actions represent atomic tasks to be executed by different plugins of the UBports Installer. Plugins may interface with each other to reduce the amount of redundant code."
 maxProperties: 1
 minProperties: 1
 additionalProperties: false
