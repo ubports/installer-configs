@@ -9,6 +9,11 @@ user_actions:
     description: "With the device powered off, hold Volume Up + Power."
     image: "phone_power_up"
     button: true
+  fastbootd:
+    title: "Reboot to Fastbootd"
+    description: "With the device powered off, hold Volume Down + Power to boot into recovery.\n\nInside the recovery, press on 'Advanced' and select 'Enter fastboot'."
+    image: "phone_power_down"
+    button: true
   recovery:
     title: "Reboot to Recovery"
     description: "With the device powered off, hold Volume Down + Power."
@@ -148,10 +153,9 @@ operating_systems:
         condition:
           var: "bootstrap"
           value: true
-        # TODO: implement user action fallback for fastbootd
-        #fallback:
-        #  - core:user_action:
-        #      action: "fastbootd"
+        fallback:
+          - core:user_action:
+              action: "fastbootd"
       - actions:
           - fastboot:wipe_super:
               image:
