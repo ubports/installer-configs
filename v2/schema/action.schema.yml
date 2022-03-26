@@ -34,7 +34,10 @@ properties:
 
   adb:reboot:
     title: "adb:reboot action"
+    description: "Reboot the device over adb."
     type: "object"
+    required: ["to_state"]
+    additionalProperties: false
     properties:
       to_state:
         title: To state
@@ -44,22 +47,25 @@ properties:
           - "recovery"
           - "system"
           - "bootloader"
-    required: ["to_state"]
-    additionalProperties: false
 
   adb:format:
     title: "adb:format action"
+    description: "Format a partition over adb shell."
     type: "object"
+    required: ["partition"]
+    additionalProperties: false
     properties:
       partition:
         title: Partition
         type: "string"
         description: "Partition to format."
-    additionalProperties: false
 
   adb:sideload:
     title: "adb:sideload action"
+    description: "Sideload a zip file OTA package."
     type: "object"
+    required: ["file", "group"]
+    additionalProperties: false
     properties:
       file:
         title: Zip to sideload
@@ -67,14 +73,13 @@ properties:
       group:
         title: Group
         type: string
-    required:
-      - file
-      - group
-    additionalProperties: false
 
   adb:push:
     title: "adb:push action"
+    description: "Push files to the device over adb."
     type: "object"
+    required: ["file", "group", "dest"]
+    additionalProperties: false
     properties:
       files:
         title: Files
@@ -89,17 +94,15 @@ properties:
         title: Destination path
         description: Path on the device to push files to
         type: string
-    required:
-      - file
-      - group
-    additionalProperties: false
 
   adb:preparesystemimage:
     title: "adb:preparesystemimage action"
+    description: "Prepare for Ubuntu Touch system image installation."
     type: "null"
 
   adb:assert_prop:
     title: "adb:assert_prop action"
+    description: "Assert a property value over adb shell getprop or, failing that, reading from the default.prop file."
     type: "object"
     additionalProperties: false
     minProperties: 2
@@ -125,6 +128,7 @@ properties:
   ###############################
   asteroid_os:download:
     title: "asteroid_os:download action"
+    description: "Download AsteroidOS images."
     type: "null"
 
   ###############################
@@ -132,7 +136,10 @@ properties:
   ###############################
   core:download:
     title: "core:download action"
+    description: "Download files."
     type: "object"
+    required: ["group", "files"]
+    additionalProperties: false
     properties:
       group:
         title: Group
@@ -141,7 +148,7 @@ properties:
       files:
         title: Files
         type: "array"
-        description: "Array of files to download."
+        description: "Files to download."
         items:
           title: File
           type: "object"
@@ -156,14 +163,13 @@ properties:
               $ref: checksum.schema.yml#
           required: ["url"]
           additionalProperties: false
-    required:
-      - group
-      - files
-    additionalProperties: false
 
   core:write:
     title: "core:write action"
+    description: "Write text to a file."
     type: "object"
+    required: ["group", "file", "content"]
+    additionalProperties: false
     properties:
       group:
         title: Group
@@ -174,11 +180,13 @@ properties:
       content:
         title: Content
         type: string
-    additionalProperties: false
 
   core:unpack:
     title: "core:unpack action"
+    description: "Unpack/decompress an archive using 7z."
     type: "object"
+    required: ["group", "files"]
+    additionalProperties: false
     properties:
       group:
         title: Group
@@ -187,18 +195,22 @@ properties:
         type: array
         items:
           type: object
+          required: ["archive", "dir"]
+          additionalProperties: false
           properties:
             archive:
-              title: Zip to sideload
+              title: Archive to decompress
               type: string
             dir:
               title: Target directory
               type: string
-    additionalProperties: false
 
   core:manual_download:
     title: "core:manual_download action"
+    description: "Instruct the user to manually download a file that can't be downloaded automatically, because it is behind some protective mechanism. The user will be instructed to load the file into the installer to continue the installation."
     type: "object"
+    required: ["group", "file"]
+    additionalProperties: false
     properties:
       group:
         title: Group
@@ -206,19 +218,25 @@ properties:
         description: "Files group"
       file:
         title: File
-        type: object
         description: "File to download"
+        type: object
+        required: ["name", "url", "checksum"]
+        additionalProperties: false
         properties:
+          name:
+            type: "string"
           url:
             type: "string"
             description: "URL of the file to download"
           checksum:
             $ref: checksum.schema.yml#
-    additionalProperties: false
 
   core:info:
     title: "core:info action"
+    description: "Display information in the UI."
     type: "object"
+    additionalProperties: false
+    minProperties: 1
     properties:
       status:
         title: Status message
@@ -247,61 +265,69 @@ properties:
 
   core:group:
     title: "core:group action"
+    description: "Run steps as a group. Useful for applying the same conditional expression to a whole series of steps."
     type: "array"
     items:
       $ref: "step.schema.yml"
 
   core:user_action:
     title: "core:user_action action"
+    description: "Instruct the user to run a user_action."
     type: "object"
+    required: ["action"]
+    additionalProperties: false
     properties:
+      # TODO implement inline user_action definitions for things that do not need to be re-used.
       action:
         title: User action
         type: "string"
         description: "user action to run"
         ubports_user-action:
-    required: ["action"]
-    additionalProperties: false
 
   ###############################
   # fastboot plugin #############
   ###############################
   fastboot:oem_unlock:
     title: "fastboot:oem_unlock action"
+    description: "OEM-unlock the device. Instruct the user to obtain and enter a code if necessary."
     oneOf:
       - type: "null"
       - type: "object"
+        required: ["code_url"]
+        additionalProperties: false
         properties:
           code_url:
             title: Code url
             type: string
             description: Website to obtain an unlock code
-        additionalProperties: false
 
   fastboot:flashing_unlock:
     title: "fastboot:flashing_unlock action"
+    description: "Flashing-unlock the device."
     type: "null"
 
   fastboot:reboot_bootloader:
     title: "fastboot:reboot_bootloader action"
+    description: "Reboot the device to bootloader over fastboot."
     type: "null"
 
   fastboot:reboot_fastboot:
     title: "fastboot:reboot_fastboot action"
+    description: "Reboot the device to fastboot over fastboot."
     type: "null"
     ubports_installer-compatibility: ">=0.9.2-beta"
 
   fastboot:reboot_recovery:
     title: "fastboot:reboot_recovery action"
+    description: "Reboot the device to recovery over fastboot."
     type: "null"
 
   fastboot:update:
     title: "fastboot:update action"
+    description: "Apply fastboot update zip."
     type: "object"
+    required: ["group", "file"]
     additionalProperties: false
-  fastboot:boot:
-    title: "fastboot:boot action"
-    type: "object"
     properties:
       file:
         title: File
@@ -309,29 +335,51 @@ properties:
       group:
         title: Group
         type: string
+
+  fastboot:boot:
+    title: "fastboot:boot action"
+    description: "Boot an image file over fastboot."
+    type: "object"
+    required: ["group", "file"]
     additionalProperties: false
+    properties:
+      file:
+        title: File
+        type: string
+      group:
+        title: Group
+        type: string
 
   fastboot:reboot:
     title: "fastboot:reboot action"
+    description: "Reboot over fastboot."
     type: "null"
 
   fastboot:continue:
     title: "fastboot:continue action"
+    description: "Continue fastboot booting."
     type: "null"
 
   fastboot:erase:
     title: "fastboot:erase action"
+    description: "Erase a partition over fastboot."
     type: "object"
+    required: ["partition"]
+    additionalProperties: false
     properties:
       partition:
         title: Partition
         type: "string"
-        description: "Partition to format."
-    additionalProperties: false
+        description: "Partition to erase."
 
   fastboot:format:
     title: "fastboot:format action"
+    description: "Format a partition over fasboot."
     type: "object"
+    required: ["partition"]
+    dependentRequired:
+      size: ["type"]
+    additionalProperties: false
     properties:
       partition:
         title: Partition
@@ -349,20 +397,23 @@ properties:
         title: Partition size
         type: number
         description: "Partition size"
-    additionalProperties: false
 
   fastboot:flash:
     title: "fastboot:flash action"
+    description: "Flash a partition over fastboot."
     type: "object"
+    required: ["partitions"]
+    additionalProperties: false
     properties:
       partitions:
         title: Partitions
         type: array
         description: Partitions to flash
         items:
-          title: Partition
+          title: Partition to flash
           type: object
-          description: Partition to flash
+          required: ["partition", "file", "group"]
+          additionalProperties: false
           properties:
             partition:
               title: Partition
@@ -373,15 +424,28 @@ properties:
             group:
               title: Group
               type: string
-    additionalProperties: false
+            raw:
+              title: Raw
+              type: boolean
+              default: false
+            flags:
+              title: Flags
+              type: array
+              items:
+                type: string
 
   fastboot:wipe_super:
     title: "fastboot:wipe_super action"
+    description: "Wipe super partition using fastboot."
     type: "object"
+    required: ["image"]
+    additionalProperties: false
     properties:
       image:
         title: Image
         type: object
+        required: ["file", "group"]
+        additionalProperties: false
         properties:
           file:
             title: File
@@ -389,21 +453,22 @@ properties:
           group:
             title: Group
             type: string
-    required: ["image"]
-    additionalProperties: false
 
   fastboot:set_active:
     title: "fastboot:set_active action"
+    description: "Set active fastboot slot."
     type: "object"
+    required: ["slot"]
+    additionalProperties: false
     properties:
       slot:
-        title: To state
+        title: Bootloader slot
         type: "string"
         enum: ["a", "b"]
-    additionalProperties: false
 
   fastboot:assert_var:
     title: "fastboot:assert_var"
+    description: "Assert a bootloader variable over fastboot getvar."
     type: "object"
     additionalProperties: false
     minProperties: 2
@@ -428,7 +493,10 @@ properties:
   ###############################
   heimdall:flash:
     title: "heimdall:flash action"
+    description: "Flash partitions using heimdall."
     type: "object"
+    required: ["partitions"]
+    additionalProperties: false
     properties:
       partitions:
         title: Partitions
@@ -448,17 +516,18 @@ properties:
             group:
               title: Group
               type: string
-    additionalProperties: false
 
   ###############################
   # lineage_os plugin ###########
   ###############################
   lineage_os:download:
     title: "lineage_os:download action"
+    description: "Download LineageOS image files."
     type: "null"
 
   lineage_os:install:
     title: "lineage_os:install action"
+    description: "Install LineageOS images."
     type: "null"
 
   ###############################
@@ -466,6 +535,7 @@ properties:
   ###############################
   systemimage:install:
     title: "systemimage:install action"
+    description: "Download and install systemimage."
     oneOf:
       - type: "object"
         ubports_installer-compatibility: ">=0.9.4-beta"
