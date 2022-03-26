@@ -1,0 +1,14 @@
+# should fail with data/user_actions/a no unused user_actions
+name: InvalidPhone
+codename: "unused_user_action"
+formfactor: "phone"
+aliases: []
+doppelgangers: []
+user_actions:
+  a:
+    title: "Reboot to Recovery"
+    description: "Press and hold the volume up and power buttons until the phone reboots."
+    image: "phone_power_down"
+    button: true
+unlock: []
+operating_systems: []

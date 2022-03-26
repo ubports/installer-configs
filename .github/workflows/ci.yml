@@ -38,6 +38,8 @@ jobs:
         run: npm run lint
       - name: npm run validate
         run: npm run validate
+      - name: npm run test
+        run: npm run test
       - name: npm run buildconfigs
         run: npm run buildconfigs
       - name: npm run buildschema

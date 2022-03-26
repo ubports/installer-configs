@@ -5,6 +5,7 @@
   "scripts": {
     "lint": "npx prettier \"**\" --ignore-path=.gitignore --arrow-parens=avoid --trailing-comma=none -uw",
     "validate": "npx ajv-cli -c ./v2/ajv-extensions.js -s v2/schema/device.schema.yml -r \"v2/schema/!(device.schema.yml)\" -d \"v2/devices/*.yml\" --errors=text --spec=draft2020",
+    "test": "for res in valid invalid; do npx ajv-cli test -c ./v2/ajv-extensions.js -s v2/schema/device.schema.yml -r \"v2/schema/!(device.schema.yml)\" -d \"v2/test/$res/*.yml\" --errors=text --spec=draft2020 --$res; done",
     "checkdownloads": "./v2/checkDownloads.js",
     "checksemver": "./v2/checkSemver.js",
     "buildconfigs": "./v2/buildConfigs.js",
