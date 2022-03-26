@@ -12,17 +12,25 @@ properties:
   ###############################
   adb:shell:
     title: "adb:shell action"
-    type: "object"
-    description: Run a command on the device via adb shell
-    properties:
-      args:
-        title: Arguments
-        type: "array"
-        description: "Shell arguments"
+    description: "Run a command on the device via adb shell"
+    oneOf:
+      - type: "array"
         items:
-          type: string
-    required: ["args"]
-    additionalProperties: false
+          type: "string"
+          description: "Shell arguments"
+        ubports_installer-compatibility: ">=0.9.6-beta"
+      - type: "object"
+        required: ["args"]
+        additionalProperties: false
+        properties:
+          args:
+            title: Arguments
+            type: "array"
+            description: "Shell arguments"
+            items:
+              type: string
+        ubports_installer-compatibility: ">=0.9.2-beta <0.10.0-beta"
+        deprecated: true
 
   adb:reboot:
     title: "adb:reboot action"
