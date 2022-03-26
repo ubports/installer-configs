@@ -70,11 +70,7 @@ operating_systems:
                 - partition: "recovery"
                   file: "halium-unlocked-recovery_device.img"
                   group: "firmware"
-                  raw: "true"
-                - partition: "boot"
-                  file: "halium-unlocked-recovery_device.img"
-                  group: "firmware"
-                  raw: "true"
+                  raw: true
         condition:
           var: "bootstrap"
           value: true
