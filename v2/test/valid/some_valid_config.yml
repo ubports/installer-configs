@@ -1,35 +1,17 @@
-name: "Nexus 6P"
-codename: "angler"
+# DO NOT actually use this config, or base new configs on it! It's sole purpose is testing validation. It does not try to represent best practices!
+name: ValidPhone
+codename: "some_valid_config"
 formfactor: "phone"
 aliases: []
 doppelgangers: []
 user_actions:
-  recovery:
-    title: "Reboot to Recovery"
-    description: "Press and hold the volume up and power buttons until the phone reboots."
+  some_user_action:
+    title: "Do epic shit!"
+    description: "Just do it!"
     image: "phone_power_down"
     button: true
-  bootloader:
-    title: "Reboot to Bootloader"
-    description: "Press and hold the volume down and power buttons until the phone reboots."
-    image: "phone_power_down"
-    button: true
-  confirm_model:
-    title: "Confirm your model"
-    description: "Please confirm that your device is a Huawei Nexus 6P (angler). The LG Nexus 6 (shamu) is not compatible!"
-  confirm_vendorimage:
-    title: "Confirm Android version"
-    description: "Please reset your device to stock Android 7.1.2 - Critical vendor files are otherwise missing!"
-  confirm_formatting:
-    title: "Reformat all partitions with TWRP"
-    description: "Please install TWRP recovery and format all partitions due to the encryption applied by the stock ROM!"
-  boot:
-    title: "Reboot the device"
-    description: "Hold the power button to turn your device completely off, release it for a few seconds, then hold it down again until the device boots."
 unlock:
-  - "confirm_model"
-  - "confirm_vendorimage"
-  - "confirm_formatting"
+  - "some_user_action"
 handlers:
   bootloader_locked:
     actions:
@@ -61,16 +43,13 @@ operating_systems:
               to_state: "bootloader"
         fallback:
           - core:user_action:
-              action: "bootloader"
+              action: "some_user_action"
         condition:
           var: "bootstrap"
           value: true
       - actions:
           - adb:reboot:
               to_state: "recovery"
-        fallback:
-          - core:user_action:
-              action: "recovery"
         condition:
           var: "bootstrap"
           value: false
@@ -78,9 +57,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://cdimage.ubports.com/devices/angler/halium-unlocked-recovery_angler.img"
+                - url: "https://cdimage.ubports.com/devices/device/halium-unlocked-recovery_device.img"
                   checksum:
-                    sum: "9fb583720bd6a1ecbb1d6ce9c0714b49f3f82f2c00c51a0f6260e247d4bad288"
+                    sum: "1337"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -89,11 +68,7 @@ operating_systems:
           - fastboot:flash:
               partitions:
                 - partition: "recovery"
-                  file: "halium-unlocked-recovery_angler.img"
-                  group: "firmware"
-                  raw: true
-                - partition: "boot"
-                  file: "halium-unlocked-recovery_angler.img"
+                  file: "halium-unlocked-recovery_device.img"
                   group: "firmware"
                   raw: true
         condition:
@@ -101,9 +76,6 @@ operating_systems:
           value: true
       - actions:
           - fastboot:reboot:
-        fallback:
-          - core:user_action:
-              action: "boot"
         condition:
           var: "bootstrap"
           value: true
@@ -112,7 +84,4 @@ operating_systems:
       - actions:
           - adb:reboot:
               to_state: "recovery"
-        fallback:
-          - core:user_action:
-              action: "recovery"
     slideshow: []
