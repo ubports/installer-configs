@@ -1,7 +1,7 @@
 name: "Xiaomi Mi A2"
 codename: "jasmine_sprout"
 formfactor: "phone"
-aliases: []
+aliases: ["jasmine"]
 doppelgangers: []
 user_actions:
   confirm_model:

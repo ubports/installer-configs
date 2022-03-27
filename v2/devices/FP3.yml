@@ -1,7 +1,7 @@
 name: "Fairphone 3/3+"
 codename: "FP3"
 formfactor: "phone"
-aliases: ["Fairphone 3+, FP3+"]
+aliases: ["fp3"]
 doppelgangers: []
 user_actions:
   confirm_model:

@@ -1,8 +1,7 @@
 name: "Xiaomi 3/4"
 codename: "cancro"
 formfactor: "phone"
-aliases:
-  - "MI 3/4"
+aliases: []
 doppelgangers: []
 user_actions:
   recovery:

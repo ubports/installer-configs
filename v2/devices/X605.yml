@@ -1,7 +1,7 @@
 name: "Lenovo Smart Tab M10 X605F/L"
 codename: "X605"
 formfactor: "tablet"
-aliases: ["lenovo-x605, tb-x605"]
+aliases: ["lenovo-x605", "tb-x605"]
 doppelgangers: []
 user_actions:
   confirm_model:
