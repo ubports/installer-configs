@@ -11,7 +11,7 @@ user_actions:
     button: true
   fastbootd:
     title: "Reboot to Fastbootd"
-    description: "With the device powered off, hold Volume Down + Power to boot into recovery.<br><br>Inside the recovery, press on 'Advanced' and select 'Enter fastboot'."
+    description: "With the device powered off, hold Volume Down + Power to boot into recovery. Inside the recovery, press on 'Advanced' and select 'Enter fastboot'."
     image: "phone_power_down"
     button: true
   recovery:
@@ -19,17 +19,29 @@ user_actions:
     description: "With the device powered off, hold Volume Down + Power."
     image: "phone_power_down"
     button: true
+  lineageos_reboot_system:
+    title: "Recovery - Reboot system now"
+    description: "Press on the top left arrow until you are back on the home screen. Press on 'Reboot system now'."
+    button: true
+  lineageos_sideload:
+    title: "Recovery - Apply update from ADB"
+    description: "Please select 'Apply update' -> 'Apply from ADB'."
+    button: true
+  lineageos_wipe_data:
+    title: "Recovery - Wipe data/factory reset"
+    description: "Press on the top left arrow until you are back on the home screen. Press on 'Factory reset' -> 'Format data/factory reset' -> 'Format data'."
+    button: true
   shiftos_reboot_system:
     title: "Recovery - Reboot system now"
-    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Reboot system now'.<br>Confirm with pressing the Power key.<br><br>Warning: Do NOT lock your bootloader, this is not supported yet."
+    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Reboot system now'. Confirm with pressing the Power key. Warning: Do NOT lock your bootloader, this is not supported yet."
     button: true
   shiftos_sideload:
     title: "Recovery - Apply update from ADB"
-    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Apply update from ADB'.<br>Confirm with pressing the Power key."
+    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Apply update from ADB'. Confirm with pressing the Power key."
     button: true
   shiftos_wipe_data:
     title: "Recovery - Wipe data/factory reset"
-    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Wipe data/factory reset'.<br>Confirm with pressing the Power key."
+    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Wipe data/factory reset'. Confirm with pressing the Power key."
     button: true
 unlock: []
 handlers:
@@ -221,6 +233,133 @@ operating_systems:
 
   ##################################################################################################
 
+  - name: "LineageOS"
+    compatible_installer: ">=0.9.4-beta"
+    options:
+      - var: "channel"
+        name: "LineageOS version"
+        tooltip: "Which LineageOS channel do you want to install?"
+        type: "select"
+        remote_values:
+          lineage_os:channels:
+      - var: "wipe"
+        name: "Wipe personal data"
+        tooltip: "This is required for new installations"
+        type: "checkbox"
+        value: false
+    prerequisites: []
+    steps:
+      ######################################################################
+      ###
+      ### Ensure we always start in bootloader mode
+      ###
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      ### As this is an A/B device, set slot to "b" to install the new system into the "a" slot.
+      - actions:
+          - fastboot:set_active:
+              slot: "b"
+      ###
+      ######################################################################
+
+      ######################################################################
+      ###
+      ### (Optional) Wipe steps
+      ###
+      # 1) Format userdata as f2fs
+      - actions:
+          - fastboot:format:
+              partition: "userdata"
+              type: "f2fs"
+        condition:
+          var: "wipe"
+          value: true
+      # 2) Format metadata as ext4
+      - actions:
+          - fastboot:format:
+              partition: "metadata"
+              type: "ext4"
+        condition:
+          var: "wipe"
+          value: true
+      # 3) Erase misc
+      - actions:
+          - fastboot:erase:
+              partition: "misc"
+        condition:
+          var: "wipe"
+          value: true
+      ###
+      ######################################################################
+
+      ######################################################################
+      ###
+      ### LineageOS Installation
+      ###
+      # 1) Download firmware images
+      - actions:
+          - core:download:
+              group: "firmware_lineageos"
+              files:
+                - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/25fdb3352c33008a1e18ed32cac239ae347b0893/axolotl/images/recovery_lineage.img"
+                  name: "recovery.img"
+                  checksum:
+                    sum: "c339282553408b50972dad17173500aaa5383c2a0f79c5868a72281dd7c99332"
+                    algorithm: "sha256"
+                - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/06fa047c3afcceb0532f90e8b503ff6a963bec56/axolotl/images/super_empty.img"
+                  name: "super_empty.img"
+                  checksum:
+                    sum: "0a0aa8a7b0faad8de4003ded16b6ffb83ba4bffde0ea29ecba12d99a9162ae3d"
+                    algorithm: "sha256"
+          - lineage_os:download:
+      # 2) Flash firmware images in bootloader fastboot mode
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "recovery"
+                  file: "recovery.img"
+                  group: "firmware_lineageos"
+      # 3) Flash firmware images in fastbootd mode
+      - actions:
+          - fastboot:reboot_fastboot:
+        fallback:
+          - core:user_action:
+              action: "fastbootd"
+      - actions:
+          - fastboot:wipe_super:
+              image:
+                file: "super_empty.img"
+                group: "firmware_lineageos"
+      # 4) Reboot back into bootloader to activate new super scheme, then into recovery mode and sideload update.zip
+      - actions:
+          - fastboot:reboot_bootloader:
+          - fastboot:reboot_recovery:
+          - core:user_action:
+              action: "lineageos_sideload"
+      - actions:
+          - adb:sideload:
+              file: "lineageos_rootfs_axolotl.zip"
+              group: "LineageOS"
+      - actions:
+          - core:user_action:
+              action: "lineageos_wipe_data"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - core:user_action:
+              action: "lineageos_reboot_system"
+
+      ###
+      ######################################################################
+    slideshow: []
+
+  ##################################################################################################
+
   - name: "ShiftOS - G / L"
     compatible_installer: ">=0.9.4-beta"
     options:
@@ -246,10 +385,10 @@ operating_systems:
         fallback:
           - core:user_action:
               action: "bootloader"
-      ### As this is an A/B device, force all future operations in "a" slot.
+      ### As this is an A/B device, set slot to "b" to install the new system into the "a" slot.
       - actions:
           - fastboot:set_active:
-              slot: "a"
+              slot: "b"
       ###
       ######################################################################
 
