@@ -11,7 +11,7 @@ user_actions:
     button: true
   fastbootd:
     title: "Reboot to Fastbootd"
-    description: "With the device powered off, hold Volume Down + Power to boot into recovery.<br><br>Inside the recovery, press on 'Advanced' and select 'Enter fastboot'."
+    description: "With the device powered off, hold Volume Down + Power to boot into recovery. Inside the recovery, press on 'Advanced' and select 'Enter fastboot'."
     image: "phone_power_down"
     button: true
   recovery:
@@ -21,7 +21,7 @@ user_actions:
     button: true
   lineageos_reboot_system:
     title: "Recovery - Reboot system now"
-    description: "Press on the top left arrow until you are back on the home screen.<br>Press on 'Reboot system now'."
+    description: "Press on the top left arrow until you are back on the home screen. Press on 'Reboot system now'."
     button: true
   lineageos_sideload:
     title: "Recovery - Apply update from ADB"
@@ -29,19 +29,19 @@ user_actions:
     button: true
   lineageos_wipe_data:
     title: "Recovery - Wipe data/factory reset"
-    description: "Press on the top left arrow until you are back on the home screen.<br>Press on 'Factory reset' -> 'Format data/factory reset' -> 'Format data'."
+    description: "Press on the top left arrow until you are back on the home screen. Press on 'Factory reset' -> 'Format data/factory reset' -> 'Format data'."
     button: true
   shiftos_reboot_system:
     title: "Recovery - Reboot system now"
-    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Reboot system now'.<br>Confirm with pressing the Power key.<br><br>Warning: Do NOT lock your bootloader, this is not supported yet."
+    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Reboot system now'. Confirm with pressing the Power key. Warning: Do NOT lock your bootloader, this is not supported yet."
     button: true
   shiftos_sideload:
     title: "Recovery - Apply update from ADB"
-    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Apply update from ADB'.<br>Confirm with pressing the Power key."
+    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Apply update from ADB'. Confirm with pressing the Power key."
     button: true
   shiftos_wipe_data:
     title: "Recovery - Wipe data/factory reset"
-    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Wipe data/factory reset'.<br>Confirm with pressing the Power key."
+    description: "With the recovery mode active, navigate using your volume keys up/down and select 'Wipe data/factory reset'. Confirm with pressing the Power key."
     button: true
 unlock: []
 handlers:
