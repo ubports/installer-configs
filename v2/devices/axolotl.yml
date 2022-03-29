@@ -259,10 +259,10 @@ operating_systems:
         fallback:
           - core:user_action:
               action: "bootloader"
-      ### As this is an A/B device, force all future operations in "a" slot.
+      ### As this is an A/B device, set slot to "b" to install the new system into the "a" slot.
       - actions:
           - fastboot:set_active:
-              slot: "a"
+              slot: "b"
       ###
       ######################################################################
 
@@ -385,10 +385,10 @@ operating_systems:
         fallback:
           - core:user_action:
               action: "bootloader"
-      ### As this is an A/B device, force all future operations in "a" slot.
+      ### As this is an A/B device, set slot to "b" to install the new system into the "a" slot.
       - actions:
           - fastboot:set_active:
-              slot: "a"
+              slot: "b"
       ###
       ######################################################################
 
