@@ -49,9 +49,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/volla-yggdrasilx-9.0-ubports-installer-bootstrap.zip"
+                - url: "https://volla.tech/filedump/volla-yggdrasilx-10.0-ubports-installer-bootstrap.zip"
                   checksum:
-                    sum: "af7af1c780a743bf4ef7d3bcc4139f24c4ab55a5c0a6c4845a252b62c30b9107"
+                    sum: "d74cbf319f9525275497a2fe3f87d657498213f903d416505b17eef47574f9f6"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -60,7 +60,7 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-yggdrasilx-9.0-ubports-installer-bootstrap.zip"
+                - archive: "volla-yggdrasilx-10.0-ubports-installer-bootstrap.zip"
                   dir: "unpacked"
         condition:
           var: "bootstrap"
