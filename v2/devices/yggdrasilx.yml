@@ -259,3 +259,99 @@ operating_systems:
       title: "EULA"
       description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE X. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Hallo Welt Systeme UG (haftungsbeschränkt) for the Volla OS and agree to it."
       link: "https://volla.online/en/eula/index.html"
+  - name: "SailfishOS"
+    prerequisites: []
+    steps:
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://volla.tech/filedump/vollaos/volla-10.1-20211002-RELEASE-SPFLASH-yggdrasilx.zip"
+                  checksum:
+                    sum: "2efe7a22e00a77e83db804b39efc28ba08fe62ca9bd5e54edb44f8326ef42436"
+                    algorithm: "sha256"
+                - url: "https://volla.tech/filedump/vollaos-10.1-ygdrassilx-preloader.bin"
+                  checksum:
+                    sum: "64cf0d77edc360a91c5023513090539250715e0d2eea869518d9ea4f9d0871c1"
+                    algorithm: "sha256"
+                - url: "https://volla.tech/filedump/sailfish-testing-vollax-dec-3-2021.zip"
+                  checksum:
+                    sum: "bf64b3b438e5f2673271d7bcfa6da7e937b1d9cf11e1740776bbb557a6363eac"
+                    algorithm: "sha256"            
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "volla-10.1-20211002-RELEASE-SPFLASH-yggdrasilx.zip"
+                  dir: "unpacked"
+                - archive: "sailfish-testing-vollax-dec-3-2021.zip"
+                  dir: "sailfish"
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "recovery"
+                  file: "unpacked/recovery.img"
+                  group: "firmware"
+                - partition: "boot"
+                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/hybris-boot.img"
+                  group: "firmware"
+                - partition: "dtbo"
+                  file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "logo"
+                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/logo.bin"
+                  group: "firmware"
+                - partition: "md1dsp"
+                  file: "unpacked/md1dsp.img"
+                  group: "firmware"
+                - partition: "md1img"
+                  file: "unpacked/md1img.img"
+                  group: "firmware"
+                - partition: "spmfw"
+                  file: "unpacked/spmfw.img"
+                  group: "firmware"
+                - partition: "lk2"
+                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/lk-yggdrasilx.img"
+                  group: "firmware"
+                - partition: "sspm_2"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
+                - partition: "tee2"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "lk"
+                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/lk-yggdrasilx.img"
+                  group: "firmware"
+                - partition: "sspm_1"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
+                - partition: "tee1"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "preloader"
+                  file: "vollaos-10.1-ygdrassilx-preloader.bin"
+                  group: "firmware"
+                - partition: "system"
+                  file: "unpacked/system.img"
+                  group: "firmware"
+                - partition: "vendor"
+                  file: "unpacked/vendor.img"
+                  group: "firmware"
+                - partition: "userdata"
+                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/sailfish.img001"
+                  group: "firmware"
+      - actions:
+          - fastboot:erase:
+              partition: "nvdata"
+      - actions:
+          - fastboot:reboot:
+        fallback:
+          - core:user_action:
+              action: "boot"
+    slideshow: []
