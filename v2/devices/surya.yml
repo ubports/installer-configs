@@ -14,6 +14,11 @@ user_actions:
     description: "With the device powered off, hold Volume Down + Power."
     image: "phone_power_down"
     button: true
+  fastbootd:
+    title: "Reboot to Fastbootd"
+    description: "With the device powered off, hold Volume Down + Power to boot into recovery. Inside the recovery, press on 'Advanced' and select 'Enter fastboot'."
+    image: "phone_power_down"
+    button: true
   confirm_firmware:
     title: "Confirm your firmware"
     description: "Please double-check that your device is running the latest available stock Android 10 firmware."
@@ -48,28 +53,35 @@ operating_systems:
     prerequisites: []
     steps:
       - actions:
-          - core:download:
-              group: "firmware"
-              files:
-                - url: "https://github.com/ubuntu-touch-surya/ubuntu-touch-surya/releases/download/stable/recovery.img"
-                  name: "recovery.img"
-                  checksum:
-                    sum: "357b32fe91a76879babcc24a0b2ad51e767283955e454ca58cf3e7f75b0fbdd5"
-                    algorithm: "sha256"
-                - url: "https://github.com/ubuntu-touch-surya/ubuntu-touch-surya/releases/download/stable/dtbo.img"
-                  name: "dtbo.img"
-                  checksum:
-                    sum: "f08d0116435d600d7e3ac002813031644d6d3ad8fb3e078ec6985d956dde8158"
-                    algorithm: "sha256"
-        condition:
-          var: "bootstrap"
-          value: true
-      - actions:
           - adb:reboot:
               to_state: "bootloader"
         fallback:
           - core:user_action:
               action: "bootloader"
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://github.com/ubuntu-touch-surya/ubuntu-touch-surya/releases/download/stable-repartition/recovery.img"
+                  name: "recovery.img"
+                  checksum:
+                    sum: "357b32fe91a76879babcc24a0b2ad51e767283955e454ca58cf3e7f75b0fbdd5"
+                    algorithm: "sha256"
+                - url: "https://github.com/ubuntu-touch-surya/ubuntu-touch-surya/releases/download/stable-repartition/dtbo.img"
+                  name: "dtbo.img"
+                  checksum:
+                    sum: "f08d0116435d600d7e3ac002813031644d6d3ad8fb3e078ec6985d956dde8158"
+                    algorithm: "sha256"
+                - url: "https://github.com/ubuntu-touch-surya/ubuntu-touch-surya/releases/download/stable-repartition/super.img"
+                  name: "super.img"
+                  checksum:
+                    sum: "2d8b05f9aefa946b8a055249c77d38377970acc2f2fe6722877d5522d3bff10d"
+                    algorithm: "sha256"
+                - url: "https://github.com/ubuntu-touch-surya/ubuntu-touch-surya/releases/download/stable-repartition/vendor.img"
+                  name: "vendor.img"
+                  checksum:
+                    sum: "8b5cb118fcb0c34af5443eaac2cd703ac9ab8e104f420eaa07276e5b0e532029"
+                    algorithm: "sha256"
         condition:
           var: "bootstrap"
           value: true
@@ -99,17 +111,32 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
-          - fastboot:reboot_bootloader:
+          - fastboot:reboot_fastboot:
+        condition:
+          var: "bootstrap"
+          value: true
         fallback:
           - core:user_action:
-              action: "recovery"
+              action: "fastbootd"
+      - actions:
+          - fastboot:wipe_super:
+              image:
+                file: "super.img"
+                group: "firmware"
         condition:
           var: "bootstrap"
           value: true
       - actions:
-          - fastboot:boot:
-              file: "recovery.img"
-              group: "firmware"
+          - fastboot:flash:
+              partitions:
+                - partition: "vendor"
+                  file: "vendor.img"
+                  group: "firmware"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:reboot_recovery:
         fallback:
           - core:user_action:
               action: "recovery"
