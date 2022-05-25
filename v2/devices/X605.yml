@@ -1,7 +1,7 @@
 name: "Lenovo Smart Tab M10 X605F/L"
 codename: "X605"
 formfactor: "tablet"
-aliases: ["lenovo-x605", "tb-x605"]
+aliases: ["X605F", "X605L", "lenovo-x605", "tb-x605"]
 doppelgangers: []
 user_actions:
   confirm_model:
@@ -61,9 +61,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://gitlab.com/ubports/community-ports/android9/lenovo-tab-m10-fhd/lenovo-x605/-/jobs/2153374929/artifacts/raw/out/boot.img"
+                - url: "https://gitlab.com/ubports/community-ports/android9/lenovo-tab-m10-fhd/lenovo-x605/-/jobs/2507752431/artifacts/raw/out/boot.img"
                   checksum:
-                    sum: "e2aa121885d997f2f5846ba8056f9f8ec2d29dc13469576f116df123eed4c239"
+                    sum: "ac25fb98d2e2757c2ac393a0c898389f73b175e3e74ba8775cbbd84552c5a0ad"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
