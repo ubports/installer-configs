@@ -1,7 +1,7 @@
 name: "Google Pixel 3a/3a XL"
 codename: "sargo"
 formfactor: "phone"
-aliases: []
+aliases: ["bonito"]
 doppelgangers: []
 user_actions:
   bootloader:
