@@ -80,7 +80,7 @@ operating_systems:
                     algorithm: "sha256"
                 - url: "https://files.beidl.guru/fp4/recovery.img"
                   checksum:
-                    sum: "70e57619e120c2b96c297eac1d6702ab12d37429eac046a5f4eec7df6996b5e2"
+                    sum: "a09ed000f16db6a61e5fa0971b9e43bdd6a2b9d07960cbb22909720ba718899b"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
