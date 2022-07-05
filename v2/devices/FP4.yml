@@ -9,16 +9,26 @@ user_actions:
     description: "Please check that your device is a Fairphone 4 (FP4)."
   confirm_os:
     title: "Confirm OS version"
-    description: "Your device must be running the Fairphone OS version of Android 11 before installing Ubuntu Touch. With a previously installed /e/ OS, it won't work!"
+    description: "Your device must be running the Fairphone OS version of Android 11 before installing Ubuntu Touch. With a previously installed custom ROM, it won't work!"
     link: "https://support.fairphone.com/hc/en-us/articles/4405858261777?s=09"
   bootloader:
     title: "Reboot to Bootloader"
-    description: "With the device powered off, press and hold the VOLUME DOWN and POWER buttons at the same time until the phone vibrates. After some seconds you'll see the fastboot mode. Or just reboot and press and hold VOLUME DOWN BUTTON while rebooting."
+    description: "With the device powered off, press and hold the VOLUME DOWN button and plug the device into your PC via USB. After some seconds you'll see the fastboot mode."
+    image: "phone_power_down"
+    button: true
+  bootloader_from_fastbootd:
+    title: "Reboot to Bootloader"
+    description: 'With the device still at the fastbootd screen, use the volume buttons to select "Reboot to bootloader".'
     image: "phone_power_down"
     button: true
   recovery:
     title: "Reboot to Recovery"
-    description: 'With the device still at the "Fastboot Mode" (green), use the Volume buttons to switch to "Recovery Mode" (red) and push the power button to confirm your selection.'
+    description: 'With the device still at the "FastBoot Mode", use the Volume buttons to switch to "Recovery Mode" and push the power button to confirm your selection.'
+    image: "phone_power_up"
+    button: true
+  fastbootd:
+    title: "Reboot to fastbootd mode"
+    description: 'With the device still at the "FastBoot Mode", use the Volume buttons to switch to "Recovery Mode" and push the power button to confirm your selection. Then select "Fastboot mode" from the list.'
     image: "phone_power_up"
     button: true
 unlock:
@@ -42,8 +52,13 @@ operating_systems:
           systemimage:channels:
       - var: "wipe"
         name: "Wipe Userdata"
-        tooltip: "Wipe personal data. This is necessary, for first time installations."
+        tooltip: "Wipe personal data. This is necessary for first time installations."
         type: "checkbox"
+      - var: "partition"
+        name: "Partitioning"
+        tooltip: "Changes partition sizes as required. Only necessary for first time installations."
+        type: "checkbox"
+        value: true
       - var: "bootstrap"
         name: "Bootstrap"
         tooltip: "Flash system partitions using fastboot"
@@ -57,7 +72,7 @@ operating_systems:
               files:
                 - url: "https://files.beidl.guru/fp4/boot.img"
                   checksum:
-                    sum: "d6e4315d352220213fd437db7114ffb6d6538266640773f2ad8beb929cd51b39"
+                    sum: "c1ab7a12e48edddc089cd93265e475ff58242919427520a589fc19203c8fb628"
                     algorithm: "sha256"
                 - url: "https://files.beidl.guru/fp4/dtbo.img"
                   checksum:
@@ -65,17 +80,44 @@ operating_systems:
                     algorithm: "sha256"
                 - url: "https://files.beidl.guru/fp4/recovery.img"
                   checksum:
-                    sum: "43a86d7aedb802ce1bbf7f6664bd95f56fb05f7996b401edcb4ee5c515fc68c0"
+                    sum: "70e57619e120c2b96c297eac1d6702ab12d37429eac046a5f4eec7df6996b5e2"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
           value: true
       - actions:
           - adb:reboot:
+              to_state: "fastbootd"
+        fallback:
+          - core:user_action:
+              action: "fastbootd"
+        condition:
+          var: "partition"
+          value: true
+      #- actions:
+      #    - fastboot:remove_logical_partition:
+      #        slot: "system_ext"
+      #  condition:
+      #    var: "partition"
+      #    value: true
+      #- actions:
+      #    - fastboot:resize_logical_partition:
+      #        partition: "system_a"
+      #  condition:
+      #    var: "partition"
+      #    value: true
+      - actions:
+          - adb:reboot:
               to_state: "bootloader"
         fallback:
           - core:user_action:
-              action: "bootloader"
+              action: "bootloader_from_fastbootd"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:set_active:
+              slot: "a"
         condition:
           var: "bootstrap"
           value: true
