@@ -434,6 +434,45 @@ properties:
               items:
                 type: string
 
+  fastboot:create_logical_partition:
+    title: "fastboot:create_logical_partition action"
+    description: "Create a logical partition with the given name and size, in the super partition."
+    type: "object"
+    required: ["partition", "size"]
+    additionalProperties: false
+    properties:
+      partition:
+        title: Partition
+        type: string
+      size:
+        title: Partition size
+        type: number
+
+  fastboot:delete_logical_partition:
+    title: "fastboot:delete_logical_partition action"
+    description: "Delete a logical partition with the given name."
+    type: "object"
+    required: ["partition"]
+    additionalProperties: false
+    properties:
+      partition:
+        title: Partition
+        type: string
+
+  fastboot:resize_logical_partition:
+    title: "fastboot:resize_logical_partition action"
+    description: "Resize a logical partition with the given name and final size, in the super partition."
+    type: "object"
+    required: ["partition", "size"]
+    additionalProperties: false
+    properties:
+      partition:
+        title: Partition
+        type: string
+      size:
+        title: Partition size
+        type: number
+
   fastboot:wipe_super:
     title: "fastboot:wipe_super action"
     description: "Wipe super partition using fastboot."
