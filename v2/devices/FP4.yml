@@ -86,6 +86,8 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
+          - adb:reboot:
+              to_state: "bootloader"
         fallback:
           - core:user_action:
               action: "bootloader"
@@ -93,6 +95,8 @@ operating_systems:
           var: "partition"
           value: true
       - actions:
+          - fastboot:reboot:
+              to_state: "recovery"
         fallback:
           - core:user_action:
               action: "recovery"
