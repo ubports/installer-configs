@@ -86,6 +86,20 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+        condition:
+          var: "partition"
+          value: true
+      - actions:
+        fallback:
+          - core:user_action:
+              action: "recovery"
+        condition:
+          var: "partition"
+          value: true
+      - actions:
           - adb:reboot:
               to_state: "fastbootd"
         fallback:
@@ -94,24 +108,30 @@ operating_systems:
         condition:
           var: "partition"
           value: true
-      #- actions:
-      #    - fastboot:remove_logical_partition:
-      #        slot: "system_ext"
-      #  condition:
-      #    var: "partition"
-      #    value: true
-      #- actions:
-      #    - fastboot:resize_logical_partition:
-      #        partition: "system_a"
-      #  condition:
-      #    var: "partition"
-      #    value: true
+      - actions:
+          - fastboot:delete_logical_partition:
+              partition: "system_ext"
+          - fastboot:resize_logical_partition:
+              partition: "system_a"
+              size: 3221225472
+        condition:
+          var: "partition"
+          value: true
       - actions:
           - adb:reboot:
               to_state: "bootloader"
         fallback:
           - core:user_action:
               action: "bootloader_from_fastbootd"
+        condition:
+          var: "partition"
+          value: true
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
         condition:
           var: "bootstrap"
           value: true
