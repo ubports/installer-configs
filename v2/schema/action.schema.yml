@@ -527,6 +527,11 @@ properties:
       regex:
         $ref: regex.schema.yml#
 
+  fastboot:wait:
+    title: "fastboot:wait action"
+    description: "Wait until device becomes available over fastboot."
+    type: "null"
+
   ###############################
   # heimdall plugin #############
   ###############################
