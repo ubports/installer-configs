@@ -55,9 +55,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://gitlab.com/ubports/community-ports/android10/fairphone/fairphone_fp3/-/jobs/2036462451/artifacts/raw/out/boot.img"
+                - url: "https://gitlab.com/ubports/porting/community-ports/android10/fairphone/fairphone_fp3/-/jobs/2902188165/artifacts/raw/out/boot.img"
                   checksum:
-                    sum: "9dc7528b3573b32fff5504d58a05f157b4ca4fcca894e8894afcea4f602a23cd"
+                    sum: "980eb17fc4f2e9a70fe6728d0ae819d0bae3135ec88487e038df138ee0ecfc4e"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
