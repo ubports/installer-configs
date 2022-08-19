@@ -40,6 +40,10 @@ items:
           type: "null"
         lineage_os:channels:
           type: "null"
+        postmarketos:releases:
+          type: "null"
+        postmarketos:interfaces:
+          type: "null"
     value:
       description: "Default value of the option"
     values:

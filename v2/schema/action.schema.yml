@@ -577,6 +577,14 @@ properties:
     type: "null"
 
   ###############################
+  # postmarketOS plugin #########
+  ###############################
+  postmarketos:download:
+    title: "postmarketos:download action"
+    description: "Download postmarketOS image files."
+    type: "null"
+
+  ###############################
   # systemimage plugin ##########
   ###############################
   systemimage:install:
