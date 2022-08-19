@@ -360,6 +360,77 @@ operating_systems:
 
   ##################################################################################################
 
+  - name: "postmarketOS"
+    compatible_installer: ">=0.9.7-beta"
+    options:
+      - var: "release"
+        name: "Release"
+        tooltip: "The postmarketOS release"
+        link: "https://wiki.postmarketos.org/wiki/Releases"
+        type: "select"
+        remote_values:
+          postmarketos:releases:
+      - var: "interface"
+        name: "User Interface"
+        tooltip: "The user interface"
+        link: "https://wiki.postmarketos.org/wiki/Category:Interface"
+        type: "select"
+        remote_values:
+          postmarketos:interfaces:
+      - var: "notice"
+        name: "Notice"
+        tooltip: "This will install postmarketOS onto your userdata partition. All data on it will be lost. To reduce anxiety, you may check and uncheck the checkbox a few times."
+        type: "checkbox"
+        value: false
+    prerequisites: []
+    steps:
+      ######################################################################
+      ###
+      ### Ensure we always start in bootloader mode
+      ###
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      ### As this is an A/B device, force all future operations in "a" slot.
+      - actions:
+          - fastboot:set_active:
+              slot: "a"
+      ###
+      ######################################################################
+
+      ######################################################################
+      ###
+      ### postmarketOS installation steps
+      ###
+      # 1) Erase dtbo as it conflicts with the mainline boot image
+      - actions:
+          - fastboot:erase:
+              partition: "dtbo"
+      # 2) Download rootfs and boot images
+      - actions:
+          - postmarketos:download:
+      # 3) Flash partitions
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "userdata"
+                  file: "rootfs.img"
+                  group: "postmarketOS"
+                - partition: "boot"
+                  file: "boot.img"
+                  group: "postmarketOS"
+      # 4) Reboot to start into postmarketOS
+      - actions:
+          - fastboot:reboot:
+      ###
+      ######################################################################
+    slideshow: []
+
+  ##################################################################################################
+
   - name: "ShiftOS - G / L"
     compatible_installer: ">=0.9.4-beta"
     options:
