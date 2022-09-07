@@ -44,9 +44,11 @@ properties:
         type: "string"
         description: "State to rebot to."
         enum:
+          - "bootloader"
+          - "download"
+          - "edl"
           - "recovery"
           - "system"
-          - "bootloader"
 
   adb:format:
     title: "adb:format action"
