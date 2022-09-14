@@ -196,3 +196,44 @@ operating_systems:
           - core:user_action:
               action: "recovery"
     slideshow: []
+
+  - name: "postmarketOS"
+    codename: "fairphone-fp4"
+    compatible_installer: ">=0.9.8-beta"
+    options:
+      - var: "release"
+        name: "Release"
+        tooltip: "The postmarketOS release"
+        link: "https://wiki.postmarketos.org/wiki/Releases"
+        type: "select"
+        remote_values:
+          postmarketos:releases:
+      - var: "interface"
+        name: "User Interface"
+        tooltip: "The user interface"
+        link: "https://wiki.postmarketos.org/wiki/Category:Interface"
+        type: "select"
+        remote_values:
+          postmarketos:interfaces:
+    prerequisites: []
+    steps:
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      - actions:
+          - postmarketos:download:
+          - fastboot:erase:
+              partition: "dtbo"
+          - fastboot:flash:
+              partitions:
+                - partition: "userdata"
+                  file: "rootfs.img"
+                  group: "postmarketOS"
+                - partition: "boot"
+                  file: "boot.img"
+                  group: "postmarketOS"
+          - fastboot:continue:
+    slideshow: []
