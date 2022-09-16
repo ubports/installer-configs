@@ -25,7 +25,9 @@ items:
       description: "Describes what values are accepted by the setting and how they are provided."
       enum:
         - "checkbox"
+        - "hidden"
         - "input"
+        - "readonly"
         - "select"
     remote_values:
       title: Remote values
