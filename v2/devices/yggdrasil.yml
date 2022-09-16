@@ -1,8 +1,7 @@
-name: "VollaPhone"
+name: "Volla Phone"
 codename: "yggdrasil"
 formfactor: "phone"
-aliases:
-  - "k63v2_64_bsp"
+aliases: []
 doppelgangers: []
 user_actions:
   recovery:
