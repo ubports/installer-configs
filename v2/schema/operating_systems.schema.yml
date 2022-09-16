@@ -18,6 +18,10 @@ items:
       title: OS name
       type: "string"
       description: "Human-readable name of the operating system."
+    codename:
+      title: Codename of the device
+      type: "string"
+      description: "Codename of the device as used by the operating system."
     compatible_installer:
       title: Compatible Installer
       type: "string"
