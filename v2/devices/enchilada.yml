@@ -130,12 +130,14 @@ operating_systems:
       - var: "release"
         name: "Release"
         tooltip: "The postmarketOS release"
+        link: "https://wiki.postmarketos.org/wiki/Releases"
         type: "select"
         remote_values:
           postmarketos:releases:
       - var: "interface"
         name: "User Interface"
         tooltip: "The user interface"
+        link: "https://wiki.postmarketos.org/wiki/Category:Interface"
         type: "select"
         remote_values:
           postmarketos:interfaces:
