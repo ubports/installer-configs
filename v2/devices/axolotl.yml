@@ -517,10 +517,10 @@ operating_systems:
           - core:download:
               group: "firmware_shiftos"
               files:
-                - url: "https://downloads.shiftphones.com/public/SHIFT6mq/release/SHIFT6MQ.SOS.3.6.G.20220225/FULL-OTA/SHIFT6MQ.SOS.3.6.G.20220225-RELEASE-OTA.zip"
+                - url: "https://downloads.shiftphones.com/builds/SHIFT6MQ.SOS.3.8.G.20220824-RELEASE-OTA.zip"
                   name: "update.zip"
                   checksum:
-                    sum: "5df6f33fd80296f04439378f49e5d10c172d0e8ecd7ab2d813e68abd52a71b17"
+                    sum: "e20976c0456d794fcd52b74026671cc4ac2f44f9b0f15ec513ee591541466b9f"
                     algorithm: "sha256"
         condition:
           var: "shiftos_l"
@@ -530,10 +530,10 @@ operating_systems:
           - core:download:
               group: "firmware_shiftos"
               files:
-                - url: "https://downloads.shiftphones.com/public/SHIFT6mq/release-light/SHIFT6MQ.SOS.3.7.L.20220314/FULL-OTA/SHIFT6MQ.SOS.3.7.L.20220314-RELEASE-LIGHT-OTA.zip"
+                - url: "https://downloads.shiftphones.com/builds/SHIFT6MQ.SOS.3.8.L.20220920-RELEASE-LIGHT-OTA.zip"
                   name: "update.zip"
                   checksum:
-                    sum: "094f0bca3a0808d8cc557e4eadb03fa732cd73fa27638ce237b676efe004de09"
+                    sum: "9daa79481be598ce5c6d1d6abc957369e5bd7c7904d4bed18820b33705a9b4e7"
                     algorithm: "sha256"
         condition:
           var: "shiftos_l"
