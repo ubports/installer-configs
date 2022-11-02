@@ -23,13 +23,14 @@
   "homepage": "https://github.com/ubports/installer-configs#readme",
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
+    "@types/node": "^18.11.9",
     "ajv-cli": "^5.0.0",
-    "axios": "^0.26.1",
-    "commander": "^9.1.0",
+    "axios": "^1.1.3",
+    "commander": "^9.4.1",
     "json-to-pretty-yaml": "^1.2.2",
-    "prettier": "^2.6.0",
+    "prettier": "^2.7.1",
     "progressive-downloader": "^1.0.7",
-    "semver": "^7.3.5",
-    "yaml": "^1.10.2"
+    "semver": "^7.3.8",
+    "yaml": "^2.1.3"
   }
 }
