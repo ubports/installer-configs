@@ -1,6 +1,6 @@
 name: "Xiaomi Redmi Note 9"
 codename: "merlin"
-aliases: [ "merlinnfc" ]
+aliases: ["merlinnfc"]
 formfactor: "phone"
 doppelgangers: []
 user_actions:

@@ -72,7 +72,8 @@ operating_systems:
           - core:user_action:
               action: "recovery"
       - actions:
-          - adb:shell: ["mkfs.ext4", "/dev/block/platform/155a0000.ufs/by-name/USERDATA"]
+          - adb:shell:
+              ["mkfs.ext4", "/dev/block/platform/155a0000.ufs/by-name/USERDATA"]
         condition:
           var: "wipe"
           value: true

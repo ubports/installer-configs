@@ -278,7 +278,7 @@ operating_systems:
                 - url: "https://volla.tech/filedump/sailfish-testing-vollax-dec-3-2021.zip"
                   checksum:
                     sum: "bf64b3b438e5f2673271d7bcfa6da7e937b1d9cf11e1740776bbb557a6363eac"
-                    algorithm: "sha256"            
+                    algorithm: "sha256"
       - actions:
           - core:unpack:
               group: "firmware"
