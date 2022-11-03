@@ -1,8 +1,8 @@
-#!/usr/bin/env node
+#!/usr/bin/env -S ts-node --esm
 
-const $RefParser = require("@apidevtools/json-schema-ref-parser");
-const fs = require("fs/promises");
-const path = require("path");
+import $RefParser from "@apidevtools/json-schema-ref-parser";
+import fs from "fs/promises";
+import path from "path";
 
 fs.mkdir(path.join("build", "v2"), { recursive: true })
   .then(() => $RefParser.bundle("v2/schema/device.schema.yml"))

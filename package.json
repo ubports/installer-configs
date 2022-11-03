@@ -2,14 +2,15 @@
   "name": "installer-configs",
   "version": "2.0.0",
   "description": "Configuration files for the UBports Installer.",
+  "type": "module",
   "scripts": {
     "lint": "npx prettier \"**\" --ignore-path=.gitignore --arrow-parens=avoid --trailing-comma=none -uw",
-    "validate": "npx ajv-cli -c ./v2/ajv-extensions.js -s v2/schema/device.schema.yml -r \"v2/schema/!(device.schema.yml)\" -d \"v2/devices/*.yml\" --errors=text --spec=draft2020",
-    "test": "for res in valid invalid; do npx ajv-cli test -c ./v2/ajv-extensions.js -s v2/schema/device.schema.yml -r \"v2/schema/!(device.schema.yml)\" -d \"v2/test/$res/*.yml\" --errors=text --spec=draft2020 --$res || exit 1; done",
-    "checkdownloads": "./v2/checkDownloads.js",
-    "checksemver": "./v2/checkSemver.js",
-    "buildconfigs": "./v2/buildConfigs.js",
-    "buildschema": "./v2/buildSchema.js"
+    "validate": "npx ajv-cli -c ./v2/ajv-extensions.mts -s v2/schema/device.schema.yml -r \"v2/schema/!(device.schema.yml)\" -d \"v2/devices/*.yml\" --errors=text --spec=draft2020",
+    "test": "for res in valid invalid; do npx ajv-cli test -c ./v2/ajv-extensions.mts -s v2/schema/device.schema.yml -r \"v2/schema/!(device.schema.yml)\" -d \"v2/test/$res/*.yml\" --errors=text --spec=draft2020 --$res || exit 1; done",
+    "checkdownloads": "./v2/checkDownloads.ts",
+    "checksemver": "./v2/checkSemver.ts",
+    "buildconfigs": "./v2/buildConfigs.ts",
+    "buildschema": "./v2/buildSchema.ts"
   },
   "repository": {
     "type": "git",
@@ -29,8 +30,12 @@
     "commander": "^9.4.1",
     "json-to-pretty-yaml": "^1.2.2",
     "prettier": "^2.7.1",
-    "progressive-downloader": "^1.0.7",
+    "progressive-downloader": "^2.0.0",
     "semver": "^7.3.8",
+    "ts-node": "^10.9.1",
     "yaml": "^2.1.3"
+  },
+  "dependencies": {
+    "ajv": "^8.11.0"
   }
 }

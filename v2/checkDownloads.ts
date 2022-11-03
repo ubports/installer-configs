@@ -1,18 +1,17 @@
-#!/usr/bin/env node
+#!/usr/bin/env -S ts-node --esm
 
-const fs = require("fs/promises");
-const path = require("path");
-const YAML = require("yaml");
-const { download } = require("progressive-downloader");
-
-const crypto = require("crypto");
+import fs from "fs/promises";
+import crypto from "crypto";
+import path from "path";
+import YAML from "yaml";
+import download from "progressive-downloader";
 
 const md5 = str => crypto.createHash("md5").update(str).digest("hex");
 
 const check_download = ({ files }) =>
   files.map(f => ({
     ...f,
-    path: path.join(__dirname, "..", "downloads", md5(f.url))
+    path: path.resolve("downloads", md5(f.url))
   }));
 
 const check_action = action =>
@@ -47,8 +46,7 @@ fs.mkdir(path.join("downloads"), { recursive: true })
         (progress, speed) =>
           console.log(`download ${progress * 100}% complete at ${speed} MB/s`),
         (current, total) =>
-          console.log(`downloading file ${current} of ${total}`),
-        activity => console.log(activity)
+          console.log(`downloading file ${current} of ${total}`)
       )
     )
   );

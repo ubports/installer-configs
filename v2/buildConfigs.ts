@@ -1,8 +1,8 @@
-#!/usr/bin/env node
+#!/usr/bin/env -S ts-node --esm
 
-const fs = require("fs/promises");
-const path = require("path");
-const YAML = require("yaml");
+import fs from "fs/promises";
+import path from "path";
+import YAML from "yaml";
 
 function writeJSON(file, data) {
   return fs.writeFile(file, JSON.stringify(data));

@@ -1,5 +1,6 @@
-"use strict";
 const semver = require("semver");
+const Ajv = require("ajv");
+const { FuncKeywordDefinition } = require("ajv");
 
 /**
  * get all actions used in a series of steps
@@ -24,13 +25,14 @@ const getActions = config =>
     ...config.operating_systems.map(({ steps }) => steps).flat()
   ]);
 
-module.exports = function (ajv) {
+const extensions = ajv => {
   // ensure a user_action string is a valid reference
   ajv.addKeyword({
     keyword: "ubports_user-action",
     type: "string",
     compile:
       () =>
+      // @ts-ignore FIXME
       (action, { rootData }) =>
         rootData.user_actions[action],
     error: {
@@ -44,6 +46,7 @@ module.exports = function (ajv) {
     type: "string",
     compile:
       () =>
+      // @ts-ignore FIXME
       (action, { rootData }) =>
         !(rootData?.unlock?.indexOf(action) !== -1),
     error: {
@@ -58,6 +61,7 @@ module.exports = function (ajv) {
     type: "object",
     compile:
       () =>
+      // @ts-ignore FIXME
       (_, { rootData, parentDataProperty: action }) =>
         rootData?.unlock?.indexOf(action) !== -1 ||
         rootData?.operating_systems?.reduce(
@@ -88,6 +92,7 @@ module.exports = function (ajv) {
     keyword: "ubports_installer-compatibility",
     compile:
       required_by_action =>
+      // @ts-ignore FIXME
       (_, { rootData, instancePath }) =>
         !instancePath.startsWith("/operating_systems/") ||
         semver.subset(
@@ -108,3 +113,5 @@ module.exports = function (ajv) {
     }
   });
 };
+
+module.exports = extensions;

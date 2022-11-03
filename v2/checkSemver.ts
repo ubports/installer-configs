@@ -1,10 +1,10 @@
-#!/usr/bin/env node
+#!/usr/bin/env -S ts-node --esm
 
-const fs = require("fs/promises");
-const path = require("path");
-const YAML = require("yaml");
-const axios = require("axios");
-const semver = require("semver");
+import fs from "fs/promises";
+import path from "path";
+import YAML from "yaml";
+import axios from "axios";
+import semver from "semver";
 
 console.log(
   "This script will check whether the latest installer satisfies all configs. Note: This is not a requirement to merge configs, just a handy helper to track open work items."
