@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: "v2/schema/expression.schema.yml"
+$id: "expression.schema.yml"
 title: "Expression"
 type: "object"
 description: "Evaluate install settings"

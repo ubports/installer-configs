@@ -13,10 +13,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: Use Node.js 14
+      - name: Use Node.js 18
         uses: actions/setup-node@v1
         with:
-          node-version: "14"
+          node-version: "18"
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -36,11 +36,9 @@ jobs:
         run: npm audit
       - name: npm run lint
         run: npm run lint
+      - name: npm run build
+        run: npm run build
       - name: npm run validate
         run: npm run validate
       - name: npm run test
         run: npm run test
-      - name: npm run buildconfigs
-        run: npm run buildconfigs
-      - name: npm run buildschema
-        run: npm run buildschema

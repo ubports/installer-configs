@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: "v2/schema/options.schema.yml"
+$id: "options.schema.yml"
 title: Options
 type: "array"
 description: "Options for the installation."

@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["v2/validator.ts", "v2/cli.ts", "v2/schema.d.ts"]
+}

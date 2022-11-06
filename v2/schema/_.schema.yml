@@ -1,6 +1,6 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: "v2/schema/device.schema.yml"
-title: "Device"
+$id: "_.schema.yml"
+title: "UBports Installer Config"
 description: "Device configuration for the UBports Installer"
 type: "object"
 properties:

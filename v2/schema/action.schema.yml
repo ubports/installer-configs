@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: "v2/schema/action.schema.yml"
+$id: "action.schema.yml"
 title: "Action"
 type: "object"
 description: "Actions represent atomic tasks to be executed by different plugins of the UBports Installer. Plugins may interface with each other to reduce the amount of redundant code."
@@ -80,7 +80,7 @@ properties:
     title: "adb:push action"
     description: "Push files to the device over adb."
     type: "object"
-    required: ["file", "group", "dest"]
+    required: ["files", "group", "dest"]
     additionalProperties: false
     properties:
       files:
@@ -109,9 +109,7 @@ properties:
     additionalProperties: false
     minProperties: 2
     maxProperties: 2
-    oneOf:
-      - required: ["prop", "value"]
-      - required: ["prop", "regex"]
+    required: ["prop"]
     properties:
       prop:
         title: "Property"
@@ -514,9 +512,7 @@ properties:
     additionalProperties: false
     minProperties: 2
     maxProperties: 2
-    oneOf:
-      - required: ["variable", "value"]
-      - required: ["variable", "regex"]
+    required: ["variable"]
     properties:
       variable:
         title: "Variable"
