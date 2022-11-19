@@ -202,15 +202,19 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/vollaos-10.0-16-nov-2021-ubports.zip"
+                - url: "https://volla.tech/filedump/vollaos/volla-11.1-20221017-stable-SPFLASH-yggdrasil.zip"
                   checksum:
-                    sum: "2b67c3618b54cf0101dd27556f32ce37f44dd3efdd9dd544b3039b43c2792178"
+                    sum: "86023751abe70b5824846b9e7ce4a27e1d55f836f2d226c3eba78c33b31bfa2f"
+                    algorithm: "sha256"
+                - url: "https://volla.tech/filedump/vollaos/preloader_k63v2_64_bsp.bin"
+                  checksum:
+                    sum: "cf730034fcd9074f366ae9bc7b2885c343caa8c4f8c88cf35f2e8965feca0f29"
                     algorithm: "sha256"
       - actions:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "vollaos-10.0-16-nov-2021-ubports.zip"
+                - archive: "volla-11.1-20221017-stable-SPFLASH-yggdrasil.zip"
                   dir: "unpacked"
       - actions:
           - adb:reboot:
@@ -221,6 +225,9 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
+                - partition: "preloader"
+                  file: "preloader_k63v2_64_bsp.bin"
+                  group: "firmware"
                 - partition: "recovery"
                   file: "unpacked/recovery.img"
                   group: "firmware"
@@ -228,7 +235,7 @@ operating_systems:
                   file: "unpacked/boot.img"
                   group: "firmware"
                 - partition: "dtbo"
-                  file: "unpacked/dtbo-verified.img"
+                  file: "unpacked/dtbo.img"
                   group: "firmware"
                 - partition: "logo"
                   file: "unpacked/logo-verified.bin"
@@ -259,9 +266,6 @@ operating_systems:
                   group: "firmware"
                 - partition: "tee1"
                   file: "unpacked/tee-verified.img"
-                  group: "firmware"
-                - partition: "preloader"
-                  file: "unpacked/preloader_k63v2_64_bsp.bin"
                   group: "firmware"
                 - partition: "system"
                   file: "unpacked/system.img"
