@@ -530,10 +530,10 @@ operating_systems:
           - core:download:
               group: "firmware_shiftos"
               files:
-                - url: "https://downloads.shiftphones.com/builds/SHIFT6MQ.SOS.3.8.L.20220920-RELEASE-LIGHT-OTA.zip"
+                - url: "https://downloads.shiftphones.com/builds/SHIFT6MQ.SOS.3.9.L.20221027-RELEASE-LIGHT-OTA.zip"
                   name: "update.zip"
                   checksum:
-                    sum: "9daa79481be598ce5c6d1d6abc957369e5bd7c7904d4bed18820b33705a9b4e7"
+                    sum: "13c692de899a820699a82dfa944fb3e28ac53760503a34fdf7df8c9aea15c000"
                     algorithm: "sha256"
         condition:
           var: "shiftos_l"
