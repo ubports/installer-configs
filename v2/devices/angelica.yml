@@ -1,7 +1,7 @@
-name: "Xiaomi Redmi 9A/9C"
+name: "Xiaomi Redmi 9C"
 codename: "angelica"
 formfactor: "phone"
-aliases: ["dandelion", "angelican"]
+aliases: ["angelican"]
 doppelgangers: []
 user_actions:
   confirm_model:
