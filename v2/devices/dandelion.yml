@@ -82,10 +82,10 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://github.com/ubuntu-touch-mt6765/ut-images/raw/main/recovery.img"
+                - url: "https://github.com/ubuntu-touch-mt6765/ut-images/raw/main/recovery_dandelion.img"
                   name: "recovery.img"
                   checksum:
-                    sum: "991b951d5f28b7454a4a84b53b438348604d80bede890930710cef4c4a02f73f"
+                    sum: "015d14960f8478a2d5f02c69b51e27547117b5a3ecf0360026c98ecc72bca6e7"
                     algorithm: "sha256"
                 - url: "https://dl.google.com/developers/android/qt/images/gsi/vbmeta.img"
                   name: "vbmeta.img"
