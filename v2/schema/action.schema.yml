@@ -42,13 +42,15 @@ properties:
       to_state:
         title: To state
         type: "string"
-        description: "State to rebot to."
+        description: "State to reboot to."
         enum:
           - "bootloader"
           - "download"
           - "edl"
           - "recovery"
           - "system"
+          - "sideload"
+          - "sideload-auto-reboot"
 
   adb:format:
     title: "adb:format action"
