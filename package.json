@@ -31,19 +31,19 @@
   },
   "homepage": "https://github.com/ubports/installer-configs#readme",
   "devDependencies": {
-    "@types/node": "^18.11.9",
-    "axios": "^1.1.3",
+    "@types/node": "^18.11.18",
+    "axios": "^1.2.2",
     "json-schema-to-typescript": "^11.0.2",
-    "prettier": "^2.7.1",
-    "progressive-downloader": "^2.0.0"
+    "prettier": "^2.8.3",
+    "progressive-downloader": "^2.0.2"
   },
   "dependencies": {
-    "ajv": "^8.11.0",
-    "chalk": "^5.1.2",
-    "commander": "^9.4.1",
-    "globby": "^13.1.2",
+    "ajv": "^8.12.0",
+    "chalk": "^5.2.0",
+    "commander": "^10.0.0",
+    "globby": "^13.1.3",
     "semver": "^7.3.8",
     "ts-node": "^10.9.1",
-    "yaml": "^2.1.3"
+    "yaml": "^2.2.1"
   }
 }

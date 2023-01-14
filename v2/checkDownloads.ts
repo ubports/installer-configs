@@ -22,7 +22,7 @@ import fs from "fs/promises";
 import crypto from "crypto";
 import path from "path";
 import YAML from "yaml";
-import download from "progressive-downloader";
+import { download } from "progressive-downloader";
 
 const md5 = str => crypto.createHash("md5").update(str).digest("hex");
 
