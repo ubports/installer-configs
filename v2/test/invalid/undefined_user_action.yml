@@ -1,0 +1,20 @@
+expectedErrors:
+  - instancePath: "/user_actions"
+    schemaPath: "user_actions.schema.yml#/type"
+    keyword: "type"
+    params: { type: "object" }
+    message: "must be object"
+  - instancePath: "/unlock/0"
+    schemaPath: "#/properties/unlock/items/ubports_user-action"
+    keyword: "ubports_user-action"
+    params: {}
+    message: "undefined user_action"
+
+name: InvalidPhone
+codename: "unused_user_action"
+formfactor: "phone"
+aliases: []
+doppelgangers: []
+user_actions: []
+unlock: ["a"]
+operating_systems: []

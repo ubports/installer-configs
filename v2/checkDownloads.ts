@@ -1,18 +1,35 @@
-#!/usr/bin/env node
+#!/usr/bin/env -S ts-node --esm
 
-const fs = require("fs/promises");
-const path = require("path");
-const YAML = require("yaml");
-const { download } = require("progressive-downloader");
+/*
+ * Copyright (C) 2022 UBports Foundation <info@ubports.com>
+ * Copyright (C) 2022 Johannah Sprinz <hannah@ubports.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-const crypto = require("crypto");
+import fs from "fs/promises";
+import crypto from "crypto";
+import path from "path";
+import YAML from "yaml";
+import download from "progressive-downloader";
 
 const md5 = str => crypto.createHash("md5").update(str).digest("hex");
 
 const check_download = ({ files }) =>
   files.map(f => ({
     ...f,
-    path: path.join(__dirname, "..", "downloads", md5(f.url))
+    path: path.resolve("downloads", md5(f.url))
   }));
 
 const check_action = action =>
@@ -47,8 +64,7 @@ fs.mkdir(path.join("downloads"), { recursive: true })
         (progress, speed) =>
           console.log(`download ${progress * 100}% complete at ${speed} MB/s`),
         (current, total) =>
-          console.log(`downloading file ${current} of ${total}`),
-        activity => console.log(activity)
+          console.log(`downloading file ${current} of ${total}`)
       )
     )
   );

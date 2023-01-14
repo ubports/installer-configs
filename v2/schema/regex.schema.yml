@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: "v2/schema/regex.schema.yml"
+$id: "regex.schema.yml"
 title: "Regular Expression"
 type: "object"
 description: "RegEx Object"

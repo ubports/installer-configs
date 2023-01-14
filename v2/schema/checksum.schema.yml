@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: "v2/schema/checksum.schema.yml"
+$id: "checksum.schema.yml"
 title: Checksum
 type: "object"
 description: Verify a file's integrity by checking it with a hashing algorithm

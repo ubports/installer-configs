@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: "v2/schema/operating_systems.schema.yml"
+$id: "operating_systems.schema.yml"
 title: Operating systems
 type: "array"
 description: "An array of objects describing operating systems available for installation."
