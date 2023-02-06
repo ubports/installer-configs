@@ -152,51 +152,52 @@ operating_systems:
         values:
           - value: "phosh"
             label: "Phosh"
+    prerequisites: []
     steps:
       - actions:
-        - core:download:
-            group: "firmware"
-            files:
-              - url: "https://github.com/droidian-onclite/droidian-images/releases/download/ubports-installer/droidian-UNOFFICIAL_xiaomi_onclite-arm64-phosh-phone-28.zip"
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://github.com/droidian-onclite/droidian-images/releases/download/ubports-installer/droidian-UNOFFICIAL_xiaomi_onclite-arm64-phosh-phone-28.zip"
         condition:
           var: "variant"
           value: "phosh"
       - actions:
-        - core:unpack:
-            group: "firmware"
-            files:
-              - archive: "droidian-UNOFFICIAL_xiaomi_onclite-arm64-phosh-phone-28.zip"
-                dir: "unpacked_droidian"
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "droidian-UNOFFICIAL_xiaomi_onclite-arm64-phosh-phone-28.zip"
+                  dir: "unpacked_droidian"
         condition:
           var: "variant"
           value: "phosh"
       - actions:
-        - adb:reboot:
-            to_state: "bootloader"
+          - adb:reboot:
+              to_state: "bootloader"
         fallback:
           - core:user_action:
               action: "bootloader"
       - actions:
-        - fastboot:flash:
-            partitions:
-              - partition: "boot"
-                file: "unpacked_droidian/data/boot.img"
-                group: "firmware"
-              - partition: "dtbo"
-                file: "unpacked_droidian/data/dtbo.img"
-                group: "firmware"
-              - partition: "userdata"
-                file: "unpacked_droidian/data/userdata.img"
-                group: "firmware"
-              - partition: "vendor"
-                file: "unpacked_droidian/data/vendor.img"
-                group: "firmware"
-              - partition: "vbmeta"
-                file: "unpacked_droidian/data/vbmeta.img"
-                group: "firmware"
-                flags:
-                  - "--disable-verity"
-                  - "--disable-verification"
+          - fastboot:flash:
+              partitions:
+                - partition: "boot"
+                  file: "unpacked_droidian/data/boot.img"
+                  group: "firmware"
+                - partition: "dtbo"
+                  file: "unpacked_droidian/data/dtbo.img"
+                  group: "firmware"
+                - partition: "userdata"
+                  file: "unpacked_droidian/data/userdata.img"
+                  group: "firmware"
+                - partition: "vendor"
+                  file: "unpacked_droidian/data/vendor.img"
+                  group: "firmware"
+                - partition: "vbmeta"
+                  file: "unpacked_droidian/data/vbmeta.img"
+                  group: "firmware"
+                  flags:
+                    - "--disable-verity"
+                    - "--disable-verification"
       - actions:
           - fastboot:reboot:
     slideshow: []
