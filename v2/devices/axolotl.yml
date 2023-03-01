@@ -305,10 +305,11 @@ operating_systems:
           - core:download:
               group: "firmware_lineageos"
               files:
-                - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/25fdb3352c33008a1e18ed32cac239ae347b0893/axolotl/images/recovery_lineage.img"
+                # lineage-20.0-20230301-recovery-axolotl.img
+                - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/bcdacdf4f1c5161312ad4e086f4f4b922bc0be75/axolotl/images/recovery_lineage.img"
                   name: "recovery.img"
                   checksum:
-                    sum: "c339282553408b50972dad17173500aaa5383c2a0f79c5868a72281dd7c99332"
+                    sum: "c1133da366f5e5cdeab2d16f69085a8737f68c9e054dcbfbd4e58c5ef276c81d"
                     algorithm: "sha256"
                 - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/06fa047c3afcceb0532f90e8b503ff6a963bec56/axolotl/images/super_empty.img"
                   name: "super_empty.img"
