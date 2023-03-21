@@ -80,7 +80,7 @@ operating_systems:
               files:
                 - url: "https://cdimage.ubports.com/devices/angler/halium-unlocked-recovery_angler.img"
                   checksum:
-                    sum: "9fb583720bd6a1ecbb1d6ce9c0714b49f3f82f2c00c51a0f6260e247d4bad288"
+                    sum: "8d61b1b5e70fa33a8c20c3bd96ba60e1318370c7bdfd9b3d65b6368fa52c2dc8"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
