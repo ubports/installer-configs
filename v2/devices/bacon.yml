@@ -23,7 +23,7 @@ handlers:
       - fastboot:oem_unlock:
 operating_systems:
   - name: "Ubuntu Touch"
-    compatible_installer: ">=0.9.2-beta"
+    compatible_installer: ">=0.10.0"
     options:
       - var: "channel"
         name: "Channel"
@@ -51,17 +51,46 @@ operating_systems:
                   checksum:
                     sum: "9b5bf80d1cfc6b21b87d8b29d9a4a02cc9745dd541e3e75180de40be4e92a780"
                     algorithm: "sha256"
-                - url: "http://cdimage.ubports.com/devices/boot-bacon.img"
+                - url: "https://github.com/ubports/android_device_oneplus_bacon-1/raw/ubp-5.1/ubuntu_overlay/partitions/LOGO.img"
                   checksum:
-                    sum: "44c6a5c81a979cd28be3b8e44e78929dbca3c0293a2330c56ee599a69b1c9656"
+                    sum: "57c7e5d940d65452f59a2485ab9182e67d66f6bd6e5bafc0b5f40850eddb1980"
+                    algorithm: "sha256"
+        condition:
+          AND:
+            - var: "bootstrap"
+              value: true
+            - OR:
+              - var: channel
+                value: ubports-touch/16.04/stable
+              - var: channel
+                value: 16.04/rc
+              - var: channel
+                value: 16.04/devel
+              - var: channel
+                value: 16.04/armhf/hybris/halium-devel
+
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "http://cdimage.ubports.com/devices/bacon/recovery.img"
+                  checksum:
+                    sum: "40155c96ea21fd7a9a1f3a5756715aad2c99e8b24f5ee3d3b1cf87bc30e9a357"
                     algorithm: "sha256"
                 - url: "https://github.com/ubports/android_device_oneplus_bacon-1/raw/ubp-5.1/ubuntu_overlay/partitions/LOGO.img"
                   checksum:
                     sum: "57c7e5d940d65452f59a2485ab9182e67d66f6bd6e5bafc0b5f40850eddb1980"
                     algorithm: "sha256"
         condition:
-          var: "bootstrap"
-          value: true
+          AND:
+            - var: "bootstrap"
+              value: true
+            - OR:
+              - var: channel
+                value: 20.04/armhf/android9plus/devel
+              - var: channel
+                value: 20.04/armhf/android9plus/rc
+
       - actions:
           - adb:reboot:
               to_state: "bootloader"
@@ -74,10 +103,6 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
-                - partition: "boot"
-                  file: "boot-bacon.img"
-                  group: "firmware"
-                  raw: true
                 - partition: "recovery"
                   file: "recovery-bacon.img"
                   group: "firmware"
@@ -85,8 +110,38 @@ operating_systems:
                   file: "LOGO.img"
                   group: "firmware"
         condition:
-          var: "bootstrap"
-          value: true
+          AND:
+            - var: "bootstrap"
+              value: true
+            - OR:
+              - var: channel
+                value: ubports-touch/16.04/stable
+              - var: channel
+                value: 16.04/rc
+              - var: channel
+                value: 16.04/devel
+              - var: channel
+                value: 16.04/armhf/hybris/halium-devel
+
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "recovery"
+                  file: "recovery.img"
+                  group: "firmware"
+                - partition: "LOGO"
+                  file: "LOGO.img"
+                  group: "firmware"
+        condition:
+          AND:
+            - var: "bootstrap"
+              value: true
+            - OR:
+              - var: channel
+                value: 20.04/armhf/android9plus/devel   
+              - var: channel
+                value: 20.04/armhf/android9plus/rc
+
       - actions:
           - fastboot:erase:
               partition: "cache"
