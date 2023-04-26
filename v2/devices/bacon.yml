@@ -90,6 +90,8 @@ operating_systems:
                 value: 20.04/armhf/android9plus/devel
               - var: channel
                 value: 20.04/armhf/android9plus/rc
+              - var: channel
+                value: 20.04/armhf/android9plus/stable
 
       - actions:
           - adb:reboot:
@@ -141,6 +143,8 @@ operating_systems:
                 value: 20.04/armhf/android9plus/devel   
               - var: channel
                 value: 20.04/armhf/android9plus/rc
+              - var: channel
+                value: 20.04/armhf/android9plus/stable
 
       - actions:
           - fastboot:erase:
