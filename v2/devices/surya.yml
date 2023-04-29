@@ -1,6 +1,7 @@
-name: "Xiaomi Poco X3 NFC"
+name: "Xiaomi Poco X3 NFC / X3"
 codename: "surya"
-aliases: []
+aliases:
+  - "karna"
 formfactor: "phone"
 doppelgangers: []
 user_actions:
