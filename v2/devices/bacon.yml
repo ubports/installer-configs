@@ -75,7 +75,7 @@ operating_systems:
               files:
                 - url: "http://cdimage.ubports.com/devices/bacon/recovery.img"
                   checksum:
-                    sum: "7c432dbfaf038e3e7ae6fd7de5f8937470192014a5f06537b43d514b62476daa"
+                    sum: "663f8eb72fddaa756ec73afcc1d4ceed00737c49fab2affd6e549b92cceaa754"
                     algorithm: "sha256"
                 - url: "https://github.com/ubports/android_device_oneplus_bacon-1/raw/ubp-5.1/ubuntu_overlay/partitions/LOGO.img"
                   checksum:
