@@ -18,6 +18,10 @@ user_actions:
     title: "Reboot the device"
     description: "Hold down the power button until the device powers down. Then, release it briefly and hold it down again until the device boots."
     button: true
+  cutie_notice:
+    title: "Cutie Shell: Notice"
+    description: "You selected to install Droidian with Cutie Shell. Cutie Shell is still pre-alpha quality and it is not suitable for production environments. Keep in mind that Cutie Shell is not officially supported or endorsed by Droidian. This edition is maintained directly by Cutie Shell Community Project and you should report any bugs with these images at Cutie Shell Community Project before filing upstream."
+    button: true
 unlock: []
 handlers:
   bootloader_locked:
@@ -399,6 +403,8 @@ operating_systems:
         values:
           - value: "phosh"
             label: "Phosh"
+          - value: "cutie"
+            label: "Cutie Shell"
       - var: "bootstrap"
         name: "Bootstrap"
         tooltip: "Flash system partitions using fastboot"
@@ -406,6 +412,12 @@ operating_systems:
         value: true
     prerequisites: []
     steps:
+      - actions:
+          - core:user_action:
+              action: "cutie_notice"
+        condition:
+          var: "variant"
+          value: "cutie"
       - actions:
           - core:download:
               group: "firmware"
@@ -435,6 +447,14 @@ operating_systems:
           var: "variant"
           value: "phosh"
       - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://github.com/cutie-shell/droidian/releases/download/nightly/droidian-OFFICIAL_volla_yggdrasil-arm64-cutie-phone-28.zip"
+        condition:
+          var: "variant"
+          value: "cutie"
+      - actions:
           - core:unpack:
               group: "firmware"
               files:
@@ -443,6 +463,15 @@ operating_systems:
         condition:
           var: "variant"
           value: "phosh"
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "droidian-OFFICIAL_volla_yggdrasil-arm64-cutie-phone-28.zip"
+                  dir: "unpacked_droidian"
+        condition:
+          var: "variant"
+          value: "cutie"
       - actions:
           - adb:reboot:
               to_state: "bootloader"
