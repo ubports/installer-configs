@@ -18,31 +18,6 @@ user_actions:
     title: "Reboot the device"
     description: "Hold down the power button until the device powers down. Then, release it briefly and hold it down again until the device boots."
     button: true
-  twrp_unlock:
-    title: "TWRP unlock"
-    description: 'Your device will boot Team Win Recovery Project (TWRP). If the screen is off, hit the power button once to light it up, then swipe the bar in the bottom to the right where it says to "Swipe to allow modifications."'
-    button: true
-  twrp_sideload:
-    title: "TWRP sideload"
-    description: 'Select "Advanced" and then "ADB Sideload". Check the boxes "Wipe Dalvik Cache" and "Wipe Cache" and then swipe the bar in the bottom where it says "Swipe to Start Sideload".'
-    button: true
-  twrp_sideload_again:
-    title: "TWRP sideload"
-    description: 'Select "Back" and then select "ADB Sideload" again. Ensure the boxes "Wipe Dalvik Cache" and "Wipe Cache" are checked and then swipe the bar in the bottom where it says "Swipe to Start Sideload".'
-    button: true
-  twrp_sideload_reboot:
-    title: "Sideload complete!"
-    description: "Follow the on-screen instructions to complete the sideload. Your device will reboot to the new OS next."
-    button: true
-  untested:
-    title: "Untested"
-    description: "Sorry, this configuration has not yet been fully tested. You might run into issues. If you want to help us improve, click the link below to see the config file."
-    link: "https://github.com/ubports/installer-configs/blob/master/v2/devices/yggdrasil.yml"
-    button: true
-  droidian_alpha:
-    title: "Alpha quality software"
-    description: "Remember that Droidian is alpha quality software, absolutely not daily driver ready. If you break your device, you get to keep both pieces!"
-    button: true
 unlock: []
 handlers:
   bootloader_locked:
@@ -417,43 +392,20 @@ operating_systems:
   - name: "Droidian"
     compatible_installer: ">=0.9.2-beta"
     options:
-      - var: "version"
-        name: "Image Version"
+      - var: "variant"
+        name: "Variant"
+        tooltip: "The graphical shell to install"
         type: "select"
         values:
-          - value: "stable"
-            label: "Latest Release"
-          - value: "stabledev"
-            label: "Latest Release with Development Tools"
-          - value: "nightly"
-            label: "Latest Nightly"
-          - value: "nightlydev"
-            label: "Latest Nightly with Development Tools"
-      - var: "wipe"
-        name: "Wipe Userdata"
-        tooltip: "Wipe personal data (recommended)"
-        type: "checkbox"
-        value: true
+          - value: "phosh"
+            label: "Phosh"
       - var: "bootstrap"
         name: "Bootstrap"
         tooltip: "Flash system partitions using fastboot"
         type: "checkbox"
         value: true
-    prerequisites:
-      - "untested"
-      - "droidian_alpha"
+    prerequisites: []
     steps:
-      - actions:
-          - core:download:
-              group: "firmware"
-              files:
-                - url: "http://volla.tech/filedump/twrp.img"
-                  checksum:
-                    sum: "c40c3c91c4d4de7651d2cc99b1265dd521f4a8175a260d0a55f62b9d8a8a3f69"
-                    algorithm: "sha256"
-        condition:
-          var: "bootstrap"
-          value: true
       - actions:
           - core:download:
               group: "firmware"
@@ -476,42 +428,21 @@ operating_systems:
           value: true
       - actions:
           - core:download:
-              group: "Droidian"
+              group: "firmware"
               files:
-                - url: "https://images.droidian.org/rootfs-api28gsi-all/droidian-stable-latest/arm64/generic/rootfs.zip"
-                - url: "https://images.droidian.org/rootfs-api28gsi-all/droidian-stable-latest/arm64/volla/adaptation-yggdrasil.zip"
+                - url: "https://images.droidian.org/droidian/nightly/arm64/volla/image-fastboot-yggdrasil.zip"
         condition:
-          var: "version"
-          value: "stable"
+          var: "variant"
+          value: "phosh"
       - actions:
-          - core:download:
-              group: "Droidian"
+          - core:unpack:
+              group: "firmware"
               files:
-                - url: "https://images.droidian.org/rootfs-api28gsi-all/droidian-stable-latest/arm64/generic/rootfs.zip"
-                - url: "https://images.droidian.org/rootfs-api28gsi-all/droidian-stable-latest/arm64/volla/adaptation-yggdrasil.zip"
-                - url: "https://images.droidian.org/rootfs-api28gsi-all/droidian-stable-latest/arm64/generic/feature-devtools.zip"
+                - archive: "image-fastboot-yggdrasil.zip"
+                  dir: "unpacked_droidian"
         condition:
-          var: "version"
-          value: "stabledev"
-      - actions:
-          - core:download:
-              group: "Droidian"
-              files:
-                - url: "https://images.droidian.org/rootfs-api28gsi-all/nightly/arm64/generic/rootfs.zip"
-                - url: "https://images.droidian.org/rootfs-api28gsi-all/nightly/arm64/volla/adaptation-yggdrasil.zip"
-        condition:
-          var: "version"
-          value: "nightly"
-      - actions:
-          - core:download:
-              group: "Droidian"
-              files:
-                - url: "https://images.droidian.org/rootfs-api28gsi-all/nightly/arm64/generic/rootfs.zip"
-                - url: "https://images.droidian.org/rootfs-api28gsi-all/nightly/arm64/volla/adaptation-yggdrasil.zip"
-                - url: "https://images.droidian.org/rootfs-api28gsi-all/nightly/arm64/generic/feature-devtools.zip"
-        condition:
-          var: "version"
-          value: "nightlydev"
+          var: "variant"
+          value: "phosh"
       - actions:
           - adb:reboot:
               to_state: "bootloader"
@@ -521,14 +452,8 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
-                - partition: "recovery"
-                  file: "twrp.img"
-                  group: "firmware"
                 - partition: "vendor"
                   file: "unpacked/vendor.img"
-                  group: "firmware"
-                - partition: "dtbo"
-                  file: "unpacked/dtbo.img"
                   group: "firmware"
                 - partition: "logo"
                   file: "unpacked/logo.bin"
@@ -567,68 +492,20 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
-          - fastboot:erase:
-              partition: "cache"
-        condition:
-          var: "bootstrap"
-          value: true
+          - fastboot:flash:
+              partitions:
+                - partition: "dtbo"
+                  file: "unpacked_droidian/data/dtbo.img"
+                  group: "firmware"
+                - partition: "recovery"
+                  file: "unpacked_droidian/data/recovery.img"
+                  group: "firmware"
+                - partition: "boot"
+                  file: "unpacked_droidian/data/boot.img"
+                  group: "firmware"
+                - partition: "userdata"
+                  file: "unpacked_droidian/data/userdata.img"
+                  group: "firmware"
       - actions:
-          - fastboot:format:
-              partition: "userdata"
-              type: "ext4"
-        condition:
-          var: "wipe"
-          value: true
-      - actions:
-          - core:user_action:
-              action: "recovery"
-      - actions:
-          - core:user_action:
-              action: "twrp_unlock"
-      - actions:
-          - core:user_action:
-              action: "twrp_sideload"
-      - actions:
-          - adb:sideload:
-              group: "Droidian"
-              file: "rootfs.zip"
-      - actions:
-          - core:user_action:
-              action: "twrp_sideload_again"
-        condition:
-          var: "version"
-          value: "stabledev"
-      - actions:
-          - adb:sideload:
-              group: "Droidian"
-              file: "feature-devtools.zip"
-        condition:
-          var: "version"
-          value: "stabledev"
-      - actions:
-          - core:user_action:
-              action: "twrp_sideload_again"
-        condition:
-          var: "version"
-          value: "nightlydev"
-      - actions:
-          - adb:sideload:
-              group: "Droidian"
-              file: "feature-devtools.zip"
-        condition:
-          var: "version"
-          value: "nightlydev"
-      - actions:
-          - core:user_action:
-              action: "twrp_sideload_again"
-      - actions:
-          - adb:sideload:
-              group: "Droidian"
-              file: "adaptation-yggdrasil.zip"
-      - actions:
-          - adb:reboot:
-              to_state: "system"
-        fallback:
-          - core:user_action:
-              action: "twrp_sideload_reboot"
+          - fastboot:reboot:
     slideshow: []
