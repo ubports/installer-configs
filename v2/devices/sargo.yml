@@ -145,7 +145,7 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://github.com/droidian-sargo/droidian-images/releases/download/ubports-installer/droidian-UNOFFICIAL_google_sargo-arm64-phosh-phone-28.zip"
+                - url: "https://images.droidian.org/droidian/nightly/arm64/google/image-fastboot-sargo.zip"
         condition:
           var: "variant"
           value: "phosh"
@@ -153,7 +153,7 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "droidian-UNOFFICIAL_google_sargo-arm64-phosh-phone-28.zip"
+                - archive: "image-fastboot-sargo.zip"
                   dir: "unpacked_droidian"
         condition:
           var: "variant"
