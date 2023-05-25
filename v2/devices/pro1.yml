@@ -1,8 +1,8 @@
-name: "F(x)tec Pro1/Pro1 X"
+name: "F(x)tec Pro1"
 codename: "pro1"
 formfactor: "phone"
 aliases: []
-doppelgangers: []
+doppelgangers: ["pro1x"]
 user_actions:
   bootloader:
     title: "Reboot to Bootloader"
