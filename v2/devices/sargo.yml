@@ -22,6 +22,10 @@ user_actions:
     title: "Support"
     description: "For details about Ubuntu Touch support for the Pixel 3a & 3a XL, please head over to the UBports forum thread."
     link: "https://forums.ubports.com/topic/4621/google-pixel-3a-sargo"
+  cutie_notice:
+    title: "Cutie Shell: Notice"
+    description: "You selected to install Droidian with Cutie Shell. Cutie Shell is still pre-alpha quality and it is not suitable for production environments. Keep in mind that Cutie Shell is not officially supported or endorsed by Droidian. This edition is maintained directly by Cutie Shell Community Project and you should report any bugs with these images at Cutie Shell Community Project before filing upstream."
+    button: true
 unlock:
   - "downgrade_android"
   - "support"
@@ -139,13 +143,38 @@ operating_systems:
         values:
           - value: "phosh"
             label: "Phosh"
+          - value: "cutie"
+            label: "Cutie Shell"
     prerequisites: []
     steps:
+      - actions:
+          - core:user_action:
+              action: "cutie_notice"
+        condition:
+          var: "variant"
+          value: "cutie"
       - actions:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://github.com/droidian-sargo/droidian-images/releases/download/ubports-installer/droidian-UNOFFICIAL_google_sargo-arm64-phosh-phone-28.zip"
+                - url: "https://images.droidian.org/droidian/nightly/arm64/google/image-fastboot-sargo.zip"
+        condition:
+          var: "variant"
+          value: "phosh"
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://github.com/cutie-shell/droidian/releases/download/nightly/droidian-OFFICIAL_google_sargo-arm64-cutie-phone-28.zip"
+        condition:
+          var: "variant"
+          value: "cutie"
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "image-fastboot-sargo.zip"
+                  dir: "unpacked_droidian"
         condition:
           var: "variant"
           value: "phosh"
@@ -153,11 +182,11 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "droidian-UNOFFICIAL_google_sargo-arm64-phosh-phone-28.zip"
+                - archive: "droidian-OFFICIAL_google_sargo-arm64-cutie-phone-28.zip"
                   dir: "unpacked_droidian"
         condition:
           var: "variant"
-          value: "phosh"
+          value: "cutie"
       - actions:
           - adb:reboot:
               to_state: "bootloader"
