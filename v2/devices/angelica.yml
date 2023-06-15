@@ -30,6 +30,10 @@ user_actions:
     description: 'With the device still at the "FastBoot Mode", use the Volume buttons to switch to "Recovery Mode" and push the power button to confirm your selection. Then select "Fastboot mode" from the list.'
     image: "phone_power_up"
     button: true
+  cutie_notice:
+    title: "Cutie Shell: Notice"
+    description: "You selected to install Droidian with Cutie Shell. Cutie Shell is still pre-alpha quality and it is not suitable for production environments. Keep in mind that Cutie Shell is not officially supported or endorsed by Droidian. This edition is maintained directly by Cutie Shell Community Project and you should report any bugs with these images at Cutie Shell Community Project before filing upstream."
+    button: true
 unlock:
   - "confirm_model"
   - "confirm_os"
@@ -173,13 +177,38 @@ operating_systems:
         values:
           - value: "phosh"
             label: "Phosh"
+          - value: "cutie"
+            label: "Cutie Shell"
     prerequisites: []
     steps:
+      - actions:
+          - core:user_action:
+              action: "cutie_notice"
+        condition:
+          var: "variant"
+          value: "cutie"
       - actions:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://github.com/droidian-mt6765/droidian-images-angelica/releases/download/ubports-installer/droidian-UNOFFICIAL_xiaomi_angelica-armhf-phosh-phone-29.zip"
+                - url: "https://images.droidian.org/droidian/nightly/armhf/xiaomi/image-fastboot-angelica.zip"
+        condition:
+          var: "variant"
+          value: "phosh"
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://github.com/cutie-shell/droidian/releases/download/nightly/droidian-OFFICIAL_xiaomi_angelica-armhf-cutie-phone-29.zip"
+        condition:
+          var: "variant"
+          value: "cutie"
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "image-fastboot-angelica.zip"
+                  dir: "unpacked_droidian"
         condition:
           var: "variant"
           value: "phosh"
@@ -187,11 +216,11 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "droidian-UNOFFICIAL_xiaomi_angelica-armhf-phosh-phone-29.zip"
+                - archive: "droidian-OFFICIAL_xiaomi_angelica-armhf-cutie-phone-29.zip"
                   dir: "unpacked_droidian"
         condition:
           var: "variant"
-          value: "phosh"
+          value: "cutie"
       - actions:
           - adb:reboot:
               to_state: "bootloader"
