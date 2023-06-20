@@ -53,9 +53,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/volla-mimameid-11.0-ubports-installer-bootstrap.zip"
+                - url: "https://volla.tech/filedump/volla-mimameid-11.0-ubports-installer-bootstrap-v2.zip"
                   checksum:
-                    sum: "c0216239cc6dc11e23940884d0f6d1183b29898e63b561da8122bf69636f6c7c"
+                    sum: "82ec6dd3d5602ecdd5cd445e09440c6c764b841648c22317a59ca536c502323b"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -64,7 +64,7 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-mimameid-11.0-ubports-installer-bootstrap.zip"
+                - archive: "volla-mimameid-11.0-ubports-installer-bootstrap-v2.zip"
                   dir: "unpacked"
         condition:
           var: "bootstrap"
@@ -87,12 +87,16 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
-                - partition: "lk"
+                - partition: "lk_a"
                   file: "unpacked/lk.img"
                   group: "firmware"
-                - partition: "boot"
+                - partition: "boot_a"
                   file: "unpacked/boot.img"
                   group: "firmware"
+                - partition: "vbmeta_a"
+                  file: "unpacked/vbmeta.img"
+                  group: "firmware"
+                  flags: [ "--disable-verity" ]
                 - partition: "super"
                   file: "unpacked/super.img"
                   group: "firmware"
@@ -333,13 +337,13 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
-                - partition: "dtbo"
+                - partition: "dtbo_a"
                   file: "unpacked_droidian/data/dtbo.img"
                   group: "firmware"
-                - partition: "boot"
+                - partition: "boot_a"
                   file: "unpacked_droidian/data/boot.img"
                   group: "firmware"
-                - partition: "vbmeta"
+                - partition: "vbmeta_a"
                   file: "unpacked_droidian/data/vbmeta.img"
                   group: "firmware"
                 - partition: "userdata"
