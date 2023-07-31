@@ -6,7 +6,7 @@ doppelgangers: ["pro1"]
 user_actions:
   confirm_model:
     title: "Confirm your model"
-    description: "Please check that your device is a Fairphone 4 (FP4)."
+    description: "Please check that your device is a F(x)tec Pro1-X."
   confirm_os:
     title: "Confirm OS version"
     description: "Your device must be running the official version of Android 11 before installing Ubuntu Touch. With a previously installed custom ROM, it won't work!"
