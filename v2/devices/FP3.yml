@@ -10,7 +10,7 @@ user_actions:
   confirm_os:
     title: "Confirm OS version"
     description: "Your device must be running the Fairphone OS version of Android 10 before installing Ubuntu Touch. With a previously installed /e/ OS, it won't work! Only if it is already running the previous Halium 9 version of Ubuntu Touch and you want to upgrade to the Halium 10 (recommended), you can download and flash the Android 10 stock rom from the link below (More...), which leaves your userdata partition untouched. Afterwards run this installer again."
-    link: "https://androidfilehost.com/?fid=7161016148664787652"
+    link: "https://support.fairphone.com/hc/en-us/articles/360048050332"
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, press and hold the VOLUME DOWN and POWER buttons at the same time until the phone vibrates. After some seconds you'll see the fastboot mode. Or just reboot and press and hold VOLUME DOWN BUTTON while rebooting."
