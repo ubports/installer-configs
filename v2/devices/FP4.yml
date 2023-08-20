@@ -14,7 +14,7 @@ user_actions:
   unlock_phone:
     title: "Unlock the bootloader"
     description: "Before installing Ubuntu Touch you must unlock the bootloader of your phone manually. Follow the steps in the linked page if you haven't already."
-    link: "https://support.fairphone.com/hc/en-us/articles/4405858258961-FP4-Manage-the-bootloader"
+    link: "https://support.fairphone.com/hc/en-us/articles/10492476238865"
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, press and hold the VOLUME DOWN button and plug the device into your PC via USB. After some seconds you'll see the fastboot mode."
