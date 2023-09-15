@@ -103,6 +103,7 @@ operating_systems:
       - actions:
           - fastboot:format:
               partition: "userdata"
+              type: "ext4"
         condition:
           var: "wipe"
           value: true
