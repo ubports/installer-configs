@@ -56,6 +56,10 @@ operating_systems:
         name: "Wipe Userdata"
         tooltip: "Wipe personal data (required for new installs)"
         type: "checkbox"
+      - var: "partition"
+        name: "Partitioning"
+        tooltip: "Changes partition sizes as required. Only necessary for first time installations of Focal 20.04."
+        type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
         tooltip: "Flash system partitions using fastboot"
@@ -113,6 +117,19 @@ operating_systems:
                   group: "firmware"
         condition:
           var: "bootstrap"
+          value: true  
+      - actions:
+          - fastboot:reboot_fastboot:
+        condition:
+          var: "partition"  
+          value: true                      
+      - actions:
+          # Increase space for system_a for UT installation
+          - fastboot:resize_logical_partition:
+              partition: "system"
+              size: 3221225472
+        condition:
+          var: "partition"
           value: true
       - actions:
           - fastboot:reboot_bootloader:
