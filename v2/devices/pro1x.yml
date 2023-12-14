@@ -93,7 +93,7 @@ operating_systems:
               files:
                 - url: "https://cdimage.ubports.com/devices/pro1x/recovery.img"
                   checksum:
-                    sum: "8b5dcac087a6856492c873bc73ab8714d81bb7a61c29519d8a59bb38bcaaabfe"
+                    sum: "79eb3c3969343c6c969ce9eea2deab22ab140e29cd388df9345877b78cb80795"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
