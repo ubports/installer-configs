@@ -32,6 +32,8 @@ jobs:
 
       - name: npm install
         run: npm install
+      - name: npm install -g ts-node
+        run: npm install -g ts-node
       - name: npm run lint
         run: npm run lint
       - name: npm run build
