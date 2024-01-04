@@ -10,6 +10,7 @@
     "sourceMap": true,
     "importHelpers": true,
     "downlevelIteration": true,
+    "esModuleInterop": true,
 
     /* Strict Type-Checking Options */
     "strict": true,
