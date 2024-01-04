@@ -2,7 +2,7 @@
   "compilerOptions": {
     /* Basic Options */
     "target": "es2015",
-    "module": "es2022",
+    "module": "CommonJS",
     "lib": ["DOM", "es2022", "es2021"],
     "outDir": "./lib",
     "allowJs": false,
@@ -11,6 +11,7 @@
     "importHelpers": true,
     "downlevelIteration": true,
     "esModuleInterop": true,
+    "moduleResolution": "Node",
 
     /* Strict Type-Checking Options */
     "strict": true,
