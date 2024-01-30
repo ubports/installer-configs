@@ -6,11 +6,11 @@ doppelgangers: []
 user_actions:
   confirm_model:
     title: "Confirm your model"
-    description: "Please check that your device is a Lenovo Smart Tab M10 X605L or X605F."
+    description: "Please make sure, that your device is a Lenovo Smart Tab M10 X605L or X605F with at least 3GB RAM. For the 2GB/16GB models, the installer won't work!"
   confirm_os:
     title: "Confirm OS version"
     description: "Your device must be running Android 9 before installing Ubuntu Touch. This seems to be already the case for the most devices of this type. But if you still need to flash the Android 9 stock rom, please see the install section in the link below:"
-    link: "https://gitlab.com/ubports/community-ports/android9/lenovo-tab-m10-fhd/lenovo-x605#install"
+    link: "https://gitlab.com/ubports/porting/community-ports/android9/lenovo-tab-m10-fhd/lenovo-x605#install-first-time"
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, press and hold the VOLUME DOWN and POWER buttons at the same time until the device turns on. The bootloader mode is indicated by the red 'Fastboot Mode' text in the left down corner."
@@ -23,10 +23,6 @@ user_actions:
       Unplug USB-cable and press and hold the POWER button until display turns off. If it is rebooting, repeat this until the device stays off!
       If it is off, press and hold the VOLUME UP, VOLUME DOWN and the POWER buttons at the same time until it boots.
       Then only release the POWER button and keep holding the VOLUME buttons until the UBports recovery appears."
-    button: true
-  afterinstall:
-    title: "UNPLUG YOUR USB CABLE!"
-    description: "Somehow the device does not boot reliable after finishing setup, if the USB-cable is still plugged in. Therefore it is better to unplug it."
     button: true
 unlock:
   - "confirm_model"
@@ -61,9 +57,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://gitlab.com/ubports/community-ports/android9/lenovo-tab-m10-fhd/lenovo-x605/-/jobs/2507752431/artifacts/raw/out/boot.img"
+                - url: "https://gitlab.com/ubports/porting/community-ports/android9/lenovo-tab-m10-fhd/lenovo-x605/-/jobs/6057055401/artifacts/raw/out/boot.img"
                   checksum:
-                    sum: "ac25fb98d2e2757c2ac393a0c898389f73b175e3e74ba8775cbbd84552c5a0ad"
+                    sum: "8036c26af66f5e42f891c7bb280e389771bfaa2118b1632b430a3c6c5c096fc3"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -72,7 +68,7 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://gitlab.com/ubports/community-ports/android9/lenovo-tab-m10-fhd/lenovo-x605-assets/-/raw/main/recovery.img"
+                - url: "https://gitlab.com/ubports/porting/community-ports/android9/lenovo-tab-m10-fhd/lenovo-x605-assets/-/raw/main/recovery.img"
                   checksum:
                     sum: "67808f905623a208c702879085bdc83eb0d3b8332a57689764249ca1d800fa9e"
                     algorithm: "sha256"
@@ -138,7 +134,4 @@ operating_systems:
         fallback:
           - core:user_action:
               action: "recovery"
-      - actions:
-          - core:user_action:
-              action: "afterinstall"
     slideshow: []
