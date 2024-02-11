@@ -1,4 +1,4 @@
-#!/usr/bin/env -S ts-node --esm
+#!/usr/bin/env -S node --loader ts-node/esm
 
 /*
  * Copyright (C) 2022 UBports Foundation <info@ubports.com>
