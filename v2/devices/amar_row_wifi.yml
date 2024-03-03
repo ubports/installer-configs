@@ -93,7 +93,7 @@ operating_systems:
                     algorithm: "sha256"
                 - url: "https://github.com/rubencarneiro/amar_row_wifi/releases/download/1.0/recovery.img"
                   checksum:
-                    sum: "11145535baecb111b9a4e07c67a39c407366e7a7b261b795b02b70a09e27c0bd"
+                    sum: "da9c4ef047d852c1ac6ae0ea72e05684ebadeff8f495871e6b0d98bfd3863779"
                     algorithm: "sha256"
                 - url: "https://github.com/rubencarneiro/amar_row_wifi/releases/download/1.0/dtbo.img"
                   checksum:
@@ -122,7 +122,7 @@ operating_systems:
                   file: "vbmeta.img"
                   group: "firmware"
                   flags:
-                    - "--disable-verity"
+                    - "--disable-verity" 
                     - "--disable-verification"
         condition:
           var: "bootstrap"
@@ -165,6 +165,19 @@ operating_systems:
       - actions:
           - fastboot:format:
               partition: "userdata"
+              type: "ext4"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - fastboot:erase:
+              partition: "cache"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - fastboot:format:
+              partition: "cache"
               type: "ext4"
         condition:
           var: "wipe"
