@@ -21,6 +21,14 @@ user_actions:
     title: "Cutie Shell: Notice"
     description: "You selected to install Droidian with Cutie Shell. Cutie Shell is still pre-alpha quality and it is not suitable for production environments. Keep in mind that Cutie Shell is not officially supported or endorsed by Droidian. This edition is maintained directly by Cutie Shell Community Project and you should report any bugs with these images at Cutie Shell Community Project before filing upstream."
     button: true
+  twrp_sideload:
+    title: "TWRP sideload"
+    description: 'Select "Advanced" and then "ADB Sideload". Check the box "Wipe Dalvik Cache" and then swipe the bar in the bottom where it says "Swipe to Start Sideload".'
+    button: true
+  twrp_sideload_reboot:
+    title: "Sideload complete!"
+    description: "Follow the on-screen instructions to complete the sideload."
+    button: true
 unlock: []
 handlers:
   bootloader_locked:
@@ -254,9 +262,20 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/volla-mimameid-11.0-ubports-installer-bootstrap.zip"
+                - url: "https://volla.tech/filedump/volla-mimameid-11.0-ubports-installer-bootstrap-v2.zip"
                   checksum:
-                    sum: "c0216239cc6dc11e23940884d0f6d1183b29898e63b561da8122bf69636f6c7c"
+                    sum: "82ec6dd3d5602ecdd5cd445e09440c6c764b841648c22317a59ca536c502323b"
+                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "http://deb.cutie-shell.org/twrp-mimameid.img"
+                  checksum:
+                    sum: "1d44b9201d5dd9bc18a5d12a4c2e05d00e485d67512b69a7e253b62649df62bc"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -265,7 +284,7 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-mimameid-11.0-ubports-installer-bootstrap.zip"
+                - archive: "volla-mimameid-11.0-ubports-installer-bootstrap-v2.zip"
                   dir: "unpacked"
         condition:
           var: "bootstrap"
@@ -287,24 +306,6 @@ operating_systems:
           var: "variant"
           value: "cutie"
       - actions:
-          - core:unpack:
-              group: "firmware"
-              files:
-                - archive: "image-fastboot-mimameid.zip"
-                  dir: "unpacked_droidian"
-        condition:
-          var: "variant"
-          value: "phosh"
-      - actions:
-          - core:unpack:
-              group: "firmware"
-              files:
-                - archive: "droidian-OFFICIAL_volla_mimameid-arm64-cutie-phone-30.zip"
-                  dir: "unpacked_droidian"
-        condition:
-          var: "variant"
-          value: "cutie"
-      - actions:
           - adb:reboot:
               to_state: "bootloader"
         fallback:
@@ -320,13 +321,19 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
+          - fastboot:format:
+              partition: "userdata"
+      - actions:
           - fastboot:flash:
               partitions:
                 - partition: "lk_a"
                   file: "unpacked/lk.img"
                   group: "firmware"
-                - partition: "lk_b"
-                  file: "unpacked/lk.img"
+                - partition: "vbmeta_a"
+                  file: "unpacked/vbmeta.img"
+                  group: "firmware"
+                - partition: "boot_a"
+                  file: "twrp-mimameid.img"
                   group: "firmware"
                 - partition: "super"
                   file: "unpacked/super.img"
@@ -335,20 +342,37 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
-          - fastboot:flash:
-              partitions:
-                - partition: "dtbo_a"
-                  file: "unpacked_droidian/data/dtbo.img"
-                  group: "firmware"
-                - partition: "boot_a"
-                  file: "unpacked_droidian/data/boot.img"
-                  group: "firmware"
-                - partition: "vbmeta_a"
-                  file: "unpacked_droidian/data/vbmeta.img"
-                  group: "firmware"
-                - partition: "userdata"
-                  file: "unpacked_droidian/data/userdata.img"
-                  group: "firmware"
+          - fastboot:reboot_recovery:
+        fallback:
+          - core:user_action:
+              action: "recovery"
+        condition:
+          var: "bootstrap"
+          value: true
       - actions:
-          - fastboot:reboot:
+          - core:user_action:
+              action: "twrp_sideload"
+      - actions:
+          - adb:sideload:
+              file: "image-fastboot-mimameid.zip"
+              group: "firmware"
+        condition:
+          var: "variant"
+          value: "phosh"
+      - actions:
+          - adb:sideload:
+              file: "droidian-OFFICIAL_volla_mimameid-arm64-cutie-phone-30.zip"
+              group: "firmware"
+        condition:
+          var: "variant"
+          value: "cutie"
+      - actions:
+          - core:user_action:
+              action: "twrp_sideload_reboot"
+      - actions:
+          - adb:reboot:
+              to_state: "system"
+        fallback:
+          - core:user_action:
+              action: "boot"
     slideshow: []
