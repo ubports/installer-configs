@@ -51,7 +51,7 @@ operating_systems:
         type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
-        tooltip: "Flash system partitions using fastboot"
+        tooltip: "Flash system partitions using fastboot. Do NOT uncheck unless you know exactly what you're doing!"
         type: "checkbox"
         value: true
     prerequisites: []
@@ -61,9 +61,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/volla-mimameid-11.0-ubports-installer-bootstrap-v2.zip"
+                - url: "https://volla.tech/filedump/volla-mimameid-11.0-ubports-installer-bootstrap-v3.zip"
                   checksum:
-                    sum: "82ec6dd3d5602ecdd5cd445e09440c6c764b841648c22317a59ca536c502323b"
+                    sum: "a1fb6b27e3f693c7155e6a64dfdc58d00198921ffe04040aac4a124a657acd05"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -72,7 +72,7 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-mimameid-11.0-ubports-installer-bootstrap-v2.zip"
+                - archive: "volla-mimameid-11.0-ubports-installer-bootstrap-v3.zip"
                   dir: "unpacked"
         condition:
           var: "bootstrap"
@@ -95,19 +95,46 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
+                - partition: "boot_a"
+                  file: "unpacked/boot.img"
+                  group: "firmware"
+                - partition: "dtbo_a"
+                  file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "gz_a"
+                  file: "unpacked/gz.img"
+                  group: "firmware"
                 - partition: "lk_a"
                   file: "unpacked/lk.img"
                   group: "firmware"
-                - partition: "boot_a"
-                  file: "unpacked/boot.img"
+                - partition: "logo"
+                  file: "unpacked/logo.img"
+                  group: "firmware"
+                - partition: "md1img_a"
+                  file: "unpacked/md1img.img"
+                  group: "firmware"
+                - partition: "preloader_a"
+                  file: "unpacked/preloader.img"
+                  group: "firmware"
+                - partition: "scp_a"
+                  file: "unpacked/scp.img"
+                  group: "firmware"
+                - partition: "spmfw_a"
+                  file: "unpacked/spmfw.img"
+                  group: "firmware"
+                - partition: "sspm_a"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
+                - partition: "super"
+                  file: "unpacked/super.img"
+                  group: "firmware"
+                - partition: "tee_a"
+                  file: "unpacked/tee.img"
                   group: "firmware"
                 - partition: "vbmeta_a"
                   file: "unpacked/vbmeta.img"
                   group: "firmware"
                   flags: ["--disable-verity"]
-                - partition: "super"
-                  file: "unpacked/super.img"
-                  group: "firmware"
         condition:
           var: "bootstrap"
           value: true
@@ -246,7 +273,7 @@ operating_systems:
             label: "Cutie Shell"
       - var: "bootstrap"
         name: "Bootstrap"
-        tooltip: "Flash system partitions using fastboot"
+        tooltip: "Flash system partitions using fastboot. Do NOT uncheck unless you know exactly what you're doing!"
         type: "checkbox"
         value: true
     prerequisites: []
@@ -262,9 +289,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/volla-mimameid-11.0-ubports-installer-bootstrap-v2.zip"
+                - url: "https://volla.tech/filedump/volla-mimameid-11.0-ubports-installer-bootstrap-v3.zip"
                   checksum:
-                    sum: "82ec6dd3d5602ecdd5cd445e09440c6c764b841648c22317a59ca536c502323b"
+                    sum: "a1fb6b27e3f693c7155e6a64dfdc58d00198921ffe04040aac4a124a657acd05"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -284,7 +311,7 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-mimameid-11.0-ubports-installer-bootstrap-v2.zip"
+                - archive: "volla-mimameid-11.0-ubports-installer-bootstrap-v3.zip"
                   dir: "unpacked"
         condition:
           var: "bootstrap"
@@ -326,18 +353,46 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
+                - partition: "boot_a"
+                  file: "twrp-mimameid.img"
+                  group: "firmware"
+                - partition: "dtbo_a"
+                  file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "gz_a"
+                  file: "unpacked/gz.img"
+                  group: "firmware"
                 - partition: "lk_a"
                   file: "unpacked/lk.img"
                   group: "firmware"
-                - partition: "vbmeta_a"
-                  file: "unpacked/vbmeta.img"
+                - partition: "logo"
+                  file: "unpacked/logo.img"
                   group: "firmware"
-                - partition: "boot_a"
-                  file: "twrp-mimameid.img"
+                - partition: "md1img_a"
+                  file: "unpacked/md1img.img"
+                  group: "firmware"
+                - partition: "preloader_a"
+                  file: "unpacked/preloader.img"
+                  group: "firmware"
+                - partition: "scp_a"
+                  file: "unpacked/scp.img"
+                  group: "firmware"
+                - partition: "spmfw_a"
+                  file: "unpacked/spmfw.img"
+                  group: "firmware"
+                - partition: "sspm_a"
+                  file: "unpacked/sspm.img"
                   group: "firmware"
                 - partition: "super"
                   file: "unpacked/super.img"
                   group: "firmware"
+                - partition: "tee_a"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "vbmeta_a"
+                  file: "unpacked/vbmeta.img"
+                  group: "firmware"
+                  flags: ["--disable-verity"]
         condition:
           var: "bootstrap"
           value: true
