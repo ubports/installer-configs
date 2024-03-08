@@ -60,14 +60,14 @@ operating_systems:
             - var: "bootstrap"
               value: true
             - OR:
-              - var: channel
-                value: ubports-touch/16.04/stable
-              - var: channel
-                value: 16.04/rc
-              - var: channel
-                value: 16.04/devel
-              - var: channel
-                value: 16.04/armhf/hybris/halium-devel
+                - var: channel
+                  value: ubports-touch/16.04/stable
+                - var: channel
+                  value: 16.04/rc
+                - var: channel
+                  value: 16.04/devel
+                - var: channel
+                  value: 16.04/armhf/hybris/halium-devel
 
       - actions:
           - core:download:
@@ -86,12 +86,12 @@ operating_systems:
             - var: "bootstrap"
               value: true
             - OR:
-              - var: channel
-                value: 20.04/armhf/android9plus/devel
-              - var: channel
-                value: 20.04/armhf/android9plus/rc
-              - var: channel
-                value: 20.04/armhf/android9plus/stable
+                - var: channel
+                  value: 20.04/armhf/android9plus/devel
+                - var: channel
+                  value: 20.04/armhf/android9plus/rc
+                - var: channel
+                  value: 20.04/armhf/android9plus/stable
 
       - actions:
           - adb:reboot:
@@ -116,14 +116,14 @@ operating_systems:
             - var: "bootstrap"
               value: true
             - OR:
-              - var: channel
-                value: ubports-touch/16.04/stable
-              - var: channel
-                value: 16.04/rc
-              - var: channel
-                value: 16.04/devel
-              - var: channel
-                value: 16.04/armhf/hybris/halium-devel
+                - var: channel
+                  value: ubports-touch/16.04/stable
+                - var: channel
+                  value: 16.04/rc
+                - var: channel
+                  value: 16.04/devel
+                - var: channel
+                  value: 16.04/armhf/hybris/halium-devel
 
       - actions:
           - fastboot:flash:
@@ -139,12 +139,12 @@ operating_systems:
             - var: "bootstrap"
               value: true
             - OR:
-              - var: channel
-                value: 20.04/armhf/android9plus/devel   
-              - var: channel
-                value: 20.04/armhf/android9plus/rc
-              - var: channel
-                value: 20.04/armhf/android9plus/stable
+                - var: channel
+                  value: 20.04/armhf/android9plus/devel
+                - var: channel
+                  value: 20.04/armhf/android9plus/rc
+                - var: channel
+                  value: 20.04/armhf/android9plus/stable
 
       - actions:
           - fastboot:erase:

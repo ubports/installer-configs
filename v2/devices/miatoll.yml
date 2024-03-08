@@ -117,12 +117,12 @@ operating_systems:
                   group: "firmware"
         condition:
           var: "bootstrap"
-          value: true  
+          value: true
       - actions:
           - fastboot:reboot_fastboot:
         condition:
-          var: "partition"  
-          value: true                      
+          var: "partition"
+          value: true
       - actions:
           # Increase space for system_a for UT installation
           - fastboot:resize_logical_partition:
@@ -237,4 +237,3 @@ operating_systems:
       - actions:
           - fastboot:reboot:
     slideshow: []
-
