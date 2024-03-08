@@ -95,7 +95,7 @@ operating_systems:
                 - partition: "vbmeta_a"
                   file: "unpacked/vbmeta.img"
                   group: "firmware"
-                  flags: [ "--disable-verity" ]
+                  flags: ["--disable-verity"]
                 - partition: "super"
                   file: "unpacked/super.img"
                   group: "firmware"
