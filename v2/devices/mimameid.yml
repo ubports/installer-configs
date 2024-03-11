@@ -17,6 +17,10 @@ user_actions:
     title: "Reboot the device"
     description: "Hold down the power button until the device powers down. Then, release it briefly and hold it down again until the device boots."
     button: true
+  display_notice:
+    title: "Replacement Display Notice"
+    description: "The selected OS requires Android 11 firmware which does NOT support Volla Phone 22 devices with replaced display panels. If that is the case or you're unsure, to avoid soft-bricking your phone please restart the process and instead select 'Volla Phone 22 with new display' as the device!"
+    button: true
   cutie_notice:
     title: "Cutie Shell: Notice"
     description: "You selected to install Droidian with Cutie Shell. Cutie Shell is still pre-alpha quality and it is not suitable for production environments. Keep in mind that Cutie Shell is not officially supported or endorsed by Droidian. This edition is maintained directly by Cutie Shell Community Project and you should report any bugs with these images at Cutie Shell Community Project before filing upstream."
@@ -56,6 +60,9 @@ operating_systems:
         value: true
     prerequisites: []
     steps:
+      - actions:
+          - core:user_action:
+              action: "display_notice"
       # Firmware setup (bootstrap)
       - actions:
           - core:download:
@@ -278,6 +285,9 @@ operating_systems:
         value: true
     prerequisites: []
     steps:
+      - actions:
+          - core:user_action:
+              action: "display_notice"
       - actions:
           - core:user_action:
               action: "cutie_notice"
