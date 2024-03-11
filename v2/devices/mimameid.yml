@@ -23,7 +23,7 @@ user_actions:
     button: true
   twrp_sideload:
     title: "TWRP sideload"
-    description: 'Select "Advanced" and then "ADB Sideload". Check the box "Wipe Dalvik Cache" and then swipe the bar in the bottom where it says "Swipe to Start Sideload".'
+    description: 'Select "Advanced" and then "ADB Sideload". Do NOT check either of the wipe boxes, just swipe the bar on the bottom where it says "Swipe to Start Sideload".'
     button: true
   twrp_sideload_reboot:
     title: "Sideload complete!"
