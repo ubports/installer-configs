@@ -1,7 +1,7 @@
 name: "OnePlus Nord N100"
 codename: "billie2"
 formfactor: "phone"
-aliases: [bengal, OnePlusN100]
+aliases: [OnePlusN100]
 doppelgangers: []
 user_actions:
   confirm_model:
