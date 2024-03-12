@@ -41,6 +41,7 @@ unlock:
   - "unlock_phone"
 operating_systems:
   - name: "Ubuntu Touch"
+    compatible_installer: ">=0.9.6-beta"
     options:
       - var: "channel"
         name: "Channel"
