@@ -148,15 +148,15 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/vollaos/volla-12.1-20230911-stable-SPFLASH-vidofnir.zip"
+                - url: "https://volla.tech/filedump/vollaos/volla-12.1-20240228-stable-SPFLASH-vidofnir.zip"
                   checksum:
-                    sum: "71840531706eda0633873d02eb181d3dc306178d8210ca05d612561958e55428"
+                    sum: "4ad9aa53980835bcefa379f1963e4e4dd71136b8e18f82b3397d586f406a66a0"
                     algorithm: "sha256"
       - actions:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-12.1-20230911-stable-SPFLASH-vidofnir.zip"
+                - archive: "volla-12.1-20240228-stable-SPFLASH-vidofnir.zip"
                   dir: "unpacked"
       - actions:
           - adb:reboot:
