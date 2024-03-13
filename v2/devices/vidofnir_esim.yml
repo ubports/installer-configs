@@ -1,7 +1,8 @@
 name: "Volla Phone X23"
-codename: "vidofnir"
+codename: "vidofnir_esim"
 formfactor: "phone"
-aliases: []
+aliases:
+  - "vidofnir"
 user_actions:
   recovery:
     title: "Reboot to Recovery"
