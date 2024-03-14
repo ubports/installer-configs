@@ -18,6 +18,10 @@ user_actions:
     title: "Reboot the device"
     description: "Hold down the power button until the device powers down. Then, release it briefly and hold it down again until the device boots."
     button: true
+  reboot_workaround:
+    title: "Workaround initial boot problem"
+    description: "Once a blank screen with the backlight comes up hold down the power button until the device powers down. Then, release it briefly and hold it down again until the device boots with Volla logo visible."
+    button: true
 unlock: []
 handlers:
   bootloader_locked:
@@ -177,19 +181,15 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/vollaos/volla-11.1-20221024-stable-SPFLASH-yggdrasilx.zip"
+                - url: "https://volla.tech/filedump/vollaos/volla-12.1-20240229-stable-SPFLASH-yggdrasilx.zip"
                   checksum:
-                    sum: "25eb21d54ecb8a443d8944559f45eb9b6d2dd2df193c9f3221e49ee5da48ecd7"
-                    algorithm: "sha256"
-                - url: "https://volla.tech/filedump/vollaos-10.1-ygdrassilx-preloader.bin"
-                  checksum:
-                    sum: "64cf0d77edc360a91c5023513090539250715e0d2eea869518d9ea4f9d0871c1"
+                    sum: "fd1a7cd54e4ad1acda5077d3b213bec5ecc2c53bba10c4f66f5acf7ff5a198b1"
                     algorithm: "sha256"
       - actions:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-11.1-20221024-stable-SPFLASH-yggdrasilx.zip"
+                - archive: "volla-12.1-20240229-stable-SPFLASH-yggdrasilx.zip"
                   dir: "unpacked"
       - actions:
           - adb:reboot:
@@ -222,7 +222,7 @@ operating_systems:
                   file: "unpacked/md1img.img"
                   group: "firmware"
                 - partition: "preloader"
-                  file: "vollaos-10.1-ygdrassilx-preloader.bin"
+                  file: "unpacked/preloader_k63v2_64_bsp.bin"
                   group: "firmware"
                 - partition: "recovery"
                   file: "unpacked/recovery.img"
@@ -259,6 +259,9 @@ operating_systems:
         fallback:
           - core:user_action:
               action: "boot"
+      - actions:
+          - core:user_action:
+              action: "reboot_workaround"
     slideshow: []
     eula:
       title: "EULA"
