@@ -138,10 +138,10 @@ operating_systems:
           var: "wipe"
           value: true
       - actions:
-          - fastboot:reboot:
+          - fastboot:reboot_recovery:
         fallback:
           - core:user_action:
-              action: "boot"
+              action: "recovery"
         condition:
           var: "bootstrap"
           value: true
