@@ -270,7 +270,18 @@ operating_systems:
   - name: "SailfishOS"
     prerequisites: []
     compatible_installer: ">=0.9.2-beta"
+    options:
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Flash system partitions using fastboot. Keep enabled if coming from non-Sailfish OS"
+        type: "checkbox"
+        value: true
     steps:
+      - actions:
+          - core:download:
+              group: "SailfishOS"
+              files:
+                - url: "https://gitlab.com/sailfishos-porters-ci/yggdrasil-ci/-/jobs/artifacts/master/download?job=run-build-x-lvm-testing"
       - actions:
           - core:download:
               group: "firmware"
@@ -283,18 +294,24 @@ operating_systems:
                   checksum:
                     sum: "64cf0d77edc360a91c5023513090539250715e0d2eea869518d9ea4f9d0871c1"
                     algorithm: "sha256"
-                - url: "https://volla.tech/filedump/sailfish-testing-vollax-dec-3-2021.zip"
-                  checksum:
-                    sum: "bf64b3b438e5f2673271d7bcfa6da7e937b1d9cf11e1740776bbb557a6363eac"
-                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - core:unpack:
+              group: "SailfishOS"
+              files:
+                - archive: "download?job=run-build-x-lvm-testing"
+                  dir: "unpacked"
       - actions:
           - core:unpack:
               group: "firmware"
               files:
                 - archive: "volla-10.1-20211002-RELEASE-SPFLASH-yggdrasilx.zip"
                   dir: "unpacked"
-                - archive: "sailfish-testing-vollax-dec-3-2021.zip"
-                  dir: "sailfish"
+        condition:
+          var: "bootstrap"
+          value: true
       - actions:
           - adb:reboot:
               to_state: "bootloader"
@@ -304,20 +321,8 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
-                - partition: "boot"
-                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/hybris-boot.img"
-                  group: "firmware"
                 - partition: "dtbo"
                   file: "unpacked/dtbo.img"
-                  group: "firmware"
-                - partition: "lk"
-                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/lk-yggdrasilx.img"
-                  group: "firmware"
-                - partition: "lk2"
-                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/lk-yggdrasilx.img"
-                  group: "firmware"
-                - partition: "logo"
-                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/logo.bin"
                   group: "firmware"
                 - partition: "md1dsp"
                   file: "unpacked/md1dsp.img"
@@ -349,15 +354,30 @@ operating_systems:
                 - partition: "tee2"
                   file: "unpacked/tee.img"
                   group: "firmware"
-                - partition: "userdata"
-                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/sailfish.img001"
-                  group: "firmware"
                 - partition: "vendor"
                   file: "unpacked/vendor.img"
                   group: "firmware"
+        condition:
+          var: "bootstrap"
+          value: true
       - actions:
-          - fastboot:erase:
-              partition: "nvdata"
+          - fastboot:flash:
+              partitions:
+                - partition: "boot"
+                  file: "unpacked/sfe-yggdrasilx/Sailfish_OS/hybris-boot.img"
+                  group: "SailfishOS"
+                - partition: "lk"
+                  file: "unpacked/sfe-yggdrasilx/Sailfish_OS/lk-yggdrasilx.img"
+                  group: "SailfishOS"
+                - partition: "lk2"
+                  file: "unpacked/sfe-yggdrasilx/Sailfish_OS/lk-yggdrasilx.img"
+                  group: "SailfishOS"
+                - partition: "logo"
+                  file: "unpacked/sfe-yggdrasilx/Sailfish_OS/logo_yggdrasilx.bin"
+                  group: "SailfishOS"
+                - partition: "userdata"
+                  file: "unpacked/sfe-yggdrasilx/Sailfish_OS/sailfish.img001"
+                  group: "SailfishOS"
       - actions:
           - fastboot:reboot:
         fallback:
