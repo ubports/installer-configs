@@ -17,13 +17,17 @@ user_actions:
     title: "Reboot the device"
     description: "Hold down the power button until the device powers down. Then, release it briefly and hold it down again until the device boots."
     button: true
+  display_notice:
+    title: "Replacement Display Notice"
+    description: "The selected OS requires Android 11 firmware which does NOT support Volla Phone 22 devices with replaced display panels. If that is the case or you're unsure, to avoid soft-bricking your phone please restart the process and instead select 'Volla Phone 22 with new display' as the device!"
+    button: true
   cutie_notice:
     title: "Cutie Shell: Notice"
     description: "You selected to install Droidian with Cutie Shell. Cutie Shell is still pre-alpha quality and it is not suitable for production environments. Keep in mind that Cutie Shell is not officially supported or endorsed by Droidian. This edition is maintained directly by Cutie Shell Community Project and you should report any bugs with these images at Cutie Shell Community Project before filing upstream."
     button: true
   twrp_sideload:
     title: "TWRP sideload"
-    description: 'Select "Advanced" and then "ADB Sideload". Check the box "Wipe Dalvik Cache" and then swipe the bar in the bottom where it says "Swipe to Start Sideload".'
+    description: 'Select "Advanced" and then "ADB Sideload". Do NOT check either of the wipe boxes, just swipe the bar on the bottom where it says "Swipe to Start Sideload".'
     button: true
   twrp_sideload_reboot:
     title: "Sideload complete!"
@@ -51,19 +55,22 @@ operating_systems:
         type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
-        tooltip: "Flash system partitions using fastboot"
+        tooltip: "Flash system partitions using fastboot. Do NOT uncheck unless you know exactly what you're doing!"
         type: "checkbox"
         value: true
     prerequisites: []
     steps:
+      - actions:
+          - core:user_action:
+              action: "display_notice"
       # Firmware setup (bootstrap)
       - actions:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/volla-mimameid-11.0-ubports-installer-bootstrap-v2.zip"
+                - url: "https://volla.tech/filedump/volla-mimameid-11.0-ubports-installer-bootstrap-v3.zip"
                   checksum:
-                    sum: "82ec6dd3d5602ecdd5cd445e09440c6c764b841648c22317a59ca536c502323b"
+                    sum: "a1fb6b27e3f693c7155e6a64dfdc58d00198921ffe04040aac4a124a657acd05"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -72,7 +79,7 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-mimameid-11.0-ubports-installer-bootstrap-v2.zip"
+                - archive: "volla-mimameid-11.0-ubports-installer-bootstrap-v3.zip"
                   dir: "unpacked"
         condition:
           var: "bootstrap"
@@ -95,19 +102,46 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
+                - partition: "boot_a"
+                  file: "unpacked/boot.img"
+                  group: "firmware"
+                - partition: "dtbo_a"
+                  file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "gz_a"
+                  file: "unpacked/gz.img"
+                  group: "firmware"
                 - partition: "lk_a"
                   file: "unpacked/lk.img"
                   group: "firmware"
-                - partition: "boot_a"
-                  file: "unpacked/boot.img"
+                - partition: "logo"
+                  file: "unpacked/logo.img"
+                  group: "firmware"
+                - partition: "md1img_a"
+                  file: "unpacked/md1img.img"
+                  group: "firmware"
+                - partition: "preloader_a"
+                  file: "unpacked/preloader.img"
+                  group: "firmware"
+                - partition: "scp_a"
+                  file: "unpacked/scp.img"
+                  group: "firmware"
+                - partition: "spmfw_a"
+                  file: "unpacked/spmfw.img"
+                  group: "firmware"
+                - partition: "sspm_a"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
+                - partition: "super"
+                  file: "unpacked/super.img"
+                  group: "firmware"
+                - partition: "tee_a"
+                  file: "unpacked/tee.img"
                   group: "firmware"
                 - partition: "vbmeta_a"
                   file: "unpacked/vbmeta.img"
                   group: "firmware"
                   flags: ["--disable-verity"]
-                - partition: "super"
-                  file: "unpacked/super.img"
-                  group: "firmware"
         condition:
           var: "bootstrap"
           value: true
@@ -155,15 +189,15 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/vollaos/volla-11.1-20221017-stable-SPFLASH-mimameid.zip"
+                - url: "https://volla.tech/filedump/vollaos/volla-12.1-20240228-stable-SPFLASH-mimameid.zip"
                   checksum:
-                    sum: "1021e15b932c0ca006f117c15259bba2e31b4d6ef1cc5218ea0d806c84cc6882"
+                    sum: "7038740f7efc183a54a0bb5816c9d10fa8c7a5ef0a95cc19a2565255b060954e"
                     algorithm: "sha256"
       - actions:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-11.1-20221017-stable-SPFLASH-mimameid.zip"
+                - archive: "volla-12.1-20240228-stable-SPFLASH-mimameid.zip"
                   dir: "unpacked"
       - actions:
           - adb:reboot:
@@ -181,31 +215,34 @@ operating_systems:
                   file: "unpacked/dtbo.img"
                   group: "firmware"
                 - partition: "gz"
-                  file: "unpacked/gz-verified.img"
-                  group: "firmware"
-                - partition: "logo"
-                  file: "unpacked/logo-verified.bin"
-                  group: "firmware"
-                - partition: "md1img"
-                  file: "unpacked/md1img-verified.img"
-                  group: "firmware"
-                - partition: "spmfw"
-                  file: "unpacked/spmfw-verified.img"
+                  file: "unpacked/gz.img"
                   group: "firmware"
                 - partition: "lk"
-                  file: "unpacked/lk-verified.img"
+                  file: "unpacked/lk.img"
                   group: "firmware"
-                - partition: "sspm"
-                  file: "unpacked/sspm-verified.img"
+                - partition: "logo"
+                  file: "unpacked/logo.bin"
+                  group: "firmware"
+                - partition: "md1img"
+                  file: "unpacked/md1img.img"
+                  group: "firmware"
+                - partition: "preloader"
+                  file: "unpacked/preloader.img"
                   group: "firmware"
                 - partition: "scp"
-                  file: "unpacked/scp-verified.img"
+                  file: "unpacked/scp.img"
                   group: "firmware"
-                - partition: "tee"
-                  file: "unpacked/tee-verified.img"
+                - partition: "spmfw"
+                  file: "unpacked/spmfw.img"
+                  group: "firmware"
+                - partition: "sspm"
+                  file: "unpacked/sspm.img"
                   group: "firmware"
                 - partition: "super"
                   file: "unpacked/super.img"
+                  group: "firmware"
+                - partition: "tee"
+                  file: "unpacked/tee.img"
                   group: "firmware"
                 - partition: "vbmeta"
                   file: "unpacked/vbmeta.img"
@@ -246,11 +283,14 @@ operating_systems:
             label: "Cutie Shell"
       - var: "bootstrap"
         name: "Bootstrap"
-        tooltip: "Flash system partitions using fastboot"
+        tooltip: "Flash system partitions using fastboot. Do NOT uncheck unless you know exactly what you're doing!"
         type: "checkbox"
         value: true
     prerequisites: []
     steps:
+      - actions:
+          - core:user_action:
+              action: "display_notice"
       - actions:
           - core:user_action:
               action: "cutie_notice"
@@ -262,9 +302,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/volla-mimameid-11.0-ubports-installer-bootstrap-v2.zip"
+                - url: "https://volla.tech/filedump/volla-mimameid-11.0-ubports-installer-bootstrap-v3.zip"
                   checksum:
-                    sum: "82ec6dd3d5602ecdd5cd445e09440c6c764b841648c22317a59ca536c502323b"
+                    sum: "a1fb6b27e3f693c7155e6a64dfdc58d00198921ffe04040aac4a124a657acd05"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -284,7 +324,7 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-mimameid-11.0-ubports-installer-bootstrap-v2.zip"
+                - archive: "volla-mimameid-11.0-ubports-installer-bootstrap-v3.zip"
                   dir: "unpacked"
         condition:
           var: "bootstrap"
@@ -326,18 +366,46 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
+                - partition: "boot_a"
+                  file: "twrp-mimameid.img"
+                  group: "firmware"
+                - partition: "dtbo_a"
+                  file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "gz_a"
+                  file: "unpacked/gz.img"
+                  group: "firmware"
                 - partition: "lk_a"
                   file: "unpacked/lk.img"
                   group: "firmware"
-                - partition: "vbmeta_a"
-                  file: "unpacked/vbmeta.img"
+                - partition: "logo"
+                  file: "unpacked/logo.img"
                   group: "firmware"
-                - partition: "boot_a"
-                  file: "twrp-mimameid.img"
+                - partition: "md1img_a"
+                  file: "unpacked/md1img.img"
+                  group: "firmware"
+                - partition: "preloader_a"
+                  file: "unpacked/preloader.img"
+                  group: "firmware"
+                - partition: "scp_a"
+                  file: "unpacked/scp.img"
+                  group: "firmware"
+                - partition: "spmfw_a"
+                  file: "unpacked/spmfw.img"
+                  group: "firmware"
+                - partition: "sspm_a"
+                  file: "unpacked/sspm.img"
                   group: "firmware"
                 - partition: "super"
                   file: "unpacked/super.img"
                   group: "firmware"
+                - partition: "tee_a"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "vbmeta_a"
+                  file: "unpacked/vbmeta.img"
+                  group: "firmware"
+                  flags: ["--disable-verity"]
         condition:
           var: "bootstrap"
           value: true
