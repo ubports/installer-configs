@@ -18,6 +18,10 @@ user_actions:
     title: "Reboot the device"
     description: "Hold down the power button until the device powers down. Then, release it briefly and hold it down again until the device boots."
     button: true
+  reboot_workaround:
+    title: "Workaround initial boot problem"
+    description: "Once a blank screen with the backlight comes up hold down the power button until the device powers down. Then, release it briefly and hold it down again until the device boots with Volla logo visible."
+    button: true
 unlock: []
 handlers:
   bootloader_locked:
@@ -45,6 +49,7 @@ operating_systems:
         value: true
     prerequisites: []
     steps:
+      # Firmware setup (bootstrap)
       - actions:
           - core:download:
               group: "firmware"
@@ -77,17 +82,17 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
-                - partition: "recovery"
-                  file: "unpacked/recovery.img"
-                  group: "firmware"
-                - partition: "vendor"
-                  file: "unpacked/vendor.img"
-                  group: "firmware"
                 - partition: "boot"
                   file: "unpacked/recovery.img"
                   group: "firmware"
                 - partition: "dtbo"
                   file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "lk"
+                  file: "unpacked/lk.img"
+                  group: "firmware"
+                - partition: "lk2"
+                  file: "unpacked/lk.img"
                   group: "firmware"
                 - partition: "logo"
                   file: "unpacked/logo.img"
@@ -98,29 +103,29 @@ operating_systems:
                 - partition: "md1img"
                   file: "unpacked/md1img.img"
                   group: "firmware"
-                - partition: "spmfw"
-                  file: "unpacked/spmfw.img"
-                  group: "firmware"
-                - partition: "lk2"
-                  file: "unpacked/lk.img"
-                  group: "firmware"
-                - partition: "sspm_2"
-                  file: "unpacked/sspm.img"
-                  group: "firmware"
-                - partition: "tee2"
-                  file: "unpacked/tee.img"
-                  group: "firmware"
                 - partition: "preloader"
                   file: "unpacked/preloader.img"
                   group: "firmware"
-                - partition: "lk"
-                  file: "unpacked/lk.img"
+                - partition: "recovery"
+                  file: "unpacked/recovery.img"
+                  group: "firmware"
+                - partition: "spmfw"
+                  file: "unpacked/spmfw.img"
                   group: "firmware"
                 - partition: "sspm_1"
                   file: "unpacked/sspm.img"
                   group: "firmware"
+                - partition: "sspm_2"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
                 - partition: "tee1"
                   file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "tee2"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "vendor"
+                  file: "unpacked/vendor.img"
                   group: "firmware"
         condition:
           var: "bootstrap"
@@ -131,17 +136,21 @@ operating_systems:
         condition:
           var: "bootstrap"
           value: true
+
+      # Optionally wipe userdata
       - actions:
           - fastboot:format:
               partition: "userdata"
         condition:
           var: "wipe"
           value: true
+
+      # Reboot to UBports recovery to install UT
       - actions:
-          - fastboot:reboot:
+          - fastboot:reboot_recovery:
         fallback:
           - core:user_action:
-              action: "boot"
+              action: "recovery"
         condition:
           var: "bootstrap"
           value: true
@@ -172,19 +181,15 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/vollaos/volla-11.1-20221024-stable-SPFLASH-yggdrasilx.zip"
+                - url: "https://volla.tech/filedump/vollaos/volla-12.1-20240229-stable-SPFLASH-yggdrasilx.zip"
                   checksum:
-                    sum: "25eb21d54ecb8a443d8944559f45eb9b6d2dd2df193c9f3221e49ee5da48ecd7"
-                    algorithm: "sha256"
-                - url: "https://volla.tech/filedump/vollaos-10.1-ygdrassilx-preloader.bin"
-                  checksum:
-                    sum: "64cf0d77edc360a91c5023513090539250715e0d2eea869518d9ea4f9d0871c1"
+                    sum: "fd1a7cd54e4ad1acda5077d3b213bec5ecc2c53bba10c4f66f5acf7ff5a198b1"
                     algorithm: "sha256"
       - actions:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-11.1-20221024-stable-SPFLASH-yggdrasilx.zip"
+                - archive: "volla-12.1-20240229-stable-SPFLASH-yggdrasilx.zip"
                   dir: "unpacked"
       - actions:
           - adb:reboot:
@@ -195,14 +200,17 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
-                - partition: "recovery"
-                  file: "unpacked/recovery.img"
-                  group: "firmware"
                 - partition: "boot"
                   file: "unpacked/boot.img"
                   group: "firmware"
                 - partition: "dtbo"
                   file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "lk"
+                  file: "unpacked/lk.img"
+                  group: "firmware"
+                - partition: "lk2"
+                  file: "unpacked/lk.img"
                   group: "firmware"
                 - partition: "logo"
                   file: "unpacked/logo.bin"
@@ -213,32 +221,29 @@ operating_systems:
                 - partition: "md1img"
                   file: "unpacked/md1img.img"
                   group: "firmware"
+                - partition: "preloader"
+                  file: "unpacked/preloader_k63v2_64_bsp.bin"
+                  group: "firmware"
+                - partition: "recovery"
+                  file: "unpacked/recovery.img"
+                  group: "firmware"
                 - partition: "spmfw"
                   file: "unpacked/spmfw.img"
-                  group: "firmware"
-                - partition: "lk2"
-                  file: "unpacked/lk.img"
-                  group: "firmware"
-                - partition: "sspm_2"
-                  file: "unpacked/sspm.img"
-                  group: "firmware"
-                - partition: "tee2"
-                  file: "unpacked/tee.img"
-                  group: "firmware"
-                - partition: "lk"
-                  file: "unpacked/lk.img"
                   group: "firmware"
                 - partition: "sspm_1"
                   file: "unpacked/sspm.img"
                   group: "firmware"
-                - partition: "tee1"
-                  file: "unpacked/tee.img"
-                  group: "firmware"
-                - partition: "preloader"
-                  file: "vollaos-10.1-ygdrassilx-preloader.bin"
+                - partition: "sspm_2"
+                  file: "unpacked/sspm.img"
                   group: "firmware"
                 - partition: "system"
                   file: "unpacked/system.img"
+                  group: "firmware"
+                - partition: "tee1"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "tee2"
+                  file: "unpacked/tee.img"
                   group: "firmware"
                 - partition: "vendor"
                   file: "unpacked/vendor.img"
@@ -254,6 +259,9 @@ operating_systems:
         fallback:
           - core:user_action:
               action: "boot"
+      - actions:
+          - core:user_action:
+              action: "reboot_workaround"
     slideshow: []
     eula:
       title: "EULA"
@@ -262,7 +270,18 @@ operating_systems:
   - name: "SailfishOS"
     prerequisites: []
     compatible_installer: ">=0.9.2-beta"
+    options:
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Flash system partitions using fastboot. Keep enabled if coming from non-Sailfish OS"
+        type: "checkbox"
+        value: true
     steps:
+      - actions:
+          - core:download:
+              group: "SailfishOS"
+              files:
+                - url: "https://gitlab.com/sailfishos-porters-ci/yggdrasil-ci/-/jobs/artifacts/master/download?job=run-build-x-lvm-testing"
       - actions:
           - core:download:
               group: "firmware"
@@ -275,18 +294,24 @@ operating_systems:
                   checksum:
                     sum: "64cf0d77edc360a91c5023513090539250715e0d2eea869518d9ea4f9d0871c1"
                     algorithm: "sha256"
-                - url: "https://volla.tech/filedump/sailfish-testing-vollax-dec-3-2021.zip"
-                  checksum:
-                    sum: "bf64b3b438e5f2673271d7bcfa6da7e937b1d9cf11e1740776bbb557a6363eac"
-                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - core:unpack:
+              group: "SailfishOS"
+              files:
+                - archive: "download?job=run-build-x-lvm-testing"
+                  dir: "unpacked"
       - actions:
           - core:unpack:
               group: "firmware"
               files:
                 - archive: "volla-10.1-20211002-RELEASE-SPFLASH-yggdrasilx.zip"
                   dir: "unpacked"
-                - archive: "sailfish-testing-vollax-dec-3-2021.zip"
-                  dir: "sailfish"
+        condition:
+          var: "bootstrap"
+          value: true
       - actions:
           - adb:reboot:
               to_state: "bootloader"
@@ -296,17 +321,8 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
-                - partition: "recovery"
-                  file: "unpacked/recovery.img"
-                  group: "firmware"
-                - partition: "boot"
-                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/hybris-boot.img"
-                  group: "firmware"
                 - partition: "dtbo"
                   file: "unpacked/dtbo.img"
-                  group: "firmware"
-                - partition: "logo"
-                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/logo.bin"
                   group: "firmware"
                 - partition: "md1dsp"
                   file: "unpacked/md1dsp.img"
@@ -314,42 +330,54 @@ operating_systems:
                 - partition: "md1img"
                   file: "unpacked/md1img.img"
                   group: "firmware"
+                - partition: "preloader"
+                  file: "vollaos-10.1-ygdrassilx-preloader.bin"
+                  group: "firmware"
+                - partition: "recovery"
+                  file: "unpacked/recovery.img"
+                  group: "firmware"
                 - partition: "spmfw"
                   file: "unpacked/spmfw.img"
-                  group: "firmware"
-                - partition: "lk2"
-                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/lk-yggdrasilx.img"
-                  group: "firmware"
-                - partition: "sspm_2"
-                  file: "unpacked/sspm.img"
-                  group: "firmware"
-                - partition: "tee2"
-                  file: "unpacked/tee.img"
-                  group: "firmware"
-                - partition: "lk"
-                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/lk-yggdrasilx.img"
                   group: "firmware"
                 - partition: "sspm_1"
                   file: "unpacked/sspm.img"
                   group: "firmware"
-                - partition: "tee1"
-                  file: "unpacked/tee.img"
-                  group: "firmware"
-                - partition: "preloader"
-                  file: "vollaos-10.1-ygdrassilx-preloader.bin"
+                - partition: "sspm_2"
+                  file: "unpacked/sspm.img"
                   group: "firmware"
                 - partition: "system"
                   file: "unpacked/system.img"
                   group: "firmware"
+                - partition: "tee1"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "tee2"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
                 - partition: "vendor"
                   file: "unpacked/vendor.img"
                   group: "firmware"
-                - partition: "userdata"
-                  file: "sailfish/sfe-yggdrasilx/Sailfish_OS/sailfish.img001"
-                  group: "firmware"
+        condition:
+          var: "bootstrap"
+          value: true
       - actions:
-          - fastboot:erase:
-              partition: "nvdata"
+          - fastboot:flash:
+              partitions:
+                - partition: "boot"
+                  file: "unpacked/sfe-yggdrasilx/Sailfish_OS/hybris-boot.img"
+                  group: "SailfishOS"
+                - partition: "lk"
+                  file: "unpacked/sfe-yggdrasilx/Sailfish_OS/lk-yggdrasilx.img"
+                  group: "SailfishOS"
+                - partition: "lk2"
+                  file: "unpacked/sfe-yggdrasilx/Sailfish_OS/lk-yggdrasilx.img"
+                  group: "SailfishOS"
+                - partition: "logo"
+                  file: "unpacked/sfe-yggdrasilx/Sailfish_OS/logo_yggdrasilx.bin"
+                  group: "SailfishOS"
+                - partition: "userdata"
+                  file: "unpacked/sfe-yggdrasilx/Sailfish_OS/sailfish.img001"
+                  group: "SailfishOS"
       - actions:
           - fastboot:reboot:
         fallback:
