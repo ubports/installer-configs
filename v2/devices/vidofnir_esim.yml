@@ -40,7 +40,7 @@ operating_systems:
         type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
-        tooltip: "Flash system partitions using fastboot"
+        tooltip: "Flash system partitions using fastboot. Do NOT uncheck unless you know exactly what you're doing!"
         type: "checkbox"
         value: true
     prerequisites: []
@@ -50,9 +50,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/volla-vidofnir-12.0-ubports-installer-bootstrap.zip"
+                - url: "https://volla.tech/filedump/volla-vidofnir-12.0-ubports-installer-bootstrap-v2.zip"
                   checksum:
-                    sum: "f0dc13734c8fc7000c6176b606377cb49df94bb0b1e3b08b03268abc9c43819b"
+                    sum: "40c9b499bd51a9359a7eb6ca333c3dd7a362fb7bbafd1f853902c78cc84f032d"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -61,7 +61,7 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-vidofnir-12.0-ubports-installer-bootstrap.zip"
+                - archive: "volla-vidofnir-12.0-ubports-installer-bootstrap-v2.zip"
                   dir: "unpacked"
         condition:
           var: "bootstrap"
