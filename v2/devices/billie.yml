@@ -10,7 +10,7 @@ user_actions:
   confirm_os:
     title: "Confirm OS version"
     description: "Your device must be running the Android 10 stock firmware OxygenOS_10.5.7 before installing Ubuntu Touch.If you are using Global Version use the OxygenOS_10.5.7 for global."
-    link: "https://onepluscommunityserver.com/list/Unbrick_Tools/OnePlus_Nord_N10_5G/EU_BE89BA/Q/OnePlus_Nord_N10_5G_EU_OxygenOS_10.5.7.zip"
+    link: "https://onepluscommunityserver.com/list/Unbrick_Tools/OnePlus_Nord_N10_5G"
   unlock_phone:
     title: "Unlock the bootloader"
     description: "Before installing Ubuntu Touch you must unlock the bootloader of your phone manually. Follow the steps in the linked page if you haven't already."
@@ -100,6 +100,10 @@ operating_systems:
                   checksum:
                     sum: "d5d985ffdc93720d6f5702006a9dc488bd8f62f854347a6b6e08eef83832d5d4"
                     algorithm: "sha256"
+                - url: "https://github.com/rubencarneiro/billie/releases/download/1.0/persist.img"
+                  checksum:
+                    sum: "8941d3b35fb5116cd0042e45c5351625fd006fb624b2422638290929959ecb88"
+                    algorithm: "sha256"
                 - url: "https://github.com/rubencarneiro/billie/releases/download/1.0/dtbo.img"
                   checksum:
                     sum: "984f270a8edf8c8f8be10215e07a030dc9cd822929df6f1ff7c4a9b4ad897b05"
@@ -122,6 +126,8 @@ operating_systems:
                   group: "firmware"
                 - partition: "dtbo"
                   file: "dtbo.img"
+                - partition: "persist"
+                  file: "persist.img"
                   group: "firmware"
                 - partition: "vbmeta"
                   file: "vbmeta.img"
