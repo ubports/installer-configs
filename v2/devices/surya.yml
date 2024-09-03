@@ -1,6 +1,7 @@
 name: "Xiaomi Poco X3 NFC"
 codename: "surya"
-aliases: []
+aliases:
+  - "karna"
 formfactor: "phone"
 doppelgangers: []
 user_actions:
