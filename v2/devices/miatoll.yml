@@ -24,7 +24,7 @@ user_actions:
   confirm_firmware:
     title: "Confirm your firmware"
     description: "Please double-check that your device is running the latest available stock Android 10 firmware."
-    link: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-miatoll/blob/main/FIRMWARE.md"
+    link: "https://xmfirmwareupdater.com/supported/firmware/"
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."
