@@ -20,11 +20,173 @@ user_actions:
     description: "With the device powered off, press and hold the VOLUME DOWN button and plug the device into your PC via USB. After some seconds you'll see the fastboot mode."
     image: "phone_power_down"
     button: true
+  bootloader_from_fastbootd:
+    title: "Reboot to Bootloader"
+    description: 'With the device still at the fastbootd screen, use the volume buttons to select "Reboot to bootloader".'
+    image: "phone_power_down"
+    button: true
+  recovery:
+    title: "Reboot to Recovery"
+    description: 'With the device still at the "FastBoot Mode", use the Volume buttons to switch to "Recovery Mode" and push the power button to confirm your selection.'
+    image: "phone_power_up"
+    button: true
+  fastbootd:
+    title: "Reboot to fastbootd mode"
+    description: 'With the device still at the "FastBoot Mode", use the Volume buttons to switch to "Recovery Mode" and push the power button to confirm your selection. Then select "Fastboot mode" from the list.'
+    image: "phone_power_up"
+    button: true
 unlock:
   - "confirm_model"
   - "confirm_os"
   - "unlock_phone"
 operating_systems:
+  - name: "Ubuntu Touch"
+    compatible_installer: ">=0.9.6-beta"
+    options:
+      - var: "channel"
+        name: "Channel"
+        tooltip: "The release channel"
+        link: "https://docs.ubports.com/en/latest/about/process/release-schedule.html"
+        type: "select"
+        remote_values:
+          systemimage:channels:
+      - var: "wipe"
+        name: "Wipe Userdata"
+        tooltip: "Wipe personal data. This is necessary for first time installations."
+        type: "checkbox"
+      - var: "partition"
+        name: "Partitioning"
+        tooltip: "Changes partition sizes as required. Only necessary for first time installations."
+        type: "checkbox"
+        value: true
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Flash system partitions using fastboot"
+        type: "checkbox"
+        value: true
+    prerequisites: []
+    steps:
+      ### Ensure we always start in bootloader mode
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      ### Ensure the bootloader has been unlocked already
+      - actions:
+          - fastboot:wait:
+      - actions:
+          - fastboot:assert_var:
+              variable: "unlocked"
+              value: "yes"
+        fallback:
+          - core:user_action:
+              action: "unlock_phone"
+      ### As this is an A/B device, force all future operations in "a" slot.
+      - actions:
+          - fastboot:set_active:
+              slot: "a"
+      ### Flash important partitions (if requested)
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://cdimage.ubports.com/devices/FP5/boot.img"
+                  checksum:
+                    sum: "ea973975c55e74d8147c940045957fc06a1301e96edd6a47f845e96d716d7288"
+                    algorithm: "sha256"
+                - url: "https://cdimage.ubports.com/devices/FP5/vendor_boot.img"
+                  checksum:
+                    sum: "a609de3a734b4184dc1a3f662c0b52a38087857a872abd336b8e69ebfe03d870"
+                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "boot"
+                  file: "boot.img"
+                  group: "firmware"
+                - partition: "vendor_boot"
+                  file: "vendor_boot.img"
+                  group: "firmware"
+        condition:
+          var: "bootstrap"
+          value: true
+      ### Set up logical partitions (if requested)
+      - actions:
+          - fastboot:reboot_fastboot:
+        fallback:
+          - core:user_action:
+              action: "fastbootd"
+        condition:
+          var: "partition"
+          value: true
+      - actions:
+          # Remove all unused logical partitions
+          - fastboot:delete_logical_partition:
+              partition: "system_ext_a"
+          - fastboot:delete_logical_partition:
+              partition: "system_ext_b"
+          - fastboot:delete_logical_partition:
+              partition: "product_a"
+          - fastboot:delete_logical_partition:
+              partition: "product_b"
+          # Remove _b variants of used partitions
+          - fastboot:delete_logical_partition:
+              partition: "system_b"
+          - fastboot:delete_logical_partition:
+              partition: "vendor_b"
+          - fastboot:delete_logical_partition:
+              partition: "odm_b"
+          # Increase space for system_a for UT installation
+          - fastboot:resize_logical_partition:
+              partition: "system_a"
+              size: 3221225472
+        condition:
+          var: "partition"
+          value: true
+      - actions:
+          - fastboot:reboot_bootloader:
+        fallback:
+          - core:user_action:
+              action: "bootloader_from_fastbootd"
+        condition:
+          var: "partition"
+          value: true
+      ### Wipe userdata (if requested)
+      - actions:
+          - fastboot:erase:
+              partition: "userdata"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - fastboot:format:
+              partition: "userdata"
+              type: "ext4"
+        condition:
+          var: "wipe"
+          value: true
+      ### Systemimage installation steps
+      - actions:
+          - fastboot:reboot_recovery:
+        fallback:
+          - core:user_action:
+              action: "recovery"
+      - actions:
+          - systemimage:install:
+              verify_recovery: true
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+    slideshow: []
+
   - name: "postmarketOS"
     codename: "fairphone-fp5"
     compatible_installer: ">=0.9.8-beta"
