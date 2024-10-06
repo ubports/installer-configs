@@ -94,11 +94,11 @@ operating_systems:
               files:
                 - url: "https://cdimage.ubports.com/devices/FP5/boot.img"
                   checksum:
-                    sum: "ea973975c55e74d8147c940045957fc06a1301e96edd6a47f845e96d716d7288"
+                    sum: "f2959efc18fe489018c860375886397dbf7740778015e3afb8b955e7e6bb0e89"
                     algorithm: "sha256"
                 - url: "https://cdimage.ubports.com/devices/FP5/vendor_boot.img"
                   checksum:
-                    sum: "a609de3a734b4184dc1a3f662c0b52a38087857a872abd336b8e69ebfe03d870"
+                    sum: "441a13f88a3ddd95486e2421402b74acbfb00b93fc03d663d8cb2753c3b4c598"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
