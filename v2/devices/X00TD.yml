@@ -20,7 +20,7 @@ user_actions:
   unlock:
     title: "BOOTLOADER unlock"
     description: "If you haven't done so already, make sure to BOOTLOADER unlock your device first."
-    link: "https://wiki.lineageos.org/devices/X00TD/install#unlocking-the-bootloader"
+    link: "https://web.archive.org/web/20230605131122/https://wiki.lineageos.org/devices/X00TD/install/#unlocking-the-bootloader"
   warning:
     title: "Warning"
     description: "The port is based on Android 9 firmware (WW-16.2017.2004.063) and Lineage 16 vendor image. Current Recovery will be replaced with Ubports Recovery!"
