@@ -94,7 +94,7 @@ operating_systems:
               files:
                 - url: "https://github.com/rubencarneiro/billie/releases/download/1.0/boot.img"
                   checksum:
-                    sum: "65e9ad9b1e879d123a1de6482556feb1703710897fe67f1de8abf1c3a33337df"
+                    sum: "04770c80896f6d73fe7055da6e745946fc673b1f7351c2f725b4a8567de41111"
                     algorithm: "sha256"
                 - url: "https://github.com/rubencarneiro/billie/releases/download/1.0/recovery.img"
                   checksum:
