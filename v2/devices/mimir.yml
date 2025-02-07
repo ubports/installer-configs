@@ -13,6 +13,10 @@ user_actions:
     description: 'With the device powered off, hold Volume Up + Power. You might be prompted to select a mode to boot into. If that happens, follow the on-screen instructions and select "Fastboot" mode.'
     image: "phone_power_up"
     button: true
+  boot:
+    title: "Reboot the device"
+    description: "Hold down the power button until the device powers down. Then, release it briefly and hold it down again until the device boots."
+    button: true
 unlock: []
 handlers:
   bootloader_locked:
@@ -174,3 +178,103 @@ operating_systems:
           - core:user_action:
               action: "recovery"
     slideshow: []
+  - name: "Volla OS"
+    compatible_installer: ">=0.9.2-beta"
+    prerequisites: []
+    steps:
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://volla.tech/filedump/vollaos/volla-14.0-20250130-stable-BOOTSTRAP-mimir.zip"
+                  checksum:
+                    sum: "73891d2c7dd620dea44f7f3ad9ad5474cded5262470319f42349b1ee72ed1bc1"
+                    algorithm: "sha256"
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "volla-14.0-20250130-stable-BOOTSTRAP-mimir.zip"
+                  dir: "unpacked"
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      - actions:
+          - fastboot:set_active:
+              slot: "a"
+          - fastboot:flash:
+              partitions:
+                - partition: "boot_a"
+                  file: "unpacked/boot.img"
+                  group: "firmware"
+                - partition: "csci"
+                  file: "unpacked/csci.ini"
+                  group: "firmware"
+                - partition: "dpm_a"
+                  file: "unpacked/dpm.img"
+                  group: "firmware"
+                - partition: "dtbo_a"
+                  file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "gz_a"
+                  file: "unpacked/gz.img"
+                  group: "firmware"
+                - partition: "lk_a"
+                  file: "unpacked/lk.img"
+                  group: "firmware"
+                - partition: "logo"
+                  file: "unpacked/logo.bin"
+                  group: "firmware"
+                - partition: "mcupm_a"
+                  file: "unpacked/mcupm.img"
+                  group: "firmware"
+                - partition: "md1img_a"
+                  file: "unpacked/md1img.img"
+                  group: "firmware"
+                - partition: "pi_img_a"
+                  file: "unpacked/pi_img.img"
+                  group: "firmware"
+                - partition: "preloader_a"
+                  file: "unpacked/preloader_tb8781p1_64.bin"
+                  group: "firmware"
+                - partition: "scp_a"
+                  file: "unpacked/scp.img"
+                  group: "firmware"
+                - partition: "spmfw_a"
+                  file: "unpacked/spmfw.img"
+                  group: "firmware"
+                - partition: "sspm_a"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
+                - partition: "super"
+                  file: "unpacked/super.img"
+                  group: "firmware"
+                - partition: "tee_a"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "vbmeta_a"
+                  file: "unpacked/vbmeta.img"
+                  group: "firmware"
+                - partition: "vbmeta_system_a"
+                  file: "unpacked/vbmeta_system.img"
+                  group: "firmware"
+                - partition: "vbmeta_vendor_a"
+                  file: "unpacked/vbmeta_vendor.img"
+                  group: "firmware"
+                - partition: "vendor_boot_a"
+                  file: "unpacked/vendor_boot.img"
+                  group: "firmware"
+          - fastboot:erase:
+              partition: "userdata"
+      - actions:
+          - fastboot:reboot:
+        fallback:
+          - core:user_action:
+              action: "boot"
+    slideshow: []
+    eula:
+      title: "EULA"
+      description: "To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Volla Systeme GmbH for the Volla OS and agree to it."
+      link: "https://volla.online/en/eula/index.html"
