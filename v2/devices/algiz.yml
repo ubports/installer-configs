@@ -189,15 +189,15 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/vollaos/volla-14.0-20241124-stable-SPFLASH-algiz.zip"
+                - url: "https://volla.tech/filedump/vollaos/volla-14.0-20241124-stable-BOOTSTRAP-algiz.zip"
                   checksum:
-                    sum: "845c09802537cb0c578b964e242346787091949fb2d3ebcb76e48a1b549e0273"
+                    sum: "c389f38804cc1d692e236a70328f668c5843e35d71200e8eaddc0041be5c053e"
                     algorithm: "sha256"
       - actions:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-14.0-20241124-stable-SPFLASH-algiz.zip"
+                - archive: "volla-14.0-20241124-stable-BOOTSTRAP-algiz.zip"
                   dir: "unpacked"
       - actions:
           - adb:reboot:
@@ -282,5 +282,5 @@ operating_systems:
     slideshow: []
     eula:
       title: "EULA"
-      description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE QUINTUS. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Hallo Welt Systeme UG (haftungsbeschränkt) for the Volla OS and agree to it."
+      description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE QUINTUS. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Volla Systeme GmbH for the Volla OS and agree to it."
       link: "https://volla.online/en/eula/index.html"

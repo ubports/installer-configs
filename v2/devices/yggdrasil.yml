@@ -181,15 +181,15 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/vollaos/volla-12.1-20240228-stable-SPFLASH-yggdrasil.zip"
+                - url: "https://volla.tech/filedump/vollaos/volla-12.1-20240228-stable-BOOTSTRAP-yggdrasil.zip"
                   checksum:
-                    sum: "39c14ffaea550e72714e8931e95f20affe397153a8d7e75480e64c1b33e73205"
+                    sum: "3b337e12ef2d9dc95b1decfeaf0f1531da46a8ae6a765dd47c4c05aa73dd73c6"
                     algorithm: "sha256"
       - actions:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-12.1-20240228-stable-SPFLASH-yggdrasil.zip"
+                - archive: "volla-12.1-20240228-stable-BOOTSTRAP-yggdrasil.zip"
                   dir: "unpacked"
       - actions:
           - adb:reboot:
@@ -262,7 +262,7 @@ operating_systems:
     slideshow: []
     eula:
       title: "EULA"
-      description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Hallo Welt Systeme UG (haftungsbeschränkt) for the Volla OS and agree to it."
+      description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Volla Systeme GmbH for the Volla OS and agree to it."
       link: "https://volla.online/en/eula/index.html"
   - name: "SailfishOS"
     compatible_installer: ">=0.9.2-beta"
