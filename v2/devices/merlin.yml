@@ -19,8 +19,8 @@ user_actions:
     description: "Please double-check that your device is the following model: Xiaomi Redmi Note 9 (merlin)."
   confirm_firmware:
     title: "Confirm your firmware"
-    description: "Please double-check that your device is running the latest available stock Android 10 firmware."
-    link: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-merlin/blob/main/FIRMWARE.md"
+    description: "Please double-check that your device is running the latest available stock Android 11 firmware (MIUI 12.5.4.0 recomended)."
+    link: "https://github.com/ubuntu-touch-redmi-mt6768/ubuntu-touch-merlin/blob/main/README.md"
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."
@@ -62,7 +62,7 @@ operating_systems:
                 - url: "https://github.com/ubuntu-touch-redmi-mt6768/ubuntu-touch-merlin/releases/download/20250217/recovery.img"
                   name: "recovery.img"
                   checksum:
-                    sum: "4c971d9799559823dba7c6c8e789ad0ed56936fc1aab8a0a0dd8174be7aaaf17"
+                    sum: "58cd96315ca4693ccde87048db6f6334a9a0886210dcb8ff83dd2bcb628269e4"
                     algorithm: "sha256"
                 - url: "https://github.com/ubuntu-touch-redmi-mt6768/ubuntu-touch-merlin/releases/download/20250217/dtbo.img"
                   name: "dtbo.img"

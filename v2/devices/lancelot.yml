@@ -19,7 +19,7 @@ user_actions:
     description: "Please double-check that your device is the following model: Xiaomi Redmi 9 (lancelot)."
   confirm_firmware:
     title: "Confirm your firmware"
-    description: "Please double-check that your device is running the latest available stock Android 10 firmware."
+    description: "Please double-check that your device is running the latest available stock Android 11 firmware (MIUI 12.5.4.0 recomended)."
     link: "https://github.com/ubuntu-touch-redmi-mt6768/lancelotfw/blob/main/README.md"
   unlock:
     title: "OEM unlock"
@@ -62,7 +62,7 @@ operating_systems:
                 - url: "https://github.com/ubuntu-touch-redmi-mt6768/lancelotfw/releases/download/20250217/recovery.img"
                   name: "recovery.img"
                   checksum:
-                    sum: "311ab4c97f308a58e87877f9c33267093ed83ca56f22265504dd556403b5fe78"
+                    sum: "7781625e7baffcba9b9919573784e42842ddf6e5a8ac053d6edb6cb61b8e0734"
                     algorithm: "sha256"
                 - url: "https://github.com/ubuntu-touch-redmi-mt6768/lancelotfw/releases/download/20250217/dtbo.img"
                   name: "dtbo.img"
