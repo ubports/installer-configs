@@ -435,14 +435,22 @@ operating_systems:
   - name: "ShiftOS - G / L"
     compatible_installer: ">=0.9.4-beta"
     options:
-      - var: "shiftos_l"
+      - var: "shiftos_type"
         name: "ShiftOS type"
-        tooltip: "Check to install ShiftOS-L, uncheck to install ShiftOS-G"
-        type: "checkbox"
-        value: false
+        tooltip: "Please select the version of ShiftOS you would like to install."
+        type: "select"
+        values:
+          - value: "shiftos_g_3"
+            label: "ShiftOS-G - 3 - (Android 10)"
+          - value: "shiftos_g_5"
+            label: "ShiftOS-G - 5 - (Android 13)"
+          - value: "shiftos_l_3"
+            label: "ShiftOS-L - 3 - (Android 10)"
+          - value: "shiftos_l_5"
+            label: "ShiftOS-L - 5 - (Android 13)"
       - var: "wipe"
         name: "Wipe personal data"
-        tooltip: "This is required for new installations or when switching between G and L"
+        tooltip: "This is required for new installations or when switching between G and L."
         type: "checkbox"
         value: false
     prerequisites: []
@@ -513,32 +521,58 @@ operating_systems:
                   checksum:
                     sum: "0a0aa8a7b0faad8de4003ded16b6ffb83ba4bffde0ea29ecba12d99a9162ae3d"
                     algorithm: "sha256"
-      # 1.1) ShiftOS G
+      # 1.1) ShiftOS G - 3 (Android 10)
       - actions:
           - core:download:
               group: "firmware_shiftos"
               files:
-                - url: "https://downloads.shiftphones.com/builds/SHIFT6MQ.SOS.3.8.G.20220824-RELEASE-OTA.zip"
+                - url: "https://downloads.shiftphones.com/public/SHIFT6mq/release/SHIFT6MQ.SOS.3.10.G.20231025/FULL-OTA/SHIFT6MQ.SOS.3.10.G.20231025-RELEASE-OTA.zip"
                   name: "update.zip"
                   checksum:
-                    sum: "e20976c0456d794fcd52b74026671cc4ac2f44f9b0f15ec513ee591541466b9f"
+                    sum: "faffcbe607e19ededa33c2afab9cac11120d0582d24f2d949cba1f1b849ec5c2"
                     algorithm: "sha256"
         condition:
-          var: "shiftos_l"
-          value: false
-      # 1.2) ShiftOS L
+          var: "shiftos_type"
+          value: "shiftos_g_3"
+      # 1.2) ShiftOS G - 5 (Android 13)
       - actions:
           - core:download:
               group: "firmware_shiftos"
               files:
-                - url: "https://downloads.shiftphones.com/builds/SHIFT6MQ.SOS.3.9.L.20221027-RELEASE-LIGHT-OTA.zip"
+                - url: "https://downloads.shiftphones.com/public/SHIFT6mq/release/SHIFT6MQ.SOS.5.0.G.20240820/FULL-OTA/SHIFT6MQ.SOS.5.0.G.20240820-RELEASE-OTA.zip"
                   name: "update.zip"
                   checksum:
-                    sum: "13c692de899a820699a82dfa944fb3e28ac53760503a34fdf7df8c9aea15c000"
+                    sum: "d84e3df2a82530b91e2417582b2be02880cca5a164dec3b0feb03c91c536c77a"
                     algorithm: "sha256"
         condition:
-          var: "shiftos_l"
-          value: true
+          var: "shiftos_type"
+          value: "shiftos_g_5"
+      # 1.3) ShiftOS L - 3 (Android 10)
+      - actions:
+          - core:download:
+              group: "firmware_shiftos"
+              files:
+                - url: "https://downloads.shiftphones.com/public/SHIFT6mq/release-light/SHIFT6MQ.SOS.3.10.L.20231025/FULL-OTA/SHIFT6MQ.SOS.3.10.L.20231025-RELEASE-LIGHT-OTA.zip"
+                  name: "update.zip"
+                  checksum:
+                    sum: "0fccccee11eaa2cbec2c8e50256561b2f9480081dd12ca62dc803bfdc19af3e7"
+                    algorithm: "sha256"
+        condition:
+          var: "shiftos_type"
+          value: "shiftos_l_3"
+      # 1.4) ShiftOS L - 5 (Android 13)
+      - actions:
+          - core:download:
+              group: "firmware_shiftos"
+              files:
+                - url: "https://downloads.shiftphones.com/public/SHIFT6mq/release-light/SHIFT6MQ.SOS.5.1.L.20250224/FULL-OTA/SHIFT6MQ.SOS.5.1.L.20250224-RELEASE-LIGHT-OTA.zip"
+                  name: "update.zip"
+                  checksum:
+                    sum: "2bedcd3d0b3aaa3f904621668e7b4d5b8e6acaa02257f7253ef2acb48484762c"
+                    algorithm: "sha256"
+        condition:
+          var: "shiftos_type"
+          value: "shiftos_l_5"
       # 2) Flash firmware images in bootloader fastboot mode
       - actions:
           - fastboot:flash:
