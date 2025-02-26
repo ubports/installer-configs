@@ -1,3 +1,5 @@
+#!/usr/bin/env -S tsx
+
 /*
  * Copyright (C) 2022 UBports Foundation <info@ubports.com>
  * Copyright (C) 2022 Johannah Sprinz <hannah@ubports.com>
