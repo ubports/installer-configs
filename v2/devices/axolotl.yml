@@ -305,16 +305,16 @@ operating_systems:
           - core:download:
               group: "firmware_lineageos"
               files:
-                # lineage-20.0-20230301-recovery-axolotl.img
-                - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/bcdacdf4f1c5161312ad4e086f4f4b922bc0be75/axolotl/images/recovery_lineage.img"
+                # lineage-22.1-20250222-recovery-axolotl.img
+                - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/f57559da30096b34165c5e3259c32adc6f334e59/axolotl/images/recovery_lineage.img"
                   name: "recovery.img"
                   checksum:
-                    sum: "c1133da366f5e5cdeab2d16f69085a8737f68c9e054dcbfbd4e58c5ef276c81d"
+                    sum: "9c55463546b452bd88c8863c0a6106b9d67ed46e27503740765a35f2f57e2976"
                     algorithm: "sha256"
-                - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/06fa047c3afcceb0532f90e8b503ff6a963bec56/axolotl/images/super_empty.img"
+                - url: "https://gitlab.com/SHIFTPHONES/ubports/assets/-/raw/f57559da30096b34165c5e3259c32adc6f334e59/axolotl/images/super_empty_lineage.img"
                   name: "super_empty.img"
                   checksum:
-                    sum: "0a0aa8a7b0faad8de4003ded16b6ffb83ba4bffde0ea29ecba12d99a9162ae3d"
+                    sum: "cd639e4d48db44b324f7e5ed396ea02381ac0bb65fdb453e7df4c35bf1610d61"
                     algorithm: "sha256"
           - lineage_os:download:
       # 2) Flash firmware images in bootloader fastboot mode
