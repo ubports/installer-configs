@@ -103,7 +103,7 @@ operating_systems:
                 - url: "https://github.com/rubencarneiro/amar_row_wifi/releases/download/1.0/vbmeta.img"
                   checksum:
                     sum: "debc86fc6832bbc8f76cbeca2319a8768c03c19ac8d67dca61bf414b52ba2fb9"
-                    algorithm: "sha256"       
+                    algorithm: "sha256"
         condition:
           var: "bootstrap"
           value: true
@@ -123,7 +123,7 @@ operating_systems:
                   file: "vbmeta.img"
                   group: "firmware"
                   flags:
-                    - "--disable-verity" 
+                    - "--disable-verity"
                     - "--disable-verification"
         condition:
           var: "bootstrap"
