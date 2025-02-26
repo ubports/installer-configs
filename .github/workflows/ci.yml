@@ -30,8 +30,8 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - name: npm install
-        run: npm install
+      - name: npm ci
+        run: npm ci
       - name: npm run lint
         run: npm run lint
       - name: npm run build
