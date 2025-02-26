@@ -1,4 +1,4 @@
-name: "Xiaomi Poco X3 NFC"
+name: "Xiaomi POCO X3 NFC"
 codename: "surya"
 aliases:
   - "karna"
@@ -21,11 +21,19 @@ user_actions:
     image: "phone_power_down"
     button: true
   confirm_firmware:
-    title: "Confirm your firmware"
-    description: "Please double-check that your device is running the latest available stock Android 10 firmware."
+    title: "Ubuntu Touch: Confirm your firmware"
+    description: "If you plan on installing Ubuntu Touch, please double-check that your device is running the latest available stock Android 10 firmware."
     link: "https://github.com/ubuntu-touch-surya/ubuntu-touch-surya/blob/master/FIRMWARE.md"
+  confirm_latest_firmware:
+    title: "postmarketOS: Confirm your firmware"
+    description: "If you plan on installing postmarketOS, please ensure that your device has the latest available firmware installed."
+    link: "https://wiki.postmarketos.org/wiki/Xiaomi_POCO_X3_NFC_(xiaomi-surya)#Flashing_the_latest_firmware"
+  confirm_model:
+    title: "Confirm your model"
+    description: "Please confirm that your device is a Xiaomi POCO X3 NFC (surya)."
 unlock:
   - "confirm_firmware"
+  - "confirm_latest_firmware"
 handlers:
   bootloader_locked:
     actions:
@@ -150,4 +158,62 @@ operating_systems:
         fallback:
           - core:user_action:
               action: "recovery"
+    slideshow: []
+  - name: "postmarketOS"
+    compatible_installer: ">=0.10.1-beta"
+    options:
+      - var: "variant"
+        name: "Display panel"
+        tooltip: "Display panel manufacturer"
+        link: "https://wiki.postmarketos.org/wiki/Xiaomi_POCO_X3_NFC_(xiaomi-surya)#Know_your_display_panel"
+        type: "select"
+        values:
+          - value: "huaxing"
+            label: "Huaxing"
+          - value: "tianma"
+            label: "Tianma"
+      - var: "release"
+        name: "Release"
+        tooltip: "The postmarketOS release"
+        link: "https://wiki.postmarketos.org/wiki/Releases"
+        type: "select"
+        remote_values:
+          postmarketos:releases:
+      - var: "interface"
+        name: "User Interface"
+        tooltip: "The user interface"
+        link: "https://wiki.postmarketos.org/wiki/Category:Interface"
+        type: "select"
+        remote_values:
+          postmarketos:interfaces:
+    prerequisites: []
+    steps:
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      - actions:
+          - fastboot:wait:
+      - actions:
+          - fastboot:assert_var:
+              variable: "product"
+              value: "surya"
+        fallback:
+          - core:user_action:
+              action: "confirm_model"
+      - actions:
+          - postmarketos:download:
+          - fastboot:erase:
+              partition: "dtbo"
+          - fastboot:flash:
+              partitions:
+                - partition: "userdata"
+                  file: "rootfs.img"
+                  group: "postmarketOS"
+                - partition: "boot"
+                  file: "boot.img"
+                  group: "postmarketOS"
+          - fastboot:reboot:
     slideshow: []
