@@ -107,7 +107,7 @@ operating_systems:
                 - url: "https://github.com/rubencarneiro/billie2/releases/download/1.0/vbmeta.img"
                   checksum:
                     sum: "06ad2b775ec21134aa935eb6e0a48514198822ee7bfb1773f27cc006a0c6e427"
-                    algorithm: "sha256"       
+                    algorithm: "sha256"
         condition:
           var: "bootstrap"
           value: true

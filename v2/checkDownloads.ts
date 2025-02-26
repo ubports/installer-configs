@@ -1,4 +1,4 @@
-#!/usr/bin/env -S node --loader ts-node/esm
+#!/usr/bin/env -S tsx
 
 /*
  * Copyright (C) 2022 UBports Foundation <info@ubports.com>
@@ -36,8 +36,8 @@ const check_action = action =>
   action["core:download"]
     ? check_download(action["core:download"])
     : action["core:group"]
-    ? action["core:group"].map(check_step)
-    : null;
+      ? action["core:group"].map(check_step)
+      : null;
 
 const check_step = ({ actions, fallback }) =>
   [

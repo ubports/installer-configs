@@ -1,4 +1,4 @@
-#!/usr/bin/env -S node --loader ts-node/esm
+#!/usr/bin/env -S tsx
 
 /*
  * Copyright (C) 2022 UBports Foundation <info@ubports.com>
@@ -81,15 +81,18 @@ program
   .action(async glob => {
     if (
       (
-        await processConfigs((obj, file) => {
-          if (validate(obj)) {
-            log.i(file, "valid");
-          } else {
-            log.e(file, "INVALID");
-            log.validationError(validate.errors || []);
-          }
-          return validate.errors || [];
-        }, ...glob)
+        await processConfigs(
+          (obj, file) => {
+            if (validate(obj)) {
+              log.i(file, "valid");
+            } else {
+              log.e(file, "INVALID");
+              log.validationError(validate.errors || []);
+            }
+            return validate.errors || [];
+          },
+          ...glob
+        )
       ).length
     )
       process.exit(1);
@@ -105,33 +108,36 @@ program
   .action(async glob => {
     if (
       (
-        await processConfigs(({ expectedErrors, ...obj }, file) => {
-          if (!expectedErrors) {
-            if (validate(obj)) {
-              log.i(file, "valid as expected");
-              return [];
-            } else {
-              log.e(file, "unexpectedly invalid");
-              log.validationError(validate.errors || []);
-              return validate.errors;
-            }
-          } else {
-            if (validate(obj)) {
-              log.e(file, "unexpectedly valid");
-            } else {
-              try {
-                assert.deepStrictEqual(validate.errors, expectedErrors);
-                log.i(file, "invalid as expected");
+        await processConfigs(
+          ({ expectedErrors, ...obj }, file) => {
+            if (!expectedErrors) {
+              if (validate(obj)) {
+                log.i(file, "valid as expected");
                 return [];
-              } catch (e) {
-                log.i(file, "unsatisfied error expectations");
-                console.error(e);
-                return [e];
+              } else {
+                log.e(file, "unexpectedly invalid");
+                log.validationError(validate.errors || []);
+                return validate.errors;
+              }
+            } else {
+              if (validate(obj)) {
+                log.e(file, "unexpectedly valid");
+              } else {
+                try {
+                  assert.deepStrictEqual(validate.errors, expectedErrors);
+                  log.i(file, "invalid as expected");
+                  return [];
+                } catch (e) {
+                  log.i(file, "unsatisfied error expectations");
+                  console.error(e);
+                  return [e];
+                }
               }
             }
-          }
-          return validate.errors == expectedErrors;
-        }, ...glob)
+            return validate.errors == expectedErrors;
+          },
+          ...glob
+        )
       ).length
     )
       process.exit(1);

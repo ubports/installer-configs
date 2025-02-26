@@ -19,7 +19,7 @@ user_actions:
     description: "Please double-check that your device is the following model: Xiaomi Redmi 9 (lancelot)."
   confirm_firmware:
     title: "Confirm your firmware"
-    description: "Please double-check that your device is running the latest available stock Android 10 firmware."
+    description: "Please double-check that your device is running the latest available stock Android 11 firmware (MIUI 12.5.4.0 recomended)."
     link: "https://github.com/ubuntu-touch-redmi-mt6768/lancelotfw/blob/main/README.md"
   unlock:
     title: "OEM unlock"
@@ -59,20 +59,20 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://github.com/ubuntu-touch-redmi-mt6768/lancelotfw/releases/download/20211005/recovery.img"
+                - url: "https://github.com/ubuntu-touch-redmi-mt6768/lancelotfw/releases/download/20250217/recovery.img"
                   name: "recovery.img"
                   checksum:
-                    sum: "d941e216c78fb69411b2ab34066c92806245698917f1c95e62abbc3e142141bf"
+                    sum: "7781625e7baffcba9b9919573784e42842ddf6e5a8ac053d6edb6cb61b8e0734"
                     algorithm: "sha256"
-                - url: "https://github.com/ubuntu-touch-redmi-mt6768/lancelotfw/releases/download/20211005/dtbo.img"
+                - url: "https://github.com/ubuntu-touch-redmi-mt6768/lancelotfw/releases/download/20250217/dtbo.img"
                   name: "dtbo.img"
                   checksum:
-                    sum: "b668fe7b025f0de2ecac4df41fe6f0a9a81d5af5e99ae27fe081679831aba4be"
+                    sum: "0954920f069cdb001d7b64c1c33cb1bfb9fb4528790ab7c8b9eaf5cbcf57058b"
                     algorithm: "sha256"
-                - url: "https://github.com/ubuntu-touch-redmi-mt6768/lancelotfw/releases/download/20211005/super.zip"
+                - url: "https://github.com/ubuntu-touch-redmi-mt6768/lancelotfw/releases/download/20250217/super.zip"
                   name: "super.zip"
                   checksum:
-                    sum: "4d203a72d7ec05edb38cd717946dd244ea39749ea4996b03a5d1a188e444924b"
+                    sum: "2d3f0f5cee735854dd98301f8df407e42f2178f5d982b8d3f956fe8ce3d5f2b3"
                     algorithm: "sha256"
                 - url: "https://dl.google.com/developers/android/qt/images/gsi/vbmeta.img"
                   name: "vbmeta.img"

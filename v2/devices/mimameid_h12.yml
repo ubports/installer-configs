@@ -171,15 +171,15 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/vollaos/volla-12.1-20240228-stable-SPFLASH-mimameid.zip"
+                - url: "https://volla.tech/filedump/vollaos/volla-12.1-20240228-stable-BOOTSTRAP-mimameid.zip"
                   checksum:
-                    sum: "7038740f7efc183a54a0bb5816c9d10fa8c7a5ef0a95cc19a2565255b060954e"
+                    sum: "f864eddaf65ed58b608f359c45eb7feb01b1dd62c270b0ec5ea3eb79e94b30f6"
                     algorithm: "sha256"
       - actions:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-12.1-20240228-stable-SPFLASH-mimameid.zip"
+                - archive: "volla-12.1-20240228-stable-BOOTSTRAP-mimameid.zip"
                   dir: "unpacked"
       - actions:
           - adb:reboot:
@@ -249,5 +249,5 @@ operating_systems:
     slideshow: []
     eula:
       title: "EULA"
-      description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE 22. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Hallo Welt Systeme UG (haftungsbeschränkt) for the Volla OS and agree to it."
+      description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE 22. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Volla Systeme GmbH for the Volla OS and agree to it."
       link: "https://volla.online/en/eula/index.html"

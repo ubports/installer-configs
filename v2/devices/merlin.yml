@@ -19,8 +19,8 @@ user_actions:
     description: "Please double-check that your device is the following model: Xiaomi Redmi Note 9 (merlin)."
   confirm_firmware:
     title: "Confirm your firmware"
-    description: "Please double-check that your device is running the latest available stock Android 10 firmware."
-    link: "https://github.com/ubuntu-touch-miatoll/ubuntu-touch-merlin/blob/main/FIRMWARE.md"
+    description: "Please double-check that your device is running the latest available stock Android 11 firmware (MIUI 12.5.4.0 recomended)."
+    link: "https://github.com/ubuntu-touch-redmi-mt6768/ubuntu-touch-merlin/blob/main/README.md"
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."
@@ -59,20 +59,20 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://github.com/ubuntu-touch-redmi-mt6768/ubuntu-touch-merlin/releases/download/20210927/recovery.img"
+                - url: "https://github.com/ubuntu-touch-redmi-mt6768/ubuntu-touch-merlin/releases/download/20250217/recovery.img"
                   name: "recovery.img"
                   checksum:
-                    sum: "4d523f43afe6d2dd04995f38dc9f17552893e8a916c22df73ca699c911fc4478"
+                    sum: "58cd96315ca4693ccde87048db6f6334a9a0886210dcb8ff83dd2bcb628269e4"
                     algorithm: "sha256"
-                - url: "https://github.com/ubuntu-touch-redmi-mt6768/ubuntu-touch-merlin/releases/download/20210927/dtbo.img"
+                - url: "https://github.com/ubuntu-touch-redmi-mt6768/ubuntu-touch-merlin/releases/download/20250217/dtbo.img"
                   name: "dtbo.img"
                   checksum:
-                    sum: "1a3ac5db3b5371cd3f319aca99629214fc9c816e41fe754c500bf71672f6f9f0"
+                    sum: "5f5fe86cddacaeaa7db59af4ec416ef294319af24190ff75f23d8e37f2fb0c5b"
                     algorithm: "sha256"
-                - url: "https://github.com/ubuntu-touch-redmi-mt6768/ubuntu-touch-merlin/releases/download/20210927/super.zip"
+                - url: "https://github.com/ubuntu-touch-redmi-mt6768/ubuntu-touch-merlin/releases/download/20250217/super.zip"
                   name: "super.zip"
                   checksum:
-                    sum: "4565b1f9e4111b28e393771c415578774826516d7c54191bde1facc351912381"
+                    sum: "2c68453b95db547273bff2d05c683d03463e106c14657315ed86170de2db3c96"
                     algorithm: "sha256"
                 - url: "https://dl.google.com/developers/android/qt/images/gsi/vbmeta.img"
                   name: "vbmeta.img"

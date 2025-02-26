@@ -181,15 +181,15 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/vollaos/volla-12.1-20240229-stable-SPFLASH-yggdrasilx.zip"
+                - url: "https://volla.tech/filedump/vollaos/volla-12.1-20240229-stable-BOOTSTRAP-yggdrasilx.zip"
                   checksum:
-                    sum: "fd1a7cd54e4ad1acda5077d3b213bec5ecc2c53bba10c4f66f5acf7ff5a198b1"
+                    sum: "c748aecb99ad3564cbc8d08dc040a32d8c27c0b93e22f9ea520a26b026b79cf9"
                     algorithm: "sha256"
       - actions:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-12.1-20240229-stable-SPFLASH-yggdrasilx.zip"
+                - archive: "volla-12.1-20240229-stable-BOOTSTRAP-yggdrasilx.zip"
                   dir: "unpacked"
       - actions:
           - adb:reboot:
@@ -265,7 +265,7 @@ operating_systems:
     slideshow: []
     eula:
       title: "EULA"
-      description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE X. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Hallo Welt Systeme UG (haftungsbeschränkt) for the Volla OS and agree to it."
+      description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE X. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Volla Systeme GmbH for the Volla OS and agree to it."
       link: "https://volla.online/en/eula/index.html"
   - name: "SailfishOS"
     prerequisites: []
@@ -286,9 +286,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/vollaos/volla-10.1-20211002-RELEASE-SPFLASH-yggdrasilx.zip"
+                - url: "https://volla.tech/filedump/vollaos/volla-10.1-20211002-SFOS-BOOTSTRAP-yggdrasilx.zip"
                   checksum:
-                    sum: "2efe7a22e00a77e83db804b39efc28ba08fe62ca9bd5e54edb44f8326ef42436"
+                    sum: "4809daeb907459b6310da196c3c2c8c90f92c7194aa9fb57a79985e79554e314"
                     algorithm: "sha256"
                 - url: "https://volla.tech/filedump/vollaos-10.1-ygdrassilx-preloader.bin"
                   checksum:
@@ -307,7 +307,7 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-10.1-20211002-RELEASE-SPFLASH-yggdrasilx.zip"
+                - archive: "volla-10.1-20211002-SFOS-BOOTSTRAP-yggdrasilx.zip"
                   dir: "unpacked"
         condition:
           var: "bootstrap"
