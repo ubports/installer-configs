@@ -1,0 +1,188 @@
+name: "Lenovo Tab M10 HD 2nd Gen LTE"
+codename: "amar_row_lte"
+formfactor: "tablet"
+aliases: [amar_row_lte, X306X]
+doppelgangers: []
+user_actions:
+  confirm_model:
+    title: "Confirm your model"
+    description: "Please check that your device is a Lenovo Tab M10 HD LTE (X306X)."
+  confirm_os:
+    title: "Confirm OS version"
+    description: "Your device must be running the Android 11 stock firmware before installing Ubuntu Touch. You can flash the device using spflash tools"
+    link: "https://github.com/rubencarneiro/amar_row_lte/releases/tag/1.0Firmware.tar.xz"
+  unlock_phone:
+    title: "Unlock the bootloader"
+    description: "Before installing Ubuntu Touch you must unlock the bootloader of your phone manually. Follow the steps in the linked page if you haven't already."
+    link: "https://unlocktechy.com/lenovo-tab-m10-hd-gen-2-unlock-bootloader"
+  bootloader:
+    title: "Reboot to Bootloader"
+    description: "With the device powered off, press and hold the VOLUME DOWN + POWER until you see the fastboot on screen and plug the device into your PC via USB."
+    image: "phone_power_down"
+    button: true
+  bootloader_from_fastbootd:
+    title: "Reboot to Bootloader"
+    description: 'With the device still at the fastbootd screen, use the volume buttons to select "Reboot to bootloader".'
+    image: "phone_power_down"
+    button: true
+  recovery:
+    title: "Reboot to Recovery"
+    description: 'With the device still at the "FastBoot Mode", use the Volume buttons to switch to "Recovery Mode" and push the power button to confirm your selection.'
+    image: "phone_power_up"
+    button: true
+  fastbootd:
+    title: "Reboot to fastbootd mode"
+    description: 'With the device still at the "FastBoot Mode", use the Volume buttons to switch to "Recovery Mode" and push the power button to confirm your selection. Then select "Fastboot mode" from the list.'
+    image: "phone_power_up"
+    button: true
+unlock:
+  - "confirm_model"
+  - "confirm_os"
+  - "unlock_phone"
+operating_systems:
+  - name: "Ubuntu Touch"
+    compatible_installer: ">=0.9.6-beta"
+    options:
+      - var: "channel"
+        name: "Channel"
+        tooltip: "The release channel"
+        link: "https://docs.ubports.com/en/latest/about/process/release-schedule.html"
+        type: "select"
+        remote_values:
+          systemimage:channels:
+      - var: "wipe"
+        name: "Wipe Userdata"
+        tooltip: "Wipe personal data. This is necessary for first time installations."
+        type: "checkbox"
+      - var: "partition"
+        name: "Partitioning"
+        tooltip: "Changes partition sizes as required. Only necessary for first time installations."
+        type: "checkbox"
+        value: true
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Flash system partitions using fastboot"
+        type: "checkbox"
+        value: true
+    prerequisites: []
+    steps:
+      ### Ensure we always start in bootloader mode
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      ### Ensure the bootloader has been unlocked already
+      - actions:
+          - fastboot:wait:
+      - actions:
+          - fastboot:assert_var:
+              variable: "unlocked"
+              value: "yes"
+        fallback:
+          - core:user_action:
+              action: "unlock_phone"
+      ### Flash important partitions (if requested)
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://github.com/rubencarneiro/amar_row_lte/releases/download/1.0/boot.img"
+                  checksum:
+                    sum: "4161f2f63c85fb462f555e3cf87e73ae2080d51d8d858359360151af372a9c7d"
+                    algorithm: "sha256"
+                - url: "https://github.com/rubencarneiro/amar_row_lte/releases/download/1.0/recovery.img"
+                  checksum:
+                    sum: "6ef17f8fd03c558394d0c58b9187a6595d237d5bd599bcfbbbfe431e206a071a"
+                    algorithm: "sha256"
+                - url: "https://github.com/rubencarneiro/amar_row_lte/releases/download/1.0/dtbo.img"
+                  checksum:
+                    sum: "41bef15140c81d701ea0ff0bf9e0cd293c2419d12606d930496ae551c1e8e716"
+                    algorithm: "sha256"
+                - url: "https://github.com/rubencarneiro/amar_row_lte/releases/download/1.0/vbmeta.img"
+                  checksum:
+                    sum: "6d369e45f5ee06bcb3e76cddf96f8ef07136fd2c2e7e6746f177f3b0a7975fa9"
+                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "boot"
+                  file: "boot.img"
+                  group: "firmware"
+                - partition: "recovery"
+                  file: "recovery.img"
+                  group: "firmware"
+                - partition: "dtbo"
+                  file: "dtbo.img"
+                  group: "firmware"
+                - partition: "vbmeta"
+                  file: "vbmeta.img"
+                  group: "firmware"
+                  flags:
+                    - "--disable-verity"
+                    - "--disable-verification"
+        condition:
+          var: "bootstrap"
+          value: true
+      ### Set up logical partitions (if requested)
+      - actions:
+          - fastboot:reboot_fastboot:
+        fallback:
+          - core:user_action:
+              action: "fastbootd"
+        condition:
+          var: "partition"
+          value: true
+      - actions:
+          # Remove all unused logical partitions
+          - fastboot:delete_logical_partition:
+              partition: "product"
+          # Increase space for system_a for UT installation
+          - fastboot:resize_logical_partition:
+              partition: "system"
+              size: 3978565472
+        condition:
+          var: "partition"
+          value: true
+      - actions:
+          - fastboot:reboot_bootloader:
+        fallback:
+          - core:user_action:
+              action: "bootloader_from_fastbootd"
+        condition:
+          var: "partition"
+          value: true
+      ### Wipe userdata (if requested)
+      - actions:
+          - fastboot:erase:
+              partition: "userdata"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - fastboot:format:
+              partition: "userdata"
+              type: "ext4"
+        condition:
+          var: "wipe"
+          value: true
+      ### Systemimage installation steps
+      - actions:
+          - fastboot:reboot_recovery:
+        fallback:
+          - core:user_action:
+              action: "recovery"
+      - actions:
+          - systemimage:install:
+              verify_recovery: true
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+    slideshow: []
