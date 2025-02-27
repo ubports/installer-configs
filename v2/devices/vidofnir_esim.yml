@@ -50,9 +50,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/volla-vidofnir-12.0-ubports-installer-bootstrap-v2.zip"
+                - url: "https://volla.tech/filedump/volla-vidofnir-12.0-ubports-installer-bootstrap-v3.zip"
                   checksum:
-                    sum: "40c9b499bd51a9359a7eb6ca333c3dd7a362fb7bbafd1f853902c78cc84f032d"
+                    sum: "da18b5498ebae0267be894fff73bfd629be73967cf33f071d571ffc3ef46ce97"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -61,7 +61,7 @@ operating_systems:
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-vidofnir-12.0-ubports-installer-bootstrap-v2.zip"
+                - archive: "volla-vidofnir-12.0-ubports-installer-bootstrap-v3.zip"
                   dir: "unpacked"
         condition:
           var: "bootstrap"
@@ -92,6 +92,9 @@ operating_systems:
                   group: "firmware"
                 - partition: "vendor_boot_a"
                   file: "unpacked/vendor_boot.img"
+                  group: "firmware"
+                - partition: "dtbo_a"
+                  file: "unpacked/dtbo.img"
                   group: "firmware"
                 - partition: "vbmeta_a"
                   file: "unpacked/vbmeta.img"
