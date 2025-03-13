@@ -22,6 +22,11 @@ user_actions:
     title: "Workaround initial boot problem"
     description: "Once a blank screen with the backlight comes up hold down the power button until the device powers down. Then, release it briefly and hold it down again until the device boots with Volla logo visible."
     button: true
+  sfos_notice:
+    title: "SailfishOS: Notice"
+    description: "For additional information about the Volla device ports including known issues please visit the following URL."
+    link: "https://forum.sailfishos.org/t/the-single-volla-thread/22553"
+    button: true
 unlock: []
 handlers:
   bootloader_locked:
@@ -277,6 +282,9 @@ operating_systems:
         type: "checkbox"
         value: true
     steps:
+      - actions:
+          - core:user_action:
+              action: "sfos_notice"
       - actions:
           - core:download:
               group: "SailfishOS"

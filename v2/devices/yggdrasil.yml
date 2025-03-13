@@ -18,6 +18,11 @@ user_actions:
     title: "Reboot the device"
     description: "Hold down the power button until the device powers down. Then, release it briefly and hold it down again until the device boots."
     button: true
+  sfos_notice:
+    title: "SailfishOS: Notice"
+    description: "For additional information about the Volla device ports including known issues please visit the following URL."
+    link: "https://forum.sailfishos.org/t/the-single-volla-thread/22553"
+    button: true
   cutie_notice:
     title: "Cutie Shell: Notice"
     description: "You selected to install Droidian with Cutie Shell. Cutie Shell is still pre-alpha quality and it is not suitable for production environments. Keep in mind that Cutie Shell is not officially supported or endorsed by Droidian. This edition is maintained directly by Cutie Shell Community Project and you should report any bugs with these images at Cutie Shell Community Project before filing upstream."
@@ -274,6 +279,9 @@ operating_systems:
         type: "checkbox"
         value: true
     steps:
+      - actions:
+          - core:user_action:
+              action: "sfos_notice"
       - actions:
           - core:download:
               group: "SailfishOS"
