@@ -18,6 +18,11 @@ user_actions:
     title: "Reboot the device"
     description: "Hold down the power button until the device powers down. Then, release it briefly and hold it down again until the device boots."
     button: true
+  sfos_notice:
+    title: "SailfishOS: Notice"
+    description: "For additional information about the Volla device ports including known issues please visit the following URL."
+    link: "https://forum.sailfishos.org/t/the-single-volla-thread/22553"
+    button: true
 unlock: []
 handlers:
   bootloader_locked:
@@ -251,3 +256,120 @@ operating_systems:
       title: "EULA"
       description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE 22. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Volla Systeme GmbH for the Volla OS and agree to it."
       link: "https://volla.online/en/eula/index.html"
+  - name: "SailfishOS"
+    prerequisites: []
+    compatible_installer: ">=0.9.2-beta"
+    options:
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Flash system partitions using fastboot. Keep enabled if coming from non-Sailfish OS"
+        type: "checkbox"
+        value: true
+    steps:
+      - actions:
+          - core:user_action:
+              action: "sfos_notice"
+      - actions:
+          - core:download:
+              group: "SailfishOS"
+              files:
+                - url: "https://github.com/HelloVolla/sailfish-release-halium-mimameid/releases/latest/download/SailfishOS-halium-mimameid.7z"
+      - actions:
+          - core:unpack:
+              group: "SailfishOS"
+              files:
+                - archive: "SailfishOS-halium-mimameid.7z"
+                  dir: "unpacked"
+
+      # Firmware setup (bootstrap)
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://volla.tech/filedump/volla-mimameid-12.0-ubports-installer-bootstrap.zip"
+                  checksum:
+                    sum: "bfcac4a2722bb01eb911d1daf9c9b50c246f5cb8e85cfa1aaaed5701d20bcc2c"
+                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "volla-mimameid-12.0-ubports-installer-bootstrap.zip"
+                  dir: "unpacked"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:set_active:
+              slot: "a"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "dtbo_a"
+                  file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "gz_a"
+                  file: "unpacked/gz.img"
+                  group: "firmware"
+                - partition: "lk_a"
+                  file: "unpacked/lk.img"
+                  group: "firmware"
+                - partition: "logo"
+                  file: "unpacked/logo.img"
+                  group: "firmware"
+                - partition: "md1img_a"
+                  file: "unpacked/md1img.img"
+                  group: "firmware"
+                - partition: "preloader_a"
+                  file: "unpacked/preloader.img"
+                  group: "firmware"
+                - partition: "scp_a"
+                  file: "unpacked/scp.img"
+                  group: "firmware"
+                - partition: "spmfw_a"
+                  file: "unpacked/spmfw.img"
+                  group: "firmware"
+                - partition: "sspm_a"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
+                - partition: "tee_a"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "vbmeta_a"
+                  file: "unpacked/vbmeta.img"
+                  group: "firmware"
+                  flags: ["--disable-verity"]
+        condition:
+          var: "bootstrap"
+          value: true
+
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "boot_a"
+                  file: "unpacked/SailfishOS-halium-mimameid/boot.img"
+                  group: "SailfishOS"
+                - partition: "super"
+                  file: "unpacked/SailfishOS-halium-mimameid/super.img"
+                  group: "SailfishOS"
+      - actions:
+          - fastboot:reboot:
+        fallback:
+          - core:user_action:
+              action: "boot"
+    slideshow: []
