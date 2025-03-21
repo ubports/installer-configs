@@ -21,6 +21,11 @@ user_actions:
     title: "Replacement Display Notice"
     description: "The selected OS requires Android 11 firmware which does NOT support Volla Phone 22 devices with replaced display panels. If that is the case or you're unsure, to avoid soft-bricking your phone please restart the process and instead select 'Volla Phone 22 with new display' as the device!"
     button: true
+  sfos_notice:
+    title: "SailfishOS: Notice"
+    description: "For additional information about the Volla device ports including known issues please visit the following URL."
+    link: "https://forum.sailfishos.org/t/the-single-volla-thread/22553"
+    button: true
   cutie_notice:
     title: "Cutie Shell: Notice"
     description: "You selected to install Droidian with Cutie Shell. Cutie Shell is still pre-alpha quality and it is not suitable for production environments. Keep in mind that Cutie Shell is not officially supported or endorsed by Droidian. This edition is maintained directly by Cutie Shell Community Project and you should report any bugs with these images at Cutie Shell Community Project before filing upstream."
@@ -269,6 +274,123 @@ operating_systems:
       title: "EULA"
       description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE 22. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Volla Systeme GmbH for the Volla OS and agree to it."
       link: "https://volla.online/en/eula/index.html"
+  - name: "SailfishOS"
+    prerequisites: []
+    compatible_installer: ">=0.9.2-beta"
+    options:
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Flash system partitions using fastboot. Keep enabled if coming from non-Sailfish OS"
+        type: "checkbox"
+        value: true
+    steps:
+      - actions:
+          - core:user_action:
+              action: "sfos_notice"
+      - actions:
+          - core:download:
+              group: "SailfishOS"
+              files:
+                - url: "https://github.com/HelloVolla/sailfish-release-halium-mimameid/releases/latest/download/SailfishOS-halium-mimameid.7z"
+      - actions:
+          - core:unpack:
+              group: "SailfishOS"
+              files:
+                - archive: "SailfishOS-halium-mimameid.7z"
+                  dir: "unpacked"
+
+      # Firmware setup (bootstrap)
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://volla.tech/filedump/volla-mimameid-12.0-ubports-installer-bootstrap.zip"
+                  checksum:
+                    sum: "bfcac4a2722bb01eb911d1daf9c9b50c246f5cb8e85cfa1aaaed5701d20bcc2c"
+                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "volla-mimameid-12.0-ubports-installer-bootstrap.zip"
+                  dir: "unpacked"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:set_active:
+              slot: "a"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "dtbo_a"
+                  file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "gz_a"
+                  file: "unpacked/gz.img"
+                  group: "firmware"
+                - partition: "lk_a"
+                  file: "unpacked/lk.img"
+                  group: "firmware"
+                - partition: "logo"
+                  file: "unpacked/logo.img"
+                  group: "firmware"
+                - partition: "md1img_a"
+                  file: "unpacked/md1img.img"
+                  group: "firmware"
+                - partition: "preloader_a"
+                  file: "unpacked/preloader.img"
+                  group: "firmware"
+                - partition: "scp_a"
+                  file: "unpacked/scp.img"
+                  group: "firmware"
+                - partition: "spmfw_a"
+                  file: "unpacked/spmfw.img"
+                  group: "firmware"
+                - partition: "sspm_a"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
+                - partition: "tee_a"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "vbmeta_a"
+                  file: "unpacked/vbmeta.img"
+                  group: "firmware"
+                  flags: ["--disable-verity"]
+        condition:
+          var: "bootstrap"
+          value: true
+
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "boot_a"
+                  file: "unpacked/SailfishOS-halium-mimameid/boot.img"
+                  group: "SailfishOS"
+                - partition: "super"
+                  file: "unpacked/SailfishOS-halium-mimameid/super.img"
+                  group: "SailfishOS"
+      - actions:
+          - fastboot:reboot:
+        fallback:
+          - core:user_action:
+              action: "boot"
+    slideshow: []
   - name: "Droidian"
     compatible_installer: ">=0.9.2-beta"
     options:
