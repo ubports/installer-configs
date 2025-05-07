@@ -94,7 +94,7 @@ operating_systems:
                     algorithm: "sha256"
                 - url: "https://github.com/rubencarneiro/amar_row_lte/releases/download/1.0/recovery.img"
                   checksum:
-                    sum: "6ef17f8fd03c558394d0c58b9187a6595d237d5bd599bcfbbbfe431e206a071a"
+                    sum: "2797cd33a00e85c8b5c9faedf3d75adb81fd91ab46dcdc6c842667e756605b2b"
                     algorithm: "sha256"
                 - url: "https://github.com/rubencarneiro/amar_row_lte/releases/download/1.0/dtbo.img"
                   checksum:
