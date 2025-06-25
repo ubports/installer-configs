@@ -207,6 +207,31 @@ properties:
               title: Target directory
               type: string
 
+  core:unpack_move:
+    title: "core:unpack_move action"
+    description: "Move files/directories within the unpacked directory"
+    type: "object"
+    required: ["group", "files"]
+    additionalProperties: false
+    properties:
+      group:
+        title: Group
+        type: string
+      files:
+        type: array
+        items:
+          type: object
+          required: ["src", "dst"]
+          additionalProperties: false
+          properties:
+            src:
+              title: Source file/directory
+              type: string
+            dst:
+              title: Target directory
+              type: string
+    ubports_installer-compatibility: ">=0.11.2-beta"
+
   core:manual_download:
     title: "core:manual_download action"
     description: "Instruct the user to manually download a file that can't be downloaded automatically, because it is behind some protective mechanism. The user will be instructed to load the file into the installer to continue the installation."
