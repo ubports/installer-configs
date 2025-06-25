@@ -448,6 +448,8 @@ operating_systems:
             label: "ShiftOS-L - 3 - (Android 10)"
           - value: "shiftos_l_5"
             label: "ShiftOS-L - 5 - (Android 13)"
+          - value: "shiftos_l_7"
+            label: "ShiftOS-L - 7 - (Android 15)"
       - var: "wipe"
         name: "Wipe personal data"
         tooltip: "This is required for new installations or when switching between G and L."
@@ -573,6 +575,19 @@ operating_systems:
         condition:
           var: "shiftos_type"
           value: "shiftos_l_5"
+      # 1.5) ShiftOS L - 7 (Android 15)
+      - actions:
+          - core:download:
+              group: "firmware_shiftos"
+              files:
+                - url: "https://downloads.shiftphones.com/public/SHIFT6mq/release-light/SHIFT6MQ.SOS.7.0.L.20250612/SHIFT6MQ.SOS.7.0.L-RELEASE-LIGHT-20250612-OTA.zip"
+                  name: "update.zip"
+                  checksum:
+                    sum: "eb21d3ae8fa1c87446a4f3b82cc3edff7e9a8fac95503a27b93c23cc5d8f5353"
+                    algorithm: "sha256"
+        condition:
+          var: "shiftos_type"
+          value: "shiftos_l_7"
       # 2) Flash firmware images in bootloader fastboot mode
       - actions:
           - fastboot:flash:
