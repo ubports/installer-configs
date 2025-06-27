@@ -1,0 +1,103 @@
+name: "Samsung Galaxy Note FE Exynos"
+codename: "gracerlte"
+formfactor: "phone"
+aliases: ["gracerltexx"]
+doppelgangers: []
+user_actions:
+  recovery:
+    title: "Reboot to Recovery"
+    description: "If your device did not reboot into Recovery, power off the device, then hold Volume Up + Home + Power."
+    image: "phone_power_up"
+    button: true
+  download:
+    title: "Reboot to Download Mode"
+    description: "Press and hold Volume Down + Home + Power, until you see the Warning about Custom OS installations, press Volume Up to Continue, then you may have to unplug and plug the USB cord back in."
+    image: "phone_power_down"
+    button: true
+  gracerlte_check:
+    title: "Unlock Bootloader"
+    description: "You need an unlocked bootloader. If your bootloader was never unlocked, please refer to the first two oem unlock steps linked here."
+    link: "https://forum.xda-developers.com/t/recovery-exynos-official-twrp-for-galaxy-s7-herolte.3333770/"
+unlock: []
+handlers:
+  bootloader_locked:
+    actions:
+      - fastboot:oem_unlock:
+operating_systems:
+  - name: "Ubuntu Touch"
+    compatible_installer: ">=0.9.6-beta"
+    options:
+      - var: "channel"
+        name: "Channel"
+        tooltip: "The release channel"
+        link: "https://docs.ubports.com/en/latest/about/process/release-schedule.html"
+        type: "select"
+        remote_values:
+          systemimage:channels:
+      - var: "wipe"
+        name: "Wipe Userdata"
+        tooltip: "Wipe personal data (required for new installs)"
+        type: "checkbox"
+    prerequisites:
+      - "gracerlte_check"
+    steps:
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://github.com/Kethen/samsung-exynos8890/releases/download/2022-07-23/recovery_gracerlte.img"
+                  checksum:
+                    sum: "e2e790e42d21c6002e6cd9b5001553ec73bcf53ee66df6c5bb1ac0de214171d0"
+                    algorithm: "sha256"
+                - url: "https://github.com/Kethen/samsung-exynos8890/releases/download/2022-07-23/boot-reboot-recovery-gracerlte.img"
+                  checksum:
+                    sum: "01aaf518d479914db48ddaef1c08ec77ebb3c41a740e695d5bec5a47dbc08603"
+                    algorithm: "sha256"
+      - actions:
+          - core:user_action:
+              action: "download"
+      - actions:
+          - heimdall:flash:
+              partitions:
+                - partition: "BOOT"
+                  file: "boot-reboot-recovery-gracerlte.img"
+                  group: "firmware"
+                - partition: "RECOVERY"
+                  file: "recovery_gracerlte.img"
+                  group: "firmware"
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+      - actions:
+          - adb:shell:
+              ["mkfs.ext4", "/dev/block/platform/155a0000.ufs/by-name/USERDATA"]
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - adb:shell: ["mount", "/data"]
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - adb:shell: ["mkdir", "/data/cache"]
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - adb:shell: ["mount", "/data"]
+        condition:
+          var: "wipe"
+          value: false
+      - actions:
+          - systemimage:install:
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+    slideshow: []
