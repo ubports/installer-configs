@@ -5,12 +5,12 @@ aliases: []
 user_actions:
   recovery:
     title: "Reboot to Recovery"
-    description: 'With the device powered off, hold Volume Down + Power. You might be prompted to select a mode to boot into. If that happens, follow the on-screen instructions and select "Recovery" mode.'
+    description: 'With the device powered off, Move scroll wheel down + Power. This opens recovery mode'
     image: "phone_power_up"
     button: true
   bootloader:
     title: "Reboot to Bootloader"
-    description: 'With the device powered off, hold Volume Up + Power. You might be prompted to select a mode to boot into. If that happens, follow the on-screen instructions and select "Fastboot" mode.'
+    description: 'With the device powered off, Move Scroll wheel Up + Power. You might be prompted to select a mode to boot into. If that happens, follow the on-screen instructions and select "Fastboot" mode.'
     image: "phone_power_up"
     button: true
   confirm_model:
@@ -18,7 +18,7 @@ user_actions:
     description: "Please double-check that your device is the following model: rabbit r1"
   confirm_firmware:
     title: "Confirm your firmware"
-    description: "Please double-check that your device is running stock rabbitOS firmware. "
+    description: "Please double-check that your device is running stock rabbitOS v0.8 firmware. "
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to unlock your device bootloader first."
