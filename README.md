@@ -43,8 +43,11 @@ validate(object as UBportsInstallerConfig);
 ### v2
 
 - **published: November 2020**
+- **finalized: 12th of July, 2025**
 - **lead author: Johannah Sprinz**
 - [JSON Schema](https://github.com/ubports/installer-configs/blob/master/v2/schema_.schema.yml)
+
+Note: v2 of the schema is finalized. If you need anything, like additional actions, please create a new issue to get it tracked for v3.
 
 Starting with version 0.8.1-beta, the UBports Installer uses version 2 of the config file structure. The changes in specification draw from the experience made with the initial version of the specification and take some inspiration from [Ansible Playbooks](https://www.ansible.com/) and the [OPEN-CUTS combination filtering language](https://www.open-cuts.org/).
 
