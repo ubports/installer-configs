@@ -90,7 +90,7 @@ operating_systems:
               files:
                 - url: "https://github.com/rubencarneiro/amar_row_lte/releases/download/1.0/boot.img"
                   checksum:
-                    sum: "4161f2f63c85fb462f555e3cf87e73ae2080d51d8d858359360151af372a9c7d"
+                    sum: "f3f373f44a8f5e5077965b58fddad28fa01202642e75c386985ecabe76e31618"
                     algorithm: "sha256"
                 - url: "https://github.com/rubencarneiro/amar_row_lte/releases/download/1.0/recovery.img"
                   checksum:

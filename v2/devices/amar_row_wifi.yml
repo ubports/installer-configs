@@ -90,7 +90,7 @@ operating_systems:
               files:
                 - url: "https://github.com/rubencarneiro/amar_row_wifi/releases/download/1.0/boot.img"
                   checksum:
-                    sum: "d2410a0a730ceeeef19d30773dabe118c818af006c3c52e960b3aeee87cfa9c5"
+                    sum: "e6acba8552d96b26582db364513364b0bf733a78ed1b9e262e5001f43e43e6ed"
                     algorithm: "sha256"
                 - url: "https://github.com/rubencarneiro/amar_row_wifi/releases/download/1.0/recovery.img"
                   checksum:
