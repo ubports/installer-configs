@@ -58,7 +58,7 @@ operating_systems:
         type: "checkbox"
       - var: "partition"
         name: "Partitioning"
-        tooltip: "Changes partition sizes as required. Only necessary for first time installations of Focal 20.04."
+        tooltip: "Changes partition sizes as required. Only necessary if you are switching from Android and installing UT for the first time."
         type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
