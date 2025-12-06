@@ -14,7 +14,7 @@ user_actions:
   confirm_os:
     title: "Confirm OS version"
     description: "Your device must be running NothingOS version of Android 13 (NothingOS 2.0.5) before installing Ubuntu Touch. Any other type of ROM (stock or custom) won't work! Click below on More... to download NOS 2.0.5 and follow the steps on the downgrade section."
-    link: "https://sourceforge.net/projects/nothingphone-1-rom/files/FastbootROM"
+    link: "https://sourceforge.net/projects/nothingphone-1-rom/files/FastbootROM/Spacewar_FastbootROM_v2.0.5.7z/download"
   unlock_phone:
     title: "Unlock the bootloader"
     description: "Before installing Ubuntu Touch, the bootloader must be unlocked first. Follow the steps in the linked page if you haven't already."
