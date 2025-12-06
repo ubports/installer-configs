@@ -1,7 +1,7 @@
 name: "Nothing Phone 1"
 codename: "Spacewar"
 formfactor: "phone"
-aliases: ["Spacewar"]
+aliases: []
 doppelgangers: []
 user_actions:
   confirm_model:
@@ -9,12 +9,16 @@ user_actions:
     description: "Please check that your device is a Nothing Phone 1 (Spacewar)."
   confirm_os:
     title: "Confirm OS version"
-    description: "Your device must be running NothingOS version of Android 13 before installing Ubuntu Touch. Any other type of ROM (stock or custom) won't work! This device has a rollback protection that needs to be disabled first if you are on a version higher than Android 13. Check the Link below for the downgrade process."
-    link: "https://xdaforums.com/t/advanced-bypassing-rollback-protection-to-downgrade-the-os.4511501/"
+    description: "Your device must be running NothingOS version of Android 13 (NothingOS 2.0.5) before installing Ubuntu Touch. Any other type of ROM (stock or custom) won't work!
+    link: "https://sourceforge.net/projects/nothingphone-1-rom/files/FastbootROM"
+  downgrade_android:
+    title: "Downgrade Android"
+    description: "This device has a rollback protection that needs to be disabled first in order to downgrade to Android 13. Check the Link below for the downgrade process."
+    link: "https://xdaforums.com/t/advanced-bypassing-rollback-protection-to-downgrade-the-os.4511501"
   unlock_phone:
     title: "Unlock the bootloader"
     description: "Before installing Ubuntu Touch, the bootloader must be unlocked first. Follow the steps in the linked page if you haven't already."
-    link: "https://xdaforums.com/t/nothing-phone-1-unlock-root-guide-howto.4470155/"
+    link: "https://xdaforums.com/t/nothing-phone-1-unlock-root-guide-howto.4470155"
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, press and hold the VOLUME DOWN button and plug the device into your PC via USB. After some seconds you'll see the fastboot mode."
