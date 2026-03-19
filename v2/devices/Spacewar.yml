@@ -7,14 +7,10 @@ user_actions:
   confirm_model:
     title: "Confirm your model"
     description: "Please check that your device is a Nothing Phone 1 (Spacewar)."
-  downgrade_android:
-    title: "Downgrade Android"
-    description: "Stock Android 13 is required to install Ubuntu Touch. This device has a rollback protection that needs to be disabled first in order to downgrade. Click on More... for the downgrade process."
-    link: "https://xdaforums.com/t/advanced-bypassing-rollback-protection-to-downgrade-the-os.4511501"
   confirm_os:
     title: "Confirm OS version"
-    description: "Your device must be running NothingOS version of Android 13 (NothingOS 2.0.5) before installing Ubuntu Touch. Any other type of ROM (stock or custom) won't work! Click below on More... to download NOS 2.0.5 and follow the steps on the downgrade section."
-    link: "https://sourceforge.net/projects/nothingphone-1-rom/files/FastbootROM/Spacewar_FastbootROM_v2.0.5.7z/download"
+    description: "Your device must be running stock NothingOS (NOS 3.2 is advised) before installing Ubuntu Touch. Any other type of ROM (custom) won't work! Click below on More... to download the latest fastboot flashable ROM. Ignore this step if your device is already running NOS 3.x"
+    link: "https://sourceforge.net/projects/nothingphone-1-rom/files/FastbootROM/Spacewar_FastbootROM_v3.0.0-250303-1817.7z/download"
   unlock_phone:
     title: "Unlock the bootloader"
     description: "Before installing Ubuntu Touch, the bootloader must be unlocked first. Follow the steps in the linked page if you haven't already."
@@ -41,7 +37,6 @@ user_actions:
     button: true
 unlock:
   - "confirm_model"
-  - "downgrade_android"
   - "confirm_os"
   - "unlock_phone"
 operating_systems:
