@@ -1,0 +1,12 @@
+FROM docker.io/debian:latest
+
+RUN apt-get update &&\
+	apt-get install -y --no-install-recommends \
+			jsonschema-jv yq \
+			python3-jsonschema-path python3-semantic-version python3-yaml \
+			python3-jq &&\
+	apt-get clean autoclean && rm -rf /var/lib/{apt,dpkg,cache,log}
+
+WORKDIR /app
+COPY extra_validations.py .
+COPY build.sh .

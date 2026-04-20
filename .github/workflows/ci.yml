@@ -2,7 +2,7 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [master]
+    branches: [master, bye-bye-node]
   pull_request:
     branches: [master]
 
@@ -12,31 +12,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js 20
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: docker/setup-buildx-action@v4
+      - uses: docker/build-push-action@v7
         with:
-          node-version: "20"
-
-      - name: Cache node modules
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-node-modules
+          context: .
+          file: Containerfile.ci
+          tags: localci:latest
+          load: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          push: false
+      - uses: addnab/docker-run-action@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      - name: npm ci
-        run: npm ci
-      - name: npm run lint
-        run: npm run lint
-      - name: npm run build
-        run: npm run build
-      - name: npm run validate
-        run: npm run validate
-      - name: npm run test
-        run: npm run test
+          image: localci:latest
+          options: -v ${{ github.workspace }}:/work
+          run: |
+            for device in /work/v2/devices/*.yml; do
+              jv /work/v2/schema/_.schema.yml "${device}"
+              /app/extra_validations.py "${device}"
+            done
