@@ -75,10 +75,10 @@ operating_systems:
       ### Ensure the bootloader has been unlocked already
       - actions:
           - fastboot:wait:
-      - actions:
-          - fastboot:assert_var:
-              variable: "unlocked"
-              value: "yes"
+      # - actions: # This is not needed when booting to Pro1x phone as UBports seems to not go beyond this point. Ignoring this, helps in installing properly.
+      #     - fastboot:assert_var:
+      #         variable: "unlocked"
+      #         value: "yes"
         fallback:
           - core:user_action:
               action: "unlock_phone"
