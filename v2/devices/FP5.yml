@@ -7,14 +7,18 @@ user_actions:
   confirm_model:
     title: "Confirm your model"
     description: "Please check that your device is a Fairphone 5 (FP5)."
-  confirm_os:
-    title: "Confirm OS version"
-    description: "Your device must be running the Fairphone OS version of Android 13 before installing another operating system. With a previously installed custom ROM, it won't work!"
-    link: "https://support.fairphone.com/hc/en-us/articles/18896094650513-Installing-Fairphone-OS-Manually"
   unlock_phone:
     title: "Unlock the bootloader"
     description: "Before installing another operating system you must unlock the bootloader of your phone manually. Follow the steps in the linked page if you haven't already."
     link: "https://support.fairphone.com/hc/en-us/articles/10492476238865-Manage-the-Bootloader"
+  fpos_eula:
+    title: "Fairphone's End User License Agreement for stock firmware"
+    description: >-
+      As part of bootstraping process, the stock firmware will be downloaded from Fairphone.
+      To proceed with the installation, please confirm that you have read and understood the
+      End User License Agreement (EULA) from Fairphone and agree to it.
+    link: "https://www.fairphone.com/en/legal/fairphone-os-end-user-license-agreement/"
+    button: true
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, press and hold the VOLUME DOWN button and plug the device into your PC via USB. After some seconds you'll see the fastboot mode."
@@ -37,7 +41,6 @@ user_actions:
     button: true
 unlock:
   - "confirm_model"
-  - "confirm_os"
   - "unlock_phone"
 operating_systems:
   - name: "Ubuntu Touch"
@@ -66,6 +69,12 @@ operating_systems:
         value: true
     prerequisites: []
     steps:
+      - actions:
+        - core:user_action:
+            action: "fpos_eula"
+        condition:
+          var: "bootstrap"
+          value: true
       ### Ensure we always start in bootloader mode
       - actions:
           - adb:reboot:
@@ -83,6 +92,15 @@ operating_systems:
         fallback:
           - core:user_action:
               action: "unlock_phone"
+      ### Prevent low-level firmware from being flashed on a wrong device.
+      ### (Should not fail unless user select the wrong device...)
+      - actions:
+          - fastboot:assert_var:
+              variable: "product"
+              value: "FP5"
+        condition:
+          var: "bootstrap"
+          value: true
       ### As this is an A/B device, force all future operations in "a" slot.
       - actions:
           - fastboot:set_active:
@@ -92,6 +110,11 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
+                # https://support.fairphone.com/hc/en-us/articles/18896094650513-How-to-manually-install-Android-on-your-Fairphone
+                - url: "https://fairphone-android-builds.ams3.digitaloceanspaces.com/FP5/A13/FP5-TT4H-factory.zip"
+                  checksum:
+                    sum: "38f5cded3cceca25cbf7c9d42ad664ec232a9b1446f3ae17053fe97d7110da01"
+                    algorithm: "sha256"
                 - url: "https://cdimage.ubports.com/devices/FP5/boot.img"
                   checksum:
                     sum: "f2959efc18fe489018c860375886397dbf7740778015e3afb8b955e7e6bb0e89"
@@ -104,8 +127,184 @@ operating_systems:
           var: "bootstrap"
           value: true
       - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "FP5-TT4H-factory.zip"
+                  dir: "FP5-TT4H"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
           - fastboot:flash:
               partitions:
+                # Stock firmware partitions
+                - partition: "abl_a"
+                  file: "FP5-TT4H/images/abl.elf"
+                  group: "firmware"
+                - partition: "abl_b"
+                  file: "FP5-TT4H/images/abl.elf"
+                  group: "firmware"
+                - partition: "aop_a"
+                  file: "FP5-TT4H/images/aop.mbn"
+                  group: "firmware"
+                - partition: "aop_b"
+                  file: "FP5-TT4H/images/aop.mbn"
+                  group: "firmware"
+                - partition: "apdp"
+                  file: "FP5-TT4H/images/apdp.mbn"
+                  group: "firmware"
+                - partition: "bluetooth_a"
+                  file: "FP5-TT4H/images/BTFM.bin"
+                  group: "firmware"
+                - partition: "bluetooth_b"
+                  file: "FP5-TT4H/images/BTFM.bin"
+                  group: "firmware"
+                - partition: "cpucp_a"
+                  file: "FP5-TT4H/images/cpucp.elf"
+                  group: "firmware"
+                - partition: "cpucp_b"
+                  file: "FP5-TT4H/images/cpucp.elf"
+                  group: "firmware"
+                - partition: "ddr"
+                  file: "FP5-TT4H/images/zeros_5sectors.bin"
+                  group: "firmware"
+                - partition: "devcfg_a"
+                  file: "FP5-TT4H/images/devcfg.mbn"
+                  group: "firmware"
+                - partition: "devcfg_b"
+                  file: "FP5-TT4H/images/devcfg.mbn"
+                  group: "firmware"
+                - partition: "dsp_a"
+                  file: "FP5-TT4H/images/dspso.bin"
+                  group: "firmware"
+                - partition: "dsp_b"
+                  file: "FP5-TT4H/images/dspso.bin"
+                  group: "firmware"
+                - partition: "featenabler_a"
+                  file: "FP5-TT4H/images/featenabler.mbn"
+                  group: "firmware"
+                - partition: "featenabler_b"
+                  file: "FP5-TT4H/images/featenabler.mbn"
+                  group: "firmware"
+                - partition: "hyp_a"
+                  file: "FP5-TT4H/images/hypvm.mbn"
+                  group: "firmware"
+                - partition: "hyp_b"
+                  file: "FP5-TT4H/images/hypvm.mbn"
+                  group: "firmware"
+                - partition: "imagefv_a"
+                  file: "FP5-TT4H/images/imagefv.elf"
+                  group: "firmware"
+                - partition: "imagefv_b"
+                  file: "FP5-TT4H/images/imagefv.elf"
+                  group: "firmware"
+                - partition: "keymaster_a"
+                  file: "FP5-TT4H/images/km41.mbn"
+                  group: "firmware"
+                - partition: "keymaster_b"
+                  file: "FP5-TT4H/images/km41.mbn"
+                  group: "firmware"
+                - partition: "logfs"
+                  file: "FP5-TT4H/images/logfs_ufs_8mb.bin"
+                  group: "firmware"
+                - partition: "modem_a"
+                  file: "FP5-TT4H/images/NON-HLOS.bin"
+                  group: "firmware"
+                - partition: "modem_b"
+                  file: "FP5-TT4H/images/NON-HLOS.bin"
+                  group: "firmware"
+                - partition: "multiimgoem_a"
+                  file: "FP5-TT4H/images/multi_image.mbn"
+                  group: "firmware"
+                - partition: "multiimgoem_b"
+                  file: "FP5-TT4H/images/multi_image.mbn"
+                  group: "firmware"
+                - partition: "qupfw_a"
+                  file: "FP5-TT4H/images/qupv3fw.elf"
+                  group: "firmware"
+                - partition: "qupfw_b"
+                  file: "FP5-TT4H/images/qupv3fw.elf"
+                  group: "firmware"
+                - partition: "rtice"
+                  file: "FP5-TT4H/images/rtice.mbn"
+                  group: "firmware"
+                - partition: "shrm_a"
+                  file: "FP5-TT4H/images/shrm.elf"
+                  group: "firmware"
+                - partition: "shrm_b"
+                  file: "FP5-TT4H/images/shrm.elf"
+                  group: "firmware"
+                - partition: "storsec"
+                  file: "FP5-TT4H/images/storsec.mbn"
+                  group: "firmware"
+                - partition: "study"
+                  file: "FP5-TT4H/images/study.tar"
+                  group: "firmware"
+                - partition: "studybk_a"
+                  file: "FP5-TT4H/images/study.tar"
+                  group: "firmware"
+                - partition: "studybk_b"
+                  file: "FP5-TT4H/images/study.tar"
+                  group: "firmware"
+                - partition: "tz_a"
+                  file: "FP5-TT4H/images/tz.mbn"
+                  group: "firmware"
+                - partition: "tz_b"
+                  file: "FP5-TT4H/images/tz.mbn"
+                  group: "firmware"
+                - partition: "uefisecapp_a"
+                  file: "FP5-TT4H/images/uefi_sec.mbn"
+                  group: "firmware"
+                - partition: "uefisecapp_b"
+                  file: "FP5-TT4H/images/uefi_sec.mbn"
+                  group: "firmware"
+                - partition: "xbl_a"
+                  file: "FP5-TT4H/images/xbl.elf"
+                  group: "firmware"
+                - partition: "xbl_b"
+                  file: "FP5-TT4H/images/xbl.elf"
+                  group: "firmware"
+                - partition: "xbl_config_a"
+                  file: "FP5-TT4H/images/xbl_config.elf"
+                  group: "firmware"
+                - partition: "xbl_config_b"
+                  file: "FP5-TT4H/images/xbl_config.elf"
+                  group: "firmware"
+
+                # Skip boot_a, boot_b; will be overwritten by UT
+                - partition: "dtbo_a"
+                  file: "FP5-TT4H/images/dtbo.img"
+                  group: "firmware"
+                - partition: "dtbo_b"
+                  file: "FP5-TT4H/images/dtbo.img"
+                  group: "firmware"
+                - partition: "super"
+                  file: "FP5-TT4H/images/super.img"
+                  group: "firmware"
+                - partition: "vbmeta_a"
+                  file: "FP5-TT4H/images/vbmeta.img"
+                  group: "firmware"
+                - partition: "vbmeta_b"
+                  file: "FP5-TT4H/images/vbmeta.img"
+                  group: "firmware"
+                - partition: "vbmeta_system_a"
+                  file: "FP5-TT4H/images/vbmeta_system.img"
+                  group: "firmware"
+                - partition: "vbmeta_system_b"
+                  file: "FP5-TT4H/images/vbmeta_system.img"
+                  group: "firmware"
+                # Skip vendor_boot_a, vendor_boot_b; will be overwritten by UT.
+
+                # "Wipe data" (except for actual userdata, which will be formatted later)
+                - partition: "metadata"
+                  file: "FP5-TT4H/images/metadata.img"
+                  group: "firmware"
+                - partition: "frp"
+                  file: "FP5-TT4H/images/frp_for_factory.img"
+                  group: "firmware"
+
+                # Ubuntu Touch recovery
                 - partition: "boot"
                   file: "boot.img"
                   group: "firmware"
@@ -122,8 +321,11 @@ operating_systems:
           - core:user_action:
               action: "fastbootd"
         condition:
-          var: "partition"
-          value: true
+          OR:
+            - var: "partition"
+              value: true
+            - var: "bootstrap"
+              value: true
       - actions:
           # Remove all unused logical partitions
           - fastboot:delete_logical_partition:
@@ -146,16 +348,22 @@ operating_systems:
               partition: "system_a"
               size: 3421225472
         condition:
-          var: "partition"
-          value: true
+          OR:
+            - var: "partition"
+              value: true
+            - var: "bootstrap"
+              value: true
       - actions:
           - fastboot:reboot_bootloader:
         fallback:
           - core:user_action:
               action: "bootloader_from_fastbootd"
         condition:
-          var: "partition"
-          value: true
+          OR:
+            - var: "partition"
+              value: true
+            - var: "bootstrap"
+              value: true
       ### Wipe userdata (if requested)
       - actions:
           - fastboot:erase:
