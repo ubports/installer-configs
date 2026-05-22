@@ -1,0 +1,321 @@
+name: "Volla Phone Plinius"
+codename: "ansuz"
+formfactor: "phone"
+user_actions:
+  recovery:
+    title: "Reboot to Recovery"
+    description: 'With the device powered off, hold Volume Down + Power. When prompted choose a boot mode using Volume Down to select "recovery" and confirm with Power button.'
+    image: "phone_power_up"
+    button: true
+  bootloader:
+    title: "Reboot to Bootloader"
+    description: 'With the device powered off, hold Volume Down + Power. When prompted choose a boot mode using Volume Down to select "fastboot" and confirm with Power button.'
+    image: "phone_power_up"
+    button: true
+unlock: []
+handlers:
+  bootloader_locked:
+    actions:
+      - fastboot:flashing_unlock:
+operating_systems:
+  - name: "Ubuntu Touch"
+    compatible_installer: ">=0.9.2-beta"
+    options:
+      - var: "channel"
+        name: "Channel"
+        tooltip: "The release channel"
+        link: "https://docs.ubports.com/en/latest/about/process/release-schedule.html"
+        type: "select"
+        remote_values:
+          systemimage:channels:
+      - var: "wipe"
+        name: "Wipe Userdata"
+        tooltip: "Wipe personal data. *Required* if switching from something (e.g. VollaOS) that isn't Ubuntu Touch."
+        type: "checkbox"
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Flash system partitions using fastboot. Do NOT uncheck unless you know exactly what you're doing!"
+        type: "checkbox"
+        value: true
+    prerequisites: []
+    steps:
+      # Firmware setup (bootstrap)
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://volla.tech/filedump/volla-ansuz-14.0-ubports-installer-bootstrap.zip"
+                  checksum:
+                    sum: "a8138800a258affdab7906d7cac11d34d63b7d860cd31c7cbf51692a82935da1"
+                    algorithm: "sha256"
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "volla-ansuz-14.0-ubports-installer-bootstrap.zip"
+                  dir: "unpacked"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+# FIXME: bring below back once "adb reboot bootloader" doesn't hang on UT side
+#          - adb:reboot:
+#              to_state: "bootloader"
+#        fallback:
+          - core:user_action:
+              action: "bootloader"
+        condition:
+          OR:
+            - var: "bootstrap"
+              value: true
+            - var: "wipe"
+              value: true
+      - actions:
+          - fastboot:set_active:
+              slot: "a"
+          - fastboot:flash:
+              partitions:
+                - partition: "apusys_a"
+                  file: "unpacked/apusys.img"
+                  group: "firmware"
+                - partition: "boot_a"
+                  file: "unpacked/boot.img"
+                  group: "firmware"
+                - partition: "ccu_a"
+                  file: "unpacked/ccu.img"
+                  group: "firmware"
+                - partition: "connsys_bt_a"
+                  file: "unpacked/connsys_bt.img"
+                  group: "firmware"
+                - partition: "connsys_gnss_a"
+                  file: "unpacked/connsys_gnss.img"
+                  group: "firmware"
+                - partition: "connsys_wifi_a"
+                  file: "unpacked/connsys_wifi.img"
+                  group: "firmware"
+                - partition: "dpm_a"
+                  file: "unpacked/dpm.img"
+                  group: "firmware"
+                - partition: "dtbo_a"
+                  file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "gpueb_a"
+                  file: "unpacked/gpueb.img"
+                  group: "firmware"
+                - partition: "gz_a"
+                  file: "unpacked/gz.img"
+                  group: "firmware"
+                - partition: "init_boot_a"
+                  file: "unpacked/init_boot.img"
+                  group: "firmware"
+                - partition: "lk_a"
+                  file: "unpacked/lk.img"
+                  group: "firmware"
+                - partition: "logo_a"
+                  file: "unpacked/logo.img"
+                  group: "firmware"
+                - partition: "mcf_ota_a"
+                  file: "unpacked/mcf_ota.img"
+                  group: "firmware"
+                - partition: "mcupm_a"
+                  file: "unpacked/mcupm.img"
+                  group: "firmware"
+                - partition: "modem_a"
+                  file: "unpacked/modem.img"
+                  group: "firmware"
+                - partition: "pi_img_a"
+                  file: "unpacked/pi_img.img"
+                  group: "firmware"
+                - partition: "preloader_a"
+                  file: "unpacked/preloader_k6878v1_64.bin"
+                  group: "firmware"
+                - partition: "scp_a"
+                  file: "unpacked/scp.img"
+                  group: "firmware"
+                - partition: "spmfw_a"
+                  file: "unpacked/spmfw.img"
+                  group: "firmware"
+                - partition: "sspm_a"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
+                - partition: "super"
+                  file: "unpacked/super.img"
+                  group: "firmware"
+                - partition: "tee_a"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "vbmeta_a"
+                  file: "unpacked/vbmeta.img"
+                  group: "firmware"
+                  flags: ["--disable-verity"]
+                - partition: "vcp_a"
+                  file: "unpacked/vcp.img"
+                  group: "firmware"
+                - partition: "vendor_boot_a"
+                  file: "unpacked/vendor_boot.img"
+                  group: "firmware"
+        condition:
+          var: "bootstrap"
+          value: true
+
+      # Optionally wipe userdata
+      - actions:
+          - fastboot:format:
+              partition: "userdata"
+              type: "ext4"
+        condition:
+          var: "wipe"
+          value: true
+
+      # Reboot to UBports recovery to install UT
+      - actions:
+          - fastboot:reboot_recovery:
+        fallback:
+          - core:user_action:
+              action: "recovery"
+        condition:
+          OR:
+            - var: "bootstrap"
+              value: true
+            - var: "wipe"
+              value: true
+      - actions:
+# FIXME: bring below back once "adb reboot recovery" doesn't hang on UT side
+#          - adb:reboot:
+#              to_state: "recovery"
+#        fallback:
+          - core:user_action:
+              action: "recovery"
+        condition:
+          var: "bootstrap"
+          value: false
+      - actions:
+          - systemimage:install:
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+    slideshow: []
+
+  - name: "Volla OS"
+    compatible_installer: ">=0.9.2-beta"
+    prerequisites: []
+    steps:
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://volla.tech/filedump/vollaos/volla-15.0-20260324-stable-BOOTSTRAP-ansuz.zip"
+                  checksum:
+                    sum: "5e3a7a116b9ec4ea7bcbd0a8639148ad26bd84cfaff0d3ab3a218d435b3536ea"
+                    algorithm: "sha256"
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "volla-15.0-20260324-stable-BOOTSTRAP-ansuz.zip"
+                  dir: "unpacked"
+      - actions:
+# FIXME: bring below back once "adb reboot bootloader" doesn't hang on UT side
+#          - adb:reboot:
+#              to_state: "bootloader"
+#        fallback:
+          - core:user_action:
+              action: "bootloader"
+      - actions:
+          - fastboot:set_active:
+              slot: "a"
+          - fastboot:flash:
+              partitions:
+                - partition: "apusys_a"
+                  file: "unpacked/apusys.img"
+                  group: "firmware"
+                - partition: "boot_a"
+                  file: "unpacked/boot.img"
+                  group: "firmware"
+                - partition: "ccu_a"
+                  file: "unpacked/ccu.img"
+                  group: "firmware"
+                - partition: "connsys_bt_a"
+                  file: "unpacked/connsys_bt.img"
+                  group: "firmware"
+                - partition: "connsys_gnss_a"
+                  file: "unpacked/connsys_gnss.img"
+                  group: "firmware"
+                - partition: "connsys_wifi_a"
+                  file: "unpacked/connsys_wifi.img"
+                  group: "firmware"
+                - partition: "dpm_a"
+                  file: "unpacked/dpm.img"
+                  group: "firmware"
+                - partition: "dtbo_a"
+                  file: "unpacked/dtbo.img"
+                  group: "firmware"
+                - partition: "gpueb_a"
+                  file: "unpacked/gpueb.img"
+                  group: "firmware"
+                - partition: "gz_a"
+                  file: "unpacked/gz.img"
+                  group: "firmware"
+                - partition: "init_boot_a"
+                  file: "unpacked/init_boot.img"
+                  group: "firmware"
+                - partition: "lk_a"
+                  file: "unpacked/lk.img"
+                  group: "firmware"
+                - partition: "logo_a"
+                  file: "unpacked/logo.img"
+                  group: "firmware"
+                - partition: "mcf_ota_a"
+                  file: "unpacked/mcf_ota.img"
+                  group: "firmware"
+                - partition: "mcupm_a"
+                  file: "unpacked/mcupm.img"
+                  group: "firmware"
+                - partition: "modem_a"
+                  file: "unpacked/modem.img"
+                  group: "firmware"
+                - partition: "pi_img_a"
+                  file: "unpacked/pi_img.img"
+                  group: "firmware"
+                - partition: "preloader_a"
+                  file: "unpacked/preloader.img"
+                  group: "firmware"
+                - partition: "scp_a"
+                  file: "unpacked/scp.img"
+                  group: "firmware"
+                - partition: "spmfw_a"
+                  file: "unpacked/spmfw.img"
+                  group: "firmware"
+                - partition: "sspm_a"
+                  file: "unpacked/sspm.img"
+                  group: "firmware"
+                - partition: "super"
+                  file: "unpacked/super.img"
+                  group: "firmware"
+                - partition: "tee_a"
+                  file: "unpacked/tee.img"
+                  group: "firmware"
+                - partition: "vbmeta_a"
+                  file: "unpacked/vbmeta.img"
+                  group: "firmware"
+                - partition: "vbmeta_system_a"
+                  file: "unpacked/vbmeta_system.img"
+                  group: "firmware"
+                - partition: "vbmeta_vendor"
+                  file: "unpacked/vbmeta_vendor.img"
+                  group: "firmware"
+                - partition: "vcp_a"
+                  file: "unpacked/vcp.img"
+                  group: "firmware"
+                - partition: "vendor_boot_a"
+                  file: "unpacked/vendor_boot.img"
+                  group: "firmware"
+          - fastboot:erase:
+              partition: "userdata"
+          - fastboot:reboot:
+    slideshow: []
+    eula:
+      title: "EULA"
+      description: "THE TERMS OF USE OF THE VOLLA OS ONLY ALLOW AN INSTALLATION ON A CLEARLY BRANDED VOLLA PHONE PLINIUS. To proceed with the installation you have to confirm that you have read and understood the End User License Agreement (EULA) of Volla Systeme GmbH for the Volla OS and agree to it."
+      link: "https://volla.online/en/eula/index.html"
