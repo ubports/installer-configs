@@ -137,7 +137,8 @@ operating_systems:
           # Increase space for system_a for UT installation
           - fastboot:resize_logical_partition:
               partition: "system_a"
-              size: 3221225472
+              # 4500MiB - matches new recovery
+              size: 4718592000
         condition:
           var: "partition"
           value: true
