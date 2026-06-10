@@ -1,8 +1,7 @@
-name: "Volla Phone 22 with new display"
+name: "Volla Phone 22"
 codename: "mimameid_h12"
 formfactor: "phone"
-# TODO: add "mimameid" to aliases once ready to migrate all users
-aliases: []
+aliases: ["mimameid"]
 user_actions:
   recovery:
     title: "Reboot to Recovery"
