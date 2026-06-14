@@ -94,11 +94,11 @@ operating_systems:
               files:
                 - url: "https://github.com/rubencarneiro/billie/releases/download/1.0/boot.img"
                   checksum:
-                    sum: "b5f3cd9f708ff986fe0cfb95ac47a4222c456a6d476279409c6c2417eda50234"
+                    sum: "3dd90e529b64ba447a149ef85c5f6a1d07ef2faba1886edc7eb7c4c260778d49"
                     algorithm: "sha256"
                 - url: "https://github.com/rubencarneiro/billie/releases/download/1.0/recovery.img"
                   checksum:
-                    sum: "d5d985ffdc93720d6f5702006a9dc488bd8f62f854347a6b6e08eef83832d5d4"
+                    sum: "7cb942cfd2f3730b5f9d49adc6151155dc8f984f5dc13a811ecaf824b535257a"
                     algorithm: "sha256"
                 - url: "https://github.com/rubencarneiro/billie/releases/download/1.0/persist.img"
                   checksum:
