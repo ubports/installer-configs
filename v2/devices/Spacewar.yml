@@ -1,19 +1,20 @@
-name: "F(x)tec Pro1 X"
-codename: "pro1x"
+name: "Nothing Phone 1"
+codename: "Spacewar"
 formfactor: "phone"
 aliases: []
-doppelgangers: ["pro1"]
+doppelgangers: []
 user_actions:
   confirm_model:
     title: "Confirm your model"
-    description: "Please check that your device is a F(x)tec Pro1-X."
+    description: "Please check that your device is a Nothing Phone 1 (Spacewar)."
   confirm_os:
     title: "Confirm OS version"
-    description: "Your device must be running the official version of Android 11 before installing Ubuntu Touch. With a previously installed custom ROM, it won't work!"
+    description: "Your device must be running stock NothingOS (NOS 3.2 is advised) before installing Ubuntu Touch. Any other type of ROM (custom) won't work! Click below on More... to download the latest fastboot flashable ROM. Ignore this step if your device is already running NOS 3.x"
+    link: "https://sourceforge.net/projects/nothingphone-1-rom/files/FastbootROM/Spacewar_FastbootROM_v3.0.0-250303-1817.7z/download"
   unlock_phone:
     title: "Unlock the bootloader"
-    description: "Before installing Ubuntu Touch you must unlock the bootloader of your phone manually. Follow the steps in the linked page if you haven't already."
-    link: "https://community.fxtec.com/topic/3617-pro1-x-oembootloader-lock-user-manual/"
+    description: "Before installing Ubuntu Touch, the bootloader must be unlocked first. Follow the steps in the linked page if you haven't already."
+    link: "https://xdaforums.com/t/nothing-phone-1-unlock-root-guide-howto.4470155"
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, press and hold the VOLUME DOWN button and plug the device into your PC via USB. After some seconds you'll see the fastboot mode."
@@ -91,9 +92,13 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://cdimage.ubports.com/devices/pro1x/recovery.img"
+                - url: "https://github.com/Nonta72/nothing-spacewar/releases/download/UT-24.02_v12/boot.img"
                   checksum:
-                    sum: "79eb3c3969343c6c969ce9eea2deab22ab140e29cd388df9345877b78cb80795"
+                    sum: "edab3d48c8d6847d82921c46e2fa59a9ae9b716d9d70c3ef1775c5ee1526e5da"
+                    algorithm: "sha256"
+                - url: "https://github.com/Nonta72/nothing-spacewar/releases/download/UT-24.02_v12/vendor_boot.img"
+                  checksum:
+                    sum: "5154479aa793b747e0cc2e649c84401af368a3d3aa50f8f795d3d8e1d81064d6"
                     algorithm: "sha256"
         condition:
           var: "bootstrap"
@@ -101,10 +106,12 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
-                - partition: "recovery"
-                  file: "recovery.img"
+                - partition: "boot"
+                  file: "boot.img"
                   group: "firmware"
-                  raw: true
+                - partition: "vendor_boot"
+                  file: "vendor_boot.img"
+                  group: "firmware"
         condition:
           var: "bootstrap"
           value: true
@@ -118,7 +125,7 @@ operating_systems:
           var: "partition"
           value: true
       - actions:
-          # Remove all unused logical partitions
+          # Remove all unused logical partitions. We really need vendor_a, system_a and odm_a.
           - fastboot:delete_logical_partition:
               partition: "system_ext_a"
           - fastboot:delete_logical_partition:
@@ -127,18 +134,17 @@ operating_systems:
               partition: "product_a"
           - fastboot:delete_logical_partition:
               partition: "product_b"
-          # Remove _b variants of used partitions
+          # Remove _b variants of used partitions as well
           - fastboot:delete_logical_partition:
               partition: "system_b"
           - fastboot:delete_logical_partition:
               partition: "vendor_b"
           - fastboot:delete_logical_partition:
               partition: "odm_b"
-          # Increase space for system_a for UT installation
+          # Increase space for system_a to 4GB for UT installation
           - fastboot:resize_logical_partition:
               partition: "system_a"
-              # 4500MiB - matches new recovery
-              size: 4718592000
+              size: 4294967296
         condition:
           var: "partition"
           value: true
@@ -151,6 +157,12 @@ operating_systems:
           var: "partition"
           value: true
       ### Wipe userdata (if requested)
+      - actions:
+          - fastboot:erase:
+              partition: "userdata"
+        condition:
+          var: "wipe"
+          value: true
       - actions:
           - fastboot:format:
               partition: "userdata"

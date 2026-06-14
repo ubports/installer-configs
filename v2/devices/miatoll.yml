@@ -58,7 +58,7 @@ operating_systems:
         type: "checkbox"
       - var: "partition"
         name: "Partitioning"
-        tooltip: "Changes partition sizes as required. Only necessary for first time installations of Focal 20.04."
+        tooltip: "Changes partition sizes as required. Only necessary if you are switching from Android and installing UT for the first time."
         type: "checkbox"
       - var: "bootstrap"
         name: "Bootstrap"
@@ -127,7 +127,7 @@ operating_systems:
           # Increase space for system_a for UT installation
           - fastboot:resize_logical_partition:
               partition: "system"
-              size: 3221225472
+              size: 3670016000
         condition:
           var: "partition"
           value: true
