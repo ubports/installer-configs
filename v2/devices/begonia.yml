@@ -20,7 +20,7 @@ user_actions:
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."
-    link: "https://en.miui.com/unlock/"
+    link: "https://en.miui.com/unlock/download_en.html"
   adb_bug:
     title: "Warning"
     description: "This device is known to have problems with adb push, so the installer will flash latest stable image. Please switch to desired channel afterwards in System Settings."

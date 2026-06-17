@@ -24,7 +24,7 @@ user_actions:
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."
-    link: "https://en.miui.com/unlock/"
+    link: "https://en.miui.com/unlock/download_en.html"
 unlock:
   - "confirm_model"
   - "confirm_firmware"

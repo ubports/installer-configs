@@ -20,7 +20,7 @@ user_actions:
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."
-    link: "https://en.miui.com/unlock/"
+    link: "https://en.miui.com/unlock/download_en.html"
   warning:
     title: "Warning"
     description: "The port is based on Android 9 firmware and vendor (V11.0.6.0.PEAMIXM). Current Recovery will be replaced with Ubports Recovery! Remember to flash the latest firmware when reverting to latest Android builds!"

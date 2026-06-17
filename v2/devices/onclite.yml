@@ -21,7 +21,7 @@ user_actions:
   unlock:
     title: "OEM unlock"
     description: "If you haven't done so already, make sure to OEM unlock your device first."
-    link: "https://en.miui.com/unlock/"
+    link: "https://en.miui.com/unlock/download_en.html"
   cutie_notice:
     title: "Cutie Shell: Notice"
     description: "You selected to install Droidian with Cutie Shell. Cutie Shell is still pre-alpha quality and it is not suitable for production environments. Keep in mind that Cutie Shell is not officially supported or endorsed by Droidian. This edition is maintained directly by Cutie Shell Community Project and you should report any bugs with these images at Cutie Shell Community Project before filing upstream."
