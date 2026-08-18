@@ -1,0 +1,30 @@
+name: "Samsung Galaxy S20+ (Exynos)"
+codename: "y2slte"
+formfactor: "phone"
+aliases:
+  - "y2slte"
+note: "CRITICAL: 1. Boot TWRP, wipe Cache/Dalvik/Internal, format Data to ext4. 2. Reboot to Download Mode and begin installation. 3. When the installer hangs after flashing the boot image, manually reboot back into TWRP so it can push the rootfs over ADB."
+operating_systems:
+  - name: "Ubuntu Touch"
+    versions:
+      - name: "Devel (Community Port)"
+        steps:
+          - type: "download"
+            group: "firmware"
+            files:
+              - url: "https://github.com/RaphaelSolis/Ubuntu-Touch-Y2S/releases/download/v1.0-devel/boot.img"
+                checksum: ""
+                name: "boot.img"
+              - url: "https://github.com/RaphaelSolis/Ubuntu-Touch-Y2S/releases/download/v1.0-devel/ubuntu-rootfs.tar.gz"
+                checksum: ""
+                name: "ubuntu-rootfs.tar.gz"
+          - type: "heimdall"
+            action: "flash"
+            partition: "boot"
+            file: "boot.img"
+            group: "firmware"
+          - type: "halium"
+            action: "install"
+            rootfs: "ubuntu-rootfs.tar.gz"
+            group: "firmware"
+
