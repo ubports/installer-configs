@@ -1,0 +1,209 @@
+name: "Google Pixel 9a"
+codename: "tegu"
+formfactor: "phone"
+aliases: ["tegu"]
+doppelgangers: []
+user_actions:
+  confirm_model:
+    title: "Confirm your model"
+    description: "Please check that your device is a Pixel 9a (tegu)."
+  confirm_os:
+    title: "Confirm OS version"
+    description: "Your device must be running the last version of Android 16 (CP1A.260505.005 for worldwide models) before installing another operating system. With a previously installed custom ROM, it won't work!"
+    link: "https://developers.google.com/android/images#tegu"
+  unlock_phone:
+    title: "Unlock the bootloader"
+    description: "Before installing another operating system you must unlock the bootloader of your phone manually. Follow the steps in the linked page if you haven't already."
+  bootloader:
+    title: "Reboot to Bootloader"
+    description: "With the device powered off, press and hold the Power and the Volume Down buttons until a menu appears. You'll see the fastboot mode."
+    image: "phone_power_down"
+    button: true
+  bootloader_from_fastbootd:
+    title: "Reboot to Bootloader"
+    description: 'With the device still at the fastbootd screen, use the volume buttons to select "Reboot to bootloader".'
+    image: "phone_power_down"
+    button: true
+  recovery:
+    title: "Reboot to Recovery"
+    description: 'With the device still at the "FastBoot Mode", use the Volume buttons to switch to "Recovery Mode" and push the power button to confirm your selection.'
+    image: "phone_power_up"
+    button: true
+  fastbootd:
+    title: "Reboot to fastbootd mode"
+    description: 'With the device still at the "FastBoot Mode", use the Volume buttons to switch to "Recovery Mode" and push the power button to confirm your selection. Then select "Fastboot mode" from the list.'
+    image: "phone_power_up"
+    button: true
+unlock:
+  - "confirm_model"
+  - "confirm_os"
+  - "unlock_phone"
+operating_systems:
+  - name: "Ubuntu Touch"
+    compatible_installer: ">=0.9.6-beta"
+    options:
+      - var: "channel"
+        name: "Channel"
+        tooltip: "The release channel"
+        link: "https://docs.ubports.com/en/latest/about/process/release-schedule.html"
+        type: "select"
+        remote_values:
+          systemimage:channels:
+      - var: "wipe"
+        name: "Wipe Userdata"
+        tooltip: "Wipe personal data. This is necessary for first time installations."
+        type: "checkbox"
+      - var: "partition"
+        name: "Partitioning"
+        tooltip: "Changes partition sizes as required. Only necessary for first time installations."
+        type: "checkbox"
+        value: true
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Flash system partitions using fastboot"
+        type: "checkbox"
+        value: true
+    prerequisites: []
+    steps:
+      ### Ensure we always start in bootloader mode
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      ### Ensure the bootloader has been unlocked already
+      - actions:
+          - fastboot:wait:
+      - actions:
+          - fastboot:assert_var:
+              variable: "unlocked"
+              value: "yes"
+        fallback:
+          - core:user_action:
+              action: "unlock_phone"
+      ### As this is an A/B device, force all future operations in "a" slot.
+      - actions:
+          - fastboot:set_active:
+              slot: "a"
+      ### Flash important partitions (if requested)
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://cdimage.ubports.com/devices/tegu/2026-08-27/boot.img"
+                  checksum:
+                    sum: "948783e6ced60b900060e24d4a1e07a17bb880fe1d884d48c83d9b1040083759"
+                    algorithm: "sha256"
+                - url: "https://cdimage.ubports.com/devices/tegu/2026-08-27/vendor_boot.img"
+                  checksum:
+                    sum: "15dc8553fd8cd133f8227d0c0fb1a981acffc8270f7f72123f2ea2c2ed83e3bf"
+                    algorithm: "sha256"
+                - url: "https://cdimage.ubports.com/devices/tegu/2026-08-27/dtbo.img"
+                  checksum:
+                    sum: "91def60a6759fe5a5dc1ec37a062e131ecaef6883dbba8f4e6ce5e654a0645e3"
+                    algorithm: "sha256"
+                - url: "https://cdimage.ubports.com/devices/tegu/2026-08-27/init_boot.img"
+                  checksum:
+                    sum: "77e95fa2670b7dc4f86e53709fc7394c293e95e191b867d72c85b890b86f3690"
+                    algorithm: "sha256"
+                - url: "https://cdimage.ubports.com/devices/tegu/2026-08-27/vendor_kernel_boot.img"
+                  checksum:
+                    sum: "ceebf13651c6e43afa661d29b09fd01b3c7ee9e030cd4cc4bd06852d103640af"
+                    algorithm: "sha256"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "boot"
+                  file: "boot.img"
+                  group: "firmware"
+                - partition: "dtbo"
+                  file: "dtbo.img"
+                  group: "firmware"
+                - partition: "init_boot"
+                  file: "init_boot.img"
+                  group: "firmware"
+                - partition: "vendor_boot"
+                  file: "vendor_boot.img"
+                  group: "firmware"
+                - partition: "vendor_kernel_boot"
+                  file: "vendor_kernel_boot.img"
+                  group: "firmware"
+        condition:
+          var: "bootstrap"
+          value: true
+      ### Set up logical partitions (if requested)
+      - actions:
+          - fastboot:reboot_fastboot:
+        fallback:
+          - core:user_action:
+              action: "fastbootd"
+        condition:
+          var: "partition"
+          value: true
+      - actions:
+          # Remove all unused logical partitions
+          - fastboot:delete_logical_partition:
+              partition: "system_ext_a"
+          - fastboot:delete_logical_partition:
+              partition: "system_ext_b"
+          - fastboot:delete_logical_partition:
+              partition: "product_a"
+          - fastboot:delete_logical_partition:
+              partition: "product_b"
+          # Remove _b variants of used partitions
+          - fastboot:delete_logical_partition:
+              partition: "system_b"
+          - fastboot:delete_logical_partition:
+              partition: "vendor_b"
+          - fastboot:delete_logical_partition:
+              partition: "odm_b"
+          # Increase space for system_a for UT installation
+          - fastboot:resize_logical_partition:
+              partition: "system_a"
+              # 4500MiB - matches new recovery.
+              size: 4718592000
+        condition:
+          var: "partition"
+          value: true
+      - actions:
+          - fastboot:reboot_bootloader:
+        fallback:
+          - core:user_action:
+              action: "bootloader_from_fastbootd"
+        condition:
+          var: "partition"
+          value: true
+      ### Wipe userdata (if requested)
+      - actions:
+          - fastboot:erase:
+              partition: "userdata"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - fastboot:format:
+              partition: "userdata"
+              type: "ext4"
+        condition:
+          var: "wipe"
+          value: true
+      ### Systemimage installation steps
+      - actions:
+          - fastboot:reboot_recovery:
+        fallback:
+          - core:user_action:
+              action: "recovery"
+      - actions:
+          - systemimage:install:
+              verify_recovery: true
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+    slideshow: []
