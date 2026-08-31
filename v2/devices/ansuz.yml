@@ -44,14 +44,14 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://volla.tech/filedump/volla-ansuz-14.0-ubports-installer-bootstrap-v2.zip"
+                - url: "https://volla.tech/filedump/volla-ansuz-14.0-ubports-installer-bootstrap-v3.zip"
                   checksum:
-                    sum: "0b6af6ce3fe535c73f95d6a52a548ed3cbe057fa3b68d0969167723be5fed1af"
+                    sum: "b0f05235ea8e73cda5809f68f739ec59696e13c702298b2db1f1e2c795d7cdf2"
                     algorithm: "sha256"
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "volla-ansuz-14.0-ubports-installer-bootstrap-v2.zip"
+                - archive: "volla-ansuz-14.0-ubports-installer-bootstrap-v3.zip"
                   dir: "unpacked"
         condition:
           var: "bootstrap"
