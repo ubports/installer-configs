@@ -31,7 +31,7 @@ user_actions:
   unlock:
     title: "Unlock the bootloader"
     description: "You have to unlock the bootloader to install third-party operating systems on your device."
-    link: "https://developer.sony.com/develop/open-devices/get-started/unlock-bootloader/"
+    link: "https://opendevices.sony.net/aosp-on-xperia-open-devices/get-started/unlock-bootloader"
   upgrade_android:
     title: "Upgrade Android"
     description: "If the device is running Android, you might have to upgrade to Android 8.0."
@@ -44,7 +44,7 @@ handlers:
   bootloader_locked:
     actions:
       - fastboot:oem_unlock:
-          code_url: "https://developer.sony.com/develop/open-devices/get-started/unlock-bootloader/"
+          code_url: "https://opendevices.sony.net/aosp-on-xperia-open-devices/get-started/unlock-bootloader"
 operating_systems:
   - name: "Ubuntu Touch"
     compatible_installer: ">=0.9.2-beta"
@@ -73,7 +73,7 @@ operating_systems:
               group: "firmware"
               file:
                 name: "SW_binaries_for_Xperia_AOSP_N_MR1_5.7_r1_v08_loire.zip"
-                url: "https://developer.sony.com/file/download/software-binaries-for-aosp-nougat-android-7-1-kernel-4-4-loire/"
+                url: "https://opendevices.sony.net/file/download/software-binaries-for-aosp-nougat-android-7-1-kernel-4-4-loire/"
                 checksum:
                   sum: "9d9d6df01f0816e74b386daf82658768a54e515161ee9fb907a7aae292167e51"
                   algorithm: "sha256"
