@@ -25,6 +25,13 @@ user_actions:
       With the device still at the "Fastboot Mode" (green), use the Volume buttons to switch to "Recovery Mode" (red) and push the power button to confirm your selection.
     image: "phone_power_up"
     button: true
+  lvm-migration:
+    title: "LVM Migration"
+    description: >
+      On first install of the new recovery, we need to increase the available size for the rootfs.
+        When recovery is booted, wait until "lvm-migration" is finished. Watch the log output in the bottom of the device.
+        If there is no output at all or when it displays, that it is finished, push the "Continue"-Button in the installer.
+    button: true
 unlock:
   - "confirm_model"
   - "confirm_os"
@@ -35,7 +42,7 @@ handlers:
           code_url: "https://www.fairphone.com/en/bootloader-unlocking-code-for-fairphone/"
 operating_systems:
   - name: "Ubuntu Touch"
-    compatible_installer: ">=0.9.2-beta"
+    compatible_installer: ">=0.9.4-beta"
     options:
       - var: "channel"
         name: "Channel"
@@ -86,14 +93,6 @@ operating_systems:
         fallback:
           - core:user_action:
               action: "bootloader"
-        condition:
-          var: "bootstrap"
-          value: true
-      - actions:
-          - fastboot:wait:
-        condition:
-          var: "bootstrap"
-          value: true
       - actions:
           - fastboot:flash:
               partitions:
@@ -118,22 +117,20 @@ operating_systems:
           var: "wipe"
           value: true
       - actions:
-          - core:user_action:
-              action: "recovery"
-        condition:
-          var: "bootstrap"
-          value: true
-      - actions:
           - adb:reboot:
               to_state: "recovery"
         fallback:
           - core:user_action:
               action: "recovery"
+      - actions:
+          - core:user_action:
+              action: "lvm-migration"
         condition:
           var: "bootstrap"
-          value: false
+          value: true
       - actions:
           - systemimage:install:
+              verify_recovery: true
       - actions:
           - adb:reboot:
               to_state: "recovery"
