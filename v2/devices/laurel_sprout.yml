@@ -62,13 +62,13 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://fs.nightcore.monster/ubports/laurel_sprout/boot.img"
+                - url: "https://github.com/nikhilsamant/laurel-sprout/releases/download/UT-24.04-1.x_v4/boot.img"
                   checksum:
-                    sum: "89876301997f4299d27be397a9544d1b2dc5afd145cbba866b83ebb8b1c14816"
+                    sum: "88033a79e7caef5f5349e9a9bf84bc6a6e02023255d704dbf4df50ba90b765b3"
                     algorithm: "sha256"
-                - url: "https://fs.nightcore.monster/ubports/laurel_sprout/dtbo.img"
+                - url: "https://github.com/nikhilsamant/laurel-sprout/releases/download/UT-24.04-1.x_v4/dtbo.img"
                   checksum:
-                    sum: "a0266fba49eb2d3ed035a1e0fc87759eba1ad9ffd247e35e50229f45d3698629"
+                    sum: "e32bfe561cde7e26b8bb3ae126e40fc3da35c7b056e53953b1c125f2560aabf9"
                     algorithm: "sha256"
                 - url: "https://fs.nightcore.monster/ubports/laurel_sprout/vbmeta.img"
                   checksum:
@@ -156,9 +156,9 @@ operating_systems:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://fs.nightcore.monster/ubports/laurel_sprout/dtbo.img"
+                - url: "https://github.com/nikhilsamant/laurel-sprout/releases/download/UT-24.04-1.x_v4/dtbo.img"
                   checksum:
-                    sum: "a0266fba49eb2d3ed035a1e0fc87759eba1ad9ffd247e35e50229f45d3698629"
+                    sum: "e32bfe561cde7e26b8bb3ae126e40fc3da35c7b056e53953b1c125f2560aabf9"
                     algorithm: "sha256"
       - actions:
           - adb:reboot:
