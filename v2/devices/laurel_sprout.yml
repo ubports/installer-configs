@@ -9,11 +9,8 @@ user_actions:
     description: "Please double-check that your device is a Xiaomi Mi A3 (laurel_sprout). Xiaomi Mi CC9e is NOT supported."
   confirm_os:
     title: "Confirm OS version"
-    description: "Your device must be running the stock Android 9 firmware before flashing. If your device is running Android 11 officially, DO NOT ATTEMPT TO ROLLBACK TO ANDROID 9. Doing so will render your device unusable. If your device is running Android 10, download the Android 9 firmware linked below and flash it to your device, then resume the installation."
-    link: "http://bigota.d.miui.com/V10.3.16.0.PFQMIXM/laurel_sprout_global_images_V10.3.16.0.PFQMIXM_20200324.0000.00_9.0_4a60d662bd.tgz"
-  troubleshooting:
-    title: "Post-Install troubleshooting"
-    description: 'If after installing Ubuntu Touch you can''t connect to Wi-Fi, pair Bluetooth devices or use cellular data, run the installer again and pick "Reflash dtbo" when you''re prompted to select an OS.'
+    description: "Your device must be running the stock Android 11 firmware (MIUI V12.0.26.0.RFQMIXM) before flashing. If your device is running Android 9 or 10, download the Android 11 firmware linked below, flash it to your device, then resume the installation."
+    link: "https://bn.d.miui.com/V12.0.26.0.RFQMIXM/laurel_sprout_global_images_V12.0.26.0.RFQMIXM_20220808.0000.00_11.0_2292e2c0b1.tgz"
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, press and hold the VOLUME DOWN and POWER buttons until the screen turns on"
@@ -31,7 +28,6 @@ user_actions:
 unlock:
   - "confirm_model"
   - "confirm_os"
-  - "troubleshooting"
 handlers:
   bootloader_locked:
     actions:
