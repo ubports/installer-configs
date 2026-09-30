@@ -9,27 +9,31 @@ user_actions:
     description: "Please make sure, that your device is a Lenovo Smart Tab M10 X605L or X605F with at least 3GB RAM. For the 2GB/16GB models, the installer won't work!"
   confirm_os:
     title: "Confirm OS version"
-    description: "Your device must be running Android 9 before installing Ubuntu Touch. This seems to be already the case for the most devices of this type. But if you still need to flash the Android 9 stock rom, please see the install section in the link below:"
+    description: >
+      Your device must be running Android 9 before installing Ubuntu Touch. This seems to be already the case for the most devices of this type. 
+      But if you still need to flash the Android 9 stock rom, please see the install section in the link below:
     link: "https://gitlab.com/ubports/porting/community-ports/android9/lenovo-tab-m10-fhd/lenovo-x605#install-first-time"
   bootloader:
     title: "Reboot to Bootloader"
-    description: "With the device powered off, press and hold the VOLUME DOWN and POWER buttons at the same time until the device turns on. The bootloader mode is indicated by the red 'Fastboot Mode' text in the left down corner."
+    description: >
+      With the device powered off, press and hold the VOLUME DOWN and POWER buttons at the same time until the device turns on. 
+      The bootloader mode is indicated by the red 'Fastboot Mode' text in the left down corner.
     image: "phone_power_down"
     button: true
   recovery:
     title: "Reboot to Recovery"
-    description:
-      "Booting to recovery is not a very reliable process on this device. So you need to turn off the device first:
+    description: >
+      Booting to recovery is not a very reliable process on this device. So you need to turn off the device first:
       Unplug USB-cable and press and hold the POWER button until display turns off. If it is rebooting, repeat this until the device stays off!
       If it is off, press and hold the VOLUME UP, VOLUME DOWN and the POWER buttons at the same time until it boots.
-      Then only release the POWER button and keep holding the VOLUME buttons until the UBports recovery appears."
+      Then only release the POWER button and keep holding the VOLUME buttons until the UBports recovery appears.
     button: true
   lvm-migration:
     title: "LVM Migration"
     description: >
       On first install of the new recovery, we need to increase the available size for the rootfs.
-        When recovery is booted, wait until "lvm-migration" is finished. Watch the log output in the bottom of the device.
-        If there is no output at all or when it displays, that it is finished, push the "Continue"-Button in the installer.
+      When recovery is booted, wait until "lvm-migration" is finished. Watch the log output in the bottom of the device.
+      If there is no output at all or when it displays, that it is finished, push the "Continue"-Button in the installer.
     button: true
 unlock:
   - "confirm_model"
