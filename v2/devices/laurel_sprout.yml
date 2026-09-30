@@ -70,10 +70,6 @@ operating_systems:
                   checksum:
                     sum: "e32bfe561cde7e26b8bb3ae126e40fc3da35c7b056e53953b1c125f2560aabf9"
                     algorithm: "sha256"
-                - url: "https://fs.nightcore.monster/ubports/laurel_sprout/vbmeta.img"
-                  checksum:
-                    sum: "65f5493e01ede7e538a14df063013a921ecd122680c7d3b3598d46fc7a916517"
-                    algorithm: "sha256"
         condition:
           var: "bootstrap"
           value: true
@@ -109,9 +105,6 @@ operating_systems:
       - actions:
           - fastboot:flash:
               partitions:
-                - partition: "vbmeta_a"
-                  file: "vbmeta.img"
-                  group: "firmware"
                 - partition: "boot_a"
                   file: "boot.img"
                   group: "firmware"
