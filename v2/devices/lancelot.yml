@@ -1,6 +1,8 @@
-name: "Xiaomi Redmi 9 and 9 Prime"
+name: "Xiaomi Redmi 9 and 9 Prime - Poco M2"
 codename: "lancelot"
-aliases: ["galahad"]
+aliases:
+  - "galahad"
+  - "shiva"
 formfactor: "phone"
 doppelgangers: []
 user_actions:
