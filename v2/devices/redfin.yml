@@ -1,0 +1,217 @@
+name: "Google Pixel 5"
+codename: "redfin"
+formfactor: "phone"
+aliases: ["redfin"]
+doppelgangers: []
+user_actions:
+  confirm_model:
+    title: "Confirm your model"
+    description: "Please check that your device is a Pixel 5 (redfin)."
+  confirm_os:
+    title: "Confirm OS version"
+    description: "Your device must be running the last version of Android 13 (TQ3A.230901.001) before installing Ubuntu Touch. It won't work with a different Android version or a previously installed custom ROM!"
+    link: "https://developers.google.com/android/images#redfin"
+  unlock_phone:
+    title: "Unlock the bootloader"
+    description: "Before installing Ubuntu Touch you must unlock the bootloader of your phone manually. Follow the steps in the linked page if you haven't already."
+    link: "https://source.android.com/docs/core/architecture/bootloader/locking_unlocking"
+  bootloader:
+    title: "Reboot to Bootloader"
+    description: "With the device powered off, press and hold the Power and the Volume Down buttons until a menu appears. You'll see the fastboot mode."
+    image: "phone_power_down"
+    button: true
+  fastbootd:
+    title: "Reboot to fastbootd mode"
+    description: 'With the device still at the "Fastboot Mode", use the Volume buttons to switch to "Recovery Mode" and push the power button to confirm your selection. At the "No command" screen, hold Power and press Volume Up once, then select "Enter fastboot".'
+    image: "phone_power_up"
+    button: true
+  bootloader_from_fastbootd:
+    title: "Reboot to Bootloader"
+    description: 'With the device still at the fastbootd screen, use the volume buttons to select "Reboot to bootloader".'
+    image: "phone_power_down"
+    button: true
+  recovery:
+    title: "Reboot to Recovery"
+    description: 'With the device still at the "Fastboot Mode", use the Volume buttons to switch to "Recovery Mode" and push the power button to confirm your selection.'
+    image: "phone_power_up"
+    button: true
+unlock:
+  - "confirm_model"
+  - "confirm_os"
+  - "unlock_phone"
+operating_systems:
+  - name: "Ubuntu Touch"
+    compatible_installer: ">=0.9.6-beta"
+    options:
+      - var: "channel"
+        name: "Channel"
+        tooltip: "The release channel"
+        link: "https://docs.ubports.com/en/latest/about/process/release-schedule.html"
+        type: "select"
+        remote_values:
+          systemimage:channels:
+      - var: "wipe"
+        name: "Wipe Userdata"
+        tooltip: "Wipe personal data. This is necessary for first time installations."
+        type: "checkbox"
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Repartition and flash system partitions using fastboot"
+        type: "checkbox"
+        value: true
+    prerequisites: []
+    steps:
+      ### Ensure we always start in bootloader mode
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      ### Ensure the bootloader has been unlocked already
+      - actions:
+          - fastboot:wait:
+      - actions:
+          - fastboot:assert_var:
+              variable: "unlocked"
+              value: "yes"
+        fallback:
+          - core:user_action:
+              action: "unlock_phone"
+      ### As this is an A/B device, force all future operations in "a" slot.
+      - actions:
+          - fastboot:set_active:
+              slot: "a"
+      ### Download images (if requested)
+      # vendor.img comes from Google's factory image, which matches the
+      # firmware required by confirm_os.
+      - actions:
+          - core:download:
+              group: "stock"
+              files:
+                - url: "https://dl.google.com/dl/android/aosp/redfin-tq3a.230901.001-factory-308061bf.zip"
+                  checksum:
+                    sum: "308061bf6961ade40cae773395e01e5ca05fc8ebb554d4c56c42057b1022ec2e"
+                    algorithm: "sha256"
+          - core:unpack:
+              group: "stock"
+              files:
+                - archive: "redfin-tq3a.230901.001-factory-308061bf.zip"
+                  dir: "unpacked"
+          - core:unpack:
+              group: "stock"
+              files:
+                - archive: "unpacked/redfin-tq3a.230901.001/image-redfin-tq3a.230901.001.zip"
+                  dir: "unpacked"
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://gitlab.com/api/v4/projects/86602822/jobs/artifacts/master/download?job=build"
+                  name: "artifacts.zip"
+                - url: "https://gitlab.com/ubports/porting/community-ports/android13/google-pixel-5/google-redfin/-/raw/0f43a2a4384357c129cfd7d3a2d79fb34120e9ae/super_empty.img"
+                  name: "super_empty.img"
+                  checksum:
+                    sum: "6c56bbb8c4b264dc7d99bf4d57bb28e6a68db7419b7c215d78c75a288592ab0a"
+                    algorithm: "sha256"
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "artifacts.zip"
+                  dir: "unpacked"
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "unpacked/out/device_redfin.tar.xz"
+                  dir: "unpacked"
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "unpacked/device_redfin.tar"
+                  dir: "unpacked"
+        condition:
+          var: "bootstrap"
+          value: true
+      ### Set up logical partitions (if requested)
+      - actions:
+          - fastboot:reboot_fastboot:
+        fallback:
+          - core:user_action:
+              action: "fastbootd"
+        condition:
+          var: "bootstrap"
+          value: true
+      - actions:
+          # We need to increase slot a's cap
+          - fastboot:wipe_super:
+              image:
+                file: "super_empty.img"
+                group: "firmware"
+          # Wiping super empties vendor_a too, so put it back
+          - fastboot:flash:
+              partitions:
+                - partition: "vendor_a"
+                  file: "unpacked/vendor.img"
+                  group: "stock"
+          # 4500MiB
+          - fastboot:resize_logical_partition:
+              partition: "system_a"
+              size: 4718592000
+        condition:
+          var: "bootstrap"
+          value: true
+      ### Wipe userdata (if requested)
+      - actions:
+          - fastboot:erase:
+              partition: "userdata"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - fastboot:format:
+              partition: "userdata"
+              type: "ext4"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - fastboot:reboot_bootloader:
+        fallback:
+          - core:user_action:
+              action: "bootloader_from_fastbootd"
+        condition:
+          var: "bootstrap"
+          value: true
+      ### Flash Ubuntu Touch boot images (if requested)
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "boot"
+                  file: "unpacked/partitions/boot.img"
+                  group: "firmware"
+                - partition: "vendor_boot"
+                  file: "unpacked/partitions/vendor_boot.img"
+                  group: "firmware"
+                - partition: "dtbo"
+                  file: "unpacked/partitions/dtbo.img"
+                  group: "firmware"
+          - fastboot:set_active:
+              slot: "a"
+        condition:
+          var: "bootstrap"
+          value: true
+      ### Systemimage installation steps
+      - actions:
+          - fastboot:reboot_recovery:
+        fallback:
+          - core:user_action:
+              action: "recovery"
+      - actions:
+          - systemimage:install:
+              verify_recovery: true
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+    slideshow: []
