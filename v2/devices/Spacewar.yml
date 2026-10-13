@@ -25,6 +25,11 @@ user_actions:
     description: 'With the device still at the fastbootd screen, use the volume buttons to select "Reboot to bootloader".'
     image: "phone_power_down"
     button: true
+  bootloader_after_unlock:
+    title: "Reboot to Bootloader"
+    description: "Wait for the phone to finish booting. When you see the setup screen, power off the device. With the device powered off, press and hold the VOLUME DOWN button and plug the device into your PC via USB. After some seconds you'll see the fastboot mode."
+    image: "phone_power_down"
+    button: true
   recovery:
     title: "Reboot to Recovery"
     description: 'With the device still at the "FastBoot Mode", use the Volume buttons to switch to "Recovery Mode" and push the power button to confirm your selection.'
@@ -81,8 +86,9 @@ operating_systems:
               variable: "unlocked"
               value: "yes"
         fallback:
+          - fastboot:flashing_unlock:
           - core:user_action:
-              action: "unlock_phone"
+              action: "bootloader_after_unlock"
       ### As this is an A/B device, force all future operations in "a" slot.
       - actions:
           - fastboot:set_active:
