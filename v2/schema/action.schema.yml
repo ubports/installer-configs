@@ -599,12 +599,12 @@ properties:
     description: "Install LineageOS images."
     type: "null"
 
-  ###############################
-  # postmarketOS plugin #########
-  ###############################
+  #######################################
+  # Nura (postmarketOS) plugin #########
+  #######################################
   postmarketos:download:
     title: "postmarketos:download action"
-    description: "Download postmarketOS image files."
+    description: "Download Nura image files."
     type: "null"
 
   ###############################

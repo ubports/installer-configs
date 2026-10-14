@@ -198,21 +198,21 @@ operating_systems:
               action: "recovery"
     slideshow: []
 
-  - name: "postmarketOS"
+  - name: "Nura"
     codename: "fairphone-fp4"
     compatible_installer: ">=0.9.8-beta"
     options:
       - var: "release"
         name: "Release"
-        tooltip: "The postmarketOS release"
-        link: "https://wiki.postmarketos.org/wiki/Releases"
+        tooltip: "The Nura release"
+        link: "https://wiki.nura.eco/wiki/Releases"
         type: "select"
         remote_values:
           postmarketos:releases:
       - var: "interface"
         name: "User Interface"
         tooltip: "The user interface"
-        link: "https://wiki.postmarketos.org/wiki/Category:Interface"
+        link: "https://wiki.nura.eco/wiki/Category:Interface"
         type: "select"
         remote_values:
           postmarketos:interfaces:
