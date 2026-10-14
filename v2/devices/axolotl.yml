@@ -361,26 +361,26 @@ operating_systems:
 
   ##################################################################################################
 
-  - name: "postmarketOS"
+  - name: "Nura"
     compatible_installer: ">=0.9.7-beta"
     options:
       - var: "release"
         name: "Release"
-        tooltip: "The postmarketOS release"
-        link: "https://wiki.postmarketos.org/wiki/Releases"
+        tooltip: "The Nura release"
+        link: "https://wiki.nura.eco/wiki/Releases"
         type: "select"
         remote_values:
           postmarketos:releases:
       - var: "interface"
         name: "User Interface"
         tooltip: "The user interface"
-        link: "https://wiki.postmarketos.org/wiki/Category:Interface"
+        link: "https://wiki.nura.eco/wiki/Category:Interface"
         type: "select"
         remote_values:
           postmarketos:interfaces:
       - var: "notice"
         name: "Notice"
-        tooltip: "This will install postmarketOS onto your userdata partition. All data on it will be lost. To reduce anxiety, you may check and uncheck the checkbox a few times."
+        tooltip: "This will install Nura onto your userdata partition. All data on it will be lost. To reduce anxiety, you may check and uncheck the checkbox a few times."
         type: "checkbox"
         value: false
     prerequisites: []
@@ -404,7 +404,7 @@ operating_systems:
 
       ######################################################################
       ###
-      ### postmarketOS installation steps
+      ### Nura installation steps
       ###
       # 1) Erase dtbo as it conflicts with the mainline boot image
       - actions:
@@ -423,7 +423,7 @@ operating_systems:
                 - partition: "boot"
                   file: "boot.img"
                   group: "postmarketOS"
-      # 4) Reboot to start into postmarketOS
+      # 4) Reboot to start into Nura
       - actions:
           - fastboot:reboot:
       ###

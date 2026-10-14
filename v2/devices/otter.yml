@@ -13,7 +13,7 @@ user_actions:
   unlock_phone:
     title: "Unlock the bootloader"
     description: "Before installing another operating system you must unlock the bootloader of your phone manually. Follow the steps in the linked page if you haven't already."
-    link: "https://wiki.postmarketos.org/wiki/SHIFT_SHIFTphone_8_(shift-otter)#Unlock_bootloader"
+    link: "https://wiki.nura.eco/wiki/SHIFT_SHIFTphone_8_(shift-otter)#Unlock_bootloader"
   bootloader:
     title: "Reboot to Bootloader"
     description: "With the device powered off, hold Volume Up + Power."
