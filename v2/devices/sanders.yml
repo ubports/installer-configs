@@ -1,0 +1,105 @@
+name: "Motorola Moto G5S Plus"
+codename: "sanders"
+formfactor: "phone"
+aliases: []
+doppelgangers: []
+user_actions:
+  confirm_model:
+    title: "Confirm your model"
+    description: "Please check that your device is a Moto G5S Plus (sanders: XT1802, XT1803, XT1804, XT1805 or XT1806)."
+  backup:
+    title: "Back up your device"
+    description: "Installing replaces Android completely. Before you continue, back up the persist, modemst1, modemst2 and fsg partitions (for example with a custom recovery). They hold your IMEI, calibration and carrier data, which can't be recovered from anywhere else."
+  unlock_phone:
+    title: "Unlock the bootloader"
+    description: "Ubuntu Touch can only be installed on a device with an unlocked bootloader. Request an unlock code from Motorola and unlock the bootloader first."
+    link: "https://en-us.support.motorola.com/app/standalone/bootloader/unlock-your-device-a"
+  bootloader:
+    title: "Reboot to Bootloader"
+    description: "With the device powered off, press and hold VOLUME DOWN and POWER together until the bootloader (fastboot) screen appears, then connect the device to your computer."
+    image: "phone_power_down"
+    button: true
+unlock:
+  - "confirm_model"
+  - "backup"
+  - "unlock_phone"
+operating_systems:
+  - name: "Ubuntu Touch"
+    compatible_installer: ">=0.9.6-beta"
+    options:
+      - var: "wipe"
+        name: "Wipe Userdata"
+        tooltip: "Wipe personal data. This is necessary for first time installations."
+        type: "checkbox"
+        value: true
+    prerequisites: []
+    steps:
+      ### Ensure we always start in bootloader mode
+      - actions:
+          - adb:reboot:
+              to_state: "bootloader"
+        fallback:
+          - core:user_action:
+              action: "bootloader"
+      - actions:
+          - fastboot:wait:
+      ### Ensure the bootloader has been unlocked already
+      - actions:
+          - fastboot:assert_var:
+              variable: "securestate"
+              value: "flashing_unlocked"
+        fallback:
+          - core:user_action:
+              action: "unlock_phone"
+      ### Download and unpack the release
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://github.com/EEMuk/ubuntu-touch-motorola-sanders/releases/download/24.04-20261023/boot.img"
+                  name: "boot.img"
+                  checksum:
+                    sum: "31670a94259b08968fe1b2da6c6dcd2851acd58c4ce277a287284ff7fdea6be1"
+                    algorithm: "sha256"
+                - url: "https://github.com/EEMuk/ubuntu-touch-motorola-sanders/releases/download/24.04-20261023/vendor-pe11-sanders.zip"
+                  name: "vendor-pe11-sanders.zip"
+                  checksum:
+                    sum: "98a6f93abe9bbfb56fb7babf6afe8cc45eb4f8c3d12e30d7751c2019a9c30fc7"
+                    algorithm: "sha256"
+                - url: "https://github.com/EEMuk/ubuntu-touch-motorola-sanders/releases/download/24.04-20261023/ubuntu.zip"
+                  name: "ubuntu.zip"
+                  checksum:
+                    sum: "a269ddc9d545cf33361dfb7628e8a72d7a7c34e02cb53b8dbf3ac393aca1f191"
+                    algorithm: "sha256"
+      - actions:
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "vendor-pe11-sanders.zip"
+                  dir: "unpacked"
+                - archive: "ubuntu.zip"
+                  dir: "unpacked"
+      ### The PixelExperience 11 vendor image lives on the oem partition
+      - actions:
+          - fastboot:flash:
+              partitions:
+                - partition: "oem"
+                  file: "unpacked/vendor-pe11-sanders.img"
+                  group: "firmware"
+                - partition: "boot"
+                  file: "boot.img"
+                  group: "firmware"
+                - partition: "system"
+                  file: "unpacked/ubuntu.img"
+                  group: "firmware"
+      - actions:
+          ### The bootloader doesn't report partition sizes, so fastboot can't
+          ### format; the Halium initramfs formats a wiped userdata on boot
+          - fastboot:erase:
+              partition: "userdata"
+        condition:
+          var: "wipe"
+          value: true
+      - actions:
+          - fastboot:reboot:
+    slideshow: []
