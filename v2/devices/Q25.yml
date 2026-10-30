@@ -1,12 +1,18 @@
 name: "Zinwa Q25"
 codename: "Q25"
 formfactor: "phone"
+aliases:
+  - "q20_v12_factory"
 user_actions:
   confirm_fw:
     title: "Confirm OS version"
-    description: "Your device must be running (ideally latest mass production) Android 14 firmware linked below on slot A before installing Ubuntu Touch. Easiest way to achieve this is by flashing the device in 'Firmware Upgrade' mode of SP Flash Tool v6 before re-unlocking the bootloader as usual."
+    description: "Your device must be running (ideally latest mass production) Android 14 firmware linked below on slot A before installing Ubuntu Touch. Easiest way to achieve this is by flashing the device in 'Firmware Upgrade' mode of SP Flash Tool v6 and then unlocking the bootloader as usual."
     link: "https://drive.zinwa.com/"
     button: true
+  unlock_phone:
+    title: "Unlock the bootloader"
+    description: "Before installing Ubuntu Touch you must unlock the bootloader of your phone manually. Follow the steps in the linked page (excluding the final reboot) if you haven't already."
+    link: "https://duc1607.notion.site/Unlock-Bootloader-2a5709b7d17c8078afc5cbfbed3c2cf1"
   bootloader:
     title: "Reboot to Bootloader mode"
     description: 'With the device powered off, hold Volume Up + Power. When prompted select "Fastboot" as the boot mode using Volume Up and confirm with Volume Down.'
@@ -17,6 +23,8 @@ user_actions:
     description: 'With the device powered off, hold Volume Up + Power. When prompted select "Recovery" as the boot mode using Volume Up and confirm with Volume Down.'
     image: "phone_power_up"
     button: true
+unlock:
+  - "unlock_phone"
 handlers:
   bootloader_locked:
     actions:
@@ -67,26 +75,32 @@ operating_systems:
               value: true
 
       - actions:
-          # latest artifacts from https://gitlab.com/ubports/porting/community-ports/android12/zinwa-q25/zinwa-q25
+          - fastboot:assert_var:
+              variable: "unlocked"
+              value: "yes"
+        fallback:
+          - core:user_action:
+              action: "unlock_phone"
+        condition:
+          OR:
+            - var: "bootstrap"
+              value: true
+            - var: "wipe"
+              value: true
+
+      - actions:
           - core:download:
               group: "firmware"
               files:
-                - url: "https://gitlab.com/api/v4/projects/77968766/jobs/artifacts/main/download?job=build"
-                  name: "artifacts.zip"
+                - url: "https://gitlab.com/ubports/porting/community-ports/android12/zinwa-q25/zinwa-q25/-/package_files/380305291/download" # 20261030
+                  name: "bootstrap.zip"
+                  checksum:
+                    sum: "1ecc994e182449536edce1f030afba7712e7bff1202741e1e9ccd4daf8d6f0f4"
+                    algorithm: "sha256"
           - core:unpack:
               group: "firmware"
               files:
-                - archive: "artifacts.zip"
-                  dir: "unpacked"
-          - core:unpack:
-              group: "firmware"
-              files:
-                - archive: "unpacked/out/device_Q25.tar.xz"
-                  dir: "unpacked"
-          - core:unpack:
-              group: "firmware"
-              files:
-                - archive: "unpacked/device_Q25.tar"
+                - archive: "bootstrap.zip"
                   dir: "unpacked"
         condition:
           var: "bootstrap"
@@ -98,7 +112,7 @@ operating_systems:
           - fastboot:flash:
               partitions:
                 - partition: "boot_a"
-                  file: "unpacked/partitions/boot.img"
+                  file: "unpacked/boot.img"
                   group: "firmware"
         condition:
           var: "bootstrap"
