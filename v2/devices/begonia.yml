@@ -79,6 +79,11 @@ operating_systems:
                   checksum:
                     sum: "b3281c527ecf2a6a743b37f5b9e118f492d2038e0a82e6777d292d1c5b42601a"
                     algorithm: "sha256"
+                - url: "https://github.com/ubuntu-touch-begonia/ubuntu-touch-begonia/releases/download/20261121/scp.img"
+                  name: "scp.img"
+                  checksum:
+                    sum: "7f1843f7ab7fe7e9b5242da79d7cfa3625549cdfba54890acc1e6067bf85a1b3"
+                    algorithm: "sha256"
         condition:
           var: "bootstrap"
           value: true
@@ -155,7 +160,7 @@ operating_systems:
                   file: "unpacked/gz.img"
                   group: "firmware"
                 - partition: "scp2"
-                  file: "unpacked/scp.img"
+                  file: "scp.img"
                   group: "firmware"
                 - partition: "tee2"
                   file: "unpacked/tee.img"
@@ -173,7 +178,7 @@ operating_systems:
                   file: "unpacked/gz.img"
                   group: "firmware"
                 - partition: "scp1"
-                  file: "unpacked/scp.img"
+                  file: "scp.img"
                   group: "firmware"
                 - partition: "tee1"
                   file: "unpacked/tee.img"
