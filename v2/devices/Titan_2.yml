@@ -1,0 +1,143 @@
+name: "Unihertz Titan 2"
+codename: "Titan_2"
+formfactor: "phone"
+doppelgangers:
+  - "Titan_2_elite"
+user_actions:
+  confirm_model:
+    title: "Confirm your model"
+    description: "Please check that your device is a Titan 2 and NOT a Titan 2 Elite. Both report the same codename in Android, but their boot images are incompatible."
+  unlock_phone:
+    title: "Unlock the bootloader"
+    description: "Before installing Ubuntu Touch you must unlock the bootloader of your phone manually. Enable OEM unlocking in the Android developer options, reboot to fastboot mode and run 'fastboot flashing unlock'. Your device must be running stock Android 14 on slot A."
+  bootloader:
+    title: "Reboot to Bootloader mode"
+    description: 'With the device powered off, hold Volume Up + Power. When prompted select "Fastboot" as the boot mode using Volume Up and confirm with Volume Down.'
+    image: "phone_power_up"
+    button: true
+  recovery:
+    title: "Reboot to Recovery mode"
+    description: 'With the device powered off, hold Volume Up + Power. When prompted select "Recovery" as the boot mode using Volume Up and confirm with Volume Down.'
+    image: "phone_power_up"
+    button: true
+unlock:
+  - "confirm_model"
+  - "unlock_phone"
+handlers:
+  bootloader_locked:
+    actions:
+      - fastboot:flashing_unlock:
+operating_systems:
+  - name: "Ubuntu Touch"
+    compatible_installer: ">=0.9.2-beta"
+    options:
+      - var: "channel"
+        name: "Channel"
+        tooltip: "The release channel"
+        link: "https://docs.ubports.com/en/latest/about/process/release-schedule.html"
+        type: "select"
+        remote_values:
+          systemimage:channels:
+      - var: "wipe"
+        name: "Wipe Userdata"
+        tooltip: "Wipe personal data. *Required* if switching from something (e.g. Android) that isn't Ubuntu Touch."
+        type: "checkbox"
+      - var: "bootstrap"
+        name: "Bootstrap"
+        tooltip: "Flash system partitions using fastboot. Do NOT uncheck unless you know exactly what you're doing!"
+        type: "checkbox"
+        value: true
+    prerequisites: []
+    steps:
+      # Handle initial bootstrap/userdata wipe in bootloader mode
+      ##################################################################
+      - actions:
+          # FIXME: bring below back once "adb reboot bootloader" unbroken on UT side
+          #          - adb:reboot:
+          #              to_state: "bootloader"
+          #        fallback:
+          - core:user_action:
+              action: "bootloader"
+        condition:
+          OR:
+            - var: "bootstrap"
+              value: true
+            - var: "wipe"
+              value: true
+
+      - actions:
+          - fastboot:assert_var:
+              variable: "unlocked"
+              value: "yes"
+        fallback:
+          - core:user_action:
+              action: "unlock_phone"
+        condition:
+          OR:
+            - var: "bootstrap"
+              value: true
+            - var: "wipe"
+              value: true
+
+      - actions:
+          - core:download:
+              group: "firmware"
+              files:
+                - url: "https://gitlab.com/ubports/porting/community-ports/android14/unihertz-titan2/unihertz-titan2/-/package_files/398588880/download" # 20261123
+                  name: "bootstrap.zip"
+                  checksum:
+                    sum: "418b968ac5e0333a10e3a9e268090af65b0ac76c86f2439f25e70ac6e2a862f3"
+                    algorithm: "sha256"
+          - core:unpack:
+              group: "firmware"
+              files:
+                - archive: "bootstrap.zip"
+                  dir: "unpacked"
+        condition:
+          var: "bootstrap"
+          value: true
+
+      - actions:
+          - fastboot:set_active:
+              slot: "a"
+          - fastboot:flash:
+              partitions:
+                - partition: "boot_a"
+                  file: "unpacked/boot.img"
+                  group: "firmware"
+                - partition: "init_boot_a"
+                  file: "unpacked/init_boot.img"
+                  group: "firmware"
+                - partition: "vendor_boot_a"
+                  file: "unpacked/vendor_boot.img"
+                  group: "firmware"
+        condition:
+          var: "bootstrap"
+          value: true
+
+      # Optionally wipe userdata (too)
+      - actions:
+          - fastboot:format:
+              partition: "userdata"
+              type: "ext4"
+        condition:
+          var: "wipe"
+          value: true
+
+      # Install UT
+      ##################################################################
+      - actions:
+          - fastboot:reboot_recovery:
+        fallback:
+          - core:user_action:
+              action: "recovery"
+
+      - actions:
+          - systemimage:install:
+      - actions:
+          - adb:reboot:
+              to_state: "recovery"
+        fallback:
+          - core:user_action:
+              action: "recovery"
+    slideshow: []
